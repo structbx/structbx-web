@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Unicasa Web - CPW Sinergy</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/png" href="../../assets/images/logo-75x75.png" />
+        <!-- CSS -->
+        <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+        
+        <link href="../../assets/css/main.css" rel="stylesheet" />
+        <link href="../../assets/css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="cpw-sinergy">
+        <!-- Nav top -->
+            <nav id="nav_top" class="cpws-topnav navbar navbar-expand navbar-dark bg-dark">
+                <!-- Navbar Brand-->
+                <a class="navbar-brand ps-3" href="index.html">
+                    <img class="img-fluid rounded align-middle" width="50" src="../../assets/images/logo-150x150.png" alt="CPW Sinergy Logo" />
+                    <span class="d-none d-md-inline-block">CPW Sinergy</span>
+                </a>
+                <!-- Sidebar Toggle-->
+                <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+                <!-- Current Workspace-->
+                <select class="btn btn-primary btn-sm ms-4 me-lg-0">
+                    <option value="" selected>Unicasa Web</option>
+                    <option value="">Mas x Menos Web</option>
+                </select>
+                <!-- Navbar Search-->
+                <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="btnNavbarSearch" />
+                        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+                <!-- Navbar-->
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="#!">Configuraci&oacute;n</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Soporte y ayuda</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Cerrar sesi&oacute;n</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        <!-- /Nav top -->
+
+        <!-- Container Main-->
+            <div id="container_main">
+
+                <!-- Sidebar main nav-->
+                    <div id="sidebar_main">
+                        <nav class="cpws-sidenav accordion cpws-sidenav-dark" id="sidenavAccordion">
+                            <div class="cpws-sidenav-menu">
+                                <div id="sidebar_nav" class="nav pb-4">
+                                    <!-- General -->
+                                    <div class="cpws-sidenav-menu-heading">General</div>
+                                    <a class="nav-link active" href="#" tag="page_panel">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                        Panel
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_deployments">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-upload"></i></div>
+                                        Despliegues
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_code">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-code"></i></div>
+                                        C&oacute;digo
+                                    </a>
+                                    <!-- Extensiones -->
+                                    <div class="cpws-sidenav-menu-heading">Extensiones</div>
+                                    <a class="nav-link" href="#" tag="page_functions">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-server"></i></div>
+                                        Funciones
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_databases">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-database"></i></div>
+                                        Bases de datos
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_permissions">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-users"></i></div>
+                                        Permisos
+                                    </a>
+                                    <!-- Extra -->
+                                    <div class="cpws-sidenav-menu-heading">Extra</div>
+                                    <a class="nav-link" href="#" tag="page_settings">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-gear"></i></div>
+                                        Configuracion
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_reports">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-file"></i></div>
+                                        Reportes
+                                    </a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                <!-- /Sidebar main nav-->
+
+                <!-- Contents main -->
+                    <main id="contents_main">
+                        
+                        <!-- Contents body -->
+                            <section id="contents_body">
+
+                                <!-- Page: Panel -->
+                                    <div id="page_panel" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Panel</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Panel</li>
+                                        </ol>
+                                        <!-- Indicators: General -->
+                                        <hr>
+                                        <h3 class="my-4">General</h3>
+                                        <div class="row">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Espacios de trabajo</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">4</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Consultas a bases de datos</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">1245</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Consultas a funciones</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">1156</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Visitas a la aplicacion web</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">254</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Indicators: Report 1 -->
+                                        <hr>
+                                        <h3 class="my-4">Diario</h3>
+                                        <div class="row">
+                                            <!-- Database Queries -->
+                                            <div class="col-xl-6">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <i class="fas fa-chart-area me-1"></i>
+                                                        Consultas a bases de datos
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr><th scope="col">Fecha</th><th scope="col">Cantidad</th></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td>2023-09-01</td><td>15</td></tr>
+                                                                <tr><td>2023-09-02</td><td>22</td></tr>
+                                                                <tr><td>2023-09-03</td><td>18</td></tr>
+                                                                <tr><td>2023-09-04</td><td>10</td></tr>
+                                                                <tr><td>2023-09-05</td><td>27</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Functions queries -->
+                                            <div class="col-xl-6">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <i class="fas fa-chart-area me-1"></i>
+                                                        Consultas a funciones
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr><th scope="col">Fecha</th><th scope="col">Cantidad</th></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td>2023-09-01</td><td>15</td></tr>
+                                                                <tr><td>2023-09-02</td><td>22</td></tr>
+                                                                <tr><td>2023-09-03</td><td>18</td></tr>
+                                                                <tr><td>2023-09-04</td><td>10</td></tr>
+                                                                <tr><td>2023-09-05</td><td>27</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- /Page: Panel -->
+
+                                <!-- Page: Deployments -->
+                                    <div id="page_deployments" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Despliegues</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Despliegues</li>
+                                        </ol>
+
+                                        <!-- Deployments: Environments -->
+                                        <hr>
+                                        <h3 class="my-4">Entornos</h3>
+                                        <div class="row">
+
+                                            <!-- Deployments: Environments: Read -->
+                                            <div class="col-xl-6 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Producci&oacute;n</div>
+                                                        <div class="d-block mt-2"><strong class="display-6">V0.9.5</strong></div>
+                                                        <div class="d-block mt-2"><small class="text-success">Desplegado</small></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" data-bs-toggle="modal" data-bs-target="#deployments_environments_add">
+                                                            Nuevo despliegue
+                                                        </a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Pruebas</div>
+                                                        <div class="d-block mt-2"><strong class="display-6">V1.0.1-beta</strong></div>
+                                                        <div class="d-block mt-2"><small class="text-danger">Error en despliegue</small></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" data-bs-toggle="modal" data-bs-target="#deployments_environments_add">
+                                                            Nuevo despliegue
+                                                        </a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Deployments: Environments: Add New Deployment -->
+                                            <div class="modal fade" id="deployments_environments_add" tabindex="-1" aria-labelledby="deployments_environments_add_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deployments_environments_add_label">Despliegues: Entornos: A&ntilde;adir nuevo despliegue</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table id="table_billing_detailed" class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Entorno</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">Producc&oacute;n</option>
+                                                                                <option value="2">Pruebas</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Versi&oacute;n</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">v1.2.3</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Deployments: History -->
+                                        <hr>
+                                        <h3 class="my-4">Hist&oacute;rico de despliegues</h3>
+                                        <div class="row">
+
+                                            <!-- Deployments: History: Read -->
+                                            <div id="deployments_history_read" class="col">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Todos los despliegues
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_deployments"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_deployments">
+                                                                        <li>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deployments_environments_add">
+                                                                                A&ntilde;adir nuevo
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <table id="table_workspaces" class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Version</th>
+                                                                    <th scope="col">Git commit</th>
+                                                                    <th scope="col">Entorno</th>
+                                                                    <th scope="col">Resultado</th>
+                                                                    <th scope="col">Clasificacion</th>
+                                                                    <th scope="col">Fecha de creaci&oacute;n</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>3245</td>
+                                                                    <td>V1.0.1</td>
+                                                                    <td>afd49d00</td>
+                                                                    <td>Produccion</td>
+                                                                    <td>Desplegado</td>
+                                                                    <td>Bueno</td>
+                                                                    <td>2023-09-01</td>
+                                                                </tr>
+                                                            </tbody>
+                                                          </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+                                    </div>
+                                <!-- /Page: Deployments -->
+                                
+                                <!-- Page: Code -->
+                                    <div id="page_code" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">C&oacute;digo</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">C&oacute;digo</li>
+                                        </ol>
+
+                                        <!-- Code: General -->
+                                        <hr>
+                                        <h3 class="my-4">Codigo por Rama/Etiqueta</h3>
+                                        <div class="row">
+
+                                            <!-- Code: General: Read -->
+                                            <div id="code_general_read" class="col">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Rama
+                                                                <select class="btn btn-primary btn-sm ms-4 me-lg-0">
+                                                                    <option value="" selected>Master</option>
+                                                                    <option value="">Dev</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_code"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_code">
+                                                                        <li>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#code_add_version">
+                                                                                A&ntilde;adir nueva versi&oacute;n
+                                                                            </a>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#code_upload_info">
+                                                                                Subir
+                                                                            </a>
+                                                                            <a class="dropdown-item">
+                                                                                Descargar ZIP
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <table id="table_code" class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Archivo</th>
+                                                                    <th scope="col">Ultimo commit</th>
+                                                                    <th scope="col">Titulo commit</th>
+                                                                    <th scope="col">Fecha de actualizaci&oacute;n</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><a href="#">doc/</a></td>
+                                                                    <td>21dfe44d</td>
+                                                                    <td>Commit inicial</td>
+                                                                    <td>2023-02-01</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>main.js</td>
+                                                                    <td>21dfe44d</td>
+                                                                    <td>Commit inicial</td>
+                                                                    <td>2023-02-01</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Code: Add New Version -->
+                                            <div class="modal fade" id="code_add_version" tabindex="-1" aria-labelledby="code_add_version_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="code_add_version_label">C&oacute;digo: A&ntilde;adir nueva versi&oacute;n</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <ul class="nav nav-tabs" role="tablist">
+                                                                <li class="nav-item" role="presentation">
+                                                                    <button class="nav-link active" id="tab_git_commit_btn" data-bs-toggle="tab" data-bs-target="#tab_git_commit" type="button" role="tab" aria-controls="tab_git_commit" aria-selected="true">De commit Git</button>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <button class="nav-link" id="tab_git_tag_btn" data-bs-toggle="tab" data-bs-target="#tab_git_tag" type="button" role="tab" aria-controls="tab_git_tag" aria-selected="false">De etiqueta Git</button>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content">
+                                                                <div class="tab-pane fade show active" id="tab_git_commit" role="tabpanel" aria-labelledby="tab_git_commit_btn">
+                                                                    <table class="table">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>Commit Git</td>
+                                                                                <td>
+                                                                                    <select class="form-select" name="workspace_type">
+                                                                                        <option value="1">435as45 Some changes</option>
+                                                                                        <option value="2">35sad7s Initial commit</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Versi&oacute;n</td>
+                                                                                <td>
+                                                                                    <input class="form-control" placeholder="v0.9.1">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="tab-pane fade" id="tab_git_tag" role="tabpanel" aria-labelledby="tab_git_tag_btn">
+                                                                    <table class="table">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>Etiqueta Git</td>
+                                                                                <td>
+                                                                                    <select class="form-select" name="workspace_type">
+                                                                                        <option value="1">v0.93.3 - 435as45 Some changes</option>
+                                                                                        <option value="2">v0.1.3 - 35sad7s Initial commit</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Versi&oacute;n</td>
+                                                                                <td>
+                                                                                    <input class="form-control" placeholder="v0.9.1">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Code: Upload info -->
+                                            <div class="modal fade" id="code_upload_info" tabindex="-1" aria-labelledby="code_upload_info_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="code_upload_info_label">C&oacute;digo: Subir</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table id="table_billing_detailed" class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Subir usando Git</td>
+                                                                        <td><code>git.cpwsinergy@cpwonline.net:cpwsinergy/user4553/unicasa-web.git</code></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+  
+                                        </div>
+                                        
+                                    </div>
+                                <!-- /Page: Code -->
+                            
+                                <!-- Page: Functions -->
+                                    <div id="page_functions" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Funciones</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item">Unicasa Web</li>
+                                            <li class="breadcrumb-item active">Funciones</li>
+                                        </ol>
+
+                                        <!-- Functions: General -->
+                                        <hr>
+                                        <div class="row">
+
+                                            <!-- Functions: General: Read -->
+                                            <div id="functions_general_read" class="col">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Todas las funciones
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_functions"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_functions">
+                                                                        <li>
+                                                                            <a href="#" id="functions_general_add_btn" class="dropdown-item btn btn-secondary">A&ntilde;adir</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <table id="table_functions" class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Endpoint</th>
+                                                                    <th scope="col">Estado</th>
+                                                                    <th scope="col">Base de datos</th>
+                                                                    <th scope="col">Fecha de creaci&oacute;n</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><a href="#">/api/products/</a></td>
+                                                                    <td>Activo</td>
+                                                                    <td>172.16.4.44:administrador_registros (MariaDB)</td>
+                                                                    <td>2023-02-01</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Functions: General: Add -->
+                                            <div id="functions_general_add" class="col" style="display: none">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Funciones: A&ntilde;adir
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <a href="#" id="functions_general_add_back" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <ul class="nav nav-tabs" role="tablist">
+                                                            <li class="nav-item" role="presentation">
+                                                                <button class="nav-link active" id="tab_function_add_general_btn" data-bs-toggle="tab" data-bs-target="#tab_function_add_general" type="button" role="tab" aria-controls="tab_function_add_general" aria-selected="true">General</button>
+                                                            </li>
+                                                            <li class="nav-item" role="presentation">
+                                                                <button class="nav-link" id="tab_function_add_database_btn" data-bs-toggle="tab" data-bs-target="#tab_function_add_database" type="button" role="tab" aria-controls="tab_function_add_database" aria-selected="false">Base de datos</button>
+                                                            </li>
+                                                            <li class="nav-item" role="presentation">
+                                                                <button class="nav-link" id="tab_function_add_filters_btn" data-bs-toggle="tab" data-bs-target="#tab_function_add_filters" type="button" role="tab" aria-controls="tab_function_add_filters" aria-selected="false">Filtros</button>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane fade show active" id="tab_function_add_general" role="tabpanel" aria-labelledby="tab_function_add_general_btn">
+                                                                <table class="table mt-2">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Endpoint</td>
+                                                                            <td><input class="form-control" type="text" placeholder="/api/products"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Estado</td>
+                                                                            <td>
+                                                                                <select class="form-select" name="workspace_type">
+                                                                                    <option value="1">Activo</option>
+                                                                                    <option value="2">Inactivo</option>
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Descripci&oacute;n</td>
+                                                                            <td><textarea class="form-control"></textarea></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="tab_function_add_database" role="tabpanel" aria-labelledby="tab_function_add_database_btn">
+                                                                <table class="table mt-2">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Direccion IP/Dominio</td>
+                                                                            <td><input class="form-control" type="text" placeholder="172.16.4.44"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Base de datos</td>
+                                                                            <td><input class="form-control" type="text" placeholder="database"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Puerto</td>
+                                                                            <td><input class="form-control" type="text" placeholder="Puerto" value="3306"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Usuario</td>
+                                                                            <td><input class="form-control" type="text" placeholder="dbuser"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Contrase&ntilde;a</td>
+                                                                            <td><input class="form-control" type="password"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="tab_function_add_filters" role="tabpanel" aria-labelledby="tab_function_add_filters_btn">
+                                                                <div class="p-2 bd-highlight">
+                                                                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#functions_add_filter"><i class="fas fa-plus"></i></a>
+                                                                </div>
+                                                                <table class="table mt-2">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Tipo</th>
+                                                                            <th scope="col">Parametrizado</th>
+                                                                            <th scope="col">Estado</th>
+                                                                            <th scope="col">Descripci&oacute;n</th>
+                                                                            <th scope="col">Fecha de creaci&oacute;n</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#functions_add_filter">
+                                                                                    Lista
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>No</td>
+                                                                            <td>Activo</td>
+                                                                            <td></td>
+                                                                            <td>2023-06-03</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Functions: Add: Add Filter -->
+                                            <div class="modal fade" id="functions_add_filter" tabindex="-1" aria-labelledby="functions_add_filter_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="functions_add_filter_label">Funciones: A&ntilde;adir: A&ntilde;adir filtro</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h3>General</h3>
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Tipo de filtro</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">Lista</option>
+                                                                                <option value="2">Igual</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Parametrizado</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">Si</option>
+                                                                                <option value="2">No</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Estado</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">Activo</option>
+                                                                                <option value="2">Inactivo</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <h3>
+                                                                Valores
+                                                                <a href="#" id="btn_functions_add_filter_value" class="btn btn-secondary"><i class="fas fa-plus"></i></a>
+                                                            </h3>
+                                                            <table id="btn_functions_add_filter_values_table" class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Valor</th>
+                                                                        <th scope="col">Tipo</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><input type="text" class="form-control" value="Anzoategui"></td></td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">Texto</option>
+                                                                                <option value="2">Entero</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+                                    </div>
+                                <!-- /Page: Functions -->
+                            
+                                <!-- Page: Databases -->
+                                    <div id="page_databases" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Bases de datos</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Bases de datos</li>
+                                        </ol>
+
+                                        <!-- Databases: General -->
+                                        <hr>
+                                        <div class="row">
+                                            <!-- Databases: Read -->
+                                            <div class="col">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Todas las bases de datos
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_databases"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_databases">
+                                                                        <li>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#databases_add">
+                                                                                A&ntilde;adir
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Nombre</th>
+                                                                    <th scope="col">Direccion IP</th>
+                                                                    <th scope="col">Puerto</th>
+                                                                    <th scope="col">Tipo</th>
+                                                                    <th scope="col">Fecha de creaci&oacute;n</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#databases_explorer">
+                                                                            cpw_clientdb_traki_web
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>172.16.4.44</td>
+                                                                    <td>3306</td>
+                                                                    <td>MariaDB</td>
+                                                                    <td>2023-08-12</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Databases: Add -->
+                                            <div class="modal fade" id="databases_add" tabindex="-1" aria-labelledby="databases_add_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="databases_add_label">Bases de datos: A&ntilde;adir</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Base de datos</td>
+                                                                        <td><input class="form-control" type="text" placeholder="dbname"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Direcci&oacute;n IP/Dominio</td>
+                                                                        <td><input class="form-control" type="text" placeholder="localhost" value="localhost"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Puerto</td>
+                                                                        <td><input class="form-control" type="text" placeholder="3306" value="3306"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Tipo</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">MariaDB</option>
+                                                                                <option value="2">MySQL</option>
+                                                                                <option value="2">SQLite3</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Usuario</td>
+                                                                        <td><input class="form-control" type="text" placeholder="dbuser"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Contrase&ntilde;a</td>
+                                                                        <td><input class="form-control" type="password"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Databases: Explorer -->
+                                            <div class="modal fade" id="databases_explorer" tabindex="-1" aria-labelledby="databases_explorer_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="databases_explorer_label">Bases de datos: A&ntilde;adir</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h3>General</h3>
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Peso</td>
+                                                                        <td>3.4 GB</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Tablas</td>
+                                                                        <td>65</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <h3>Explorador</h3>
+                                                            <table id="btn_functions_add_filter_values_table" class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Tabla</th>
+                                                                        <th scope="col">Filas</th>
+                                                                        <th scope="col">Peso</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>productos</td>
+                                                                        <td>45</td>
+                                                                        <td>466 MB</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>precios</td>
+                                                                        <td>4</td>
+                                                                        <td>23 MB</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <!-- /Page: Databases -->
+
+                                <!-- Page: Permissions -->
+                                    <div id="page_permissions" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Permisos</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Permisos</li>
+                                        </ol>
+                                        
+                                        <hr>
+                                        <div class="row">
+                                            <ul class="nav nav-pills p-2" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="tab_permissions_general_btn" data-bs-toggle="tab" data-bs-target="#tab_permissions_general" type="button" role="tab" aria-controls="tab_permissions_general" aria-selected="true">Permisos</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="tab_permissions_roles_btn" data-bs-toggle="tab" data-bs-target="#tab_permissions_roles" type="button" role="tab" aria-controls="tab_permissions_roles" aria-selected="false">Roles</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="tab_permissions_users_btn" data-bs-toggle="tab" data-bs-target="#tab_permissions_users" type="button" role="tab" aria-controls="tab_permissions_users" aria-selected="false">Usuarios</button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+
+                                                <!-- Permissions: Permissions -->
+                                                <div class="tab-pane fade show active" id="tab_permissions_general" role="tabpanel" aria-labelledby="tab_permissions_general_btn">
+
+                                                    <div class="card mb-4">
+                                                        <div class="card-header">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <i class="fas fa-chart-area me-1"></i>
+                                                                    Todos los permisos
+                                                                </div>
+                                                                <div class="p-2 bd-highlight">
+                                                                    <div class="dropdown">
+                                                                        <button
+                                                                            class="btn btn-secondary dropdown-toggle"
+                                                                            type="button" id="dropdown_menu_options_permissions"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-expanded="false"
+                                                                        >
+                                                                        <i class="fas fa-plus"></i>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_permissions">
+                                                                            <li>
+                                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#permissions_add">
+                                                                                    A&ntilde;adir
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Objetivo</th>
+                                                                        <th scope="col">Tipo objetivo</th>
+                                                                        <th scope="col">Concedido</th>
+                                                                        <th scope="col">Descendente</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>/api/products</td>
+                                                                        <td>Endpoint</td>
+                                                                        <td>Si</td>
+                                                                        <td>Si</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Permissions: Add -->
+                                                <div class="modal fade" id="permissions_add" tabindex="-1" aria-labelledby="permissions_add_label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="permissions_add_label">Permisos: A&ntilde;adir</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h3>General</h3>
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Tipo objetivo</td>
+                                                                            <td>
+                                                                                <select class="form-select" name="workspace_type">
+                                                                                    <option value="1">Endpoint</option>
+                                                                                    <option value="2">Archivo</option>
+                                                                                    <option value="2">Directorio</option>
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Objetivo</td>
+                                                                            <td>
+                                                                                <select class="form-select" name="workspace_type">
+                                                                                    <option value="1">/api/products</option>
+                                                                                    <option value="2">/api/prices</option>
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <h3>
+                                                                    Usuarios y roles concedidos
+                                                                    <div class="dropdown d-inline-block">
+                                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_add_permission" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                            <i class="fas fa-plus"></i>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu" aria-labelledby="dropdown_add_permission">
+                                                                            <li><a class="dropdown-item" href="#">A&ntilde;adir usuario</a></li>
+                                                                            <li><a class="dropdown-item" href="#">A&ntilde;adir rol</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </h3>
+                                                                <table id="btn_permissions_add_values_table" class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Destino de permiso</th>
+                                                                            <th scope="col">Permiso para</th>
+                                                                            <th scope="col">Concedido</th>
+                                                                            <th scope="col">Descendente</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Usuario</td>
+                                                                            <td>
+                                                                                <select class="form-select" name="workspace_type">
+                                                                                    <option value="1">user1</option>
+                                                                                    <option value="2">user2</option>
+                                                                                </select>
+                                                                            </td>
+                                                                            <td>
+                                                                                <select class="form-select" name="workspace_type">
+                                                                                    <option value="1">S&iacute;</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </td>
+                                                                            <td>
+                                                                                <select class="form-select" name="workspace_type">
+                                                                                    <option value="1">S&iacute;</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Permissions: Roles -->
+                                                <div class="tab-pane fade" id="tab_permissions_roles" role="tabpanel" aria-labelledby="tab_permissions_roles_btn">
+
+                                                    <div class="card mb-4">
+                                                        <div class="card-header">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <i class="fas fa-chart-area me-1"></i>
+                                                                    Todos los roles
+                                                                </div>
+                                                                <div class="p-2 bd-highlight">
+                                                                    <div class="dropdown">
+                                                                        <button
+                                                                            class="btn btn-secondary dropdown-toggle"
+                                                                            type="button" id="dropdown_menu_options_roles"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-expanded="false"
+                                                                        >
+                                                                        <i class="fas fa-plus"></i>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_roles">
+                                                                            <li>
+                                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#permissions_add_role">
+                                                                                    A&ntilde;adir
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Rol</th>
+                                                                        <th scope="col">Usuarios</th>
+                                                                        <th scope="col">Descripci&oacute;nn</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>admin</td>
+                                                                        <td>jose.rivas, jdavid</td>
+                                                                        <td>Rol de administrador</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Permissions: Add Role -->
+                                                <div class="modal fade" id="permissions_add_role" tabindex="-1" aria-labelledby="permissions_add_role_label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="permissions_add_role_label">Permisos: A&ntilde;adir Rol</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h3>General</h3>
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Nombre del rol</td>
+                                                                            <td><input type="text" class="form-control" name="workspace_type" placeholder="admin"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Descripcion</td>
+                                                                            <td><textarea type="text" class="form-control" name="workspace_type"></textarea></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <h3>
+                                                                    Usuarios
+                                                                    <button class="btn btn-secondary" type="button">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                </h3>
+                                                                <table id="btn_permissions_add_role_values_table" class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Usuario</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr><td>jose.rivas</td></tr>
+                                                                        <tr><td>david.rivas</td></tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Permissions: Users -->
+                                                <div class="tab-pane fade" id="tab_permissions_users" role="tabpanel" aria-labelledby="tab_permissions_users_btn">
+
+                                                    <div class="card mb-4">
+                                                        <div class="card-header">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <i class="fas fa-chart-area me-1"></i>
+                                                                    Todos los usuarios
+                                                                </div>
+                                                                <div class="p-2 bd-highlight">
+                                                                    <div class="dropdown">
+                                                                        <button
+                                                                            class="btn btn-secondary dropdown-toggle"
+                                                                            type="button" id="dropdown_menu_options_users"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-expanded="false"
+                                                                        >
+                                                                        <i class="fas fa-plus"></i>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_users">
+                                                                            <li>
+                                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#permissions_add_user">
+                                                                                    A&ntilde;adir
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Usuario</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr><td>jose.rivas</td></tr>
+                                                                    <tr><td>pedro.perez</td></tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Permissions: Add User -->
+                                                <div class="modal fade" id="permissions_add_user" tabindex="-1" aria-labelledby="permissions_add_user_label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="permissions_add_user_label">Permisos: A&ntilde;adir Usuario</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Nombre de usuario</td>
+                                                                            <td><input type="text" class="form-control" name="workspace_type"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Contrase&ntilde;a</td>
+                                                                            <td><input type="password" class="form-control" name="workspace_type"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>                                              
+                                        </div>
+                                    </div>
+                                <!-- /Page: Permissions -->
+
+                                <!-- Page: Settings -->
+                                    <div id="page_settings" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Configuraciones</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Configuraciones</li>
+                                        </ol>
+
+                                        <!-- Settings: All -->
+                                        <hr>
+                                        <div class="row">
+                                            <!-- Settings: General -->
+                                            <div class="col-xl-6">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <i class="fas fa-chart-area me-1"></i>
+                                                        General
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Nombre del espacio de trabajo</td>
+                                                                    <td><input class="form-control" type="text" value="Unicasa Web"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tipo</td>
+                                                                    <td>
+                                                                        <select class="form-select" name="workspace_type">
+                                                                            <option value="1">CPW Woodpecker + MariaDB (Shared)</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Estado</td>
+                                                                    <td>
+                                                                        <select class="form-select" name="workspace_type">
+                                                                            <option value="1">Activo</option>
+                                                                            <option value="1">Inactivo</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Descripcion</td>
+                                                                    <td><textarea class="form-control"></textarea></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <button class="btn btn-primary" type="button">Guardar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Settings: Colaborators -->
+                                            <div class="col-xl-6">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Colaboradores
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_users"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_users">
+                                                                        <li>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settings_add_colaborator">
+                                                                                A&ntilde;adir
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Colaborador</th>
+                                                                    <th scope="col">Acceso</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td>Jose Rivas</td><td>Administrador</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Settings: Add colaborator -->
+                                            <div class="modal fade" id="settings_add_colaborator" tabindex="-1" aria-labelledby="settings_add_colaborator_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="settings_add_colaborator_label">Configuraciones: Colaboradores: A&ntilde;adir</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Email del colaborador</td>
+                                                                        <td><input type="email" class="form-control" name="workspace_type"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Acceso</td>
+                                                                        <td>
+                                                                            <select class="form-select">
+                                                                                <option>Administrador</option>
+                                                                                <option>Editor</option>
+                                                                                <option>Lector</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <!-- /Page: Settings -->
+
+                                <!-- Page: Reports -->
+                                    <div id="page_reports" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Reportes</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Reportes</li>
+                                        </ol>
+
+                                        <!-- Reports: General -->
+                                        <hr>
+                                        <div class="row">
+
+                                            <!-- Reports: Read -->
+                                            <div class="col">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <i class="fas fa-chart-area me-1"></i>
+                                                        Todos los reportes
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Reporte</th>
+                                                                    <th scope="col">Descripcion</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td>Uso por dia</td><td>Reporte diario entre fechas del uso de la plataforma</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                <!-- /Page: Reports -->
+
+                            </section>
+                        <!-- /Contents body -->
+
+                        <!-- Footer -->
+                        <footer class="py-4 bg-light mt-auto">
+                            <div class="container-fluid px-4">
+                                <div class="d-flex align-items-center justify-content-between small">
+                                    <div class="text-muted">Copyright &copy; CPW Online. CPW Sinergy es un producto de CPW Online.</div>
+                                    <div>
+                                        <a href="#">Pol&iacute;tica de privacidad</a>
+                                        &middot;
+                                        <a href="#">T&eacute;rminos y condiciones</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </main>
+                <!-- Contents main -->
+
+            </main>
+        <!-- Container Main-->
+
+        <!-- Scripts -->
+            <script src="../../assets/js/jquery.min-v3.4.1.js"></script>
+            <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
+            <script src="../../assets/js/main.js"></script>
+            <script src="../../assets/js/tables.js"></script>
+            <script src="../../assets/js/events.js"></script>
+        <!-- Scripts -->
+    </body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>StructBI - Plataforma SaaS para gesti&oacute;n y analisis de datos</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/png" href="../../assets/images/logo-75x75.png" />
+        <!-- CSS -->
+        <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+        
+        <link href="../../assets/css/main.css" rel="stylesheet" />
+        <link href="../../assets/css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="cpw-sinergy">
+        <!-- Nav top -->
+            <nav id="nav_top" class="cpws-topnav navbar navbar-expand navbar-dark bg-dark">
+                <!-- Navbar Brand-->
+                <a class="navbar-brand ps-3" href="index.html">
+                    <img class="img-fluid rounded align-middle" width="50" src="../../assets/images/logo-150x150.png" alt="CPW Sinergy Logo" />
+                    <span class="d-none d-md-inline-block">StructBI</span>
+                </a>
+                <!-- Sidebar Toggle-->
+                <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+                <!-- Navbar Search-->
+                <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="btnNavbarSearch" />
+                        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+                <!-- Navbar-->
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="#!">Configuraci&oacute;n</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Soporte y ayuda</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Cerrar sesi&oacute;n</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        <!-- /Nav top -->
+
+        <!-- Container Main-->
+            <div id="container_main">
+
+                <!-- Sidebar main nav-->
+                    <div id="sidebar_main">
+                        <nav class="cpws-sidenav accordion cpws-sidenav-dark" id="sidenavAccordion">
+                            <div class="cpws-sidenav-menu">
+                                <div id="sidebar_nav" class="nav">
+                                    <!-- General -->
+                                    <div class="cpws-sidenav-menu-heading">General</div>
+                                    <a class="nav-link active" href="#" tag="page_panel">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                        Dashboard
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_finance">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-money-bill"></i></div>
+                                        Formularios
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_workspaces">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-box"></i></div>
+                                        P&aacute;ginas
+                                    </a>
+                                    <!-- Settings -->
+                                    <div class="cpws-sidenav-menu-heading">Configuraciones</div>
+                                    <a class="nav-link" href="#" tag="page_coupons">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-gift"></i></div>
+                                        Mi organizaci&oacute;n
+                                    </a>
+                                    <a class="nav-link" href="#" tag="page_coupons">
+                                        <div class="cpws-nav-link-icon"><i class="fas fa-gift"></i></div>
+                                        Configuraci&oacute;n
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="cpws-sidenav-footer">
+                                <div class="small">Logged in as:</div>
+                                Start Bootstrap
+                            </div>
+                        </nav>
+                    </div>
+                <!-- /Sidebar main nav-->
+
+                <!-- Contents main -->
+                    <main id="contents_main">
+                        
+                        <!-- Contents body -->
+                            <section id="contents_body">
+
+                                <!-- Page: Panel -->
+                                    <div id="page_panel" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Panel</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Panel</li>
+                                        </ol>
+                                        <!-- Indicators: General -->
+                                        <hr>
+                                        <h3 class="my-4">General</h3>
+                                        <div class="row">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Espacios de trabajo</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">4</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Consultas a bases de datos</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">1245</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Consultas a funciones</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">1156</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-white mb-4">
+                                                    <div class="card-body">
+                                                        <div class="d-block">Visitas a la aplicacion web</div>
+                                                        <div class="d-block mt-2"><strong class="display-2">254</strong></div>
+                                                    </div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small stretched-link" href="#">Ver m&aacute;s</a>
+                                                        <div class="small"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Indicators: Report 1 -->
+                                        <hr>
+                                        <h3 class="my-4">Diario</h3>
+                                        <div class="row">
+                                            <!-- Database Queries -->
+                                            <div class="col-xl-6">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <i class="fas fa-chart-area me-1"></i>
+                                                        Consultas a bases de datos
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr><th scope="col">Fecha</th><th scope="col">Cantidad</th></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td>2023-09-01</td><td>15</td>
+                                                                <tr><td>2023-09-02</td><td>22</td>
+                                                                <tr><td>2023-09-03</td><td>18</td>
+                                                                <tr><td>2023-09-04</td><td>10</td>
+                                                                <tr><td>2023-09-05</td><td>27</td>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Functions queries -->
+                                            <div class="col-xl-6">
+                                                <div class="card mb-4">
+                                                    <div class="card-header">
+                                                        <i class="fas fa-chart-area me-1"></i>
+                                                        Consultas a funciones
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr><th scope="col">Fecha</th><th scope="col">Cantidad</th></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td>2023-09-01</td><td>15</td>
+                                                                <tr><td>2023-09-02</td><td>22</td>
+                                                                <tr><td>2023-09-03</td><td>18</td>
+                                                                <tr><td>2023-09-04</td><td>10</td>
+                                                                <tr><td>2023-09-05</td><td>27</td>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- /Page: Panel -->
+                                <!-- Page: Workspaces -->
+                                    <div id="page_workspaces" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Espacios de trabajo</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Espacios de trabajo</li>
+                                        </ol>
+
+                                        <!-- Indicators: General -->
+                                        <hr>
+                                        <h3 class="my-4">General</h3>
+                                        <div class="row">
+    
+                                            <!-- Workspaces: Read -->
+                                            <div id="workspaces_read" class="col">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Todos los espacios de trabajo
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_workspaces"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_workspaces">
+                                                                        <li>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#workspaces_add">
+                                                                                A&ntilde;adir nuevo
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <table id="table_workspaces" class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Nombre</th>
+                                                                    <th scope="col">Tipo</th>
+                                                                    <th scope="col">Estado</th>
+                                                                    <th scope="col">Descripci&oacute;n</th>
+                                                                    <th scope="col">Fecha de creaci&oacute;n</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>3d39dk39ddfi</td>
+                                                                    <td><a href="../workspace/">Unicasa Web</a></td>
+                                                                    <td>CPW Woodpecker + MariaDB (Shared)</td>
+                                                                    <td>Activo</td>
+                                                                    <td>Sitio web principal de la empresa Unicasa</td>
+                                                                    <td>2023-09-01</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3dfdjg34687</td>
+                                                                    <td><a href="../workspace/">Mas x Menos Web</a></td>
+                                                                    <td>CPW Woodpecker + MariaDB (Shared)</td>
+                                                                    <td>Suspendido</td>
+                                                                    <td>Sitio web principal de la empresa Mas x Menos</td>
+                                                                    <td>2023-09-01</td>
+                                                                </tr>
+                                                            </tbody>
+                                                          </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Workspaces: Add -->
+                                            <div class="modal fade" id="workspaces_add" tabindex="-1" aria-labelledby="workspaces_add_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="workspaces_add_label">A&ntilde;adir nuevo Espacio de trabajo</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table id="table_billing_detailed" class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Nombre</td>
+                                                                        <td><input class="form-control" type="text" name="workspace_name"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Tipo</td>
+                                                                        <td>
+                                                                            <select class="form-select" name="workspace_type">
+                                                                                <option value="1">CPW Woodpecker + MariaDB (Shared)</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Descripci&oacute;n</td>
+                                                                        <td><textarea class="form-control" type="text" name="workspace_description"></textarea></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <!-- /Page: Workspaces -->
+                                <!-- Page: Billing and Payments -->
+                                    <div id="page_finance" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Facturaci&oacute;n y pagos</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Facturaci&oacute;n y pagos</li>
+                                        </ol>
+                                        <!-- Billing: General -->
+                                        <hr>
+                                        <h3 class="my-4">General</h3>
+                                        <div class="row">
+    
+                                            <!-- Billing: Read -->
+                                            <div id="billing_read" class="col">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Facturaciones por mes
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <table id="table_billing" class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Fecha de inicio/fin</th>
+                                                                    <th scope="col">Monto</th>
+                                                                    <th scope="col">Estado</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">234</th>
+                                                                    <td>
+                                                                        <a class="link-primary" data-bs-toggle="modal" data-bs-target="#billing_read_detailed">
+                                                                            2023-08-07 / 2023-09-06
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>19.99 USD</td>
+                                                                    <td>Pagado</td>
+                                                                    <td>Activo</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Billing: Read detailed -->
+                                            <div class="modal fade" id="billing_read_detailed" tabindex="-1" aria-labelledby="billing_read_detailed_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="billing_read_detailed_label">Facturaci&oacute;n: 2023-08-07 / 2023-09-06 (#234)</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>Consumos</h4>
+                                                            <table id="table_billing_detailed" class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Tipo</th>
+                                                                        <th scope="col">Uso</th>
+                                                                        <th scope="col">Excedido</th>
+                                                                        <th scope="col">Monto total</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Mensualidad</td>
+                                                                        <td>N/A</td>
+                                                                        <td>N/A</td>
+                                                                        <td>19.99 $</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>RAM</td>
+                                                                        <td>1.2 GB</td>
+                                                                        <td>Si</td>
+                                                                        <td>0.2 $</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <!-- /Page: Finance -->
+
+                                <!-- Page: My Cupons -->
+                                    <div id="page_coupons" class="contents_body_page container-fluid px-4">
+                                        <!-- Header -->
+                                        <h1 class="mt-4">Mis Cupones</h1>
+                                        <!-- Breadcrumbs -->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Mis Cupones</li>
+                                        </ol>
+                                        <!-- Indicators: General -->
+                                        <hr>
+                                        <h3 class="my-4">General</h3>
+                                        <div class="row">
+    
+                                            <!-- Coupons: Read -->
+                                            <div id="billing_read" class="col">
+                                                <div class="card mb-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <i class="fas fa-chart-area me-1"></i>
+                                                                Todos sus cupones
+                                                            </div>
+                                                            <div class="p-2 bd-highlight">
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                        type="button" id="dropdown_menu_options_coupons"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                    <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_coupons">
+                                                                        <li>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#coupon_add_new">
+                                                                                A&ntilde;adir nuevo
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <table id="table_billing" class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Nombre</th>
+                                                                    <th scope="col">Monto</th>
+                                                                    <th scope="col">Estado</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">KD8FKS99EKK3</th>
+                                                                    <td>Felices fiestas</td>
+                                                                    <td>20 USD</td>
+                                                                    <td>Activo</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Coupons: Add New -->
+                                            <div class="modal fade" id="coupon_add_new" tabindex="-1" aria-labelledby="coupon_add_new_label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="coupon_add_new_label">A&ntilde;adir nuevo cup&oacute;n</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table id="table_billing_detailed" class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>C&oacute;digo</td>
+                                                                        <td><input class="form-control" type="text" name="coupon_add_code"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <!-- /Page: Cupons -->
+                            </section>
+                        <!-- /Contents body -->
+
+                        <!-- Footer -->
+                        <footer class="py-4 bg-light mt-auto">
+                            <div class="container-fluid px-4">
+                                <div class="d-flex align-items-center justify-content-between small">
+                                    <div class="text-muted">Copyright &copy; CPW Online. CPW Sinergy es un producto de CPW Online.</div>
+                                    <div>
+                                        <a href="#">Pol&iacute;tica de privacidad</a>
+                                        &middot;
+                                        <a href="#">T&eacute;rminos y condiciones</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </main>
+                <!-- Contents main -->
+
+            </main>
+        <!-- Container Main-->
+
+        <!-- Scripts -->
+            <script src="../../assets/js/jquery.min-v3.4.1.js"></script>
+            <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
+            <script src="../../assets/js/main.js"></script>
+            <script src="../../assets/js/tables.js"></script>
+        <!-- Scripts -->
+    </body>
+</html>
