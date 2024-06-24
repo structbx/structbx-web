@@ -58,31 +58,31 @@ class WebElements
         sidebar_menu.append($(`
             <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
-                <a class="nav-link mb-2 active" href="#">
+                <a class="menu_start nav-link mb-2 active" href="#start" menu="start">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="ms-2">Inicio</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="#">
+                <a class="menu_forms nav-link mb-2" href="#forms" menu="forms">
                     <i class="fas fa-table"></i>
                     <span class="ms-2">Formularios</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="#">
+                <a class="menu_pages nav-link mb-2" href="#pages" menu="pages">
                     <i class="fas fa-file"></i>
                     <span class="ms-2">P&aacute;ginas</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="#">
+                <a class="menu_organization nav-link mb-2" href="#organization" menu="organization">
                     <i class="fas fa-building"></i>
                     <span class="ms-2">Organizaci&oacute;n</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="#">
+                <a class="menu_settings nav-link mb-2" href="#settings" menu="settings">
                     <i class="fas fa-cog"></i>
                     <span class="ms-2">Configuraci&oacute;n</span>
                 </a>
