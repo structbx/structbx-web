@@ -1,8 +1,21 @@
 
-.cpw-sinergy #contents_body{
-    background-color: #ececec;
+/* --- General --- */
+
+* {
+    margin: none;
+    padding: none;
 }
 
-.cpw-sinergy #contents_body .contents_body_page{
-    display: none;
+.main_content {
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.document_pages{
+    display:none;
+}
+
+.primary-background
+{
+    background: #eee063;
 }
