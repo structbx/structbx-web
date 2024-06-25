@@ -6,6 +6,8 @@ class MenuManager
         this.menu = menu;
         this.menus = [];
         this.current_menu = $("");
+        this.current_section = $("");
+        this.current_href = "";
         this.section = $("");
 
         this.AddEvent_();
@@ -22,7 +24,10 @@ class MenuManager
         if(window.location.hash != "")
         {
             let menu = window.location.hash.replace('#', '');
-            this.ManageMenus_(menu);
+            if(this.menus.includes(menu))
+                this.ManageMenus_(menu);
+            else if(this.menus.length > 0)
+                this.ManageMenus_(this.menus[0])
         }
         else if(this.menus.length > 0)
             this.ManageMenus_(this.menus[0])
@@ -38,10 +43,11 @@ class MenuManager
             {
                 this.current_menu = $(this.menu + " .menu_" + element_menu);
                 this.current_section = $(".section_" + element_menu);
+                let current_href = $(this.menu + " .menu_" + element_menu).attr('href');
 
                 $(this.current_menu).addClass('active');
                 $(this.current_section).removeClass('d-none');
-                window.location.hash = "#" + element_menu;
+                window.location.hash = current_href;
             }
             else
             {
