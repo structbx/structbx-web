@@ -342,25 +342,6 @@
                                     <div class="flex-grow-1 align-self-center">
                                         <span class="text-dark fw-bold">General</span>
                                     </div>
-                                    <div class="p-2 bd-highlight">
-                                        <div class="dropdown">
-                                            <button
-                                                class="btn btn-dark-static dropdown-toggle"
-                                                type="button" id="dropdown_menu_options_dashboards"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
-                                            <i class="fas fa-list"></i>
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_dashboards">
-                                                <li>
-                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dashboards_add">
-                                                        A&ntilde;adir nuevo
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -392,7 +373,9 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    Logo
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Logo</span>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -425,7 +408,9 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    Usuarios y roles
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Usuarios y roles</span>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -458,7 +443,9 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    Plan
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Plan</span>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -499,7 +486,9 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    Facturaci&oacute;n
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Facturaci&oacute;n</span>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -534,7 +523,9 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    Reporte de pagos
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Reporte de pagos</span>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -572,6 +563,68 @@
                         <div class="pt-3 pb-2 mb-3 border-bottom">
                             <h2 class="h2">Configuraciones</h2>
                         </div>
+
+                        <!-- Settings: General -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Informaci&oacute;n general</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Contrase&ntilde;a actual</th>
+                                            <td scope="row"><input type="password" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Nueva contrase&ntilde;a</th>
+                                            <td scope="row"><input type="password" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Repetir contrase&ntilde;a actual</th>
+                                            <td scope="row"><input type="password" class="form-control"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Settings: General -->
+
+                        <!-- Settings: Change password -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Cambiar contrase&ntilde;a</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Nombre completo</th>
+                                            <td scope="row"><input type="text" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Correo</th>
+                                            <td scope="row"><input type="email" class="form-control"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Settings: Change password -->
 
                     </section>
                     <!-- /Settings section -->
