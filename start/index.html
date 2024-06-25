@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>StructBI - Plataforma de gesti&oacute;n y an&aacute;lisis de datos</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/libraries/fontawesome-v5.9.0.min.css">
+
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <!-- /CSS files -->
+
+    </head>
+    <body id="structbi" class="position-relative">
+
+        <header class="main_header navbar navbar-dark navbar-expand-md navbar-light bg-dark text-white">
+        </header>
+
+        <div class="container-fluid container-xxl">
+            <div class="row">
+
+                <!--- Sidebar menu --->
+                <aside class="sidebar_menu sidebar col-md-3 col-lg-2 d-md-block bg-light collapse px-4">
+                </aside>
+                <!-- /Sidebar menu -->
+
+                <!-- Main content -->
+                <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4">
+
+                    <!-- Start section -->
+                    <section class="section_start d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Inicio</h1>
+                        </div>
+
+                        <!-- Start: Dashboards -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Dashboards</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <div class="row row-cols-1 row-cols-lg-3 align-items-stretch text-center">
+                                    <div class="col">
+                                        <a class="btn btn-secondary py-5 px-5 mb-2" href="#">
+                                            <i class="fas fa-file"></i>
+                                            <span class="ms-2">Indicadores generales</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="btn btn-secondary py-5 px-5 mb-2" href="#">
+                                            <i class="fas fa-file"></i>
+                                            <span class="ms-2">Indicadores 1</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="btn btn-secondary py-5 px-5 mb-2" href="#">
+                                            <i class="fas fa-file"></i>
+                                            <span class="ms-2">Indicadores 2</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Start: Dashboards -->
+
+                    </section>
+                    <!-- /Start section -->
+
+                    <!-- Forms section -->
+                    <section class="section_forms d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Formularios</h1>
+                        </div>
+
+                        <!-- Forms: All forms -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Todos los formularios</span>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-dark-static dropdown-toggle"
+                                            type="button" id="dropdown_menu_options_forms"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                        <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_forms">
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#forms_add">
+                                                    A&ntilde;adir nuevo
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Fecha de creaci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><a href="#">Ventas</a></th>
+                                            <td scope="row">Activo</td>
+                                            <td scope="row">2023-09-01</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Forms: All forms -->
+
+                        <!-- Forms: Add -->
+                        <div class="modal fade" id="forms_add" tabindex="-1" aria-labelledby="forms_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="forms_add_label">A&ntilde;adir nuevo formulario</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table id="table_billing_detailed" class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td><input class="form-control" type="text" name="workspace_name"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipo</td>
+                                                    <td>
+                                                        <select class="form-select" name="workspace_type">
+                                                            <option value="1">CPW Woodpecker + MariaDB (Shared)</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Descripci&oacute;n</td>
+                                                    <td><textarea class="form-control" type="text" name="workspace_description"></textarea></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Forms: Add -->
+
+                    </section>
+                    <!-- /Forms section -->
+
+                    <!-- Dashboards section -->
+                    <section class="section_dashboards d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Dashboards</h1>
+                        </div>
+
+                        <!-- Dashboards: All Dashboards -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Todos los Dashboards</span>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-dark-static dropdown-toggle"
+                                            type="button" id="dropdown_menu_options_dashboards"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                        <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_dashboards">
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dashboards_add">
+                                                    A&ntilde;adir nuevo
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Privacidad</th>
+                                            <th scope="col">Agregado a Inicio</th>
+                                            <th scope="col">Fecha de creaci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><a href="#">Indicadores 1</a></th>
+                                            <td scope="row">Activo</td>
+                                            <td scope="row">P&uacute;blico</td>
+                                            <td scope="row">S&iacute;</td>
+                                            <td scope="row">2023-09-01</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Dashboards: All Dashboards -->
+
+                        <!-- Dashboards: Add -->
+                        <div class="modal fade" id="dashboards_add" tabindex="-1" aria-labelledby="dashboards_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="dashboards_add_label">A&ntilde;adir nuevo Dashboard</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table id="table_billing_detailed" class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td><input class="form-control" type="text" name="workspace_name"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipo</td>
+                                                    <td>
+                                                        <select class="form-select" name="workspace_type">
+                                                            <option value="1">CPW Woodpecker + MariaDB (Shared)</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Descripci&oacute;n</td>
+                                                    <td><textarea class="form-control" type="text" name="workspace_description"></textarea></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Dashboards: Add -->
+
+                    </section>
+                    <!-- /Dashboards section -->
+
+                    <!-- Organization section -->
+                    <section class="section_organization d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Organizaci&oacute;n</h1>
+                        </div>
+
+                    </section>
+                    <!-- /Organization section -->
+
+                    <!-- Settings section -->
+                    <section class="section_settings d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Configuraciones</h1>
+                        </div>
+
+                    </section>
+                    <!-- /Settings section -->
+
+                    <!-- Footer -->
+                    <footer class="main_footer container">
+                    </footer>
+                    <!-- /Footer -->
+                    
+                </main>
+                <!-- /Main content -->
+
+            </div>
+        </div>
+
+        <!-- Javascript -->
+            <!-- Libraries -->
+            <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+            <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
+            <script src="../assets/js/libraries/chart.js-v3.5.0.js"></script>
+
+            <!-- Classes -->
+            <script src="../assets/js/classes/button_state.js"></script>
+            <script src="../assets/js/classes/csv_operator.js"></script>
+            <script src="../assets/js/classes/form_checker.js"></script>
+            <script src="../assets/js/classes/menu_manager.js"></script>
+            <script src="../assets/js/classes/notification.js"></script>
+            <script src="../assets/js/classes/request.js"></script>
+            <script src="../assets/js/classes/server_config.js"></script>
+            <script src="../assets/js/classes/wait_animation.js"></script>
+            <script src="../assets/js/classes/web_elements.js"></script>
+
+            <!-- Modules -->
+            <!--<script src="../assets/js/modules/login.js"></script>-->
+
+            <!-- Custom scripts -->
+            <script>
+                $(function ()
+                {
+                    // Web Elements
+                        let webE = new WebElements();
+                        webE.SidebarMenu_();
+                        webE.Header_();
+                        webE.Footer_();
+                        new MenuManager('.sidebar_menu');
+
+                    // Verify Session
+                    /*new Login().VerifySession(result =>
+                    {
+                        if(!result)
+                        {
+                            new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
+                            window.location.href = "../login/";
+                        }
+                    });*/
+                });
+            </script>
+            
+            <!-- Events -->
+            <script src="../assets/js/events/general_events.js"></script>
+            
+        <!-- Javascript -->
+    </body>
+</html>
