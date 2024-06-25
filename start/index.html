@@ -152,19 +152,20 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Nombre</td>
-                                                    <td><input class="form-control" type="text" name="workspace_name"></td>
+                                                    <td><input class="form-control" type="text" name="form_name"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Tipo</td>
+                                                    <td>Estado</td>
                                                     <td>
-                                                        <select class="form-select" name="workspace_type">
-                                                            <option value="1">CPW Woodpecker + MariaDB (Shared)</option>
+                                                        <select class="form-select" name="form_state">
+                                                            <option value="1">Activo</option>
+                                                            <option value="2">Inactivo</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Descripci&oacute;n</td>
-                                                    <td><textarea class="form-control" type="text" name="workspace_description"></textarea></td>
+                                                    <td><textarea class="form-control" type="text" name="form_description"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -258,19 +259,36 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Nombre</td>
-                                                    <td><input class="form-control" type="text" name="workspace_name"></td>
+                                                    <td><input class="form-control" type="text" name="dashboard_name"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Tipo</td>
+                                                    <td>Estado</td>
                                                     <td>
-                                                        <select class="form-select" name="workspace_type">
-                                                            <option value="1">CPW Woodpecker + MariaDB (Shared)</option>
+                                                        <select class="form-select" name="dashboard_state">
+                                                            <option value="1">Activo</option>
+                                                            <option value="2">Inactivo</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Privacidad</td>
+                                                    <td>
+                                                        <select class="form-select" name="dashboard_state">
+                                                            <option value="1">P&uacute;blico</option>
+                                                            <option value="2">Privado</option>
+                                                            <option value="2">S&oacute;lo yo</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Agregado a inicio</td>
+                                                    <td>
+                                                        <input type="checkbox" class="form-check" checked />
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <td>Descripci&oacute;n</td>
-                                                    <td><textarea class="form-control" type="text" name="workspace_description"></textarea></td>
+                                                    <td><textarea class="form-control" type="text" name="dashboard_description"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
