@@ -29,12 +29,12 @@
                 <!-- /Sidebar menu -->
 
                 <!-- Main content -->
-                <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4">
+                <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
 
                     <!-- Start section -->
                     <section class="section_start d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">Inicio</h1>
+                            <h2 class="h2">Inicio</h2>
                         </div>
 
                         <!-- Start: Dashboards -->
@@ -82,7 +82,7 @@
                     <!-- Forms section -->
                     <section class="section_forms d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">Formularios</h1>
+                            <h2 class="h2">Formularios</h2>
                         </div>
 
                         <!-- Forms: All forms -->
@@ -185,7 +185,7 @@
                     <!-- Dashboards section -->
                     <section class="section_dashboards d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">Dashboards</h1>
+                            <h2 class="h2">Dashboards</h2>
                         </div>
 
                         <!-- Dashboards: All Dashboards -->
@@ -308,8 +308,181 @@
                     <!-- Organization section -->
                     <section class="section_organization d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">Organizaci&oacute;n</h1>
+                            <h2 class="h2">Organizaci&oacute;n</h2>
                         </div>
+
+                        <!-- Organization: Nav -->
+                        <ul class="nav_organization nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <a class="menu_organization_general nav-link" href="#organization" menu="organization_general">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_organization_logo nav-link" href="#organization" menu="organization_logo">Logo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_organization_users_roles nav-link" href="#organization" menu="organization_users_roles">Usuarios y roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_organization_plan nav-link" href="#organization" menu="organization_plan">Plan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_organization_billing nav-link" href="#organization" menu="organization_billing">Facturaci&oacute;n</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_organization_pays nav-link" href="#organization" menu="organization_pays">Reporte de pagos</a>
+                            </li>
+                        </ul>
+                        <!-- /Organization: Nav -->
+
+                        <!-- Organization: General -->
+                        <section class="section_organization_general d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">General</span>
+                                    </div>
+                                    <div class="p-2 bd-highlight">
+                                        <div class="dropdown">
+                                            <button
+                                                class="btn btn-dark-static dropdown-toggle"
+                                                type="button" id="dropdown_menu_options_dashboards"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                            >
+                                            <i class="fas fa-list"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_dashboards">
+                                                <li>
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dashboards_add">
+                                                        A&ntilde;adir nuevo
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Privacidad</th>
+                                                <th scope="col">Agregado a Inicio</th>
+                                                <th scope="col">Fecha de creaci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><a href="#">Indicadores 1</a></th>
+                                                <td scope="row">Activo</td>
+                                                <td scope="row">P&uacute;blico</td>
+                                                <td scope="row">S&iacute;</td>
+                                                <td scope="row">2023-09-01</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+    
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Organization: General -->
+
+                        <!-- Organization: Logo -->
+                        <section class="section_organization_logo d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    2
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Organization: Logo -->
+
+                        <!-- Organization: Users and roles -->
+                        <section class="section_organization_users_roles d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    3
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Organization: Users and roles -->
+
+                        <!-- Organization: Plan -->
+                        <section class="section_organization_plan d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    4
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Organization: Plan -->
+
+                        <!-- Organization: Billing -->
+                        <section class="section_organization_billing d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    5
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Organization: Billing -->
+
+                        <!-- Organization: Pays -->
+                        <section class="section_organization_pays d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    6
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Organization: Pays -->
 
                     </section>
                     <!-- /Organization section -->
@@ -317,7 +490,7 @@
                     <!-- Settings section -->
                     <section class="section_settings d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">Configuraciones</h1>
+                            <h2 class="h2">Configuraciones</h2>
                         </div>
 
                     </section>
@@ -364,6 +537,7 @@
                         webE.Header_();
                         webE.Footer_();
                         new MenuManager('.sidebar_menu');
+                        new MenuManager('.nav_organization');
 
                     // Verify Session
                     /*new Login().VerifySession(result =>
