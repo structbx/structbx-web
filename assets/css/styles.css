@@ -1,14 +1,21 @@
 
+.primary-background
+{
+    background-color:#eee063 !important;
+}
+.primary-border
+{
+    border-color:#eee063 !important;
+}
 .primary-color
 {
-    border-color:#eee063;
+    color:#eee063 !important;
 }
-
 .bg-dark{
-    background-color: #212529;
+    background-color: #212529 !important;
 }
-.bg-ligth{
-    background-color: #e4e4e4;
+.bg-light{
+    background-color: #f3f3f3 !important;
 }
 
 /* --- Buttons and forms --- */
@@ -18,35 +25,29 @@
     border-color:none;
     color:#333 !important;
 }
-
-.btn:hover{
-    background: #eee063;
-    border-color:#eee063;
-}
-
 .btn-primary{
     background: #eee063;
     border-color:#eee063;
     color:#333 !important;
 }
-
 .btn-secondary{
     background: #b8b8b8;
     border-color:#b8b8b8;
     color:#333 !important;
 }
-
+.btn-secondary:hover{
+    background: #9b9b9b;
+    color:#333 !important;
+}
 .btn-outline-primary{
     background: none;
     border-color:#eee063;
     color:#333 !important;
 }
-
 .btn-primary:hover{
     background: #cebf3e;
     border-color:#eee063;
 }
-
 .btn-primary:focus{
     background: #eee063;
     border-color:#eee063;
@@ -58,6 +59,11 @@
 }
 .btn-ligth:hover{
     background-color: #eee063;
+    color:#333 !important;
+}
+.btn-dark-static{
+    background: none;
+    border-color:#333;
     color:#333 !important;
 }
 /* --- Tables --- */
@@ -139,6 +145,9 @@ table tr .dropdown .dropdown-menu
 
 .nav-link {
     color:#333;
+}
+.nav-link:hover {
+    color:#796e0c;
 }
 .nav-link.active {
     color:#796e0c;
