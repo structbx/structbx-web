@@ -365,28 +365,21 @@
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
-    
                                     <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Estado</th>
-                                                <th scope="col">Privacidad</th>
-                                                <th scope="col">Agregado a Inicio</th>
-                                                <th scope="col">Fecha de creaci&oacute;n</th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row"><a href="#">Indicadores 1</a></th>
-                                                <td scope="row">Activo</td>
-                                                <td scope="row">P&uacute;blico</td>
-                                                <td scope="row">S&iacute;</td>
-                                                <td scope="row">2023-09-01</td>
+                                                <td>Nombre de la organizaci&oacute;n</td>
+                                                <td><input class="form-control" type="text" name="organization_general_name"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Descripci&oacute;n</td>
+                                                <td><textarea class="form-control" type="text" name="organization_general_description"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button class="btn btn-primary">Guardar</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
-    
                                 </div>
                                 <!-- /Contents -->
                                 
@@ -399,11 +392,26 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    2
+                                    Logo
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Logo actual</td>
+                                                <td><img src="../assets/images/logo-150x150.png" alt=""></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nuevo logo</td>
+                                                <td><input class="form-control" type="file" name="organization_logo_new_logo"></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button class="btn btn-primary">Guardar</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
     
                                 </div>
                                 <!-- /Contents -->
@@ -417,12 +425,27 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    3
+                                    Usuarios y roles
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
-    
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Correo </th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Rol</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><a href="#">correo@test.com</a></th>
+                                                <td scope="row">Activo</td>
+                                                <td scope="row">Administrador</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /Contents -->
                                 
@@ -435,12 +458,35 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    4
+                                    Plan
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
-    
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Plan actual</th>
+                                                <td scope="row">B&aacute;sico</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Fecha de renovacion</th>
+                                                <td scope="row">15 de cada mes</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Uso</th>
+                                                <td scope="row">15 GB / 30 GB</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Usuarios</th>
+                                                <td scope="row">2/10</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Reportes</th>
+                                                <td scope="row">5/Sin limite</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /Contents -->
                                 
@@ -453,12 +499,29 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    5
+                                    Facturaci&oacute;n
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
-    
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Fecha de inicio/fin </th>
+                                                <th scope="col">Plan</th>
+                                                <th scope="col">Monto</th>
+                                                <th scope="col">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">2023-08-07 / 2023-09-06</th>
+                                                <td scope="row">B&aacute;sico</td>
+                                                <td scope="row">19.99 USD</td>
+                                                <td scope="row">Pagado</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /Contents -->
                                 
@@ -471,12 +534,29 @@
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    6
+                                    Reporte de pagos
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
-    
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Monto</th>
+                                                <th scope="col">M&eacute;todo de pago</th>
+                                                <th scope="col">Comprobante</th>
+                                                <th scope="col">Fecha y hora</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">19.99</th>
+                                                <td scope="row">Binance</td>
+                                                <td scope="row"><img src="" alt=""></td>
+                                                <td scope="row">2024/04/23 23:12:34</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /Contents -->
                                 
