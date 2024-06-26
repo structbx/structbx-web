@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Formulario - StructBI</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/libraries/fontawesome-v5.9.0.min.css">
+
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <!-- /CSS files -->
+
+    </head>
+    <body id="structbi" class="position-relative">
+
+        <header class="main_header navbar navbar-dark navbar-expand-md navbar-light bg-dark text-white">
+        </header>
+
+        <div class="container-fluid container-xxl">
+            <div class="row">
+
+                <!--- Sidebar menu --->
+                <aside class="sidebar_menu sidebar col-md-3 col-lg-2 d-md-block bg-light collapse px-4">
+                </aside>
+                <!-- /Sidebar menu -->
+
+                <!-- Main content -->
+                <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
+
+                    <!-- Data section -->
+                    <section class="section_data d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Data almacenada</h2>
+                        </div>
+
+                    </section>
+                    <!-- /Data section -->
+
+                    <!-- Form design section -->
+                    <section class="section_form_design d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Dise&ntilde;o del formulario</h2>
+                        </div>
+
+                    </section>
+                    <!-- /Form design section -->
+
+                    <!-- Reports section -->
+                    <section class="section_reports d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Reportes</h2>
+                        </div>
+
+                    </section>
+                    <!-- /Reports section -->
+
+                    <!-- History section -->
+                    <section class="section_history d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Historial de cambios</h2>
+                        </div>
+
+                    </section>
+                    <!-- /History section -->
+
+                    <!-- Bin section -->
+                    <section class="section_bin d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Papelera</h2>
+                        </div>
+
+                    </section>
+                    <!-- /Bin section section -->
+
+                    <!-- Settings section -->
+                    <section class="section_settings d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Configuraciones</h2>
+                        </div>
+
+                    </section>
+                    <!-- /Settings section -->
+
+                    <!-- Footer -->
+                    <footer class="main_footer container">
+                    </footer>
+                    <!-- /Footer -->
+                    
+                </main>
+                <!-- /Main content -->
+
+            </div>
+        </div>
+
+        <!-- Javascript -->
+            <!-- Libraries -->
+            <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+            <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
+            <script src="../assets/js/libraries/chart.js-v3.5.0.js"></script>
+
+            <!-- Classes -->
+            <script src="../assets/js/classes/button_state.js"></script>
+            <script src="../assets/js/classes/csv_operator.js"></script>
+            <script src="../assets/js/classes/form_checker.js"></script>
+            <script src="../assets/js/classes/menu_manager.js"></script>
+            <script src="../assets/js/classes/notification.js"></script>
+            <script src="../assets/js/classes/request.js"></script>
+            <script src="../assets/js/classes/server_config.js"></script>
+            <script src="../assets/js/classes/wait_animation.js"></script>
+            <script src="../assets/js/classes/web_elements.js"></script>
+
+            <!-- Modules -->
+            <!--<script src="../assets/js/modules/login.js"></script>-->
+
+            <!-- Custom scripts -->
+            <script>
+                $(function ()
+                {
+                    // Web Elements
+                        let webE = new WebElements();
+                        webE.SidebarMenuForm_();
+                        webE.HeaderForm_();
+                        webE.Footer_();
+                        new MenuManager('.sidebar_menu');
+                        //new MenuManager('.nav_organization');
+
+                    // Verify Session
+                    /*new Login().VerifySession(result =>
+                    {
+                        if(!result)
+                        {
+                            new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
+                            window.location.href = "../login/";
+                        }
+                    });*/
+                });
+            </script>
+            
+            <!-- Events -->
+            <script src="../assets/js/events/general_events.js"></script>
+            
+        <!-- Javascript -->
+    </body>
+</html>
