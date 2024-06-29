@@ -423,6 +423,227 @@
                             <h2 class="h2">Dise&ntilde;o del formulario</h2>
                         </div>
 
+                        <!-- Form design: Rows -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Filas del formulario</span>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-dark-static dropdown-toggle"
+                                            type="button" id="dropdown_menu_options_data_general"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                        <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_general">
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_row_add">
+                                                    Agregar fila
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Filas</th>
+                                            <th scope="col">Columnas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Fila</th>
+                                            <td scope="row">Ventas, Fecha de Venta</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Fila</th>
+                                            <td scope="row">Ingreso, Nombre</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Form design: Rows -->
+
+                        <!-- Form design: Add row -->
+                        <div class="modal fade" id="form_design_row_add" tabindex="-1" aria-labelledby="form_design_row_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="form_design_row_add_label">Agregar fila</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-4">
+                                            <select class="form-select mb-2" name="form_design_row_add_form">
+                                                <option value="1">Ingreso</option>
+                                                <option value="1">Ventas</option>
+                                                <option value="1">Fecha de venta</option>
+                                            </select>
+                                            <button class="btn btn-primary">Agregar fila</button>
+                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Columna</th>
+                                                    <th scope="col">Posici&oacute;n de etiqueta</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Ventas</th>
+                                                    <td>Arriba</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Nombre</th>
+                                                    <td>Arriba</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Form design: Add row -->
+
+                        <!-- Form design: Final form -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Resultado de formulario</span>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-dark-static dropdown-toggle"
+                                            type="button" id="dropdown_menu_options_final_form_properties"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                        <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_final_form_properties">
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_final_form_properties">
+                                                    Propiedades
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <h3>T&iacute;tulo del formulario</h3>
+                                <div class="mt-4">
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label>Ventas</label>
+                                            <input type="text" class="form-control" name=""/>
+                                        </div>
+                                        <div class="col">
+                                            <label>Fecha de venta</label>
+                                            <input type="date" class="form-control" name=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label>Ingreso</label>
+                                            <input type="number" class="form-control" name=""/>
+                                        </div>
+                                        <div class="col">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" name=""/>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                </div>
+
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Form design: Final form -->
+
+                        <!-- Form design: Final form: Properties -->
+                        <div class="modal fade" id="form_design_final_form_properties" tabindex="-1" aria-labelledby="form_design_final_form_properties_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="form_design_final_form_properties_add_label">Propiedades</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Mostrar descripcion del fomulario</th>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option value="">S&iacute;</option>
+                                                            <option value="">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Mostrar descripciones de campos</th>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option value="">S&iacute;</option>
+                                                            <option value="">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Texto del boton de guardado</th>
+                                                    <td>
+                                                        <input type="text" class="form-control" name=""/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Mostrar etiquetas</th>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option value="">S&iacute;</option>
+                                                            <option value="">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Form design: Final form: Properties -->
+
+                        <button type="button" class="btn btn-primary">Guardar cambios del formulario</button>
+
                     </section>
                     <!-- /Form design section -->
 
