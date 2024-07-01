@@ -136,7 +136,53 @@ class WebElements
                     <span class="ms-2">Configuraci&oacute;n</span>
                 </a>
             </div>
-            <h5 class="small text-uppercase text-muted">P&aacute;ginas</h5>
+            <h5 class="small text-uppercase text-muted">Dashboards</h5>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="#">
+                    <i class="fas fa-file"></i>
+                    <span class="ms-2">Indicadores generales</span>
+                </a>
+            </div>
+        `));
+
+        $(".sidebar_menu").append(sidebar_menu);
+    }
+    SidebarMenuDashboard_ = () =>
+    {
+        let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
+        sidebar_menu.append($(`
+            <h5 class="small text-uppercase text-muted">GENERAL</h5>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="../start/#start">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="ms-2">Inicio</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="../start/#forms">
+                    <i class="fas fa-table"></i>
+                    <span class="ms-2">Formularios</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="../start/#dashboards">
+                    <i class="fas fa-file"></i>
+                    <span class="ms-2">Dashboards</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="../start/#organization">
+                    <i class="fas fa-building"></i>
+                    <span class="ms-2">Organizaci&oacute;n</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="../start/#settings">
+                    <i class="fas fa-cog"></i>
+                    <span class="ms-2">Configuraci&oacute;n</span>
+                </a>
+            </div>
+            <h5 class="small text-uppercase text-muted">Dashboards</h5>
             <div class="nav-item">
                 <a class="nav-link mb-2" href="#">
                     <i class="fas fa-file"></i>
@@ -184,9 +230,9 @@ class WebElements
                 </a>
             </div>
             <div class="nav-item">
-                <a class="menu_settings nav-link mb-2" href="#" href="#settings" menu="settings">
+                <a class="menu_settings nav-link mb-2" href="#settings" menu="settings">
                     <i class="fas fa-file"></i>
-                    <span class="ms-2">Configuracion</span>
+                    <span class="ms-2">Configuraci&oacute;n</span>
                 </a>
             </div>
         `));
