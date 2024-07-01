@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dashboard - StructBI</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/libraries/fontawesome-v5.9.0.min.css">
+
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <!-- /CSS files -->
+
+    </head>
+    <body id="structbi" class="position-relative">
+
+        <header class="main_header navbar navbar-dark navbar-expand-md navbar-light bg-dark text-white">
+        </header>
+
+        <div class="container-fluid container-xxl">
+            <div class="row">
+
+                <!--- Sidebar menu --->
+                <aside class="sidebar_menu sidebar col-md-3 col-lg-2 d-md-block bg-light collapse px-4">
+                </aside>
+                <!-- /Sidebar menu -->
+
+                <!-- Main content -->
+                <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
+
+                    <!-- Dashboard section -->
+                    <section class="d-block">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Indicadores generales</h2>
+                        </div>
+
+                        <!-- Dashboard: Nav -->
+                        <ul class="nav_dashboard nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <a class="menu_dashboard_menu1 nav-link" href="#dashboard_menu1" menu="dashboard_menu1">Reporte 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_dashboard_menu2 nav-link" href="#dashboard_menu2" menu="dashboard_menu2">Reporte 1</a>
+                            </li>
+                        </ul>
+                        <!-- /Dashboard: Nav -->
+                        
+                        <!-- Dashboard: Report 1 -->
+                        <section class="section_dashboard_menu1 d-none">
+                            <!-- Dashboard: Report1: Table -->
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Ventas por mes</span>
+                                    </div>
+                                    <div class="p-2 bd-highlight">
+                                        <div class="dropdown">
+                                            <button
+                                                class="btn btn-dark-static dropdown-toggle"
+                                                type="button" id="dropdown_menu_options_dashboard_report1_table"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                                >
+                                                <i class="fas fa-list"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_dashboard_report1_table">
+                                                <li>
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dashboard_report_export">
+                                                        Exportar reporte
+                                                    </a>
+                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dashboard_report_filter">
+                                                        Aplicar filtro
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mes</th>
+                                                <th scope="col">Ventas</th>
+                                                <th scope="col">Ventas por completar</th>
+                                                <th scope="col">Ventas fallidas</th>
+                                                <th scope="col">Clientes interesados</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Febrero</th>
+                                                <td>34</td>
+                                                <td>45</td>
+                                                <td>23</td>
+                                                <td>456</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div id="dashboard_report1_graph" class="mt-4">
+
+                                    </div>
+                                </div>
+                                <!-- /Contents -->
+                            </article>
+                            <!-- /Dashboard: Report1: Table -->
+                        </section>
+                        <!-- /Dashboard: Report 1 -->
+
+                        <!-- Dashboard: Report 2 -->
+                        <section class="section_dashboard_menu2 d-none">
+                        </section>
+                        <!-- /Dashboard: Report 2 -->
+
+                    </section>
+                    <!-- /Dashboard section -->
+
+                    <!-- Footer -->
+                    <footer class="main_footer container">
+                    </footer>
+                    <!-- /Footer -->
+                    
+                </main>
+                <!-- /Main content -->
+
+            </div>
+        </div>
+
+        <!-- Javascript -->
+            <!-- Libraries -->
+            <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+            <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.6.1/dist/frappe-charts.min.umd.js"></script>
+
+            <!-- Classes -->
+            <script src="../assets/js/classes/button_state.js"></script>
+            <script src="../assets/js/classes/csv_operator.js"></script>
+            <script src="../assets/js/classes/form_checker.js"></script>
+            <script src="../assets/js/classes/menu_manager.js"></script>
+            <script src="../assets/js/classes/notification.js"></script>
+            <script src="../assets/js/classes/request.js"></script>
+            <script src="../assets/js/classes/server_config.js"></script>
+            <script src="../assets/js/classes/wait_animation.js"></script>
+            <script src="../assets/js/classes/web_elements.js"></script>
+
+            <!-- Modules -->
+            <!--<script src="../assets/js/modules/login.js"></script>-->
+
+            <!-- Custom scripts -->
+            <script>
+                $(function ()
+                {
+                    // Web Elements
+                        let webE = new WebElements();
+                        webE.SidebarMenuDashboard_();
+                        webE.Header_();
+                        webE.Footer_();
+                        new MenuManager('.nav_dashboard');
+                        //new MenuManager('.nav_organization');
+
+                    // Verify Session
+                    /*new Login().VerifySession(result =>
+                    {
+                        if(!result)
+                        {
+                            new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
+                            window.location.href = "../login/";
+                        }
+                    });*/
+                });
+
+                // Chart
+                const data = {
+                    labels: ["12am-3am", "3am-6pm", "6am-9am", "9am-12am",
+                        "12pm-3pm", "3pm-6pm", "6pm-9pm", "9am-12am"
+                    ],
+                    datasets: [
+                        {
+                            name: "Some Data", chartType: "bar",
+                            values: [25, 40, 30, 35, 8, 52, 17, -4]
+                        },
+                        {
+                            name: "Another Set", chartType: "line",
+                            values: [25, 50, -10, 15, 18, 32, 27, 14]
+                        }
+                    ]
+                }
+
+                const chart = new frappe.Chart("#dashboard_report1_graph", {
+                    title: "My Awesome Chart",
+                    data: data,
+                    type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+                    height: 250,
+                    colors: ['#7cd6fd', '#743ee2']
+                })
+            </script>
+            
+            <!-- Events -->
+            <script src="../assets/js/events/general_events.js"></script>
+            
+        <!-- Javascript -->
+    </body>
+</html>
