@@ -42,7 +42,7 @@ class WebElements
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">Configuraci&oacute;n</a></li>
+                                    <li><a class="dropdown-item" href="../start/#settings">Configuraci&oacute;n</a></li>
                                     <li><a class="dropdown-item" href="#!">Cerrar sesi&oacute;n</a></li>
                                 </ul>
                             </li>
@@ -91,7 +91,7 @@ class WebElements
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">Configuraci&oacute;n</a></li>
+                                    <li><a class="dropdown-item" href="../start/#settings">Configuraci&oacute;n</a></li>
                                     <li><a class="dropdown-item" href="#!">Cerrar sesi&oacute;n</a></li>
                                 </ul>
                             </li>
@@ -184,7 +184,7 @@ class WebElements
             </div>
             <h5 class="small text-uppercase text-muted">Dashboards</h5>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="#">
+                <a class="nav-link active mb-2" href="#">
                     <i class="fas fa-file"></i>
                     <span class="ms-2">Indicadores generales</span>
                 </a>
@@ -200,7 +200,7 @@ class WebElements
             <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
                 <a class="menu_data nav-link mb-2 active" href="#data" menu="data">
-                    <i class="fas fa-tachometer-alt"></i>
+                    <i class="fas fa-database"></i>
                     <span class="ms-2">Data</span>
                 </a>
             </div>
@@ -219,13 +219,13 @@ class WebElements
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
             <div class="nav-item">
                 <a class="menu_history nav-link mb-2" href="#history" menu="history">
-                    <i class="fas fa-building"></i>
+                    <i class="fas fa-history"></i>
                     <span class="ms-2">Historial</span>
                 </a>
             </div>
             <div class="nav-item">
                 <a class="menu_bin nav-link mb-2" href="#bin" menu="bin">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-trash"></i>
                     <span class="ms-2">Papelera</span>
                 </a>
             </div>
