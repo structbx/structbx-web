@@ -883,6 +883,41 @@
                     <section class="section_bin d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
                             <h2 class="h2">Papelera</h2>
+
+                            <!-- Bin: All bin -->
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Registros en Papelera</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Registro ID</th>
+                                                <th scope="col">Formulario</th>
+                                                <th scope="col">Valores</th>
+                                                <th scope="col">Fecha de borrado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">345</th>
+                                                <td>Ventas</td>
+                                                <td>Venta 25, 343, 24.3</td>
+                                                <td>2024-02-03 12:23</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /Contents -->
+                            </article>
+                            <!-- /Bin: All bin -->
+
                         </div>
 
                     </section>
@@ -893,6 +928,56 @@
                         <div class="pt-3 pb-2 mb-3 border-bottom">
                             <h2 class="h2">Configuraciones</h2>
                         </div>
+
+                        <!-- Settings: General -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">General</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Nombre</th>
+                                            <td><input type="text" class="form-control" name=""/></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Estado</th>
+                                            <td>
+                                                <select class="form-select" name=""/>
+                                                    <option value="">Activo</option>
+                                                    <option value="">Inactivo</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Privacidad</th>
+                                            <td>
+                                                <select class="form-select" name=""/>
+                                                    <option value="">P&uacute;blico</option>
+                                                    <option value="">Privado</option>
+                                                    <option value="">Solo yo</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Descripci&oacute;n</th>
+                                            <td><textarea class="form-control" name=""/></textarea></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                            <!-- /Contents -->
+                        </article>
+                        <!-- /Settings: General -->
 
                     </section>
                     <!-- /Settings section -->
@@ -912,7 +997,7 @@
             <!-- Libraries -->
             <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
             <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
-            <script src="../assets/js/libraries/chart.js-v3.5.0.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.6.1/dist/frappe-charts.min.umd.js"></script>
 
             <!-- Classes -->
             <script src="../assets/js/classes/button_state.js"></script>
