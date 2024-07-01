@@ -675,6 +675,9 @@
                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reports_add">
                                                     Nuevo reporte
                                                 </a>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reports_add_template">
+                                                    Nuevo reporte de plantilla
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -832,6 +835,48 @@
                             </div>
                         </div>
                         <!-- /Reports: Add -->
+
+                        <!-- Reports: Add: Template -->
+                        <div class="modal fade" id="reports_add_template" tabindex="-1" aria-labelledby="reports_add_template_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reports_add_template_label">A&ntilde;adir nuevo reporte</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Plantilla</th>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option value="">Plantilla 1</option>
+                                                            <option value="">Plantilla 2</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Descripci&oacute;n</th>
+                                                    <td>Descripci&oacute;n de plantilla 1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Previsualizaci&oacute;n</th>
+                                                    <td><img src="" alt="Previsualizaci&oacute;n"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Reports: Add: Template -->
 
                     </section>
                     <!-- /Reports section -->
