@@ -488,13 +488,22 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="mb-4">
-                                            <select class="form-select mb-2" name="form_design_row_add_form">
-                                                <option value="1">Ingreso</option>
-                                                <option value="1">Ventas</option>
-                                                <option value="1">Fecha de venta</option>
-                                            </select>
-                                            <button class="btn btn-primary">Agregar fila</button>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Columna a agregar</th>
+                                                    <td>
+                                                        <select class="form-select" name="form_design_row_add_form"/>
+                                                        <option value="1">Ingreso</option>
+                                                        <option value="1">Ventas</option>
+                                                        <option value="1">Fecha de venta</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="mt-2">
+                                            <button class="btn btn-primary">Agregar</button>
                                         </div>
                                         <table class="table">
                                             <thead>
