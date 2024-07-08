@@ -369,6 +369,240 @@
                     </section>
                     <!-- /Dashboards section -->
 
+                    <!-- Reports section -->
+                    <section class="section_reports d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Reportes</h2>
+                        </div>
+
+                        <!-- Reports: All reports -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Reportes</span>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-dark-static dropdown-toggle"
+                                            type="button" id="dropdown_menu_options_reports_add"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                        <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_reports_add">
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reports_add">
+                                                    Nuevo reporte
+                                                </a>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reports_add_template">
+                                                    Nuevo reporte de plantilla
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Privacidad</th>
+                                            <th scope="col">Fecha de creaci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Ventas del mes</th>
+                                            <td>Activo</td>
+                                            <td>Privado</td>
+                                            <td>2024/03/23</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Reports: All reports -->
+
+                        <!-- Reports: Add -->
+                        <div class="modal fade" id="reports_add" tabindex="-1" aria-labelledby="reports_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reports_add_label">A&ntilde;adir nuevo reporte</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <!-- Reports: Add: Nav -->
+                                        <ul class="nav_reports_add nav nav-tabs mb-4">
+                                            <li class="nav-item">
+                                                <a class="menu_reports_add_general nav-link" href="#reports" menu="reports_add_general">General</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="menu_reports_add_paramaters nav-link" href="#reports" menu="reports_add_paramaters">Par&aacute;metros</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="menu_reports_add_sql_code nav-link" href="#reports" menu="reports_add_sql_code">C&oacute;digo SQL</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="menu_reports_add_graphic nav-link" href="#reports" menu="reports_add_graphic">Gr&aacute;fico</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /Reports: Add: Nav -->
+
+                                        <!-- Reports: Add: General -->
+                                        <section class="section_reports_add_general d-none">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Nombre</th>
+                                                        <td><input type="text" class="form-control" name=""></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Estado</th>
+                                                        <td>
+                                                            <select class="form-select" name="">
+                                                                <option value="">1</option>
+                                                                <option value="">2</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Privacidad</th>
+                                                        <td>
+                                                            <select class="form-select" name="">
+                                                                <option value="">1</option>
+                                                                <option value="">2</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Descripci&oacute;n</th>
+                                                        <td><textarea class="form-control" name=""></textarea></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Add: General -->
+
+                                        <!-- Reports: Add: Parameters -->
+                                        <section class="section_reports_add_paramaters d-none">
+                                            <div class="mb-2">
+                                                <button class="btn btn-primary">Nuevo par&aacute;metro</button>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Parametro</th>
+                                                        <th scope="col">Tipo</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">mes</th>
+                                                        <td>Valores de formulario</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Add: Parameters -->
+
+                                        <!-- Reports: Add: SQL Code -->
+                                        <section class="section_reports_add_sql_code d-none">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">C&oacute;digo SQL</th>
+                                                        <td><textarea class="form-control" name=""/></textarea></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Add: SQL Code -->
+
+                                        <!-- Reports: Add: Graphic -->
+                                        <section class="section_reports_add_graphic d-none">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Tipo de gr&aacute;fico</th>
+                                                        <td>
+                                                            <select class="form-select" name=""/>
+                                                                <option value="">Gr&aacute;fico de barras</option>
+                                                                <option value="">Gr&aacute;fico 2</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Add: Graphic -->
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Reports: Add -->
+
+                        <!-- Reports: Add: Template -->
+                        <div class="modal fade" id="reports_add_template" tabindex="-1" aria-labelledby="reports_add_template_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reports_add_template_label">A&ntilde;adir nuevo reporte</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Plantilla</th>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option value="">Plantilla 1</option>
+                                                            <option value="">Plantilla 2</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Descripci&oacute;n</th>
+                                                    <td>Descripci&oacute;n de plantilla 1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Previsualizaci&oacute;n</th>
+                                                    <td><img src="" alt="Previsualizaci&oacute;n"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Reports: Add: Template -->
+
+                    </section>
+                    <!-- /Reports section -->
+
                     <!-- Organization section -->
                     <section class="section_organization d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -741,6 +975,7 @@
                         webE.Footer_();
                         new MenuManager('.sidebar_menu');
                         new MenuManager('.nav_organization');
+                        new MenuManager('.nav_reports_add');
 
                     // Verify Session
                     /*new Login().VerifySession(result =>

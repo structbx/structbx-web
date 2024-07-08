@@ -108,7 +108,7 @@ class WebElements
             <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
                 <a class="menu_start nav-link mb-2 active" href="#start" menu="start">
-                    <i class="fas fa-tachometer-alt"></i>
+                    <i class="fas fa-home"></i>
                     <span class="ms-2">Inicio</span>
                 </a>
             </div>
@@ -120,8 +120,14 @@ class WebElements
             </div>
             <div class="nav-item">
                 <a class="menu_dashboards nav-link mb-2" href="#dashboards" menu="dashboards">
-                    <i class="fas fa-file"></i>
+                    <i class="fas fa-tachometer-alt"></i>
                     <span class="ms-2">Dashboards</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_reports nav-link mb-2" href="#reports" menu="reports">
+                    <i class="fas fa-file"></i>
+                    <span class="ms-2">Reportes</span>
                 </a>
             </div>
             <div class="nav-item">
@@ -154,7 +160,7 @@ class WebElements
             <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
                 <a class="nav-link mb-2" href="../start/#start">
-                    <i class="fas fa-tachometer-alt"></i>
+                    <i class="fas fa-home"></i>
                     <span class="ms-2">Inicio</span>
                 </a>
             </div>
@@ -166,8 +172,14 @@ class WebElements
             </div>
             <div class="nav-item">
                 <a class="nav-link mb-2" href="../start/#dashboards">
-                    <i class="fas fa-file"></i>
+                    <i class="fas fa-tachometer-alt"></i>
                     <span class="ms-2">Dashboards</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link mb-2" href="../start/#reports" menu="reports">
+                    <i class="fas fa-file"></i>
+                    <span class="ms-2">Reportes</span>
                 </a>
             </div>
             <div class="nav-item">
@@ -208,12 +220,6 @@ class WebElements
                 <a class="menu_form_design nav-link mb-2" href="#form_design" menu="form_design">
                     <i class="fas fa-table"></i>
                     <span class="ms-2">Diseño de formulario</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a class="menu_reports nav-link mb-2" href="#reports" menu="reports">
-                    <i class="fas fa-file"></i>
-                    <span class="ms-2">Reportes</span>
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
