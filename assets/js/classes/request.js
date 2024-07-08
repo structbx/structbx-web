@@ -43,6 +43,28 @@ class Request
 		return result;
 	}
 
+	Exec_(callback)
+	{
+        let response_data = new ResponseData(false, "", []);
+        this.MakeHTTPRequest()
+        .then((response) =>
+        {
+            response_data.status = response.status;
+            return response.json();
+        })
+        .then((body) => 
+        {
+            response_data.body = body;
+            callback(response_data);
+        })
+        .catch(error =>
+        {
+            response_data.error = true;
+            response_data.body = error;
+            callback(response_data);
+        });
+	}
+
 	async GETRequest_()
 	{
 		const response = await fetch(`${this.endpoint}?json=${JSON.stringify(this.data)}`
