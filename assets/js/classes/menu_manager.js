@@ -1,9 +1,10 @@
 
 class MenuManager
 {
-    constructor(menu)
+    constructor(menu, main_menu = false)
     {
         this.menu = menu;
+        this.main_menu = main_menu;
         this.menus = [];
         this.current_menu = $("");
         this.current_section = $("");
@@ -47,7 +48,8 @@ class MenuManager
 
                 $(this.current_menu).addClass('active');
                 $(this.current_section).removeClass('d-none');
-                window.location.hash = current_href;
+                if(this.main_menu)
+                    window.location.hash = current_href;
             }
             else
             {
