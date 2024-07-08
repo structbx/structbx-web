@@ -1,3 +1,14 @@
+
+class ResponseData
+{
+    constructor(error, status, body)
+    {
+        this.error = error;
+        this.status = status;
+        this.body = body;
+    }
+}
+
 class Request
 {
 	constructor(endpoint = '', method = 'GET', data = {}, stringify = true)
@@ -6,34 +17,35 @@ class Request
 		this.method = method;
 		this.data = data;
 		this.stringify = stringify;
-		this.url = "https://localhost:3000/";
 	}
 
 	async MakeHTTPRequest()
 	{
+		let result;
 		switch(this.method)
 		{
 			case "GET":
-				return this.GETRequest();
+				result = this.GETRequest_();
 				break;
 			case "POST":
-				return this.POSTRequest();
+				result = this.POSTRequest_();
 				break;
 			case "PUT":
-				return this.PUTRequest();
+				result = this.PUTRequest_();
 				break;
 			case "DEL":
-				return this.DELRequest();
+				result = this.DELRequest_();
 				break;
 			default:
-				return this.GETRequest();
+				result = this.GETRequest_();
 				break;
 		}
+		return result;
 	}
 
-	async GETRequest()
+	async GETRequest_()
 	{
-		const response = await fetch(`${this.url}${this.endpoint}?json=${JSON.stringify(this.data)}`
+		const response = await fetch(`${this.endpoint}?json=${JSON.stringify(this.data)}`
 		,{
 			method: 'GET'
 			,mode: 'cors'
@@ -45,9 +57,9 @@ class Request
 		return response;
 	}
 
-	async POSTRequest()
+	async POSTRequest_()
 	{
-		const response = await fetch(`${this.url}${this.endpoint}`
+		const response = await fetch(`${this.endpoint}`
 		,{
 			method: 'POST'
 			,mode: 'cors'
@@ -61,9 +73,9 @@ class Request
 		return response;
 	}
 
-	async PUTRequest()
+	async PUTRequest_()
 	{
-		const response = await fetch(`${this.url}${this.endpoint}`
+		const response = await fetch(`${this.endpoint}`
 		,{
 			method: 'PUT'
 			,mode: 'cors'
@@ -77,9 +89,9 @@ class Request
 		return response;
 	}
 
-	async DELRequest()
+	async DELRequest_()
 	{
-		const response = await fetch(`${this.url}${this.endpoint}`
+		const response = await fetch(`${this.endpoint}`
 		,{
 			method: 'DEL'
 			,mode: 'cors'
