@@ -122,7 +122,7 @@
                             <!-- Contents -->
                             <div class="mb-2 mt-4">
 
-                                <table class="table">
+                                <table class="table_forms_all table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nombre</th>
@@ -131,11 +131,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row"><a href="#">Ventas</a></th>
-                                            <td scope="row">Activo</td>
-                                            <td scope="row">2023-09-01</td>
-                                        </tr>
                                     </tbody>
                                 </table>
 
@@ -957,40 +952,14 @@
             <script src="../assets/js/classes/menu_manager.js"></script>
             <script src="../assets/js/classes/notification.js"></script>
             <script src="../assets/js/classes/request.js"></script>
+            <script src="../assets/js/classes/row_table.js"></script>
             <script src="../assets/js/classes/server_config.js"></script>
             <script src="../assets/js/classes/wait_animation.js"></script>
             <script src="../assets/js/classes/web_elements.js"></script>
 
-            <!-- Modules -->
-            <!--<script src="../assets/js/modules/login.js"></script>-->
-
-            <!-- Custom scripts -->
-            <script>
-                $(function ()
-                {
-                    // Web Elements
-                        let webE = new WebElements();
-                        webE.SidebarMenu_();
-                        webE.Header_();
-                        webE.Footer_();
-                        new MenuManager('.sidebar_menu');
-                        new MenuManager('.nav_organization');
-                        new MenuManager('.nav_reports_add');
-
-                    // Verify Session
-                    /*new Login().VerifySession(result =>
-                    {
-                        if(!result)
-                        {
-                            new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
-                            window.location.href = "../login/";
-                        }
-                    });*/
-                });
-            </script>
-            
             <!-- Events -->
             <script src="../assets/js/events/general_events.js"></script>
+            <script src="../assets/js/events/start_events.js"></script>
             
         <!-- Javascript -->
     </body>
