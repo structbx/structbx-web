@@ -20,21 +20,20 @@ $(function ()
                 ,"password": $('#form_session_create .password').val()
             }];
 
-            let button = new ButtonState('#form_session_create button.confirm', true, new WaitAnimation().for_button);
-            button.Change_();
+            let button = new ElementState('#form_session_create button.confirm', true, 'button', new WaitAnimation().for_button);
 
             new Login().CreateSession(data, result =>
             {
                 if(result)
                 {
-                    button.Change_();
+                    button.Off_();
                     new Notification('SUCCESS', -1, '.login_container_message')
                     .Show_(`Sesi&oacute;n iniciada, espere...`);
                     window.location.href = "../start/";
                 }
                 else
                 {
-                    button.Change_();
+                    button.Off_();
                     new Notification('WARNING', 10000, '.login_container_message')
                     .Show_(`Usuario o contrase&ntilde;a incorrectos.`);
                 }
