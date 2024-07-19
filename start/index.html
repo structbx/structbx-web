@@ -128,6 +128,7 @@
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Estado</th>
                                             <th scope="col">Fecha de creaci&oacute;n</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,24 +144,29 @@
                         <!-- Forms: Add -->
                         <div class="modal fade" id="forms_add" tabindex="-1" aria-labelledby="forms_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                                <form class="form_forms_add modal-content" novalidate>
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="forms_add_label">A&ntilde;adir nuevo formulario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <table id="table_billing_detailed" class="table">
+                                        <div class="notification"></div>
+                                        <table class="table">
                                             <tbody>
                                                 <tr>
+                                                    <td>Identificador</td>
+                                                    <td><input class="form-control" type="text" name="form_identifier" required></td>
+                                                </tr>
+                                                <tr>
                                                     <td>Nombre</td>
-                                                    <td><input class="form-control" type="text" name="form_name"></td>
+                                                    <td><input class="form-control" type="text" name="form_name" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Estado</td>
                                                     <td>
-                                                        <select class="form-select" name="form_state">
-                                                            <option value="1">Activo</option>
-                                                            <option value="2">Inactivo</option>
+                                                        <select class="form-select" name="form_state" required>
+                                                            <option value="Activo">Activo</option>
+                                                            <option value="Inactivo">Inactivo</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -173,9 +179,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">A&ntilde;adir</button>
+                                        <button type="submit" class="btn btn-primary">Crear</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- /Forms: Add -->
@@ -936,8 +942,20 @@
                 </main>
                 <!-- /Main content -->
 
+                <!-- Notifications -->
+                    <div class="row">
+                        <div id="notifications" class="col-sm-4 position-fixed top-0 end-0 sticky-top p-2">
+                        </div>
+                    </div>
+                <!-- Notifications -->
+        
             </div>
         </div>
+
+        <!-- Loading animation -->
+        <div id="loading_animation">
+        </div>
+        <!-- /Loading animation -->
 
         <!-- Javascript -->
             <!-- Libraries -->
@@ -946,7 +964,7 @@
             <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.6.1/dist/frappe-charts.min.umd.js"></script>
 
             <!-- Classes -->
-            <script src="../assets/js/classes/button_state.js"></script>
+            <script src="../assets/js/classes/element_state.js"></script>
             <script src="../assets/js/classes/csv_operator.js"></script>
             <script src="../assets/js/classes/form_checker.js"></script>
             <script src="../assets/js/classes/menu_manager.js"></script>
@@ -956,6 +974,9 @@
             <script src="../assets/js/classes/server_config.js"></script>
             <script src="../assets/js/classes/wait_animation.js"></script>
             <script src="../assets/js/classes/web_elements.js"></script>
+
+            <!-- Requests -->
+            <script src="../assets/js/requests/form_request.js"></script>
 
             <!-- Events -->
             <script src="../assets/js/events/general_events.js"></script>
