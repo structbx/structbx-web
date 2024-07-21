@@ -2,7 +2,7 @@
 class Sidebars
 {
     constructor() {}
-    SidebarMenu_ = () =>
+    SidebarMenu_ ()
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
@@ -54,7 +54,7 @@ class Sidebars
 
         $(".sidebar_menu").append(sidebar_menu);
     }
-    SidebarMenuDashboard_ = () =>
+    SidebarMenuDashboard_ ()
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
@@ -106,7 +106,7 @@ class Sidebars
 
         $(".sidebar_menu").append(sidebar_menu);
     }
-    SidebarMenuForm_ = () =>
+    SidebarMenuForm_()
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`

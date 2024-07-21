@@ -2,7 +2,7 @@
 class Headers
 {
     constructor(){}
-    HeaderMain_()
+    Header_()
     {
         $(".main_header").append
         (`
@@ -32,7 +32,7 @@ class Headers
             </div>
         `);    
     }
-    HeaderForm_ = () =>
+    HeaderForm_ ()
     {
         $(".main_header").append
         (`
