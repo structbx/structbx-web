@@ -90,4 +90,78 @@ $(function ()
             });
         });
 
+        // Modify
+        $(document).on("click", '.form_modify_button', (e) =>
+        {
+            e.preventDefault();
+
+            // Wait animation
+            let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+            // Form data
+            const form_id = $(e.target).attr('form_id');
+            const form_name = $(e.target).attr('form_name');
+
+            // Setup form to modify
+            $('.form_forms_modify strong.form_name').html(form_name);
+            
+            // Read form to modify
+            const data = [{"action_id": "a1", "parameters":[{"name": "form_id", "value": form_id}]}]
+            new wtools.Request(server_config.current.api + "/forms/read/id", "GET", data, true).Exec_((response_data) =>
+            {
+                if(response_data.status != 200)
+                {
+                    wait.Off_();
+                    new wtools.Notification('WARNING').Show_('No se pudo acceder al formulario.');
+                    $('.form_forms_modify button[class="btn-close"]').click();
+                    $(':input','.form_forms_modify')
+                        .not(':button, :submit, :reset, :hidden')
+                        .val('')
+                        .prop('checked', false)
+                        .prop('selected', false);
+                    return;
+                }
+                
+                $('.form_forms_modify input[name="form_modify_identifier"]').val(response_data.body.data[0].identifier);
+                $('.form_forms_modify input[name="form_modify_name"]').val(response_data.body.data[0].name);
+                $('.form_forms_modify select[name="form_modify_state"]').val(response_data.body.data[0].state);
+                $('.form_forms_modify textarea[name="form_modify_description"]').val(response_data.body.data[0].description);
+
+                wait.Off_();
+            });
+
+            // Modify form
+            $('.form_forms_modify').submit((e) =>
+            {
+                e.preventDefault();
+
+                const check = new wtools.FormChecker(e.target).Check_();
+                if(!check)
+                {
+                    $('.forms_modify .notification').html('');
+                    new wtools.Notification('WARNING', 5000, '.forms_modify .notification').Show_('Hay campos inv&aacute;lidos.');
+                    return;
+                }
+                const new_data = new FormData();
+                
+                new_data.append("id", form_id);
+                new_data.append("identifier", $('.form_forms_modify input[name="form_modify_identifier"]').val());
+                new_data.append("name", $('.form_forms_modify input[name="form_modify_name"]').val());
+                new_data.append("state", $('.form_forms_modify select[name="form_modify_state"]').val());
+                new_data.append("description", $('.form_forms_modify textarea[name="form_modify_description"]').val());
+    
+                new wtools.Request(server_config.current.api + "/forms/modify", "PUT", new_data, false).Exec_((response_data) =>
+                {
+                    if(response_data.status == 200)
+                    {
+                        new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
+                        $('#forms_modify button[class="btn-close"]').click();
+                    }
+                    else
+                    {
+                        new wtools.Notification('ERROR', 0, '.form_forms_modify .notification').Show_('Hubo un error al modificar el formulario: ' + response_data.body.message);
+                    }
+                });
+            });
+        });
 });
