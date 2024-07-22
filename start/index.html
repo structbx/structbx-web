@@ -91,15 +91,15 @@
                             <h2 class="h2">Formularios</h2>
                         </div>
 
-                        <!-- Forms: All forms -->
-                        <article class="card p-4 bg-white mb-4">
+                        <!-- Forms: Read -->
+                        <article id="component_forms_read" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
                                     <span class="text-dark fw-bold">Todos los formularios</span>
                                 </div>
                                 <div class="p-2">
-                                    <button class="button_forms_read btn btn-dark-static">
+                                    <button class="update btn btn-dark-static">
                                         <i class="fas fa-sync"></i>
                                     </button>
                                 </div>
@@ -107,15 +107,15 @@
                                     <div class="dropdown">
                                         <button
                                             class="btn btn-dark-static dropdown-toggle"
-                                            type="button" id="dropdown_menu_options_forms"
+                                            type="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
                                             <i class="fas fa-list"></i>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_forms">
+                                        <ul class="dropdown-menu">
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#forms_add">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_forms_add">
                                                     A&ntilde;adir nuevo
                                                 </a>
                                             </li>
@@ -127,7 +127,7 @@
                             <!-- Contents -->
                             <div class="mb-2 mt-4">
 
-                                <table class="table_forms_all table">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
@@ -140,38 +140,38 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-                                <div class="table_forms_all_notification"></div>
+                                <div class="notifications"></div>
 
                             </div>
                             <!-- /Contents -->
                             
                         </article>
-                        <!-- /Forms: All forms -->
+                        <!-- /Forms: Read -->
 
                         <!-- Forms: Add -->
-                        <div class="modal fade" id="forms_add" tabindex="-1" aria-labelledby="forms_add_label" aria-hidden="true">
+                        <div id="component_forms_add" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <form class="form_forms_add modal-content" novalidate>
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="forms_add_label">A&ntilde;adir nuevo formulario</h5>
+                                        <h5 class="modal-title">A&ntilde;adir nuevo formulario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="notification"></div>
+                                        <div class="notifications"></div>
                                         <table class="table">
                                             <tbody>
                                                 <tr>
                                                     <td>Identificador</td>
-                                                    <td><input class="form-control" type="text" name="form_identifier" required></td>
+                                                    <td><input class="form-control" type="text" name="identifier" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Nombre</td>
-                                                    <td><input class="form-control" type="text" name="form_name" required></td>
+                                                    <td><input class="form-control" type="text" name="name" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Estado</td>
                                                     <td>
-                                                        <select class="form-select" name="form_state" required>
+                                                        <select class="form-select" name="state" required>
                                                             <option value="Activo">Activo</option>
                                                             <option value="Inactivo">Inactivo</option>
                                                         </select>
@@ -179,7 +179,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Descripci&oacute;n</td>
-                                                    <td><textarea class="form-control" type="text" name="form_description"></textarea></td>
+                                                    <td><textarea class="form-control" type="text" name="description"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -194,11 +194,11 @@
                         <!-- /Forms: Add -->
 
                         <!-- Forms: Modify -->
-                        <div class="modal fade" id="forms_modify" tabindex="-1" aria-labelledby="forms_modify_label" aria-hidden="true">
+                        <div id="component_forms_modify" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <form class="form_forms_modify modal-content" novalidate>
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="forms_modify_label">Modificar formulario <strong class="form_name"></strong></h5>
+                                        <h5 class="modal-title">Modificar formulario <strong class="header"></strong></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -207,16 +207,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Identificador</td>
-                                                    <td><input class="form-control" type="text" name="form_modify_identifier" required></td>
+                                                    <td><input class="form-control" type="text" name="identifier" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Nombre</td>
-                                                    <td><input class="form-control" type="text" name="form_modify_name" required></td>
+                                                    <td><input class="form-control" type="text" name="name" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Estado</td>
                                                     <td>
-                                                        <select class="form-select" name="form_modify_state" required>
+                                                        <select class="form-select" name="state" required>
                                                             <option value="Activo">Activo</option>
                                                             <option value="Inactivo">Inactivo</option>
                                                         </select>
@@ -224,7 +224,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Descripci&oacute;n</td>
-                                                    <td><textarea class="form-control" type="text" name="form_modify_description"></textarea></td>
+                                                    <td><textarea class="form-control" type="text" name="description"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -239,16 +239,16 @@
                         <!-- /Forms: Modify -->
 
                         <!-- Forms: Delete -->
-                        <div class="modal fade" id="forms_delete" tabindex="-1" aria-labelledby="forms_delete_label" aria-hidden="true">
+                        <div id="component_forms_delete" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="form_forms_delete modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="forms_delete_label">Eliminar formulario <strong class="form_name"></strong></h5>
+                                        <h5 class="modal-title">Eliminar formulario <strong class="header"></strong></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notification"></div>
-                                        <p>Seguro desea eliminar el formulario ID #<strong class="form_id"></strong> (<strong class="form_name"></strong>)</p>
+                                        <p>Seguro desea eliminar el formulario ID #<strong class="id"></strong> (<strong class="name"></strong>)</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
