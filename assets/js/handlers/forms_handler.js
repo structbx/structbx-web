@@ -102,7 +102,7 @@ $(function()
         });
     });
 
-    // Modify
+    // Read Form to Modify
     $(document).on("click", '#component_forms_read table .modify', (e) =>
     {
         e.preventDefault();
@@ -115,11 +115,11 @@ $(function()
         const form_name = $(e.target).attr('form_name');
 
         // Setup form to modify
+        $('#component_forms_modify input[name="id"]').val(form_id);
         $('#component_forms_modify .modal-title strong.header').html(form_name);
         
         // Read form to modify
-        const data = [{"action_id": "a1", "parameters":[{"name": "form_id", "value": form_id}]}]
-        new wtools.Request(server_config.current.api + "/forms/read/id", "GET", data, true).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/read/id?id=${form_id}`).Exec_((response_data) =>
         {
             if(response_data.status != 200)
             {
@@ -141,48 +141,48 @@ $(function()
             wait.Off_();
             $('#component_forms_modify').modal('show');
         });
+    });
 
-        // Modify form
-        $('#component_forms_modify form').submit((e) =>
+    // Modify form
+    $('#component_forms_modify form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_forms_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
         {
-            e.preventDefault();
+            wait.Off_();
+            $('#component_forms_modify .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_forms_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
 
-            // Wait animation
-            let wait = new wtools.ElementState('#component_forms_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+        // Data collection
+        const new_data = new FormData();
+        new_data.append("id", $('#component_forms_modify input[name="id"]').val());
+        new_data.append("identifier", $('#component_forms_modify input[name="identifier"]').val());
+        new_data.append("name", $('#component_forms_modify input[name="name"]').val());
+        new_data.append("state", $('#component_forms_modify select[name="state"]').val());
+        new_data.append("description", $('#component_forms_modify textarea[name="description"]').val());
 
-            // Form check
-            const check = new wtools.FormChecker(e.target).Check_();
-            if(!check)
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", new_data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
             {
-                wait.Off_();
-                $('#component_forms_modify .notifications').html('');
-                new wtools.Notification('WARNING', 5000, '#component_forms_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
-                return;
+                new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
+                $('#component_forms_modify').modal('hide');
+                form_read();
             }
-
-            // Data collection
-            const new_data = new FormData();
-            new_data.append("id", form_id);
-            new_data.append("identifier", $('#component_forms_modify input[name="identifier"]').val());
-            new_data.append("name", $('#component_forms_modify input[name="name"]').val());
-            new_data.append("state", $('#component_forms_modify select[name="state"]').val());
-            new_data.append("description", $('#component_forms_modify textarea[name="description"]').val());
-
-            // Request
-            new wtools.Request(server_config.current.api + "/forms/modify", "PUT", new_data, false).Exec_((response_data) =>
+            else
             {
-                wait.Off_();
-                if(response_data.status == 200)
-                {
-                    new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
-                    $('#component_forms_modify').modal('hide');
-                    form_read();
-                }
-                else
-                {
-                    new wtools.Notification('ERROR', 0, '.#component_forms_modify .notifications').Show_('Hubo un error al modificar el formulario: ' + response_data.body.message);
-                }
-            });
+                new wtools.Notification('ERROR', 0, '#component_forms_modify .notifications').Show_('Hubo un error al modificar el formulario: ' + response_data.body.message);
+            }
         });
     });
 
