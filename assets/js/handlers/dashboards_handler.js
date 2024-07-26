@@ -149,4 +149,51 @@ $(function()
             $('#component_dashboards_modify').modal('show');
         });
     });
+
+    // Modify dashboard
+    $('#component_dashboards_modify form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_dashboards_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_dashboards_modify .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_dashboards_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const new_data = new FormData();
+        new_data.append("id", $('#component_dashboards_modify input[name="id"]').val());
+        new_data.append("identifier", $('#component_dashboards_modify input[name="identifier"]').val());
+        new_data.append("name", $('#component_dashboards_modify input[name="name"]').val());
+        new_data.append("state", $('#component_dashboards_modify select[name="state"]').val());
+        new_data.append("privacity", $('#component_dashboards_modify select[name="privacity"]').val());
+        new_data.append("added_to_start", $('#component_dashboards_modify select[name="added_to_start"]').val());
+        new_data.append("position", $('#component_dashboards_modify input[name="position"]').val());
+        new_data.append("description", $('#component_dashboards_modify textarea[name="description"]').val());
+
+        // Request
+        new wtools.Request(server_config.current.api + "/dashboards/modify", "PUT", new_data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
+                $('#component_dashboards_modify').modal('hide');
+                dashboard_read();
+            }
+            else
+            {
+                new wtools.Notification('ERROR', 0, '#component_dashboards_modify .notifications').Show_('Hubo un error al modificar el formulario: ' + response_data.body.message);
+            }
+        });
+    });
+
 });
