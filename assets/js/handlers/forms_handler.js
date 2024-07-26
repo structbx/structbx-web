@@ -199,36 +199,40 @@ $(function()
         const form_name = $(e.target).attr('form_name');
 
         // Setup form to delete
+        $('#component_forms_delete input[name=id]').val(form_id);
         $('#component_forms_delete strong.header').html(form_name);
         $('#component_forms_delete strong.id').html(form_id);
         $('#component_forms_delete strong.name').html(form_name);
         $('#component_forms_delete').modal('show');
         wait.Off_();
+    });
 
-        // Delete form
-        $('#component_forms_delete form').submit((e) =>
+    // Delete form
+    $('#component_forms_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_forms_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Data
+        const form_id = $('#component_forms_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
         {
-            e.preventDefault();
+            wait.Off_();
 
-            // Wait animation
-            let wait = new wtools.ElementState('#component_forms_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
-
-            // Request
-            new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
+            if(response_data.status == 200)
             {
-                wait.Off_();
-
-                if(response_data.status == 200)
-                {
-                    form_read();
-                    new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
-                    $('#component_forms_delete').modal('hide');
-                }
-                else
-                {
-                    new wtools.Notification('ERROR', 0, '#component_forms_delete .notifications').Show_('Hubo un error al eliminar el formulario: ' + response_data.body.message);
-                }
-            });
+                form_read();
+                new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
+                $('#component_forms_delete').modal('hide');
+            }
+            else
+            {
+                new wtools.Notification('ERROR', 0, '#component_forms_delete .notifications').Show_('Hubo un error al eliminar el formulario: ' + response_data.body.message);
+            }
         });
     });
 });
