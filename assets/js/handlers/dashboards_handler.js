@@ -59,4 +59,51 @@ $(function()
     };
     dashboard_read();
     $('#component_dashboards_read .update').click(() => dashboard_read());
+
+    // Add
+    $('#component_dashboards_add form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_dashboards_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            $('#component_dashboards_add .notifications').html('');
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_dashboards_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData();
+        data.append("name", $('#component_dashboards_add input[name="name"]').val());
+        data.append("state", $('#component_dashboards_add select[name="state"]').val());
+        data.append("privacity", $('#component_dashboards_add select[name="privacity"]').val());
+        data.append("added_to_start", $('#component_dashboards_add select[name="added_to_start"]').val());
+        data.append("position", $('#component_dashboards_add input[name="position"]').val());
+        data.append("description", $('#component_dashboards_add textarea[name="description"]').val());
+
+        // Request
+        new wtools.Request(server_config.current.api + "/dashboards/add", "POST", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Notifications
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Dashboard creado exitosamente.');
+                $('#component_dashboards_add').modal('hide');
+                dashboard_read();
+            }
+            else
+            {
+                new wtools.Notification('ERROR', 0, '#component_dashboards_add .notifications').Show_('Hubo un error al crear el dashboard: ' + response_data.body.message);
+            }
+        });
+    });
+
 });
