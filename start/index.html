@@ -393,58 +393,70 @@
                         </div>
                         <!-- /Dashboards: Add -->
 
-                        <!-- Dashboard: Edit -->
-                        <div class="modal fade" id="dashboard_edit" tabindex="-1" aria-labelledby="dashboard_edit_label" aria-hidden="true">
+                        <!-- Dashboards: Modify -->
+                        <div id="component_dashboards_modify" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="dashboard_edit_label">Editar Dashboard</h5>
+                                        <h5 class="modal-title">Modificar formulario <strong class="header"></strong></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Reporte a agregar</th>
+                                                    <td>Nombre</td>
+                                                    <td><input class="form-control" type="text" name="name" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Estado</td>
                                                     <td>
-                                                        <select class="form-select" name=""/>
-                                                            <option value="">Reporte 1</option>
-                                                            <option value="">Reporte 2</option>
+                                                        <select class="form-select" name="state" required>
+                                                            <option value="Activo">Activo</option>
+                                                            <option value="Inactivo">Inactivo</option>
                                                         </select>
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="mt-2">
-                                            <button class="btn btn-primary">Agregar</button>
-                                        </div>
-                                        <table class="table mt-4">
-                                            <thead>
                                                 <tr>
-                                                    <th scope="col">Reporte</th>
-                                                    <th scope="col">Posici&oacute;n</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Reporte 1</th>
-                                                    <td>1</td>
+                                                    <td>Privacidad</td>
+                                                    <td>
+                                                        <select class="form-select" name="privacity" required>
+                                                            <option value="P&uacute;blico">P&uacute;blico</option>
+                                                            <option value="Privado">Privado</option>
+                                                            <option value="S&oacute;lo yo">S&oacute;lo yo</option>
+                                                        </select>
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Reporte 2</th>
-                                                    <td>2</td>
+                                                    <td>Agregado a inicio</td>
+                                                    <td>
+                                                        <select class="form-select" name="added_to_start" required>
+                                                            <option value="1">S&iacute;</option>
+                                                            <option value="0">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Posici&oacute;n</td>
+                                                    <td><input class="form-control" type="number" name="position" value="1" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Descripci&oacute;n</td>
+                                                    <td><textarea class="form-control" type="text" name="description"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <!-- /Dashboard: Edit -->
+                        <!-- /Dashboards: Modify -->
 
                     </section>
                     <!-- /Dashboards section -->
