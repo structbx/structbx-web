@@ -106,4 +106,47 @@ $(function()
         });
     });
 
+    // Read Dashboard to Modify
+    $(document).on("click", '#component_dashboards_read table .modify', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Form data
+        const dashboard_id = $(e.target).attr('dashboard_id');
+        const dashboard_name = $(e.target).attr('dashboard_name');
+
+        // Setup dashboard to modify
+        $('#component_dashboards_modify input[name="id"]').val(dashboard_id);
+        $('#component_dashboards_modify .modal-title strong.header').html(dashboard_name);
+        
+        // Read dashboard to modify
+        new wtools.Request(server_config.current.api + `/dashboards/read/id?id=${dashboard_id}`).Exec_((response_data) =>
+        {
+            if(response_data.status != 200)
+            {
+                $(':input','#component_dashboards_modify form')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .prop('checked', false)
+                    .prop('selected', false);
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al dashboard.');
+                return;
+            }
+            
+            $('#component_dashboards_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
+            $('#component_dashboards_modify input[name="name"]').val(response_data.body.data[0].name);
+            $('#component_dashboards_modify select[name="state"]').val(response_data.body.data[0].state);
+            $('#component_dashboards_modify select[name="privacity"]').val(response_data.body.data[0].privacity);
+            $('#component_dashboards_modify select[name="added_to_start"]').val(response_data.body.data[0].added_to_start);
+            $('#component_dashboards_modify select[name="position"]').val(response_data.body.data[0].position);
+            $('#component_dashboards_modify textarea[name="description"]').val(response_data.body.data[0].description);
+
+            wait.Off_();
+            $('#component_dashboards_modify').modal('show');
+        });
+    });
 });
