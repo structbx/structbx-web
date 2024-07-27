@@ -1,6 +1,15 @@
 $(function()
 {
 
+    // Dashboard SELECT options
+    const options_states = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "Activo", true)
+        ,new wtools.OptionValue("1", "Inactivo")
+    ]);
+    options_states.Build_('#component_forms_add select[name="state"]');
+    options_states.Build_('#component_forms_modify select[name="state"]');
+
     // Read
     const form_read = () =>
     {
@@ -26,7 +35,7 @@ $(function()
                 let elements = [
                     `<th scope="row"><a class="text-dark" href="../form/?form=${row.identifier}">${row.identifier}</a></th>`
                     ,`<td scope="row">${row.name}</td>`
-                    ,`<td scope="row">${row.state}</td>`
+                    ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                     ,`<td scope="row">
                         <div class="dropdown">

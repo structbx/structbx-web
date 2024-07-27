@@ -1,5 +1,30 @@
 $(function()
 {
+    // Dashboard SELECT options
+    const options_states = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "Activo", true)
+        ,new wtools.OptionValue("1", "Inactivo")
+    ]);
+    options_states.Build_('#component_dashboards_add select[name="state"]');
+    options_states.Build_('#component_dashboards_modify select[name="state"]');
+
+    const options_privacity = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "P&uacute;blico", true)
+        ,new wtools.OptionValue("1", "Privado")
+        ,new wtools.OptionValue("2", "S&oacute;lo yo")
+    ]);
+    options_privacity.Build_('#component_dashboards_add select[name="privacity"]');
+    options_privacity.Build_('#component_dashboards_modify select[name="privacity"]');
+
+    const options_added_to_start = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "No")
+        ,new wtools.OptionValue("1", "S&iacute;", true)
+    ]);
+    options_added_to_start.Build_('#component_dashboards_add select[name="added_to_start"]');
+    options_added_to_start.Build_('#component_dashboards_modify select[name="added_to_start"]');
 
     // Read
     const dashboard_read = () =>
@@ -25,10 +50,10 @@ $(function()
             {
                 let elements = [
                     `<th scope="row"><a class="text-dark" href="../dashboards/?id=${row.id}">${row.name}</a></th>`
-                    ,`<td scope="row">${row.state}</td>`
-                    ,`<td scope="row">${row.privacity}</td>`
+                    ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
+                    ,`<td scope="row">${options_privacity.ValueToOption_(row.privacity)}</td>`
+                    ,`<td scope="row">${options_added_to_start.ValueToOption_(row.added_to_start)}</td>`
                     ,`<td scope="row">${row.position}</td>`
-                    ,`<td scope="row">${row.added_to_start == 1 ? "S&iacute;" : "No"}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                     ,`<td scope="row">
                         <div class="dropdown">
