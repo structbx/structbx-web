@@ -1,7 +1,7 @@
 $(function()
 {
 
-    // Dashboard SELECT options
+    // SELECT options
     const options_states = new wtools.SelectOptions
     ([
         new wtools.OptionValue("0", "Activo", true)
