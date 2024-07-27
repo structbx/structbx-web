@@ -447,29 +447,34 @@
                             <h2 class="h2">Reportes</h2>
                         </div>
 
-                        <!-- Reports: All reports -->
-                        <article class="card p-4 bg-white mb-4">
+                        <!-- Reports: Read -->
+                        <article id="component_reports_read" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Reportes</span>
+                                    <span class="text-dark fw-bold">Todos los Reportes</span>
+                                </div>
+                                <div class="p-2">
+                                    <button class="update btn btn-dark-static">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
                                 </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
                                         <button
                                             class="btn btn-dark-static dropdown-toggle"
-                                            type="button" id="dropdown_menu_options_reports_add"
+                                            type="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
                                         <i class="fas fa-list"></i>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_reports_add">
+                                        <ul class="dropdown-menu"
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reports_add">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_reports_add">
                                                     Nuevo reporte
                                                 </a>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reports_add_template">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="component_reports_add_template">
                                                     Nuevo reporte de plantilla
                                                 </a>
                                             </li>
@@ -487,23 +492,20 @@
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Estado</th>
                                             <th scope="col">Privacidad</th>
+                                            <th scope="col">Gr&aacute;fico</th>
                                             <th scope="col">Fecha de creaci&oacute;n</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">Ventas del mes</th>
-                                            <td>Activo</td>
-                                            <td>Privado</td>
-                                            <td>2024/03/23</td>
-                                        </tr>
                                     </tbody>
                                 </table>
+                                <div class="notifications"></div>
+
                             </div>
                             <!-- /Contents -->
                             
                         </article>
-                        <!-- /Reports: All reports -->
+                        <!-- /Reports: Read -->
 
                         <!-- Reports: Add -->
                         <div class="modal fade" id="reports_add" tabindex="-1" aria-labelledby="reports_add_label" aria-hidden="true">
@@ -1048,6 +1050,7 @@
             <!-- Handlers -->
             <script src="../assets/js/handlers/forms_handler.js"></script>
             <script src="../assets/js/handlers/dashboards_handler.js"></script>
+            <script src="../assets/js/handlers/reports_handler.js"></script>
 
         <!-- Javascript -->
     </body>
