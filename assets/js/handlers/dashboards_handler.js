@@ -196,4 +196,53 @@ $(function()
         });
     });
 
+    // Delete
+    $(document).on("click", '#component_dashboards_read .delete', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Form data
+        const dashboard_id = $(e.target).attr('dashboard_id');
+        const dashboard_name = $(e.target).attr('dashboard_name');
+
+        // Setup form to delete
+        $('#component_dashboards_delete input[name=id]').val(dashboard_id);
+        $('#component_dashboards_delete strong.header').html(dashboard_name);
+        $('#component_dashboards_delete strong.id').html(dashboard_id);
+        $('#component_dashboards_delete strong.name').html(dashboard_name);
+        $('#component_dashboards_delete').modal('show');
+        wait.Off_();
+    });
+
+    // Delete form
+    $('#component_dashboards_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_dashboards_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Data
+        const dashboard_id = $('#component_dashboards_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/dashboards/delete?id=${dashboard_id}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            if(response_data.status == 200)
+            {
+                dashboard_read();
+                new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
+                $('#component_dashboards_delete').modal('hide');
+            }
+            else
+            {
+                new wtools.Notification('ERROR', 0, '#component_dashboards_delete .notifications').Show_('Hubo un error al eliminar el formulario: ' + response_data.body.message);
+            }
+        });
+    });
 });
