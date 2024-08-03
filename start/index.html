@@ -494,6 +494,7 @@
                                             <th scope="col">Privacidad</th>
                                             <th scope="col">Gr&aacute;fico</th>
                                             <th scope="col">Fecha de creaci&oacute;n</th>
+                                            <th scope="col">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -508,22 +509,21 @@
                         <!-- /Reports: Read -->
 
                         <!-- Reports: Add -->
-                        <div class="modal fade" id="reports_add" tabindex="-1" aria-labelledby="reports_add_label" aria-hidden="true">
+                        <div id="component_reports_add" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="reports_add_label">A&ntilde;adir nuevo reporte</h5>
+                                        <h5 class="modal-title">A&ntilde;adir nuevo reporte</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         
+                                        <div class="notifications"></div>
+
                                         <!-- Reports: Add: Nav -->
                                         <ul class="nav_reports_add nav nav-tabs mb-4">
                                             <li class="nav-item">
                                                 <a class="menu_reports_add_general nav-link" href="#reports" menu="reports_add_general">General</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="menu_reports_add_paramaters nav-link" href="#reports" menu="reports_add_paramaters">Par&aacute;metros</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="menu_reports_add_sql_code nav-link" href="#reports" menu="reports_add_sql_code">C&oacute;digo SQL</a>
@@ -540,56 +540,24 @@
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">Nombre</th>
-                                                        <td><input type="text" class="form-control" name=""></td>
+                                                        <td><input type="text" class="form-control" name="name" required></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Estado</th>
-                                                        <td>
-                                                            <select class="form-select" name="">
-                                                                <option value="">1</option>
-                                                                <option value="">2</option>
-                                                            </select>
-                                                        </td>
+                                                        <td><select class="form-select" name="state" required></select></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Privacidad</th>
-                                                        <td>
-                                                            <select class="form-select" name="">
-                                                                <option value="">1</option>
-                                                                <option value="">2</option>
-                                                            </select>
-                                                        </td>
+                                                        <td><select class="form-select" name="privacity" required></select></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Descripci&oacute;n</th>
-                                                        <td><textarea class="form-control" name=""></textarea></td>
+                                                        <td><textarea class="form-control" name="description"></textarea></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </section>
                                         <!-- /Reports: Add: General -->
-
-                                        <!-- Reports: Add: Parameters -->
-                                        <section class="section_reports_add_paramaters d-none">
-                                            <div class="mb-2">
-                                                <button class="btn btn-primary">Nuevo par&aacute;metro</button>
-                                            </div>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Parametro</th>
-                                                        <th scope="col">Tipo</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">mes</th>
-                                                        <td>Valores de formulario</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </section>
-                                        <!-- /Reports: Add: Parameters -->
 
                                         <!-- Reports: Add: SQL Code -->
                                         <section class="section_reports_add_sql_code d-none">
@@ -597,7 +565,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">C&oacute;digo SQL</th>
-                                                        <td><textarea class="form-control" name=""/></textarea></td>
+                                                        <td><textarea class="form-control" name="sql_code" required></textarea></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -609,13 +577,8 @@
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
-                                                        <th scope="row">Tipo de gr&aacute;fico</th>
-                                                        <td>
-                                                            <select class="form-select" name=""/>
-                                                                <option value="">Gr&aacute;fico de barras</option>
-                                                                <option value="">Gr&aacute;fico 2</option>
-                                                            </select>
-                                                        </td>
+                                                        <th scope="row">Tipo de gr&aacute;fico (Para visualizar la informaci&oacute;n)</th>
+                                                        <td><select class="form-select" name="id_graph"></select></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -625,9 +588,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                        <button type="submit" class="btn btn-primary">Crear</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- /Reports: Add -->
