@@ -151,4 +151,48 @@ $(function()
         });
     });
 
+    // Read Report to Modify
+    $(document).on("click", '#component_reports_read table .modify', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Form data
+        const report_id = $(e.target).attr('report_id');
+        const report_name = $(e.target).attr('report_name');
+
+        // Setup report to modify
+        $('#component_reports_modify input[name="id"]').val(report_id);
+        $('#component_reports_modify .modal-title strong.header').html(report_name);
+        
+        // Read report to modify
+        new wtools.Request(server_config.current.api + `/reports/read/id?id=${report_id}`).Exec_((response_data) =>
+        {
+            if(response_data.status != 200)
+            {
+                $(':input','#component_reports_modify form')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .prop('checked', false)
+                    .prop('selected', false);
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al reporte.');
+                return;
+            }
+            
+            $('#component_reports_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
+            $('#component_reports_modify input[name="name"]').val(response_data.body.data[0].name);
+            $('#component_reports_modify select[name="state"]').val(response_data.body.data[0].state);
+            $('#component_reports_modify select[name="privacity"]').val(response_data.body.data[0].privacity);
+            $('#component_reports_modify textarea[name="description"]').val(response_data.body.data[0].description);
+            $('#component_reports_modify textarea[name="sql_code"]').val(response_data.body.data[0].sql_code);
+            $('#component_reports_modify select[name="id_graph"]').val(response_data.body.data[0].rg_id);
+
+            wait.Off_();
+            $('#component_reports_modify').modal('show');
+        });
+    });
+
 });
