@@ -8,6 +8,7 @@ $(function ()
         new wtools.MenuManager('.sidebar_menu', true);
         new wtools.MenuManager('.nav_organization');
         new wtools.MenuManager('.nav_reports_add');
+        new wtools.MenuManager('.nav_reports_modify');
         
 
     // Verify Session
