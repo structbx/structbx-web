@@ -595,6 +595,93 @@
                         </div>
                         <!-- /Reports: Add -->
 
+                        <!-- Reports: Modify -->
+                        <div id="component_reports_modify" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modificar reporte <strong class="header"></strong></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                    
+                                        <!-- Reports: Modify: Nav -->
+                                        <ul class="nav_reports_modify nav nav-tabs mb-4">
+                                            <li class="nav-item">
+                                                <a class="menu_reports_modify_general nav-link" href="#reports" menu="reports_modify_general">General</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="menu_reports_modify_sql_code nav-link" href="#reports" menu="reports_modify_sql_code">C&oacute;digo SQL</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="menu_reports_modify_graphic nav-link" href="#reports" menu="reports_modify_graphic">Gr&aacute;fico</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /Reports: Modify: Nav -->
+
+                                        <!-- Reports: Modify: General -->
+                                        <section class="section_reports_modify_general d-none">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Nombre</th>
+                                                        <td><input type="text" class="form-control" name="name" required></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Estado</th>
+                                                        <td><select class="form-select" name="state" required></select></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Privacidad</th>
+                                                        <td><select class="form-select" name="privacity" required></select></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Descripci&oacute;n</th>
+                                                        <td><textarea class="form-control" name="description"></textarea></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Modify: General -->
+
+                                        <!-- Reports: Modify: SQL Code -->
+                                        <section class="section_reports_modify_sql_code d-none">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">C&oacute;digo SQL</th>
+                                                        <td><textarea class="form-control" name="sql_code" required></textarea></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Modify: SQL Code -->
+
+                                        <!-- Reports: Modify: Graphic -->
+                                        <section class="section_reports_modify_graphic d-none">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Tipo de gr&aacute;fico (Para visualizar la informaci&oacute;n)</th>
+                                                        <td><select class="form-select" name="id_graph"></select></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                        <!-- /Reports: Modify: Graphic -->
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Reports: Modify -->
+
                         <!-- Reports: Add: Template -->
                         <div class="modal fade" id="reports_add_template" tabindex="-1" aria-labelledby="reports_add_template_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
