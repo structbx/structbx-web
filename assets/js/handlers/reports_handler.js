@@ -19,11 +19,20 @@ $(function()
     options_privacity.Build_('#component_reports_add select[name="privacity"]');
     options_privacity.Build_('#component_reports_modify select[name="privacity"]');
 
+    const options_graphs = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "P&uacute;blico", true)
+        ,new wtools.OptionValue("1", "Privado")
+        ,new wtools.OptionValue("2", "S&oacute;lo yo")
+    ]);
+    options_graphs.Build_('#component_reports_add select[name="rg_name"]');
+    options_graphs.Build_('#component_reports_modify select[name="rg_name"]');
+
     // Read
     const report_read = () =>
     {
         // Wait animation
-        let wait = new wtools.ElementState('#component_reports_read .notifications', true, 'block', new wtools.WaitAnimation().for_block);
+        let wait = new wtools.ElementState('#component_reports_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
         new wtools.Request(server_config.current.api + "/reports/read").Exec_((response_data) =>
@@ -32,12 +41,14 @@ $(function()
             if(response_data.status != 200)
             {
                 wait.Off_();
-                new wtools.Notification('WARNING').Show_('No se pudo acceder a los reportes.');
+                $('#component_reports_read .notifications').html('');
+                new wtools.Notification('WARNING', 0, '#component_reports_read .notifications').Show_('No se pudo acceder a los reportes.');
                 return;
             }
 
             // Results elements creator
             wait.Off_();
+            $('#component_reports_read .notifications').html('');
             $('#component_reports_read table tbody').html('');
             new wtools.UIElementsCreator('#component_reports_read table tbody', response_data.body.data).Build_((row) =>
             {
@@ -58,6 +69,11 @@ $(function()
                                 <li>
                                     <a class="dropdown-item modify" report_id="${row.id}" report_name="${row.name}">
                                         Editar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item setup_parameters" report_id="${row.id}" report_name="${row.name}">
+                                        Configurar par&aacute;metros
                                     </a>
                                 </li>
                                 <li>

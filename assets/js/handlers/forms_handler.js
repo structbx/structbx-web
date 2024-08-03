@@ -14,7 +14,7 @@ $(function()
     const form_read = () =>
     {
         // Wait animation
-        let wait = new wtools.ElementState('#component_forms_read .notifications', true, 'block', new wtools.WaitAnimation().for_block);
+        let wait = new wtools.ElementState('#component_forms_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
         new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
@@ -23,12 +23,14 @@ $(function()
             if(response_data.status != 200)
             {
                 wait.Off_();
-                new wtools.Notification('WARNING').Show_('No se pudo acceder a los formularios.');
+                $('#component_forms_read .notifications').html('');
+                new wtools.Notification('WARNING', 0, '#component_forms_read .notifications').Show_('No se pudo acceder a los formularios.');
                 return;
             }
 
             // Results elements creator
             wait.Off_();
+            $('#component_forms_read .notifications').html('');
             $('#component_forms_read table tbody').html('');
             new wtools.UIElementsCreator('#component_forms_read table tbody', response_data.body.data).Build_((row) =>
             {
