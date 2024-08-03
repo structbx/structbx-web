@@ -19,14 +19,24 @@ $(function()
     options_privacity.Build_('#component_reports_add select[name="privacity"]');
     options_privacity.Build_('#component_reports_modify select[name="privacity"]');
 
-    const options_graphs = new wtools.SelectOptions
-    ([
-        new wtools.OptionValue("0", "P&uacute;blico", true)
-        ,new wtools.OptionValue("1", "Privado")
-        ,new wtools.OptionValue("2", "S&oacute;lo yo")
-    ]);
+    new wtools.Request(server_config.current.api + "/reports/graphs/read").Exec_((response_data) =>
+    {
+        try
+        {
+            let tmp_options_graphs = [];
+            for(let row of response_data.body.data)
+                tmp_options_graphs.push(new wtools.OptionValue(row.id, row.name));
+
+            const options_graphs = new wtools.SelectOptions(tmp_options_graphs);
     options_graphs.Build_('#component_reports_add select[name="rg_name"]');
     options_graphs.Build_('#component_reports_modify select[name="rg_name"]');
+        }
+        catch(error)
+        {
+            new wtools.Notification('WARNING', 0, '#component_reports_add .notifications').Show_('No se pudo acceder a los gr&aacute;ficos.');
+            new wtools.Notification('WARNING', 0, '#component_reports_modify .notifications').Show_('No se pudo acceder a los gr&aacute;ficos.');
+        }
+    });
 
     // Read
     const report_read = () =>
