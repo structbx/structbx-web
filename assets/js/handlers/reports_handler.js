@@ -27,9 +27,10 @@ $(function()
             for(let row of response_data.body.data)
                 tmp_options_graphs.push(new wtools.OptionValue(row.id, row.name));
 
+            tmp_options_graphs.push(new wtools.OptionValue("", "Sin gr&aacute;fico", true));
             const options_graphs = new wtools.SelectOptions(tmp_options_graphs);
-    options_graphs.Build_('#component_reports_add select[name="rg_name"]');
-    options_graphs.Build_('#component_reports_modify select[name="rg_name"]');
+            options_graphs.Build_('#component_reports_add select[name="id_graph"]');
+            options_graphs.Build_('#component_reports_modify select[name="id_graph"]');
         }
         catch(error)
         {
@@ -103,4 +104,50 @@ $(function()
     report_read();
     $('#component_reports_read .update').click(() => report_read());
     
+    // Add
+    $('#component_reports_add form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_reports_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            $('#component_reports_add .notifications').html('');
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_reports_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData();
+        data.append("name", $('#component_reports_add input[name="name"]').val());
+        data.append("state", $('#component_reports_add select[name="state"]').val());
+        data.append("privacity", $('#component_reports_add select[name="privacity"]').val());
+        data.append("description", $('#component_reports_add textarea[name="description"]').val());
+        data.append("sql_code", $('#component_reports_add textarea[name="sql_code"]').val());
+        data.append("id_graph", $('#component_reports_add select[name="id_graph"]').val());
+
+        // Request
+        new wtools.Request(server_config.current.api + "/reports/add", "POST", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Notifications
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Reporte creado exitosamente.');
+                $('#component_reports_add').modal('hide');
+                report_read();
+            }
+            else
+            {
+                new wtools.Notification('ERROR', 0, '#component_reports_add .notifications').Show_('Hubo un error al crear el reporte: ' + response_data.body.message);
+            }
+        });
+    });
+
 });
