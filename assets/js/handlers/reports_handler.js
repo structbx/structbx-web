@@ -19,6 +19,7 @@ $(function()
     options_privacity.Build_('#component_reports_add select[name="privacity"]');
     options_privacity.Build_('#component_reports_modify select[name="privacity"]');
 
+    let options_graphs = new wtools.SelectOptions();
     new wtools.Request(server_config.current.api + "/reports/graphs/read").Exec_((response_data) =>
     {
         try
@@ -28,7 +29,7 @@ $(function()
                 tmp_options_graphs.push(new wtools.OptionValue(row.id, row.name));
 
             tmp_options_graphs.push(new wtools.OptionValue("", "Sin gr&aacute;fico", true));
-            const options_graphs = new wtools.SelectOptions(tmp_options_graphs);
+            options_graphs.options = tmp_options_graphs;
             options_graphs.Build_('#component_reports_add select[name="id_graph"]');
             options_graphs.Build_('#component_reports_modify select[name="id_graph"]');
         }
@@ -67,7 +68,7 @@ $(function()
                     `<th scope="row"><a class="text-dark" href="../reports/?report=${row.id}">${row.name}</a></th>`
                     ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
                     ,`<td scope="row">${options_privacity.ValueToOption_(row.privacity)}</td>`
-                    ,`<td scope="row">${row.rg_name}</td>`
+                    ,`<td scope="row">${options_graphs.ValueToOption_(row.rg_id)}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                     ,`<td scope="row">
                         <div class="dropdown">
