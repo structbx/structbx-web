@@ -232,7 +232,7 @@
                         <!-- Forms: Delete -->
                         <div id="component_forms_delete" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <form class="form_forms_delete modal-content" novalidate>
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
                                         <h5 class="modal-title">Eliminar formulario <strong class="header"></strong></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -419,7 +419,7 @@
                         <!-- Dashboards: Delete -->
                         <div id="component_dashboards_delete" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <form class="form_dashboards_delete modal-content" novalidate>
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
                                         <h5 class="modal-title">Eliminar dashboard <strong class="header"></strong></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -595,29 +595,6 @@
                         </div>
                         <!-- /Reports: Add -->
 
-                        <!-- Reports: Parameters -->
-                        <div id="component_reports_parameters" class="modal fade" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <form class="modal-content" novalidate>
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Par&aacute;metros del formulario <strong class="header"></strong></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="notifications"></div>
-                                        <input type="hidden" name="id" required>
-                                        <div class="elements">
-
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /Reports: Parameters -->
-
                         <!-- Reports: Modify -->
                         <div id="component_reports_modify" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -705,47 +682,27 @@
                         </div>
                         <!-- /Reports: Modify -->
 
-                        <!-- Reports: Add: Template -->
-                        <div class="modal fade" id="reports_add_template" tabindex="-1" aria-labelledby="reports_add_template_label" aria-hidden="true">
+                        <!-- Reports: Delete -->
+                        <div id="component_reports_delete" class="modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                                <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="reports_add_template_label">A&ntilde;adir nuevo reporte</h5>
+                                        <h5 class="modal-title">Eliminar reporte <strong class="header"></strong></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Plantilla</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="">Plantilla 1</option>
-                                                            <option value="">Plantilla 2</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Descripci&oacute;n</th>
-                                                    <td>Descripci&oacute;n de plantilla 1</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Previsualizaci&oacute;n</th>
-                                                    <td><img src="" alt="Previsualizaci&oacute;n"/></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>Seguro desea eliminar el reporte ID #<strong class="id"></strong> (<strong class="name"></strong>)</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <!-- /Reports: Add: Template -->
+                        <!-- /Reports: Delete -->
 
                     </section>
                     <!-- /Reports section -->
