@@ -212,18 +212,18 @@ $(function()
             wait.Off_();
             if(response_data.status == 200)
             {
-                new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
+                new wtools.Notification('SUCCESS').Show_('Dashboard modificado exitosamente.');
                 $('#component_dashboards_modify').modal('hide');
                 dashboard_read();
             }
             else
             {
-                new wtools.Notification('ERROR', 0, '#component_dashboards_modify .notifications').Show_('Hubo un error al modificar el formulario: ' + response_data.body.message);
+                new wtools.Notification('ERROR', 0, '#component_dashboards_modify .notifications').Show_('Hubo un error al modificar el dashboard: ' + response_data.body.message);
             }
         });
     });
 
-    // Delete
+    // Read Dashboard to Delete
     $(document).on("click", '#component_dashboards_read .delete', (e) =>
     {
         e.preventDefault();
@@ -263,12 +263,12 @@ $(function()
             if(response_data.status == 200)
             {
                 dashboard_read();
-                new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
+                new wtools.Notification('SUCCESS').Show_('Dashboard eliminado exitosamente.');
                 $('#component_dashboards_delete').modal('hide');
             }
             else
             {
-                new wtools.Notification('ERROR', 0, '#component_dashboards_delete .notifications').Show_('Hubo un error al eliminar el formulario: ' + response_data.body.message);
+                new wtools.Notification('ERROR', 0, '#component_dashboards_delete .notifications').Show_('Hubo un error al eliminar el dashboard: ' + response_data.body.message);
             }
         });
     });

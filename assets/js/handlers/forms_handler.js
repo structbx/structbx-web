@@ -197,7 +197,7 @@ $(function()
         });
     });
 
-    // Delete
+    // Read form to Delete
     $(document).on("click", '#component_forms_read .delete', (e) =>
     {
         e.preventDefault();
