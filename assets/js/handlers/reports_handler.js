@@ -274,4 +274,49 @@ $(function()
         });
     });
 
+    // Modify report
+    $('#component_reports_modify form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_reports_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_reports_modify .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_reports_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const new_data = new FormData();
+        new_data.append("id", $('#component_reports_modify input[name="id"]').val());
+        new_data.append("name", $('#component_reports_modify input[name="name"]').val());
+        new_data.append("state", $('#component_reports_modify select[name="state"]').val());
+        new_data.append("privacity", $('#component_reports_modify select[name="privacity"]').val());
+        new_data.append("description", $('#component_reports_modify textarea[name="description"]').val());
+        new_data.append("sql_code", $('#component_reports_modify textarea[name="sql_code"]').val());
+        new_data.append("id_graph", $('#component_reports_modify select[name="id_graph"]').val());
+
+        // Request
+        new wtools.Request(server_config.current.api + "/reports/modify", "PUT", new_data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Reporte modificado exitosamente.');
+                $('#component_reports_modify').modal('hide');
+                report_read();
+            }
+            else
+            {
+                new wtools.Notification('ERROR', 0, '#component_reports_modify .notifications').Show_('Hubo un error al modificar el reporte: ' + response_data.body.message);
+            }
+        });
+    });
+
 });
