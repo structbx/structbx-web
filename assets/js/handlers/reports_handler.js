@@ -84,7 +84,7 @@ $(function()
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item setup_parameters" report_id="${row.id}" report_name="${row.name}">
+                                    <a class="dropdown-item parameters" report_id="${row.id}" report_name="${row.name}">
                                         Configurar par&aacute;metros
                                     </a>
                                 </li>
@@ -148,6 +148,85 @@ $(function()
             {
                 new wtools.Notification('ERROR', 0, '#component_reports_add .notifications').Show_('Hubo un error al crear el reporte: ' + response_data.body.message);
             }
+        });
+    });
+
+    // Read Reports parameters
+    $(document).on("click", '#component_reports_read table .parameters', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Form data
+        const report_id = $(e.target).attr('report_id');
+        const report_name = $(e.target).attr('report_name');
+
+        // Setup report parameters
+        $('#component_reports_parameters input[name="id"]').val(report_id);
+        $('#component_reports_parameters .modal-title strong.header').html(report_name);
+        
+        // Read report parameters
+        new wtools.Request(server_config.current.api + `/reports/parameters/read?report_id=${report_id}`).Exec_((response_data) =>
+        {
+            if(response_data.status != 200)
+            {
+                $(':input','#component_reports_modify form')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .prop('checked', false)
+                    .prop('selected', false);
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se pudo acceder a los par&aacute;metros del reporte.');
+                return;
+            }
+
+            try
+            {
+                $('#component_reports_parameters table tbody').html('');
+                for(let row of response_data.body.data)
+                {
+                    // Setup inputs
+                    let e1 = $('<input class="form-control" name="identifier"] required>').val(row.identifier);
+                    let e2 = $('<input class="form-control" name="name"] required>').val(row.name);
+                    let e3_options = new wtools.SelectOptions
+                    ([
+                        new wtools.OptionValue("Lista de valores", "Lista de valores", true)
+                        ,new wtools.OptionValue("Consulta SQL", "Consulta SQL")
+                    ]);
+                    let e3 = $('<select class="form-select" name="parameter_type"] required></select>');
+                    e3_options.Build_(e3);
+                    $(e3).val(row.parameter_type);
+                    let e4 = $('<textarea class="form-control" name="values"] required></textarea>').val(row.values);
+
+                    // Set table rows
+                    let row1 = new wtools.UIElementsPackage('<tr></tr>', [$('<th></th>').append('Identificador'), $('<td></td>').append(e1)]).Pack_();
+                    let row2 = new wtools.UIElementsPackage('<tr></tr>', [$('<th></th>').append('Etiqueta'), $('<td></td>').append(e2)]).Pack_();
+                    let row3 = new wtools.UIElementsPackage('<tr></tr>', [$('<th></th>').append('Tipo'), $('<td></td>').append(e3)]).Pack_();
+                    let row4 = new wtools.UIElementsPackage('<tr></tr>', [$('<th></th>').append('Valores'), $('<td></td>').append(e4)]).Pack_();
+
+                    // Table and form
+                    let tbody = new wtools.UIElementsPackage('<tbody></tbody>', [row1, row2, row3, row4]).Pack_();
+                    let table = new wtools.UIElementsPackage('<table class="table"></table>', [tbody]).Pack_();
+                    let form = new wtools.UIElementsPackage('<form class="mb-5"></form>', [
+                        $('<div class="notifications"></div>')
+                        ,$('<input type="hidden" name="id" required>').val(row.id)
+                        ,$(`<h5>Par&aacute;metro: ${row.identifier}</h5>`)
+                        ,table
+                        ,$('<button type="submit" class="btn btn-primary">Guardar</button>')
+                        ,$('<hr>')
+                    ]).Pack_();
+                    $('#component_reports_parameters .elements').append(form);
+                }
+            }
+            catch(error)
+            {
+                new wtools.Notification('WARNING', 0, '#component_reports_parameters .notifications').Show_('No se pudo acceder a los par&aacute;metros del reporte: ' + error);
+            }
+            
+            wait.Off_();
+            $('#component_reports_parameters').modal('show');
         });
     });
 
