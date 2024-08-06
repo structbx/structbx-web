@@ -1,6 +1,26 @@
 
 $(function ()
 {
+    // Verify Session
+    let verify_session = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/system/login", "POST").Exec_((response_data) =>
+        {
+            if(response_data.status != 200)
+            {
+                window.location.href = "../login/";
+                return;
+            }
+
+            wait.Off_();
+        });
+    };
+    verify_session();
+
     // Elements
         new Sidebars().SidebarMenu_();
         new Headers().Header_();
@@ -10,15 +30,4 @@ $(function ()
         new wtools.MenuManager('.nav_reports_add');
         new wtools.MenuManager('.nav_reports_modify');
         
-
-    // Verify Session
-        /*new Login().VerifySession(result =>
-        {
-            if(!result)
-            {
-                new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
-                window.location.href = "../login/";
-            }
-        });*/
-
 });
