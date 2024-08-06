@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Iniciar sesi&oacute;n - StructBI</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/libraries/fontawesome-v5.9.0.min.css">
+
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <!-- /CSS files -->
+
+    </head>
+    <body id="structbi" class="position-relative bg-light">
+
+        <div class="container-fluid container">
+            <div class="row">
+
+                <!-- Main content -->
+                <main class="main_content col-12 px-md-4 py-5">
+
+                    <!-- Login section -->
+                    <section class="section_login">
+
+                        <!-- Login: Login form -->
+                        <div id="component_login" class="row w-100 h-100 mx-auto">
+                            <section class="col-md-6 p-md-5 p-3">
+                                <form class="needs-validation" novalidate>
+                                    <div class="notifications"></div>
+                                    <h1 class="h3 mb-3 fw-normal">Por favor, inicie sesi&oacute;n</h1>
+                                    <p class="p">Inicia sesi&oacute;n y descubre las incre&iacute;bles funcionalidades de StructBI.</p>
+                    
+                                    <div class="mb-3">
+                                        <label for="user">Correo electr&oacute;nico</label>
+                                        <input type="text" class="form-control" name="user" placeholder="nombre@ejemplo.com" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password">Contrase&ntilde;a</label>
+                                        <input type="password" class="form-control" name="password"  placeholder="Contrase&ntilde;a" required>
+                                    </div>
+                    
+                                    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesi&oacute;n</button>
+                                    <p class="p">&iquest;No tienes cuenta? Puedes registrarte <a href="../signin/">aqu&iacute;</a></p>
+                                    <p class="p"><a href="../recover/">Olvid&eacute;n mi contrase&ntilde;a</a></p>
+                                </form>
+                            </section>
+                            <section class="col-md-6 d-none d-md-block" style="padding:0;">
+                                <img class="w-100" src="../assets/images/background1.png">
+                            </section>
+                        </div>
+                        <!-- /Login: Login form -->
+            
+                    </section>
+                    <!-- /Login section -->
+
+                    <!-- Footer -->
+                    <footer class="main_footer container">
+                    </footer>
+                    <!-- /Footer -->
+                    
+                </main>
+                <!-- /Main content -->
+
+                <!-- Notifications -->
+                    <div class="row">
+                        <div id="notifications" class="col-sm-4 position-fixed top-0 end-0 sticky-top p-2">
+                        </div>
+                    </div>
+                <!-- Notifications -->
+        
+            </div>
+        </div>
+
+        <!-- Wait animation -->
+        <div id="wait_animation_page">
+        </div>
+        <!-- /Wait animation -->
+
+        <!-- Javascript -->
+            <!-- Libraries -->
+            <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+            <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.6.1/dist/frappe-charts.min.umd.js"></script>
+            <script src="../assets/js/libraries/wtools/wtools.js"></script>
+
+            <!-- Elements -->
+            <script src="../assets/js/elements/headers.js"></script>
+            <script src="../assets/js/elements/footers.js"></script>
+            <script src="../assets/js/elements/sidebars.js"></script>
+
+            <!-- Events -->
+            <script src="../assets/js/main.js"></script>
+            <script src="../assets/js/events/general_events.js"></script>
+            <script src="../assets/js/events/login_events.js"></script>
+            
+            <!-- Handlers -->
+            <script src="../assets/js/handlers/login_handler.js"></script>
+
+        <!-- Javascript -->
+    </body>
+</html>
