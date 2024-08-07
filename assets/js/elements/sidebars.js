@@ -6,7 +6,6 @@ class Sidebars
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
-            <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
                 <a class="menu_start nav-link mb-2 active" href="#start" menu="start">
                     <i class="fas fa-home"></i>
@@ -43,10 +42,6 @@ class Sidebars
                     <span class="ms-2">Configuraci&oacute;n</span>
                 </a>
             </div>
-            <h5 class="small text-uppercase text-muted">Dashboards</h5>
-            <nav class="nav_dashboards">
-
-            </nav>
         `));
 
         $(".sidebar_menu").append(sidebar_menu);
