@@ -44,12 +44,9 @@ class Sidebars
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">Dashboards</h5>
-            <div class="nav-item">
-                <a class="nav-link mb-2" href="#">
-                    <i class="fas fa-file"></i>
-                    <span class="ms-2">Indicadores generales</span>
-                </a>
-            </div>
+            <nav class="nav_dashboards">
+
+            </nav>
         `));
 
         $(".sidebar_menu").append(sidebar_menu);
@@ -96,12 +93,9 @@ class Sidebars
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">Dashboards</h5>
-            <div class="nav-item">
-                <a class="nav-link active mb-2" href="#">
-                    <i class="fas fa-file"></i>
-                    <span class="ms-2">Indicadores generales</span>
-                </a>
-            </div>
+            <nav class="nav_dashboards">
+
+            </nav>
         `));
 
         $(".sidebar_menu").append(sidebar_menu);
