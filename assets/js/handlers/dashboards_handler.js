@@ -94,7 +94,7 @@ $(function()
                 {
                     elements.push(`
                         <div class="col-12 col-sm-3 p-2">
-                            <a class="btn btn-secondary mb-2 p-2 d-block" href="../dashboards/?id=${row.id}">
+                            <a class="btn btn-secondary mb-2 p-2 d-block" href="../dashboard/?id=${row.id}">
                                 <div class="mb-4"><i class="fas fa-file"></i></div>
                                 <span class="ms-2">${row.name}</span>
                             </a>
@@ -114,19 +114,6 @@ $(function()
                 let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
                 $('#component_start_dashboards .contents_dashboards').append(ui_element);
             }
-
-            // Menus
-            $('.sidebar_menu .nav_dashboards').html('');
-            new wtools.UIElementsCreator('.sidebar_menu .nav_dashboards', response_data.body.data).Build_((row) =>
-            {
-                return `
-                    <div class="nav-item">
-                        <a class="nav-link mb-2" href="../dashboards/?id=${row.id}">
-                            <i class="fas fa-file"></i>
-                            <span class="ms-2">${row.name}</span>
-                        </a>
-                    </div>`;
-            });
         });
     };
     dashboard_read();
