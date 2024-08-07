@@ -114,6 +114,19 @@ $(function()
                 let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
                 $('#component_start_dashboards .contents_dashboards').append(ui_element);
             }
+
+            // Menus
+            $('.sidebar_menu .nav_dashboards').html('');
+            new wtools.UIElementsCreator('.sidebar_menu .nav_dashboards', response_data.body.data).Build_((row) =>
+            {
+                return `
+                    <div class="nav-item">
+                        <a class="nav-link mb-2" href="../dashboards/?id=${row.id}">
+                            <i class="fas fa-file"></i>
+                            <span class="ms-2">${row.name}</span>
+                        </a>
+                    </div>`;
+            });
         });
     };
     dashboard_read();
