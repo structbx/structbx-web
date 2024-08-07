@@ -48,6 +48,8 @@ $(function()
             wait.Off_();
             $('#component_dashboards_read .notifications').html('');
             $('#component_dashboards_read table tbody').html('');
+
+            // Table
             new wtools.UIElementsCreator('#component_dashboards_read table tbody', response_data.body.data).Build_((row) =>
             {
                 let elements = [
@@ -82,6 +84,36 @@ $(function()
 
                 return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
             });
+
+            // Contents
+            $('#component_start_dashboards .contents_dashboards').html('');
+            let elements = []; let cont = 0;
+            for(let row of response_data.body.data)
+            {
+                if(cont < 4)
+                {
+                    elements.push(`
+                        <div class="col-12 col-sm-3 p-2">
+                            <a class="btn btn-secondary mb-2 p-2 d-block" href="../dashboards/?id=${row.id}">
+                                <div class="mb-4"><i class="fas fa-file"></i></div>
+                                <span class="ms-2">${row.name}</span>
+                            </a>
+                        </div>`
+                    );
+                }
+                else
+                {
+                    let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                    $('#component_start_dashboards .contents_dashboards').append(ui_element);
+                    cont = 0;
+                    elements = [];
+                }
+            }
+            if(elements.length > 0)
+            {
+                let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                $('#component_start_dashboards .contents_dashboards').append(ui_element);
+            }
         });
     };
     dashboard_read();
