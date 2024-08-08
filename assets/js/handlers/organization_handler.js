@@ -55,7 +55,7 @@ $(function()
         new_data.append("description", $('#component_organization_general textarea[name="description"]').val());
 
         // Request
-        new wtools.Request(server_config.current.api + "/organization/general/modify/id", "PUT", new_data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/organization/general/modify", "PUT", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
             if(response_data.status == 200)
@@ -68,4 +68,58 @@ $(function()
             }
         });
     });
+
+    // Modify logo
+    $('#component_organization_logo form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_organization_logo form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        try
+        {
+            // Form check
+            const check = new wtools.FormChecker(e.target).Check_();
+            if(!check)
+            {
+                trow('Hay campos inv&aacute;lidos.');
+                return;
+            }
+    
+            // Verify elements
+            const filelist = $('#component_organization_logo input[name="logo"]')[0].files;
+            if(filelist.length < 1)
+            {
+                trow('Hay campos inv&aacute;lidos.');
+                return;
+            }
+    
+            // Data collection
+            const new_data = new FormData();
+            new_data.append("logo", filelist[0]);
+    
+            // Request
+            new wtools.Request(server_config.current.api + "/organization/logo/modify", "PUT", new_data, false).Exec_((response_data) =>
+            {
+                wait.Off_();
+                if(response_data.status == 200)
+                {
+                    new wtools.Notification('SUCCESS', 5000, '#component_organization_logo .notifications').Show_('Logo modificado exitosamente.');
+                }
+                else
+                {
+                    new wtools.Notification('ERROR', 0, '#component_organization_logo .notifications').Show_('Hubo un error al modificar el logo: ' + response_data.body.message);
+                }
+            });
+        }
+        catch(error)
+        {
+            wait.Off_();
+            $('#component_organization_logo .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_organization_logo .notifications').Show_(error);
+            return;
+        }
+    });
+
 });
