@@ -51,7 +51,6 @@ $(function()
 
         // Data collection
         const new_data = new FormData();
-        new_data.append("id", $('#component_organization_general input[name="id"]').val());
         new_data.append("name", $('#component_organization_general input[name="name"]').val());
         new_data.append("description", $('#component_organization_general textarea[name="description"]').val());
 
