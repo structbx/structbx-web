@@ -124,9 +124,7 @@
                                             <th scope="col">Tipo</th>
                                             <th scope="col">Obligatorio</th>
                                             <th scope="col">Valor por defecto</th>
-                                            <th scope="col">L&iacute;mite de caracteres</th>
                                             <th scope="col">Enlace</th>
-                                            <th scope="col">Fecha de creaci&oacute;n</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -134,19 +132,36 @@
                                             <th scope="row">Nombre</th>
                                             <td scope="row">Texto</td>
                                             <td scope="row">S&iacute;</td>
-                                            <td scope="row">NA</td>
-                                            <td scope="row">100</td>
-                                            <td scope="row">NA</td>
-                                            <td scope="row">2024-10-12</td>
+                                            <td scope="row">Ninguno</td>
+                                            <td scope="row">No</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Ventas</th>
+                                            <th scope="row">Precio</th>
+                                            <td scope="row">N&uacute;mero decimal</td>
+                                            <td scope="row">S&iacute;</td>
+                                            <td scope="row">Ninguno</td>
+                                            <td scope="row">No</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Descripci&oacute;n</th>
+                                            <td scope="row">Texto largo</td>
+                                            <td scope="row">No</td>
+                                            <td scope="row">Ninguno</td>
+                                            <td scope="row">No</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Categor&iacute;a</th>
                                             <td scope="row">Selecci&oacute;n</td>
                                             <td scope="row">S&iacute;</td>
-                                            <td scope="row">NA</td>
-                                            <td scope="row">100</td>
-                                            <td scope="row">NA</td>
-                                            <td scope="row">2024-10-12</td>
+                                            <td scope="row">Ninguno</td>
+                                            <td scope="row">S&iacute;</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Fecha de compra</th>
+                                            <td scope="row">Fecha y hora</td>
+                                            <td scope="row">S&iacute;</td>
+                                            <td scope="row">Ninguno</td>
+                                            <td scope="row">No</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -169,12 +184,6 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Nombre de columna</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
                                                     <th scope="row">Formulario</th>
                                                     <td>
                                                         <select class="form-select" name="">
@@ -184,7 +193,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Columna</th>
+                                                    <th scope="row">Columna a enlazar</th>
                                                     <td>
                                                         <select class="form-select" name="">
                                                             <option value="1">Nombre</option>
@@ -218,7 +227,7 @@
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="columns_add_column_name">
+                                                        <input type="text" class="form-control" name="columns_add_column_name" value="Nueva columna">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -226,8 +235,14 @@
                                                     <td>
                                                         <select class="form-select" name="">
                                                             <option value="1">Texto</option>
-                                                            <option value="1">Lista de valores</option>
+                                                            <option value="1">Texto largo</option>
+                                                            <option value="1">N&uacute;mero entero</option>
+                                                            <option value="1">N&uacute;mero decimal</option>
+                                                            <option value="1">Fecha</option>
+                                                            <option value="1">Fecha y hora</option>
+                                                            <option value="1">Archivo</option>
                                                             <option value="1">Selecci&oacute;n</option>
+                                                            <option value="1">Casillas de verificaci&oacute;n</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -244,12 +259,6 @@
                                                     <th scope="row">Valor por defecto</th>
                                                     <td>
                                                         <input type="text" class="form-control" name="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">L&iacute;mite de caracteres</th>
-                                                    <td>
-                                                        <input type="number" class="form-control" name="">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -276,7 +285,7 @@
                     <!-- Data section -->
                     <section class="section_data d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Columnas</h2>
+                            <h2 class="h2">Data</h2>
                         </div>
 
                         <!-- Data: All data -->
@@ -284,7 +293,7 @@
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Data</span>
+                                    <span class="text-dark fw-bold">Todos los registros</span>
                                 </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
@@ -294,9 +303,14 @@
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                        <i class="fas fa-list"></i>
+                                            <i class="fas fa-list"></i>
                                         </button>
-                                        <ul class="dropdown-menu"
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_add">
+                                                    Nuevo registro
+                                                </a>
+                                            </li>
                                             <li>
                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_search">
                                                     Buscar data
@@ -320,21 +334,27 @@
                                         <tr>
                                             <th scope="col">ID</th>
                                             <th scope="col">Nombre</th>
+                                            <th scope="col">Precio</th>
                                             <th scope="col">Descripci&oacute;n</th>
+                                            <th scope="col">Categor&iacute;a</th>
                                             <th scope="col">Fecha de registro</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">23</th>
+                                            <th scope="row">324</th>
                                             <td scope="row">Arroz Mary</td>
+                                            <td scope="row">24.99</td>
                                             <td scope="row">Arroz de la marca Mary</td>
+                                            <td scope="row">Comida</td>
                                             <td scope="row">03/02/2024 12:23 PM</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">24</th>
+                                            <th scope="row">325</th>
                                             <td scope="row">Harina PAN</td>
+                                            <td scope="row">24.99</td>
                                             <td scope="row">Harina de maiz precocida marca PAN</td>
+                                            <td scope="row">Comida</td>
                                             <td scope="row">03/02/2024 04:23 PM</td>
                                         </tr>
                                     </tbody>
@@ -345,6 +365,41 @@
                             
                         </article>
                         <!-- /Data: All data -->
+
+                        <!-- Data: Add -->
+                        <div class="modal fade" id="data_add" tabindex="-1" aria-labelledby="data_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="data_add_label">Nuevo registro</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Nombre</th>
+                                                    <td><input type="text" class="form-control" name=""/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Descripci&oacute;n</th>
+                                                    <td><textarea class="form-control" name=""></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Fecha de registro</th>
+                                                    <td><input type="date" class="form-control" name=""/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary">Agregar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Data: Add -->
 
                         <!-- Data: Search -->
                         <div class="modal fade" id="data_search" tabindex="-1" aria-labelledby="data_search_label" aria-hidden="true">
@@ -479,67 +534,128 @@
                             <h2 class="h2">Dise&ntilde;o del formulario de entrada de datos</h2>
                         </div>
 
-                        <!-- Form design: Rows -->
-                        <article class="card p-4 bg-white mb-4">
-                            <!-- Card header -->
-                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Filas del formulario</span>
-                                </div>
-                                <div class="p-2 bd-highlight">
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-dark-static dropdown-toggle"
-                                            type="button" id="dropdown_menu_options_data_general"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                        <i class="fas fa-list"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_general">
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_row_add">
-                                                    Agregar fila
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_final_form_properties">
-                                                    Propiedades
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </header>
-                            <!-- /Card header -->
-                            <!-- Contents -->
-                            <div class="mb-2 mt-4">
+                        <div class="row">
 
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Filas</th>
-                                            <th scope="col">Columnas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Fila</th>
-                                            <td scope="row">Ventas, Fecha de Venta</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Fila</th>
-                                            <td scope="row">Ingreso, Nombre</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <!-- Form design: Rows -->
+                            <div class="col-12 col-md-8">
+
+                                <article class="card p-4 bg-white mb-4">
+                                    <!-- Card header -->
+                                    <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                        <div class="flex-grow-1 align-self-center">
+                                            <span class="text-dark fw-bold">Filas del formulario</span>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <div class="dropdown">
+                                                <button
+                                                    class="btn btn-dark-static dropdown-toggle"
+                                                    type="button" id="dropdown_menu_options_data_general"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false"
+                                                >
+                                                <i class="fas fa-list"></i>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_general">
+                                                    <li>
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_row_add">
+                                                            Agregar fila
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <!-- /Card header -->
+                                    <!-- Contents -->
+                                    <div class="mb-2 mt-4">
+    
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Fila</th>
+                                                    <th scope="col">Columnas</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td scope="row">Ventas, Fecha de Venta</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td scope="row">Ingreso, Nombre</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+    
+                                    </div>
+                                    <!-- /Contents -->
+                                    
+                                </article>
+                                <!-- /Form design: Rows -->
+    
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                
+                                <!-- Form design: Properties -->
+                                <article class="card p-4 bg-white mb-4">
+                                    <!-- Card header -->
+                                    <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                        <div class="flex-grow-1 align-self-center">
+                                            <span class="text-dark fw-bold">Propiedades</span>
+                                        </div>
+                                    </header>
+                                    <!-- /Card header -->
+                                    <!-- Contents -->
+                                    <div class="mb-2 mt-4">
+
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Mostrar descripcion del fomulario</th>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option value="">S&iacute;</option>
+                                                            <option value="">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Mostrar descripciones de campos</th>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option value="">S&iacute;</option>
+                                                            <option value="">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Texto del boton de guardado</th>
+                                                    <td>
+                                                        <input type="text" class="form-control" name=""/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Mostrar etiquetas</th>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option value="">S&iacute;</option>
+                                                            <option value="">No</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /Contents -->
+                                    
+                                </article>
+                                <!-- /Form design: Properties -->
 
                             </div>
-                            <!-- /Contents -->
-                            
-                        </article>
-                        <!-- /Form design: Rows -->
-
+                        </div>
                         <!-- Form design: Add row -->
                         <div class="modal fade" id="form_design_row_add" tabindex="-1" aria-labelledby="form_design_row_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -604,26 +720,22 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <h3>T&iacute;tulo del formulario</h3>
+                                        <h3>Registro de personal</h3>
                                         <div class="mt-4">
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <label>Ventas</label>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <label>Nombres</label>
                                                     <input type="text" class="form-control" name=""/>
                                                 </div>
-                                                <div class="col">
-                                                    <label>Fecha de venta</label>
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <label>Fecha de nacimiento</label>
                                                     <input type="date" class="form-control" name=""/>
                                                 </div>
                                             </div>
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <label>Ingreso</label>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <label>C&eacute;dula</label>
                                                     <input type="number" class="form-control" name=""/>
-                                                </div>
-                                                <div class="col">
-                                                    <label>Nombre</label>
-                                                    <input type="text" class="form-control" name=""/>
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary">Guardar</button>
@@ -637,62 +749,6 @@
                             </div>
                         </div>
                         <!-- /Form design: Final form -->
-
-                        <!-- Form design: Final form: Properties -->
-                        <div class="modal fade" id="form_design_final_form_properties" tabindex="-1" aria-labelledby="form_design_final_form_properties_add_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="form_design_final_form_properties_add_label">Propiedades</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Mostrar descripcion del fomulario</th>
-                                                    <td>
-                                                        <select class="form-select">
-                                                            <option value="">S&iacute;</option>
-                                                            <option value="">No</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Mostrar descripciones de campos</th>
-                                                    <td>
-                                                        <select class="form-select">
-                                                            <option value="">S&iacute;</option>
-                                                            <option value="">No</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Texto del boton de guardado</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" name=""/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Mostrar etiquetas</th>
-                                                    <td>
-                                                        <select class="form-select">
-                                                            <option value="">S&iacute;</option>
-                                                            <option value="">No</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Form design: Final form: Properties -->
 
                         <div class="mt-2">
                             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#form_design_final_form">
