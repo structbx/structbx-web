@@ -695,16 +695,10 @@
                                 <a class="menu_organization_logo nav-link" href="#organization" menu="organization_logo">Logo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="menu_organization_users_roles nav-link" href="#organization" menu="organization_users_roles">Usuarios y roles</a>
+                                <a class="menu_organization_users nav-link" href="#organization" menu="organization_users">Usuarios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="menu_organization_plan nav-link" href="#organization" menu="organization_plan">Plan</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="menu_organization_billing nav-link" href="#organization" menu="organization_billing">Facturaci&oacute;n</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="menu_organization_pays nav-link" href="#organization" menu="organization_pays">Reporte de pagos</a>
+                                <a class="menu_organization_roles nav-link" href="#organization" menu="organization_roles">Roles</a>
                             </li>
                         </ul>
                         <!-- /Organization: Nav -->
@@ -764,7 +758,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Logo actual</td>
-                                                    <td><img src="../assets/images/noimage.png" alt=""></td>
+                                                    <td><img class="current_logo" src="/api/organization/logo/read/id" alt="" width="200px"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Nuevo logo</td>
@@ -783,13 +777,13 @@
                         </section>
                         <!-- /Organization: Logo -->
 
-                        <!-- Organization: Users and roles -->
-                        <section class="section_organization_users_roles d-none">
+                        <!-- Organization: Users -->
+                        <section class="section_organization_users d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                     <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">Usuarios y roles</span>
+                                        <span class="text-dark fw-bold">Usuarios</span>
                                     </div>
                                 </header>
                                 <!-- /Card header -->
@@ -816,58 +810,15 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: Users and roles -->
+                        <!-- /Organization: Users -->
 
-                        <!-- Organization: Plan -->
-                        <section class="section_organization_plan d-none">
+                        <!-- Organization: Roles -->
+                        <section class="section_organization_roles d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                     <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">Plan</span>
-                                    </div>
-                                </header>
-                                <!-- /Card header -->
-                                <!-- Contents -->
-                                <div class="mb-2 mt-4">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Plan actual</th>
-                                                <td scope="row">B&aacute;sico</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Fecha de renovacion</th>
-                                                <td scope="row">15 de cada mes</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Uso</th>
-                                                <td scope="row">15 GB / 30 GB</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Usuarios</th>
-                                                <td scope="row">2/10</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Reportes</th>
-                                                <td scope="row">5/Sin limite</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /Contents -->
-                                
-                            </article>
-                        </section>
-                        <!-- /Organization: Plan -->
-
-                        <!-- Organization: Billing -->
-                        <section class="section_organization_billing d-none">
-                            <article class="card p-4 bg-white mb-4">
-                                <!-- Card header -->
-                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">Facturaci&oacute;n</span>
+                                        <span class="text-dark fw-bold">Roles</span>
                                     </div>
                                 </header>
                                 <!-- /Card header -->
@@ -876,18 +827,12 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Fecha de inicio/fin </th>
-                                                <th scope="col">Plan</th>
-                                                <th scope="col">Monto</th>
-                                                <th scope="col">Estado</th>
+                                                <th scope="col">Nombre del Rol</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">2023-08-07 / 2023-09-06</th>
-                                                <td scope="row">B&aacute;sico</td>
-                                                <td scope="row">19.99 USD</td>
-                                                <td scope="row">Pagado</td>
+                                                <td scope="row">Administrador</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -896,44 +841,7 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: Billing -->
-
-                        <!-- Organization: Pays -->
-                        <section class="section_organization_pays d-none">
-                            <article class="card p-4 bg-white mb-4">
-                                <!-- Card header -->
-                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                    <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">Reporte de pagos</span>
-                                    </div>
-                                </header>
-                                <!-- /Card header -->
-                                <!-- Contents -->
-                                <div class="mb-2 mt-4">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Monto</th>
-                                                <th scope="col">M&eacute;todo de pago</th>
-                                                <th scope="col">Comprobante</th>
-                                                <th scope="col">Fecha y hora</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">19.99</th>
-                                                <td scope="row">Binance</td>
-                                                <td scope="row"><img src="" alt=""></td>
-                                                <td scope="row">2024/04/23 23:12:34</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /Contents -->
-                                
-                            </article>
-                        </section>
-                        <!-- /Organization: Pays -->
+                        <!-- /Organization: Roles -->
 
                     </section>
                     <!-- /Organization section -->
