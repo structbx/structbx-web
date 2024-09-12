@@ -20,7 +20,7 @@ $(function()
     options_privacity.Build_('#component_reports_modify select[name="privacity"]');
 
     let options_graphs = new wtools.SelectOptions();
-    new wtools.Request(server_config.current.api + "/reports/graphs/read").Exec_((response_data) =>
+    const options_graphs_init = (options_graphs, callback) => new wtools.Request(server_config.current.api + "/reports/graphs/read").Exec_((response_data) =>
     {
         try
         {
@@ -32,6 +32,7 @@ $(function()
             options_graphs.options = tmp_options_graphs;
             options_graphs.Build_('#component_reports_add select[name="id_graph"]');
             options_graphs.Build_('#component_reports_modify select[name="id_graph"]');
+            callback();
         }
         catch(error)
         {
@@ -43,64 +44,69 @@ $(function()
     // Read
     const report_read = () =>
     {
-        // Wait animation
-        let wait = new wtools.ElementState('#component_reports_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
-
-        // Request
-        new wtools.Request(server_config.current.api + "/reports/read").Exec_((response_data) =>
+        const report = () =>
         {
-            // Error notification
-            if(response_data.status != 200)
+            // Wait animation
+            let wait = new wtools.ElementState('#component_reports_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+            // Request
+            new wtools.Request(server_config.current.api + "/reports/read").Exec_((response_data) =>
             {
+                // Error notification
+                if(response_data.status != 200)
+                {
+                    wait.Off_();
+                    $('#component_reports_read .notifications').html('');
+                    new wtools.Notification('WARNING', 0, '#component_reports_read .notifications').Show_('No se pudo acceder a los reportes.');
+                    return;
+                }
+
+                // Results elements creator
                 wait.Off_();
                 $('#component_reports_read .notifications').html('');
-                new wtools.Notification('WARNING', 0, '#component_reports_read .notifications').Show_('No se pudo acceder a los reportes.');
-                return;
-            }
+                $('#component_reports_read table tbody').html('');
+                new wtools.UIElementsCreator('#component_reports_read table tbody', response_data.body.data).Build_((row) =>
+                {
+                    let elements = [
+                        `<th scope="row"><a class="text-dark" href="../reports/?report=${row.id}">${row.name}</a></th>`
+                        ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
+                        ,`<td scope="row">${options_privacity.ValueToOption_(row.privacity)}</td>`
+                        ,`<td scope="row">${options_graphs.ValueToOption_(row.rg_id)}</td>`
+                        ,`<td scope="row">${row.created_at}</td>`
+                        ,`<td scope="row">
+                            <div class="dropdown">
+                                <a
+                                    class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                >
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item modify" report_id="${row.id}" report_name="${row.name}">
+                                            Editar
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item parameters" report_id="${row.id}" report_name="${row.name}">
+                                            Configurar par&aacute;metros
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item delete" report_id="${row.id}" report_name="${row.name}">
+                                            Eliminar
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>`
+                    ];
 
-            // Results elements creator
-            wait.Off_();
-            $('#component_reports_read .notifications').html('');
-            $('#component_reports_read table tbody').html('');
-            new wtools.UIElementsCreator('#component_reports_read table tbody', response_data.body.data).Build_((row) =>
-            {
-                let elements = [
-                    `<th scope="row"><a class="text-dark" href="../reports/?report=${row.id}">${row.name}</a></th>`
-                    ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
-                    ,`<td scope="row">${options_privacity.ValueToOption_(row.privacity)}</td>`
-                    ,`<td scope="row">${options_graphs.ValueToOption_(row.rg_id)}</td>`
-                    ,`<td scope="row">${row.created_at}</td>`
-                    ,`<td scope="row">
-                        <div class="dropdown">
-                            <a
-                                class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                            >
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item modify" report_id="${row.id}" report_name="${row.name}">
-                                        Editar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item parameters" report_id="${row.id}" report_name="${row.name}">
-                                        Configurar par&aacute;metros
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item delete" report_id="${row.id}" report_name="${row.name}">
-                                        Eliminar
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>`
-                ];
-
-                return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
+                    return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
+                });
             });
-        });
+        }
+
+        options_graphs_init(options_graphs, report);
     };
     report_read();
     $('#component_reports_read .update').click(() => report_read());
@@ -152,7 +158,7 @@ $(function()
     });
 
     // Read Reports parameters
-    $(document).on("click", '#component_reports_read table .parameters', (e) =>
+    /*$(document).on("click", '#component_reports_read table .parameters', (e) =>
     {
         e.preventDefault();
 
@@ -184,7 +190,7 @@ $(function()
 
             try
             {
-                $('#component_reports_parameters table tbody').html('');
+                $('#component_reports_parameters elements').html('');
                 for(let row of response_data.body.data)
                 {
                     // Setup inputs
@@ -209,7 +215,7 @@ $(function()
                     // Table and form
                     let tbody = new wtools.UIElementsPackage('<tbody></tbody>', [row1, row2, row3, row4]).Pack_();
                     let table = new wtools.UIElementsPackage('<table class="table"></table>', [tbody]).Pack_();
-                    let form = new wtools.UIElementsPackage('<form class="mb-5"></form>', [
+                    let form = new wtools.UIElementsPackage('<form class="collapse mb-5"></form>', [
                         $('<div class="notifications"></div>')
                         ,$('<input type="hidden" name="id" required>').val(row.id)
                         ,$(`<h5>Par&aacute;metro: ${row.identifier}</h5>`)
@@ -228,7 +234,7 @@ $(function()
             wait.Off_();
             $('#component_reports_parameters').modal('show');
         });
-    });
+    });*/
 
     // Read Report to Modify
     $(document).on("click", '#component_reports_read table .modify', (e) =>
@@ -261,7 +267,6 @@ $(function()
                 return;
             }
             
-            $('#component_reports_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
             $('#component_reports_modify input[name="name"]').val(response_data.body.data[0].name);
             $('#component_reports_modify select[name="state"]').val(response_data.body.data[0].state);
             $('#component_reports_modify select[name="privacity"]').val(response_data.body.data[0].privacity);
