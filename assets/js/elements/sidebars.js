@@ -50,47 +50,19 @@ class Sidebars
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
-            <h5 class="small text-uppercase text-muted">GENERAL</h5>
+            <h5 class="small text-uppercase text-muted">DASHBOARDS</h5>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="../start/#start">
-                    <i class="fas fa-home"></i>
-                    <span class="ms-2">Inicio</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link mb-2" href="../start/#forms">
-                    <i class="fas fa-table"></i>
-                    <span class="ms-2">Formularios</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link mb-2" href="../start/#dashboards">
+                <a class="nav-link active mb-2" href="/dashboard?id=1">
                     <i class="fas fa-tachometer-alt"></i>
-                    <span class="ms-2">Dashboards</span>
+                    <span class="ms-2">Indicadores Generales</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="../start/#reports" menu="reports">
-                    <i class="fas fa-file"></i>
-                    <span class="ms-2">Reportes</span>
+                <a class="nav-link mb-2" href="/dashboard?id=2">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="ms-2">Indicadores detallados</span>
                 </a>
             </div>
-            <div class="nav-item">
-                <a class="nav-link mb-2" href="../start/#organization">
-                    <i class="fas fa-building"></i>
-                    <span class="ms-2">Organizaci&oacute;n</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link mb-2" href="../start/#settings">
-                    <i class="fas fa-cog"></i>
-                    <span class="ms-2">Configuraci&oacute;n</span>
-                </a>
-            </div>
-            <h5 class="small text-uppercase text-muted">Dashboards</h5>
-            <nav class="nav_dashboards">
-
-            </nav>
         `));
 
         $(".sidebar_menu").append(sidebar_menu);
@@ -101,6 +73,18 @@ class Sidebars
         sidebar_menu.append($(`
             <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
+                <a class="menu_general nav-link mb-2 active" href="#general" menu="general">
+                    <i class="fas fa-database"></i>
+                    <span class="ms-2">General</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_columns nav-link mb-2 active" href="#columns" menu="columns">
+                    <i class="fas fa-database"></i>
+                    <span class="ms-2">Columnas</span>
+                </a>
+            </div>
+            <div class="nav-item">
                 <a class="menu_data nav-link mb-2 active" href="#data" menu="data">
                     <i class="fas fa-database"></i>
                     <span class="ms-2">Data</span>
@@ -109,7 +93,7 @@ class Sidebars
             <div class="nav-item">
                 <a class="menu_form_design nav-link mb-2" href="#form_design" menu="form_design">
                     <i class="fas fa-table"></i>
-                    <span class="ms-2">Diseño de formulario</span>
+                    <span class="ms-2">Diseño</span>
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
