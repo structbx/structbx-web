@@ -25,6 +25,7 @@ $(function()
             $('#component_organization_general input[name="id"]').val(response_data.body.data[0].id);
             $('#component_organization_general input[name="name"]').val(response_data.body.data[0].name);
             $('#component_organization_general textarea[name="description"]').val(response_data.body.data[0].description);
+            $("strong.organization_name").html(response_data.body.data[0].name);
 
             wait.Off_();
         });
