@@ -43,7 +43,7 @@
                                 <a class="menu_dashboard_menu1 nav-link" href="#dashboard_menu1" menu="dashboard_menu1">Reporte 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="menu_dashboard_menu2 nav-link" href="#dashboard_menu2" menu="dashboard_menu2">Reporte 1</a>
+                                <a class="menu_dashboard_menu2 nav-link" href="#dashboard_menu2" menu="dashboard_menu2">Reporte 2</a>
                             </li>
                         </ul>
                         <!-- /Dashboard: Nav -->
@@ -95,7 +95,21 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <th scope="row">Enero</th>
+                                                <td>34</td>
+                                                <td>45</td>
+                                                <td>23</td>
+                                                <td>456</td>
+                                            </tr>
+                                            <tr>
                                                 <th scope="row">Febrero</th>
+                                                <td>34</td>
+                                                <td>45</td>
+                                                <td>23</td>
+                                                <td>456</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Marzo</th>
                                                 <td>34</td>
                                                 <td>45</td>
                                                 <td>23</td>
@@ -103,8 +117,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div id="dashboard_report1_graph" class="mt-4">
-
+                                    <div class="mt-4">
+                                        <canvas id="dashboard_report1_graph"></canvas>
                                     </div>
                                 </div>
                                 <!-- /Contents -->
@@ -136,73 +150,24 @@
             <!-- Libraries -->
             <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
             <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.6.1/dist/frappe-charts.min.umd.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="../assets/js/libraries/wtools/wtools.js"></script>
 
-            <!-- Classes -->
-            <script src="../assets/js/classes/button_state.js"></script>
-            <script src="../assets/js/classes/csv_operator.js"></script>
-            <script src="../assets/js/classes/form_checker.js"></script>
-            <script src="../assets/js/classes/menu_manager.js"></script>
-            <script src="../assets/js/classes/notification.js"></script>
-            <script src="../assets/js/classes/request.js"></script>
-            <script src="../assets/js/classes/server_config.js"></script>
-            <script src="../assets/js/classes/wait_animation.js"></script>
-            <script src="../assets/js/classes/web_elements.js"></script>
+            <!-- Elements -->
+            <script src="../assets/js/elements/headers.js"></script>
+            <script src="../assets/js/elements/footers.js"></script>
+            <script src="../assets/js/elements/sidebars.js"></script>
 
-            <!-- Modules -->
-            <!--<script src="../assets/js/modules/login.js"></script>-->
+            <!-- Events -->
+            <script src="../assets/js/main.js"></script>
+            <script src="../assets/js/events/general_events.js"></script>
+            <script src="../assets/js/events/dashboard_events.js"></script>
+            
+            <!-- Handlers -->
 
             <!-- Custom scripts -->
             <script>
-                $(function ()
-                {
-                    // Web Elements
-                        let webE = new WebElements();
-                        webE.SidebarMenuDashboard_();
-                        webE.Header_();
-                        webE.Footer_();
-                        new MenuManager('.nav_dashboard');
-                        //new MenuManager('.nav_organization');
-
-                    // Verify Session
-                    /*new Login().VerifySession(result =>
-                    {
-                        if(!result)
-                        {
-                            new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
-                            window.location.href = "../login/";
-                        }
-                    });*/
-                });
-
-                // Chart
-                const data = {
-                    labels: ["12am-3am", "3am-6pm", "6am-9am", "9am-12am",
-                        "12pm-3pm", "3pm-6pm", "6pm-9pm", "9am-12am"
-                    ],
-                    datasets: [
-                        {
-                            name: "Some Data", chartType: "bar",
-                            values: [25, 40, 30, 35, 8, 52, 17, -4]
-                        },
-                        {
-                            name: "Another Set", chartType: "line",
-                            values: [25, 50, -10, 15, 18, 32, 27, 14]
-                        }
-                    ]
-                }
-
-                const chart = new frappe.Chart("#dashboard_report1_graph", {
-                    title: "My Awesome Chart",
-                    data: data,
-                    type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
-                    height: 250,
-                    colors: ['#7cd6fd', '#743ee2']
-                })
             </script>
-            
-            <!-- Events -->
-            <script src="../assets/js/events/general_events.js"></script>
             
         <!-- Javascript -->
     </body>
