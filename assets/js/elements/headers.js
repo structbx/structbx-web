@@ -108,10 +108,10 @@ class Headers
                         </li>
                         <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
                             <a class="nav-link dropdown-toggle btn btn-ligth" href="#" id="form_selection" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Form 1
+                                Inventario
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="form_selection">
-                                <li><a class="dropdown-item" href="#">Form 1</a></li>
+                                <li><a class="dropdown-item" href="#">Inventario</a></li>
                                 <li><a class="dropdown-item" href="#">Form 2</a></li>
                             </ul>
                         </li>
