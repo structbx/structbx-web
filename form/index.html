@@ -31,47 +31,18 @@
                 <!-- Main content -->
                 <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
 
-                    <!-- Data section -->
-                    <section class="section_data d-none">
+                    <!-- General section -->
+                    <section class="section_general d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Data almacenada</h2>
+                            <h2 class="h2">General</h2>
                         </div>
 
-                        <!-- Data: General -->
+                        <!-- General: General -->
                         <article class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
                                     <span class="text-dark fw-bold">General</span>
-                                </div>
-                                <div class="p-2 bd-highlight">
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-dark-static dropdown-toggle"
-                                            type="button" id="dropdown_menu_options_data_general"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                        <i class="fas fa-list"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_general">
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_general_search">
-                                                    Buscar
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_general_import_data">
-                                                    Importar datos
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_general_create_report">
-                                                    Crear reportes
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </header>
                             <!-- /Card header -->
@@ -99,138 +70,23 @@
                             <!-- /Contents -->
                             
                         </article>
-                        <!-- /Data: General -->
+                        <!-- /General: General -->
 
-                        <!-- Data: General: Search -->
-                        <div class="modal fade" id="data_general_search" tabindex="-1" aria-labelledby="data_general_search_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="data_general_search_label">Buscar data almacenada</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Columna</th>
-                                                    <td>
-                                                        <select class="form-select" name="data_general_search_column">
-                                                            <option value="1">Nombre</option>
-                                                            <option value="2">Ventas</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Buscar</th>
-                                                    <td>
-                                                        <input class="form-control" type="text" name="data_general_search_text">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="text-end">
-                                            <button type="button" class="btn btn-primary">Buscar</button>
-                                        </div>
-                                        <table class="table mt-4">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Nombre</th>
-                                                    <th scope="col">Apellido</th>
-                                                    <th scope="col">Edad</th>
-                                                    <th scope="col">Departamernto</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Juan</td>
-                                                    <td>Perez</td>
-                                                    <td>25</td>
-                                                    <td>RRHH</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
+                    </section>
+                    <!-- /General section -->
+
+                    <!-- Columns section -->
+                    <section class="section_columns d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Columnas</h2>
                         </div>
-                        <!-- /Data: General: Search -->
 
-                        <!-- Data: General: Import data -->
-                        <div class="modal fade" id="data_general_import_data" tabindex="-1" aria-labelledby="data_general_import_data_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="data_general_import_data_label">Importar data</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Archivo fuente</th>
-                                                    <td>
-                                                        <input type="file" class="form-control" name="data_general_import_data_file">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Separador</th>
-                                                    <td>
-                                                        <select class="form-select" name="data_general_import_data_separator">
-                                                            <option value="1">TAB</option>
-                                                            <option value="2">,</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table mt-4">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Columna de archivo</th>
-                                                    <th scope="col">Columna de formulario</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>name</td>
-                                                    <td>
-                                                        <select class="form-select" name="data_general_import_data_map1">
-                                                            <option value="1">Nombre</option>
-                                                            <option value="2">Edad</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>age</td>
-                                                    <td>
-                                                        <select class="form-select" name="data_general_import_data_map2">
-                                                            <option value="1">Nombre</option>
-                                                            <option value="2">Edad</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Importar data</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Data: General: Import data -->
-
-                        <!-- Data: Columns -->
+                        <!-- Columns: All columns -->
                         <article class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Columnas</span>
+                                    <span class="text-dark fw-bold">Todas las columnas</span>
                                 </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
@@ -244,12 +100,12 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_columns">
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_columns_link">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_link">
                                                     Enlazar columna de otro formulario
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_columns_add">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_add">
                                                     Crear nueva columna
                                                 </a>
                                             </li>
@@ -299,14 +155,14 @@
                             <!-- /Contents -->
                             
                         </article>
-                        <!-- /Data: Columns -->
+                        <!-- /Columns: All columns -->
 
-                        <!-- Data: Columns: Link -->
-                        <div class="modal fade" id="data_columns_link" tabindex="-1" aria-labelledby="data_columns_link_label" aria-hidden="true">
+                        <!-- Columns: Link -->
+                        <div class="modal fade" id="columns_link" tabindex="-1" aria-labelledby="columns_link_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="data_columns_link_label">Enlazar columna de otro formulario</h5>
+                                        <h5 class="modal-title" id="columns_link_label">Enlazar columna de otro formulario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -315,13 +171,13 @@
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="data_columns_link_column_name">
+                                                        <input type="text" class="form-control" name="">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Formulario</th>
                                                     <td>
-                                                        <select class="form-select" name="data_columns_link_form">
+                                                        <select class="form-select" name="">
                                                             <option value="1">Agentes</option>
                                                             <option value="1">Ventas</option>
                                                         </select>
@@ -330,7 +186,7 @@
                                                 <tr>
                                                     <th scope="row">Columna</th>
                                                     <td>
-                                                        <select class="form-select" name="data_columns_link_column">
+                                                        <select class="form-select" name="">
                                                             <option value="1">Nombre</option>
                                                             <option value="2">Edad</option>
                                                         </select>
@@ -346,14 +202,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Data: Columns: Link -->
+                        <!-- /Columns: Link -->
 
-                        <!-- Data: Columns: Add -->
-                        <div class="modal fade" id="data_columns_add" tabindex="-1" aria-labelledby="data_columns_add_label" aria-hidden="true">
+                        <!-- Columns: Add -->
+                        <div class="modal fade" id="columns_add" tabindex="-1" aria-labelledby="columns_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="data_columns_add_label">A&ntilde;adir columna</h5>
+                                        <h5 class="modal-title" id="columns_add_label">A&ntilde;adir columna</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -362,13 +218,13 @@
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="data_columns_add_column_name">
+                                                        <input type="text" class="form-control" name="columns_add_column_name">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Tipo</th>
                                                     <td>
-                                                        <select class="form-select" name="data_columns_add_form">
+                                                        <select class="form-select" name="">
                                                             <option value="1">Texto</option>
                                                             <option value="1">Lista de valores</option>
                                                             <option value="1">Selecci&oacute;n</option>
@@ -378,7 +234,7 @@
                                                 <tr>
                                                     <th scope="row">Obligatorio</th>
                                                     <td>
-                                                        <select class="form-select" name="data_columns_add_column">
+                                                        <select class="form-select" name="">
                                                             <option value="1">S&iacute;</option>
                                                             <option value="2">No</option>
                                                         </select>
@@ -387,19 +243,19 @@
                                                 <tr>
                                                     <th scope="row">Valor por defecto</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="data_columns_add_column_name">
+                                                        <input type="text" class="form-control" name="">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">L&iacute;mite de caracteres</th>
                                                     <td>
-                                                        <input type="number" class="form-control" name="data_columns_add_column_name">
+                                                        <input type="number" class="form-control" name="">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Descripcion</th>
                                                     <td>
-                                                        <textarea class="form-control" name="data_columns_add_column_name"></textarea>
+                                                        <textarea class="form-control" name=""></textarea>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -412,7 +268,207 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Data: Columns: Add -->
+                        <!-- /Columns: Add -->
+
+                    </section>
+                    <!-- /Columns section -->
+
+                    <!-- Data section -->
+                    <section class="section_data d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Columnas</h2>
+                        </div>
+
+                        <!-- Data: All data -->
+                        <article class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Data</span>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-dark-static dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                        <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu"
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_search">
+                                                    Buscar data
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_import_data">
+                                                    Importar data
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2 mt-4">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Descripci&oacute;n</th>
+                                            <th scope="col">Fecha de registro</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">23</th>
+                                            <td scope="row">Arroz Mary</td>
+                                            <td scope="row">Arroz de la marca Mary</td>
+                                            <td scope="row">03/02/2024 12:23 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">24</th>
+                                            <td scope="row">Harina PAN</td>
+                                            <td scope="row">Harina de maiz precocida marca PAN</td>
+                                            <td scope="row">03/02/2024 04:23 PM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- /Contents -->
+                            
+                        </article>
+                        <!-- /Data: All data -->
+
+                        <!-- Data: Search -->
+                        <div class="modal fade" id="data_search" tabindex="-1" aria-labelledby="data_search_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="data_search_label">Buscar data almacenada</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Columna</th>
+                                                    <td>
+                                                        <select class="form-select" name="data_search_column">
+                                                            <option value="1">Nombre</option>
+                                                            <option value="2">Ventas</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Buscar</th>
+                                                    <td>
+                                                        <input class="form-control" type="text" name="data_general_search_text">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="text-end">
+                                            <button type="button" class="btn btn-primary">Buscar</button>
+                                        </div>
+                                        <table class="table mt-4">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Apellido</th>
+                                                    <th scope="col">Edad</th>
+                                                    <th scope="col">Departamernto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Juan</td>
+                                                    <td>Perez</td>
+                                                    <td>25</td>
+                                                    <td>RRHH</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Data: Search -->
+
+                        <!-- Data: Import data -->
+                        <div class="modal fade" id="data_import_data" tabindex="-1" aria-labelledby="data_import_data_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="data_import_data_label">Importar data</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Archivo fuente</th>
+                                                    <td>
+                                                        <input type="file" class="form-control" name="">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Separador</th>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option value="1">TAB</option>
+                                                            <option value="2">,</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table mt-4">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Columna de archivo</th>
+                                                    <th scope="col">Columna de formulario</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>name</td>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option value="1">Nombre</option>
+                                                            <option value="2">Edad</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>age</td>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option value="1">Nombre</option>
+                                                            <option value="2">Edad</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Importar data</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Data: Import data -->
 
                     </section>
                     <!-- /Data section -->
@@ -420,7 +476,7 @@
                     <!-- Form design section -->
                     <section class="section_form_design d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Dise&ntilde;o del formulario</h2>
+                            <h2 class="h2">Dise&ntilde;o del formulario de entrada de datos</h2>
                         </div>
 
                         <!-- Form design: Rows -->
@@ -444,6 +500,11 @@
                                             <li>
                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_row_add">
                                                     Agregar fila
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_final_form_properties">
+                                                    Propiedades
                                                 </a>
                                             </li>
                                         </ul>
@@ -534,65 +595,47 @@
                         <!-- /Form design: Add row -->
 
                         <!-- Form design: Final form -->
-                        <article class="card p-4 bg-white mb-4">
-                            <!-- Card header -->
-                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Resultado de formulario</span>
-                                </div>
-                                <div class="p-2 bd-highlight">
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-dark-static dropdown-toggle"
-                                            type="button" id="dropdown_menu_options_final_form_properties"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                        <i class="fas fa-list"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_final_form_properties">
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_final_form_properties">
-                                                    Propiedades
-                                                </a>
-                                            </li>
-                                        </ul>
+                        <div class="modal fade" id="form_design_final_form" tabindex="-1" aria-labelledby="form_design_final_form_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="form_design_final_form_label">Resultado de formulario</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                </div>
-                            </header>
-                            <!-- /Card header -->
-                            <!-- Contents -->
-                            <div class="mb-2 mt-4">
+                                    <div class="modal-body">
 
-                                <h3>T&iacute;tulo del formulario</h3>
-                                <div class="mt-4">
-                                    <div class="row mb-4">
-                                        <div class="col">
-                                            <label>Ventas</label>
-                                            <input type="text" class="form-control" name=""/>
+                                        <h3>T&iacute;tulo del formulario</h3>
+                                        <div class="mt-4">
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <label>Ventas</label>
+                                                    <input type="text" class="form-control" name=""/>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Fecha de venta</label>
+                                                    <input type="date" class="form-control" name=""/>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <label>Ingreso</label>
+                                                    <input type="number" class="form-control" name=""/>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Nombre</label>
+                                                    <input type="text" class="form-control" name=""/>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary">Guardar</button>
                                         </div>
-                                        <div class="col">
-                                            <label>Fecha de venta</label>
-                                            <input type="date" class="form-control" name=""/>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col">
-                                            <label>Ingreso</label>
-                                            <input type="number" class="form-control" name=""/>
-                                        </div>
-                                        <div class="col">
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control" name=""/>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                </div>
 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /Contents -->
-                            
-                        </article>
+                        </div>
                         <!-- /Form design: Final form -->
 
                         <!-- Form design: Final form: Properties -->
@@ -651,7 +694,12 @@
                         </div>
                         <!-- /Form design: Final form: Properties -->
 
-                        <button type="button" class="btn btn-primary">Guardar cambios del formulario</button>
+                        <div class="mt-2">
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#form_design_final_form">
+                                Visualizar
+                            </button>
+                            <button class="btn btn-primary">Guardar cambios</button>
+                        </div>
 
                     </section>
                     <!-- /Form design section -->
@@ -818,47 +866,23 @@
             <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
             <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.6.1/dist/frappe-charts.min.umd.js"></script>
+            <script src="../assets/js/libraries/wtools/wtools.js"></script>
 
-            <!-- Classes -->
-            <script src="../assets/js/classes/button_state.js"></script>
-            <script src="../assets/js/classes/csv_operator.js"></script>
-            <script src="../assets/js/classes/form_checker.js"></script>
-            <script src="../assets/js/classes/menu_manager.js"></script>
-            <script src="../assets/js/classes/notification.js"></script>
-            <script src="../assets/js/classes/request.js"></script>
-            <script src="../assets/js/classes/server_config.js"></script>
-            <script src="../assets/js/classes/wait_animation.js"></script>
-            <script src="../assets/js/classes/web_elements.js"></script>
+            <!-- Elements -->
+            <script src="../assets/js/elements/headers.js"></script>
+            <script src="../assets/js/elements/footers.js"></script>
+            <script src="../assets/js/elements/sidebars.js"></script>
 
-            <!-- Modules -->
-            <!--<script src="../assets/js/modules/login.js"></script>-->
+            <!-- Events -->
+            <script src="../assets/js/main.js"></script>
+            <script src="../assets/js/events/general_events.js"></script>
+            <script src="../assets/js/events/form_events.js"></script>
+            
+            <!-- Handlers -->
 
             <!-- Custom scripts -->
             <script>
-                $(function ()
-                {
-                    // Web Elements
-                        let webE = new WebElements();
-                        webE.SidebarMenuForm_();
-                        webE.HeaderForm_();
-                        webE.Footer_();
-                        new MenuManager('.sidebar_menu');
-                        //new MenuManager('.nav_organization');
-
-                    // Verify Session
-                    /*new Login().VerifySession(result =>
-                    {
-                        if(!result)
-                        {
-                            new Notification('SUCCESS').Show_('Debe iniciar sesi&oacute;n para acceder.');
-                            window.location.href = "../login/";
-                        }
-                    });*/
-                });
             </script>
-            
-            <!-- Events -->
-            <script src="../assets/js/events/general_events.js"></script>
             
         <!-- Javascript -->
     </body>
