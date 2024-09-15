@@ -26,7 +26,7 @@ $(function ()
         new Headers().Header_();
         new Footers().Footer_();
         new wtools.MenuManager('.sidebar_menu', true);
-        new wtools.MenuManager('.nav_organization');
+        new wtools.MenuManager('.nav_spaces');
         new wtools.MenuManager('.nav_reports_add');
         new wtools.MenuManager('.nav_reports_modify');
         
