@@ -680,31 +680,34 @@
                     </section>
                     <!-- /Reports section -->
 
-                    <!-- Organization section -->
-                    <section class="section_organization d-none">
+                    <!-- Spaces section -->
+                    <section class="section_spaces d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Organizaci&oacute;n</h2>
+                            <h2 class="h2">Espacio</h2>
                         </div>
 
-                        <!-- Organization: Nav -->
-                        <ul class="nav_organization nav nav-tabs mb-4">
+                        <!-- Spaces: Nav -->
+                        <ul class="nav_spaces nav nav-tabs mb-4">
                             <li class="nav-item">
-                                <a class="menu_organization_general nav-link" href="#organization" menu="organization_general">General</a>
+                                <a class="menu_spaces_general nav-link" href="#spaces" menu="spaces_general">General</a>
                             </li>
                             <li class="nav-item">
-                                <a class="menu_organization_logo nav-link" href="#organization" menu="organization_logo">Logo</a>
+                                <a class="menu_spaces_logo nav-link" href="#spaces" menu="spaces_logo">Logo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="menu_organization_users nav-link" href="#organization" menu="organization_users">Usuarios</a>
+                                <a class="menu_spaces_users nav-link" href="#spaces" menu="spaces_users">Usuarios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="menu_organization_roles nav-link" href="#organization" menu="organization_roles">Roles</a>
+                                <a class="menu_spaces_groups nav-link" href="#spaces" menu="spaces_groups">Grupos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="menu_spaces_permissions nav-link" href="#spaces" menu="spaces_permissions">Permisos</a>
                             </li>
                         </ul>
-                        <!-- /Organization: Nav -->
+                        <!-- /Spaces: Nav -->
 
-                        <!-- Organization: General -->
-                        <section id="component_organization_general" class="section_organization_general d-none">
+                        <!-- Spaces: General -->
+                        <section id="component_spaces_general" class="section_spaces_general d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -738,10 +741,10 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: General -->
+                        <!-- /Spaces: General -->
 
-                        <!-- Organization: Logo -->
-                        <section id="component_organization_logo" class="section_organization_logo d-none">
+                        <!-- Spaces: Logo -->
+                        <section id="component_spaces_logo" class="section_spaces_logo d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -758,7 +761,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Logo actual</td>
-                                                    <td><img class="current_logo" src="/api/organization/logo/read/id" alt="" width="200px"></td>
+                                                    <td><img class="current_logo" src="/api/spaces/logo/read/id" alt="" width="200px"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Nuevo logo</td>
@@ -775,10 +778,10 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: Logo -->
+                        <!-- /Spaces: Logo -->
 
-                        <!-- Organization: Users -->
-                        <section class="section_organization_users d-none">
+                        <!-- Spaces: Users -->
+                        <section id="component_spaces_users" class="section_spaces_users d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -789,20 +792,19 @@
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
+                                    <div class="notifications"></div>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Correo </th>
+                                                <th scope="col">Usuario</th>
                                                 <th scope="col">Estado</th>
-                                                <th scope="col">Rol</th>
+                                                <th scope="col">Organizaci&oacute;n</th>
+                                                <th scope="col">Grupo</th>
+                                                <th scope="col">Creado</th>
+                                                <th scope="col">Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row"><a href="#">correo@test.com</a></th>
-                                                <td scope="row">Activo</td>
-                                                <td scope="row">Administrador</td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -810,15 +812,15 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: Users -->
+                        <!-- /Spaces: Users -->
 
-                        <!-- Organization: Roles -->
-                        <section class="section_organization_roles d-none">
+                        <!-- Spaces: Groups -->
+                        <section class="section_spaces_groups d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                     <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">Roles</span>
+                                        <span class="text-dark fw-bold">Grupos</span>
                                     </div>
                                 </header>
                                 <!-- /Card header -->
@@ -827,7 +829,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Nombre del Rol</th>
+                                                <th scope="col">Nombre del grupo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -841,10 +843,47 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: Roles -->
+                        <!-- /Spaces: Groups -->
+
+                        <!-- Spaces: Permissions -->
+                        <section class="section_spaces_permissions d-none">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Permisos</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Permiso en</th>
+                                                <th scope="col">Acci&oacute;n</th>
+                                                <th scope="col">Grupo</th>
+                                                <th scope="col">Creado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">Dashboards</td>
+                                                <td scope="row">Leer</td>
+                                                <td scope="row">Administrador</td>
+                                                <td scope="row">24/03/2024 12:23</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Spaces: Permissions -->
 
                     </section>
-                    <!-- /Organization section -->
+                    <!-- /Spaces section -->
 
                     <!-- Settings section -->
                     <section class="section_settings d-none">
@@ -967,7 +1006,7 @@
             <script src="../assets/js/events/start/forms.js"></script>
             <script src="../assets/js/events/start/dashboards.js"></script>
             <script src="../assets/js/events/start/reports.js"></script>
-            <script src="../assets/js/events/start/organization.js"></script>
+            <script src="../assets/js/events/start/spaces.js"></script>
 
         <!-- Javascript -->
     </body>
