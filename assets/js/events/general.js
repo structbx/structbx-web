@@ -1,60 +1,43 @@
 
 $(function ()
 {
-
-    // Client Signin
-        const ClientSignin = (e) =>
+    // Read current Space
+    const spaces_read_id = () =>
+    {
+        // Request
+        new wtools.Request(server_config.current.api + "/spaces/read/id").Exec_((response_data) =>
         {
-            e.preventDefault();
-            $('.login_container_message').html('');
-            let check = new FormChecker("#form_session_create").Check_();
-            if(!check)
-            {
-                new Notification('WARNING', 5000, '.login_container_message')
-                .Show_(`Hay campos inv&aacute;lidos`);
+            if(response_data.status != 200)
                 return;
-            }
-
-            const data = [{
-                "user": $('#form_session_create .user').val()
-                ,"password": $('#form_session_create .password').val()
-            }];
-
-            let button = new ElementState('#form_session_create button.confirm', true, 'button', new WaitAnimation().for_button);
-
-            new Login().CreateSession(data, result =>
-            {
-                if(result)
-                {
-                    button.Off_();
-                    new Notification('SUCCESS', -1, '.login_container_message')
-                    .Show_(`Sesi&oacute;n iniciada, espere...`);
-                    window.location.href = "../start/";
-                }
-                else
-                {
-                    button.Off_();
-                    new Notification('WARNING', 10000, '.login_container_message')
-                    .Show_(`Usuario o contrase&ntilde;a incorrectos.`);
-                }
-            });
-        }
-        $("#form_session_create").submit(ClientSignin);
-
-    // Client Logout
-        const ClientLogout = (e) =>
+            
+            $("#space_name").html(response_data.body.data[0].name);
+            console.log(response_data.body.data[0].name)
+        });
+    };
+    spaces_read_id();
+    
+    // Read spaces
+    const spaces_read = () =>
+    {
+        // Request
+        new wtools.Request(server_config.current.api + "/spaces/read").Exec_((response_data) =>
         {
-            e.preventDefault();
-            new Login().DeleteSession(result =>
+            if(response_data.status != 200)
+                return;
+            
+            // Results elements creator
+            $('#space_all_spaces').html('');
+
+            // Table
+            new wtools.UIElementsCreator('#space_all_spaces', response_data.body.data).Build_((row) =>
             {
-                if(result)
-                {
-                    new Notification('SUCCESS').Show_(`Cerrando sesi&oacute;n...`);
-                    window.location.href = "../login/";
-                }
-                else
-                    new Notification('ERROR').Show_(`Error al cerrar la sesi&oacute;n.`);
+                let elements = [
+                    `<a class="dropdown-item" href="#" space_id="${row.id}">${row.name}</a>`
+                ];
+
+                return new wtools.UIElementsPackage('<li></li>', elements).Pack_();
             });
-        }
-        $(".delete-session").click(ClientLogout);
+        });
+    };
+    spaces_read();
 });
