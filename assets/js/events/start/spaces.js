@@ -3,14 +3,14 @@ $(function()
     // General
     (function spaces_general()
     {
-        // Read spaces
-        const general_read = () =>
+        // Read current space
+        const spaces_read_id = () =>
         {
             // Wait animation
             let wait = new wtools.ElementState('#component_spaces_general .notifications', false, 'block', new wtools.WaitAnimation().for_block);
     
             // Request
-            new wtools.Request(server_config.current.api + "/spaces/general/read/id").Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + "/spaces/read/id").Exec_((response_data) =>
             {
                 if(response_data.status != 200)
                 {
@@ -27,12 +27,11 @@ $(function()
                 $('#component_spaces_general input[name="id"]').val(response_data.body.data[0].id);
                 $('#component_spaces_general input[name="name"]').val(response_data.body.data[0].name);
                 $('#component_spaces_general textarea[name="description"]').val(response_data.body.data[0].description);
-                $("strong.spaces_name").html(response_data.body.data[0].name);
     
                 wait.Off_();
             });
         };
-        general_read();
+        spaces_read_id();
     
         // Modify spaces
         $('#component_spaces_general form').submit((e) =>
@@ -134,7 +133,7 @@ $(function()
     (function spaces_users()
     {
         // Read
-        const general_read = () =>
+        const spaces_read_id = () =>
         {
             // Wait animation
             let wait = new wtools.ElementState('#component_spaces_users .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -196,6 +195,6 @@ $(function()
     
             });
         };
-        general_read();    
+        spaces_read_id();    
     })();
 });
