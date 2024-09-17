@@ -17,7 +17,14 @@ class Headers
                     <i class="fas fa-bars" style="color:#fff;"></i>
                 </button>
                 <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse">
-                    <strong class="organization_name text-white"></strong>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
+                            <a id="space_name" class="nav-link dropdown-toggle btn btn-ligth" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            </a>
+                            <ul id="space_all_spaces" class="dropdown-menu" aria-labelledby="space_name">
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div class="sidebar collapse navbar-collapse">
                     <div class="d-flex flex-row-reverse ms-auto">
@@ -56,6 +63,12 @@ class Headers
                                 <i class="fas fa-chevron-left me-2"></i>
                                 Inicio
                             </a>
+                        </li>
+                        <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
+                            <a id="space_name" class="nav-link dropdown-toggle btn btn-ligth" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            </a>
+                            <ul id="space_all_spaces" class="dropdown-menu" aria-labelledby="space_name">
+                            </ul>
                         </li>
                         <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
                             <a class="nav-link dropdown-toggle btn btn-ligth" href="#" id="form_selection" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,6 +120,12 @@ class Headers
                             </a>
                         </li>
                         <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
+                            <a id="space_name" class="nav-link dropdown-toggle btn btn-ligth" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            </a>
+                            <ul id="space_all_spaces" class="dropdown-menu" aria-labelledby="space_name">
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
                             <a class="nav-link dropdown-toggle btn btn-ligth" href="#" id="form_selection" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Inventario
                             </a>
@@ -114,6 +133,12 @@ class Headers
                                 <li><a class="dropdown-item" href="#">Inventario</a></li>
                                 <li><a class="dropdown-item" href="#">Form 2</a></li>
                             </ul>
+                        </li>
+                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
+                            <a class="nav-link btn btn-ligth" aria-current="page" href="../viewForm?id=1" target="_blank">
+                                Ver
+                                <i class="fas fa-chevron-right me-2"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
