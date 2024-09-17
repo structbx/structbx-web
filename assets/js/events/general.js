@@ -40,4 +40,42 @@ $(function ()
         });
     };
     spaces_read();
+
+    // Change current space
+    $(document).on("click", '#space_all_spaces a', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Data
+        let current_space = $('#space_name').html();
+        let new_space = $(e.target).html();
+
+        if(current_space == new_space)
+        {
+            new wtools.Notification('WARNING').Show_('Est&aacute;s en el espacio actual.');
+            return;
+        }
+
+        // Form data
+        const new_data = new FormData();
+        new_data.append("id_space", $(e.target).attr('space_id'));
+
+        // Read dashboard to modify
+        new wtools.Request(server_config.current.api + `/spaces/change`, "POST", new_data).Exec_((response_data) =>
+        {
+            if(response_data.status != 200)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se pudo cambiar el espacio actual.');
+                return;
+            }
+            
+            location.reload();
+
+            wait.Off_();
+        });
+    });
 });
