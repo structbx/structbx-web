@@ -31,9 +31,9 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
-                <a class="menu_organization nav-link mb-2" href="#organization" menu="organization">
+                <a class="menu_spaces nav-link mb-2" href="#spaces" menu="spaces">
                     <i class="fas fa-building"></i>
-                    <span class="ms-2">Organizaci&oacute;n</span>
+                    <span class="ms-2">Espacio</span>
                 </a>
             </div>
             <div class="nav-item">
@@ -91,7 +91,7 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
-                <a class="menu_form_design nav-link mb-2" href="#form_design" menu="form_design">
+                <a class="menu_interface_design nav-link mb-2" href="#interface_design" menu="interface_design">
                     <i class="fas fa-table"></i>
                     <span class="ms-2">Diseño</span>
                 </a>
