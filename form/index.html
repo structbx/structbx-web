@@ -100,13 +100,13 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_columns">
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_link">
-                                                    Enlazar columna de otro formulario
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_add">
+                                                    Crear nueva columna
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_add">
-                                                    Crear nueva columna
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_link">
+                                                    Enlazar formulario
                                                 </a>
                                             </li>
                                         </ul>
@@ -177,7 +177,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="columns_link_label">Enlazar columna de otro formulario</h5>
+                                        <h5 class="modal-title" id="columns_link_label">Enlazar formulario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -187,17 +187,8 @@
                                                     <th scope="row">Formulario</th>
                                                     <td>
                                                         <select class="form-select" name="">
-                                                            <option value="1">Agentes</option>
+                                                            <option value="1">Compras</option>
                                                             <option value="1">Ventas</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Columna a enlazar</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="1">Nombre</option>
-                                                            <option value="2">Edad</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -206,7 +197,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Enlazar columna</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Enlazar</button>
                                     </div>
                                 </div>
                             </div>
@@ -338,6 +329,7 @@
                                             <th scope="col">Descripci&oacute;n</th>
                                             <th scope="col">Categor&iacute;a</th>
                                             <th scope="col">Fecha de registro</th>
+                                            <th scope="col">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -347,7 +339,27 @@
                                             <td scope="row">24.99</td>
                                             <td scope="row">Arroz de la marca Mary</td>
                                             <td scope="row">Comida</td>
-                                            <td scope="row">03/02/2024 12:23 PM</td>
+                                            <td scope="row">03/02/2024 12:23 PM</td><td scope="row">
+                                                <div class="dropdown">
+                                                    <a
+                                                        class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                    >
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item modify" dashboard_id="${row.id}" dashboard_name="${row.name}">
+                                                                Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item delete" dashboard_id="${row.id}" dashboard_name="${row.name}">
+                                                                Eliminar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">325</th>
@@ -355,7 +367,27 @@
                                             <td scope="row">24.99</td>
                                             <td scope="row">Harina de maiz precocida marca PAN</td>
                                             <td scope="row">Comida</td>
-                                            <td scope="row">03/02/2024 04:23 PM</td>
+                                            <td scope="row">03/02/2024 04:23 PM</td><td scope="row">
+                                                <div class="dropdown">
+                                                    <a
+                                                        class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                    >
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item modify" dashboard_id="${row.id}" dashboard_name="${row.name}">
+                                                                Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item delete" dashboard_id="${row.id}" dashboard_name="${row.name}">
+                                                                Eliminar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -382,8 +414,21 @@
                                                     <td><input type="text" class="form-control" name=""/></td>
                                                 </tr>
                                                 <tr>
+                                                    <th scope="row">Precio</th>
+                                                    <td><input type="number" class="form-control" name=""/></td>
+                                                </tr>
+                                                <tr>
                                                     <th scope="row">Descripci&oacute;n</th>
                                                     <td><textarea class="form-control" name=""></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Categor&iacute;a</th>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option>Comida</option>
+                                                            <option>Bebida</option>
+                                                        </select>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Fecha de registro</th>
@@ -417,7 +462,10 @@
                                                     <td>
                                                         <select class="form-select" name="data_search_column">
                                                             <option value="1">Nombre</option>
-                                                            <option value="2">Ventas</option>
+                                                            <option value="2">Precio</option>
+                                                            <option value="2">Descripci&oacute;n</option>
+                                                            <option value="2">Categor&iacute;a</option>
+                                                            <option value="2">Fecha de registro</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -528,22 +576,22 @@
                     </section>
                     <!-- /Data section -->
 
-                    <!-- Form design section -->
-                    <section class="section_form_design d-none">
+                    <!-- Interface design section -->
+                    <section class="section_interface_design d-none">
                         <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Dise&ntilde;o del formulario de entrada de datos</h2>
+                            <h2 class="h2">Dise&ntilde;o de la interfaz de entrada de datos</h2>
                         </div>
 
                         <div class="row">
 
-                            <!-- Form design: Rows -->
+                            <!-- Interface design: Rows -->
                             <div class="col-12 col-md-8">
 
                                 <article class="card p-4 bg-white mb-4">
                                     <!-- Card header -->
                                     <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                         <div class="flex-grow-1 align-self-center">
-                                            <span class="text-dark fw-bold">Filas del formulario</span>
+                                            <span class="text-dark fw-bold">Filas y columnas</span>
                                         </div>
                                         <div class="p-2 bd-highlight">
                                             <div class="dropdown">
@@ -557,7 +605,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_general">
                                                     <li>
-                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#form_design_row_add">
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#interface_design_row_add">
                                                             Agregar fila
                                                         </a>
                                                     </li>
@@ -579,11 +627,15 @@
                                             <tbody>
                                                 <tr>
                                                     <th scope="row">1</th>
-                                                    <td scope="row">Ventas, Fecha de Venta</td>
+                                                    <td scope="row">Nombre, Fecha de compra</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">2</th>
-                                                    <td scope="row">Ingreso, Nombre</td>
+                                                    <td scope="row">Descripci&oacute;n</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td scope="row">Precio, Categor&iacute;a</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -592,13 +644,13 @@
                                     <!-- /Contents -->
                                     
                                 </article>
-                                <!-- /Form design: Rows -->
+                                <!-- /Interface design: Rows -->
     
                             </div>
 
                             <div class="col-12 col-md-4">
                                 
-                                <!-- Form design: Properties -->
+                                <!-- Interface design: Properties -->
                                 <article class="card p-4 bg-white mb-4">
                                     <!-- Card header -->
                                     <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -652,16 +704,16 @@
                                     <!-- /Contents -->
                                     
                                 </article>
-                                <!-- /Form design: Properties -->
+                                <!-- /Interface design: Properties -->
 
                             </div>
                         </div>
-                        <!-- Form design: Add row -->
-                        <div class="modal fade" id="form_design_row_add" tabindex="-1" aria-labelledby="form_design_row_add_label" aria-hidden="true">
+                        <!-- Interface design: Add row -->
+                        <div class="modal fade" id="interface_design_row_add" tabindex="-1" aria-labelledby="interface_design_row_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="form_design_row_add_label">Agregar fila</h5>
+                                        <h5 class="modal-title" id="interface_design_row_add_label">Agregar fila</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -670,7 +722,7 @@
                                                 <tr>
                                                     <th scope="row">Columna a agregar</th>
                                                     <td>
-                                                        <select class="form-select" name="form_design_row_add_form"/>
+                                                        <select class="form-select" name="interface_design_row_add_form"/>
                                                         <option value="1">Ingreso</option>
                                                         <option value="1">Ventas</option>
                                                         <option value="1">Fecha de venta</option>
@@ -708,34 +760,47 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Form design: Add row -->
+                        <!-- /Interface design: Add row -->
 
-                        <!-- Form design: Final form -->
-                        <div class="modal fade" id="form_design_final_form" tabindex="-1" aria-labelledby="form_design_final_form_label" aria-hidden="true">
+                        <!-- Interface design: Final form -->
+                        <div class="modal fade" id="interface_design_final_form" tabindex="-1" aria-labelledby="interface_design_final_form_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="form_design_final_form_label">Resultado de formulario</h5>
+                                        <h5 class="modal-title" id="interface_design_final_form_label">Inventario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
 
-                                        <h3>Registro de personal</h3>
-                                        <div class="mt-4">
+                                        <div class="mt-2">
                                             <div class="row">
                                                 <div class="col-12 col-md-6 mb-4">
-                                                    <label>Nombres</label>
+                                                    <label>Nombre</label>
                                                     <input type="text" class="form-control" name=""/>
                                                 </div>
                                                 <div class="col-12 col-md-6 mb-4">
-                                                    <label>Fecha de nacimiento</label>
+                                                    <label>Fecha de compra</label>
                                                     <input type="date" class="form-control" name=""/>
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-12 col-md-12 mb-4">
+                                                    <label>Descripci&oacute;n</label>
+                                                    <textarea class="form-control" name=""></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-12 col-md-6 mb-4">
-                                                    <label>C&eacute;dula</label>
-                                                    <input type="number" class="form-control" name=""/>
+                                                    <label>Precio</label>
+                                                    <input type="Number" class="form-control" name=""/>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <label>Categor&iacute;a</label>
+                                                    <select class="form-select" name="">
+                                                        <option value="">Carnes</option>
+                                                        <option value="">Hortalizas</option>
+                                                        <option value="">Snacks</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary">Guardar</button>
@@ -748,17 +813,17 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Form design: Final form -->
+                        <!-- /Interface design: Final form -->
 
                         <div class="mt-2">
-                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#form_design_final_form">
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#interface_design_final_form">
                                 Visualizar
                             </button>
                             <button class="btn btn-primary">Guardar cambios</button>
                         </div>
 
                     </section>
-                    <!-- /Form design section -->
+                    <!-- /Interface design section -->
 
                     <!-- History section -->
                     <section class="section_history d-none">
@@ -934,7 +999,7 @@
 
             <!-- Events -->
             <script src="../assets/js/events/general.js"></script>
-            <script src="../assets/js/events/form/general.js"></script>
+            <script src="../assets/js/events/form/form_general.js"></script>
 
         <!-- Javascript -->
     </body>
