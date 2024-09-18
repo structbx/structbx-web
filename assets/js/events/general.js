@@ -11,7 +11,6 @@ $(function ()
                 return;
             
             $("#space_name").html(response_data.body.data[0].name);
-            console.log(response_data.body.data[0].name)
         });
     };
     spaces_read_id();
@@ -55,7 +54,8 @@ $(function ()
 
         if(current_space == new_space)
         {
-            new wtools.Notification('WARNING').Show_('Est&aacute;s en el espacio actual.');
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('Elije un espacio diferente al actual.');
             return;
         }
 
@@ -78,4 +78,30 @@ $(function ()
             wait.Off_();
         });
     });
+
+    // Logout
+    $(document).on('click', '#logout-button', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/system/logout", "POST").Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Notifications
+            if(response_data.status == 200)
+            {
+                window.location.href = "/login/";
+            }
+            else
+            {
+                new wtools.Notification('WARNING').Show_('No se pudo cerrar la sesi&oacute;n.');
+            }
+        });
+    });
+        
 });
