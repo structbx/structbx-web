@@ -168,3 +168,21 @@ table tr .dropdown .dropdown-menu
     color:#333;
     text-decoration: none;
 }
+
+
+/* Drag and Drop elements */
+
+#component_interface_design_layout{
+    border: 1px dashed #42464e6c;
+    padding: .5cm;
+}
+
+.form-design-item {
+    cursor: pointer;
+    padding: .5cm;
+    border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.form-design-item:hover {
+    border: 1px dashed #42464e;
+}
