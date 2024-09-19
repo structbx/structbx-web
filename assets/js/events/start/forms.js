@@ -4,11 +4,19 @@ $(function()
     // SELECT options
     const options_states = new wtools.SelectOptions
     ([
-        new wtools.OptionValue("0", "Activo", true)
-        ,new wtools.OptionValue("1", "Inactivo")
+        new wtools.OptionValue("activo", "Activo", true)
+        ,new wtools.OptionValue("inactivo", "Inactivo")
     ]);
     options_states.Build_('#component_forms_add select[name="state"]');
     options_states.Build_('#component_forms_modify select[name="state"]');
+
+    const options_privacity = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("publico", "P&uacute;blico", true)
+        ,new wtools.OptionValue("interno", "Interno")
+    ]);
+    options_privacity.Build_('#component_forms_add select[name="privacity"]');
+    options_privacity.Build_('#component_forms_modify select[name="privacity"]');
 
     // Read
     const form_read = () =>
@@ -19,31 +27,44 @@ $(function()
         // Request
         new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
         {
-            // Error notification
+            // Clean
+            wait.Off_();
+            $('#component_forms_read .notifications').html('');
+            $('#component_forms_read table tbody').html('');
+
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 0, '#component_forms_read .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                return;
+            }
+
+            // Notification Error
             if(response_data.status != 200)
             {
-                wait.Off_();
-                $('#component_forms_read .notifications').html('');
                 new wtools.Notification('WARNING', 0, '#component_forms_read .notifications').Show_('No se pudo acceder a los formularios.');
                 return;
             }
 
+            // Handle no results or zero results
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('SUCCESS', 0, '#component_forms_read .notifications').Show_('Sin resultados.');
+                return;
+            }
+
             // Results elements creator
-            wait.Off_();
-            $('#component_forms_read .notifications').html('');
-            $('#component_forms_read table tbody').html('');
             new wtools.UIElementsCreator('#component_forms_read table tbody', response_data.body.data).Build_((row) =>
             {
                 let elements = [
                     `<th scope="row"><a class="text-dark" href="../form/?form=${row.identifier}">${row.identifier}</a></th>`
                     ,`<td scope="row">${row.name}</td>`
                     ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
+                    ,`<td scope="row">${options_privacity.ValueToOption_(row.privacity)}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                     ,`<td scope="row">
                         <div class="dropdown">
-                            <a
-                                class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                            >
+                            <a class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-ellipsis-h"></i>
                             </a>
                             <ul class="dropdown-menu">
@@ -92,6 +113,7 @@ $(function()
         data.append("identifier", $('#component_forms_add input[name="identifier"]').val());
         data.append("name", $('#component_forms_add input[name="name"]').val());
         data.append("state", $('#component_forms_add select[name="state"]').val());
+        data.append("privacity", $('#component_forms_add select[name="privacity"]').val());
         data.append("description", $('#component_forms_add textarea[name="description"]').val());
 
         // Request
@@ -147,6 +169,7 @@ $(function()
             $('#component_forms_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
             $('#component_forms_modify input[name="name"]').val(response_data.body.data[0].name);
             $('#component_forms_modify select[name="state"]').val(response_data.body.data[0].state);
+            $('#component_forms_modify select[name="privacity"]').val(response_data.body.data[0].privacity);
             $('#component_forms_modify textarea[name="description"]').val(response_data.body.data[0].description);
 
             wait.Off_();
@@ -178,6 +201,7 @@ $(function()
         new_data.append("identifier", $('#component_forms_modify input[name="identifier"]').val());
         new_data.append("name", $('#component_forms_modify input[name="name"]').val());
         new_data.append("state", $('#component_forms_modify select[name="state"]').val());
+        new_data.append("privacity", $('#component_forms_modify select[name="privacity"]').val());
         new_data.append("description", $('#component_forms_modify textarea[name="description"]').val());
 
         // Request
