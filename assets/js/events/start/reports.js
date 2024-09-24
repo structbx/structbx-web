@@ -4,17 +4,16 @@ $(function()
     // SELECT options
     const options_states = new wtools.SelectOptions
     ([
-        new wtools.OptionValue("0", "Activo", true)
-        ,new wtools.OptionValue("1", "Inactivo")
+        new wtools.OptionValue("activo", "Activo", true)
+        ,new wtools.OptionValue("inactivo", "Inactivo")
     ]);
     options_states.Build_('#component_reports_add select[name="state"]');
     options_states.Build_('#component_reports_modify select[name="state"]');
 
     const options_privacity = new wtools.SelectOptions
     ([
-        new wtools.OptionValue("0", "P&uacute;blico", true)
-        ,new wtools.OptionValue("1", "Privado")
-        ,new wtools.OptionValue("2", "S&oacute;lo yo")
+        new wtools.OptionValue("publico", "P&uacute;blico", true)
+        ,new wtools.OptionValue("interno", "Interno")
     ]);
     options_privacity.Build_('#component_reports_add select[name="privacity"]');
     options_privacity.Build_('#component_reports_modify select[name="privacity"]');
