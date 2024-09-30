@@ -66,4 +66,41 @@ $(function ()
         // Add class
         $(`#${element}`).addClass(`col-md-${new_size}`);
     });
+
+    // Read
+    const form_read = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('#form_name', false, 'button', new wtools.WaitAnimation().for_button);
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('form');
+
+        if(form_identifier == undefined)
+        {
+            window.location.href = "../start/#forms";
+            return;
+        }
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/read/identifier?identifier=${form_identifier}`).Exec_((response_data) =>
+        {
+            // Clean
+            wait.Off_();
+            $('#form_name').html('');
+
+            // Permissions error
+            if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                window.location.href = "../start/#forms";
+                return;
+            }
+                
+            $('#form_name').html(response_data.body.data[0].name);
+        });
+    };
+    form_read();
+    $('#component_forms_read .update').click(() => form_read());
+    
 });
