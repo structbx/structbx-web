@@ -2,7 +2,7 @@
 $(function ()
 {
     // Verify Session
-    /*let verify_session = () =>
+    let verify_session = () =>
     {
         // Wait animation
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
@@ -19,7 +19,7 @@ $(function ()
             wait.Off_();
         });
     };
-    verify_session();*/
+    verify_session();
 
     // Elements
         new Sidebars().SidebarMenuForm_();
