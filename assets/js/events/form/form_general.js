@@ -36,6 +36,8 @@ $(function ()
     {
         const element = e.currentTarget.id;
         $('#component_interface_design_item_design input[name="element"]').val(element);
+        $('#component_interface_design_item_design input[name="label"]').val(element);
+        $('#component_interface_design_item_design select[name="size"]').attr("disabled", false);
         for(let html_class of $(`#${element}`)[0].classList)
         {
             if(html_class == "col-md-12") $('#component_interface_design_item_design select[name="size"]').val("12");
