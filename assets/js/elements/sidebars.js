@@ -73,21 +73,15 @@ class Sidebars
         sidebar_menu.append($(`
             <h5 class="small text-uppercase text-muted">GENERAL</h5>
             <div class="nav-item">
-                <a class="menu_general nav-link mb-2 active" href="#general" menu="general">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span class="ms-2">General</span>
+                <a class="menu_data nav-link mb-2 active" href="#data" menu="data">
+                    <i class="fas fa-database"></i>
+                    <span class="ms-2">Data</span>
                 </a>
             </div>
             <div class="nav-item">
                 <a class="menu_columns nav-link mb-2 active" href="#columns" menu="columns">
                     <i class="fas fa-columns"></i>
                     <span class="ms-2">Columnas</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a class="menu_data nav-link mb-2 active" href="#data" menu="data">
-                    <i class="fas fa-database"></i>
-                    <span class="ms-2">Data</span>
                 </a>
             </div>
             <div class="nav-item">
