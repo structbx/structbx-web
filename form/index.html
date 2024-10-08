@@ -44,9 +44,19 @@
                                 <div class="flex-grow-1 align-self-center">
                                     <span class="text-dark fw-bold">Todos los registros</span>
                                 </div>
+                                <div class="p-2">
+                                    <button class="btn btn-dark-shadow add">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="p-2">
+                                    <button class="update btn btn-dark-shadow">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
-                                        <a class="btn btn-dark-static" data-bs-toggle="modal" data-bs-target="#data_filter">
+                                        <a class="btn btn-dark-shadow" data-bs-toggle="modal" data-bs-target="#component_data_filter">
                                             Filtros
                                         </a>
                                     </div>
@@ -54,7 +64,7 @@
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
                                         <button
-                                            class="btn btn-dark-static dropdown-toggle"
+                                            class="btn btn-dark-shadow dropdown-toggle"
                                             type="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
@@ -63,13 +73,13 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_add">
-                                                    Nuevo registro
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_data_import">
+                                                    Importar data
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#data_import_data">
-                                                    Importar data
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_data_group">
+                                                    Agrupar
                                                 </a>
                                             </li>
                                         </ul>
@@ -95,12 +105,60 @@
                         </article>
                         <!-- /Data: All data -->
 
-                        <!-- Data: Filter -->
-                        <div class="modal fade" id="data_filter" tabindex="-1" aria-labelledby="data_filter_label" aria-hidden="true">
+                        <!-- Data: Add -->
+                        <div class="modal fade" id="component_data_add" tabindex="-1" aria-labelledby="component_data_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="data_addfilter_label">Filtros</h5>
+                                        <h5 class="modal-title" id="component_data_add_label">Nuevo registro</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Nombre</th>
+                                                    <td><input type="text" class="form-control" name=""/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Precio</th>
+                                                    <td><input type="number" class="form-control" name=""/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Descripci&oacute;n</th>
+                                                    <td><textarea class="form-control" name=""></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Categor&iacute;a</th>
+                                                    <td>
+                                                        <select class="form-select" name="">
+                                                            <option>Comida</option>
+                                                            <option>Bebida</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Fecha de registro</th>
+                                                    <td><input type="date" class="form-control" name=""/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary">Agregar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Data: Add -->
+
+                        <!-- Data: Filter -->
+                        <div id="component_data_filter" class="modal fade" tabindex="-1" aria-labelledby="component_data_filter_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_data_filter_label">Filtros</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -173,60 +231,12 @@
                         </div>
                         <!-- /Data: Filter -->
 
-                        <!-- Data: Add -->
-                        <div class="modal fade" id="data_add" tabindex="-1" aria-labelledby="data_add_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <form class="modal-content" novalidate>
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="data_add_label">Nuevo registro</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Nombre</th>
-                                                    <td><input type="text" class="form-control" name=""/></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Precio</th>
-                                                    <td><input type="number" class="form-control" name=""/></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Descripci&oacute;n</th>
-                                                    <td><textarea class="form-control" name=""></textarea></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Categor&iacute;a</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option>Comida</option>
-                                                            <option>Bebida</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Fecha de registro</th>
-                                                    <td><input type="date" class="form-control" name=""/></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Agregar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /Data: Add -->
-
                         <!-- Data: Import data -->
-                        <div class="modal fade" id="data_import_data" tabindex="-1" aria-labelledby="data_import_data_label" aria-hidden="true">
+                        <div id="component_data_import" class="modal fade" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="data_import_data_label">Importar data</h5>
+                                        <h5 class="modal-title" id="component_data_import_label">Importar data</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -297,7 +307,7 @@
                         </div>
 
                         <!-- Columns: All columns -->
-                        <article class="card p-4 bg-white mb-4">
+                        <article id="component_columns_read" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
@@ -306,7 +316,7 @@
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
                                         <button
-                                            class="btn btn-dark-static dropdown-toggle"
+                                            class="btn btn-dark-shadow dropdown-toggle"
                                             type="button" id="dropdown_menu_options_data_columns"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
@@ -388,11 +398,11 @@
                         <!-- /Columns: All columns -->
 
                         <!-- Columns: Link -->
-                        <div class="modal fade" id="columns_link" tabindex="-1" aria-labelledby="columns_link_label" aria-hidden="true">
+                        <div id="component_columns_link" class="modal fade" tabindex="-1" aria-labelledby="component_columns_link_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="columns_link_label">Enlazar formulario</h5>
+                                        <h5 class="modal-title" id="component_columns_link_label">Enlazar formulario</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -420,11 +430,11 @@
                         <!-- /Columns: Link -->
 
                         <!-- Columns: Add -->
-                        <div class="modal fade" id="columns_add" tabindex="-1" aria-labelledby="columns_add_label" aria-hidden="true">
+                        <div id="component_columns_add" class="modal fade" tabindex="-1" aria-labelledby="component_columns_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="columns_add_label">A&ntilde;adir columna</h5>
+                                        <h5 class="modal-title" id="component_columns_add_label">A&ntilde;adir columna</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -433,7 +443,7 @@
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="columns_add_column_name" value="Nueva columna">
+                                                        <input type="text" class="form-control" name="name" value="Nueva columna">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -698,7 +708,7 @@
                         </div>
 
                         <!-- History: All changes -->
-                        <article class="card p-4 bg-white mb-4">
+                        <article id="component_history_read" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
@@ -740,7 +750,7 @@
                             <h2 class="h2">Papelera</h2>
 
                             <!-- Bin: All bin -->
-                            <article class="card p-4 bg-white mb-4">
+                            <article id="component_bin_read" class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                     <div class="flex-grow-1 align-self-center">
@@ -785,7 +795,7 @@
                         </div>
 
                         <!-- Settings: General -->
-                        <article class="card p-4 bg-white mb-4">
+                        <article id="component_settings_general" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                 <div class="flex-grow-1 align-self-center">
