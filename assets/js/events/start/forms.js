@@ -54,37 +54,68 @@ $(function()
             }
 
             // Results elements creator
-            new wtools.UIElementsCreator('#component_forms_read table tbody', response_data.body.data).Build_((row) =>
+            $('#component_forms_read .contents').html('');
+            let elements = []; let cont = 0;
+            for(let row of response_data.body.data)
             {
-                let elements = [
-                    `<th scope="row"><a class="text-dark" href="../form/?form=${row.identifier}">${row.identifier}</a></th>`
-                    ,`<td scope="row">${row.name}</td>`
-                    ,`<td scope="row">${options_states.ValueToOption_(row.state)}</td>`
-                    ,`<td scope="row">${options_privacity.ValueToOption_(row.privacity)}</td>`
-                    ,`<td scope="row">${row.created_at}</td>`
-                    ,`<td scope="row">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item modify" form_id="${row.id}" form_name="${row.name}">
-                                        Editar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item delete" form_id="${row.id}" form_name="${row.name}">
-                                        Eliminar
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>`
-                ];
-
-                return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
-            });
+                if(cont < 2)
+                {
+                    elements.push(`
+                        <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+							<div class="card flex-fill">
+								<div class="card-body py-4">
+									<div class="d-flex align-items-start">
+										<div class="flex-grow-1">
+											<h3 class="mb-2">
+                                                <a class="text-decoration-none text-dark" href="../form?identifier=${row.identifier}">
+                                                    ${row.name}
+                                                </a>
+                                            </h3>
+											<p class="mb-2 text-muted">Formulario</p>
+											<div class="mb-0">
+												<span class="badge bg-secondary me-2"> +10k de registros </span>
+											</div>
+										</div>
+										<div class="d-inline-block ms-3">
+											<div class="stat">
+                                                <div class="dropdown">
+                                                    <a class="text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item modify" form_id="${row.id}" form_name="${row.name}">
+                                                                Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item delete" form_id="${row.id}" form_name="${row.name}">
+                                                                Eliminar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>    
+                    `);
+                }
+                else
+                {
+                    let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                    $('#component_forms_read .contents').append(ui_element);
+                    cont = 0;
+                    elements = [];
+                }
+            }
+            if(elements.length > 0)
+            {
+                let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                $('#component_forms_read .contents').append(ui_element);
+            }
         });
     };
     form_read();
@@ -136,7 +167,7 @@ $(function()
     });
 
     // Read Form to Modify
-    $(document).on("click", '#component_forms_read table .modify', (e) =>
+    $(document).on("click", '#component_forms_read .contents .modify', (e) =>
     {
         e.preventDefault();
 
