@@ -90,8 +90,8 @@
                             <!-- Contents -->
                             <div class="mb-2 mt-4">
 
-                                <table class="table">
-                                    <thead>
+                                <table class="table table-hover table-bordered table-responsive">
+                                    <thead class="table-light text-center align-middle">
                                         <tr></tr>
                                     </thead>
                                     <tbody>
@@ -116,31 +116,6 @@
                                     <div class="modal-body">
                                         <table class="table">
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">Nombre</th>
-                                                    <td><input type="text" class="form-control" name=""/></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Precio</th>
-                                                    <td><input type="number" class="form-control" name=""/></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Descripci&oacute;n</th>
-                                                    <td><textarea class="form-control" name=""></textarea></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Categor&iacute;a</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option>Comida</option>
-                                                            <option>Bebida</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Fecha de registro</th>
-                                                    <td><input type="date" class="form-control" name=""/></td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -855,8 +830,20 @@
                 </main>
                 <!-- /Main content -->
 
+                <!-- Notifications -->
+                <div class="row">
+                    <div id="notifications" class="col-sm-4 position-fixed top-0 end-0 sticky-top p-2">
+                    </div>
+                </div>
+                <!-- Notifications -->
+        
             </div>
         </div>
+
+        <!-- Wait animation -->
+        <div id="wait_animation_page">
+        </div>
+        <!-- /Wait animation -->
 
         <!-- Javascript -->
             <!-- Libraries -->
@@ -873,6 +860,7 @@
             <script src="../assets/js/elements/headers.js"></script>
             <script src="../assets/js/elements/footers.js"></script>
             <script src="../assets/js/elements/sidebars.js"></script>
+            <script src="../assets/js/elements/form_elements.js"></script>
 
             <!-- Events -->
             <script src="../assets/js/events/general.js"></script>
