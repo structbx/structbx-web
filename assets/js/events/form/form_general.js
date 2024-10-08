@@ -69,7 +69,7 @@ $(function ()
         $(`#${element}`).addClass(`col-md-${new_size}`);
     });
 
-    // Read
+    // Read current Form
     const form_read = () =>
     {
         // Wait animation
@@ -77,7 +77,7 @@ $(function ()
 
         // Get Form identifier
         const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('form');
+        const form_identifier = url_params.get('identifier');
 
         if(form_identifier == undefined)
         {
