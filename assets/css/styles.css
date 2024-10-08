@@ -11,6 +11,9 @@
 {
     color:#eee063 !important;
 }
+.bg-primary{
+    background: #eee063 !important;
+}
 .bg-dark{
     background-color: #212529 !important;
 }
@@ -61,10 +64,13 @@
     background-color: #eee063;
     color:#333 !important;
 }
-.btn-dark-static{
+.btn-dark-shadow{
     background: none;
-    border-color:#333;
+    border-color:#818181;
     color:#333 !important;
+}
+.btn-dark-shadow:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 /* --- Tables --- */
 
