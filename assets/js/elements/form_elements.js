@@ -118,6 +118,65 @@ class FormElements
 
         return return_element;
     }
+    GetIcon_()
+    {
+        let return_element;
+        switch(this.element_type)
+        {
+            case "text":
+            {
+                return_element = '<i class="fas fa-font me-4 text-secondary"></i>';
+                break;
+            }
+            case "long-text":
+            {
+                return_element = '<i class="fas fa-text-height me-4 text-secondary"></i>';
+                break;
+            }
+            case "int-number":
+            {
+                return_element = '<i class="fas fa-sort-numeric-up me-4 text-secondary"></i>';
+                break;
+            }
+            case "decimal-number":
+            {
+                return_element = '<i class="fas fa-sort-numeric-up me-4 text-secondary"></i>';
+                break;
+            }
+            case "date":
+            {
+                return_element = '<i class="fas fa-calendar-alt me-4 text-secondary"></i>';
+                break;
+            }
+            case "time":
+            {
+                return_element = '<i class="fas fa-clock me-4 text-secondary"></i>';
+                break;
+            }
+            case "file":
+            {
+                return_element = '<i class="fas fa-file me-4 text-secondary"></i>';
+                break;
+            }
+            case "image":
+            {
+                return_element = '<i class="fas fa-image me-4 text-secondary"></i>';
+                break;
+            }
+            case "selection":
+            {
+                return_element = '<i class="fas fa-hand-pointer me-4 text-secondary"></i>';
+                break;
+            }
+            default:
+            {
+                return_element = '<i class="fas fa-font me-4 text-secondary"></i>';
+                break;
+            }
+        }
+
+        return return_element;
+    }
     Text_(identifier, maxlength, required, value)
     {
         return `
