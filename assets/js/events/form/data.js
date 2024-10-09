@@ -52,37 +52,18 @@ $(function()
                 {
                     elements.push(`<td scope="row">${row[column]}</td>`);
                 }
-                elements.push(
-                    `<td scope="row">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item modify" form_id="${row.id}" form_name="${row.name}">
-                                        Editar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item delete" form_id="${row.id}" form_name="${row.name}">
-                                        Eliminar
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>`
-                );
 
                 return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
             });
 
             // Results elements creator (Columns)
-            let keys = response_data.body.columns;
-            keys.push('Opciones');
+            let keys = response_data.body.columns_meta.data;
             new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
             {
-                return [`<th scope="col">${row}</th>`];
+                let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
+                let form_icon = form_element_object.GetIcon_();
+
+                return [`<th scope="col">${form_icon}${row.name}</th>`];
             });
             
         });
@@ -137,9 +118,9 @@ $(function()
                 // Results elements creator
                 new wtools.UIElementsCreator('#component_data_add table tbody', response_data.body.data).Build_((row) =>
                 {
-                    let ct = wtools.IFUndefined(row.column_type, "text");
-                    let fe = new FormElements(ct, row)
-                    let form_element = fe.Get_();
+                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
+                    let form_element = form_element_object.Get_();
+                    let form_icon = form_element_object.GetIcon_();
 
                     if(form_element == undefined)
                     {
@@ -148,7 +129,7 @@ $(function()
                     }
 
                     let elements = [
-                        `<th scope="row">${row.name}</th>`
+                        `<th scope="row">${form_icon}${row.name}</th>`
                         ,form_element
                     ];
 
