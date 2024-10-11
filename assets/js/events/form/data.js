@@ -1,7 +1,7 @@
 $(function()
 {
 
-    // Read
+    // Read records
     const data_read = () =>
     {
         // Wait animation
@@ -53,7 +53,7 @@ $(function()
                     elements.push(`<td scope="row">${row[column]}</td>`);
                 }
 
-                return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
+                return new wtools.UIElementsPackage(`<tr record-id="${row.ID}"></tr>`, elements).Pack_();
             });
 
             // Results elements creator (Columns)
@@ -86,7 +86,10 @@ $(function()
             const form_identifier = url_params.get('identifier');
 
             if(form_identifier == undefined)
+            {
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
                 return;
+            }
 
             // Setup form to modify
             $('#component_data_add table tbody').html('');
@@ -146,6 +149,71 @@ $(function()
             new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error: ${error}.`);
             return;
         }
+    });
+    
+    // Add record
+    $('#component_data_add form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_data_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_data_add .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_data_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+
+        if(form_identifier == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data collection
+        let new_data = new FormData($('#component_data_add form')[0]);
+        new_data.append('form-identifier', form_identifier);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/data/add", "POST", new_data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Registro guardado.');
+                $('#component_data_add').modal('hide');
+                data_read();
+            }
+
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 5000, '#component_data_add .notifications').Show_('No tiene permisos para guardar registros en este formulario.');
+                return;
+            }
+
+            // Notification Error
+            if(response_data.status != 200)
+            {
+                new wtools.Notification('WARNING', 5000, '#component_data_add .notifications').Show_('No se pudo guardar el nuevo registro.');
+                return;
+            }
+        });
+    });
+    
+    // Read columns to modify
+    $(document).on("click", '#component_data_read table tbody tr', (e) =>
+    {
+        $('#component_data_modify').modal('show');
     });
     
 });
