@@ -175,6 +175,7 @@ $(function()
 
         if(form_identifier == undefined)
         {
+            wait.Off_();
             new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
             return;
         }
@@ -210,10 +211,106 @@ $(function()
         });
     });
     
-    // Read columns to modify
+    // Read columns and data to modify
     $(document).on("click", '#component_data_read table tbody tr', (e) =>
     {
-        $('#component_data_modify').modal('show');
+        try
+        {
+            e.preventDefault();
+
+            // Wait animation
+            let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+            // Get Form identifier
+            const url_params = new URLSearchParams(window.location.search);
+            const form_identifier = url_params.get('identifier');
+            if(form_identifier == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+                return;
+            }
+
+            // Get Data ID
+            let data_id = $(e.currentTarget).attr('record-id');
+            if(data_id == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del registro.');
+                return;
+            }
+
+            // Setup form to modify
+            $('#component_data_modify table tbody').html('');
+            
+            // Read form to modify
+            new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${data_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+            {
+                // Permissions error
+                if(response_data.status == 401)
+                {
+                    new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
+                    return;
+                }
+
+                // Notification Error
+                if(response_data.status != 200)
+                {
+                    new wtools.Notification('WARNING').Show_('No se pudo acceder a la data de este formulario.');
+                    return;
+                }
+
+                // Handle no results or zero results
+                if(response_data.body.data == undefined || response_data.body.data.length < 1 || response_data.body.columns_meta.data < 1)
+                {
+                    new wtools.Notification('SUCCESS').Show_('Sin resultados.');
+                    return;
+                }
+
+                // Add values to columns_data
+                let data = response_data.body.columns_meta.data;
+                for(let it of data)
+                {
+                    it.value = response_data.body.data[0][it.name];
+                }
+
+                // Results elements creator
+                new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
+                {
+                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
+                    let form_element = form_element_object.Get_();
+                    let form_icon = form_element_object.GetIcon_();
+
+                    if(form_element == undefined)
+                    {
+                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de formulario.');
+                        return;
+                    }
+
+                    if(row.identifier == "id")
+                    {
+                        $('#component_data_modify input[name="id"]').val(data_id);
+                        return;
+                    }
+
+                    let elements = [
+                        `<th scope="row">${form_icon}${row.name}</th>`
+                        ,form_element
+                    ];
+
+                    return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
+                });
+
+                wait.Off_();
+                $('#component_data_modify').modal('show');
+            });
+
+        }
+        catch(error)
+        {
+            new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error: ${error}.`);
+            return;
+        }
     });
     
 });
