@@ -189,9 +189,7 @@ class FormElements
     {
         return `
             <td scope="row">
-                <textarea class="form-control" name="${identifier}" maxlength="${maxlength}" required="${required}">
-                    ${value}
-                </textarea>
+                <textarea class="form-control" name="${identifier}" maxlength="${maxlength}" required="${required}">${value}</textarea>
             </td>
         `;
     }
