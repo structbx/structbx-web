@@ -313,4 +313,64 @@ $(function()
         }
     });
     
+    // Modify record
+    $('#component_data_modify form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_data_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_data_modify .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_data_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data collection
+        let new_data = new FormData($('#component_data_modify form')[0]);
+        new_data.append('form-identifier', form_identifier);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/data/modify", "PUT", new_data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Registro Actualizado.');
+                $('#component_data_modify').modal('hide');
+                data_read();
+            }
+
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 5000, '#component_data_modify .notifications').Show_('No tiene permisos para modificar registros en este formulario.');
+                return;
+            }
+
+            // Notification Error
+            if(response_data.status != 200)
+            {
+                new wtools.Notification('WARNING', 5000, '#component_data_modify .notifications').Show_('No se pudo modificar el registro.');
+                return;
+            }
+        });
+    });
+    
 });
