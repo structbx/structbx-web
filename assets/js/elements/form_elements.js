@@ -211,6 +211,16 @@ class FormElements
     }
     Date_(identifier, required, value)
     {
+        if(value != undefined || value != "")
+        {
+            let date = new Date(value);
+            let day = ("0" + date.getDate()).slice(-2);
+            let month = ("0" + (date.getMonth() + 1)).slice(-2);
+            let today = date.getFullYear() + "-" + (month) + "-" + (day) ;
+            
+            value = today;
+        }
+
         return `
             <td scope="row">
                 <input class="form-control" type="date" name="${identifier}" required="${required}" value="${value}"/>
