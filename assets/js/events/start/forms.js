@@ -61,7 +61,7 @@ $(function()
                 if(cont < 2)
                 {
                     elements.push(`
-                        <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                        <div class="col-12 col-sm-6 col-xxl-3 d-flex mb-4">
 							<div class="card flex-fill">
 								<div class="card-body py-4">
 									<div class="d-flex align-items-start">
@@ -267,7 +267,6 @@ $(function()
         // Setup form to delete
         $('#component_forms_delete input[name=id]').val(form_id);
         $('#component_forms_delete strong.header').html(form_name);
-        $('#component_forms_delete strong.id').html(form_id);
         $('#component_forms_delete strong.name').html(form_name);
         $('#component_forms_delete').modal('show');
         wait.Off_();
