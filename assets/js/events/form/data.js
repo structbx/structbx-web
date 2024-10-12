@@ -372,5 +372,74 @@ $(function()
             }
         });
     });
+
+    // Read form to Delete
+    $('#component_data_modify .delete').click((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Data
+        let data = new FormData($('#component_data_modify form')[0]);
+        const data_id = data.get('id');
+
+        // Setup data to delete
+        $('#component_data_delete input[name=id]').val(data_id);
+        $('#component_data_delete strong.id').html(data_id);
+        $('#component_data_delete').modal('show');
+        wait.Off_();
+    });
+    
+    // Delete data
+    $('#component_data_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data
+        const data_id = $('#component_data_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/data/delete?id=${data_id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Registro eliminado.');
+                $('#component_data_delete').modal('hide');
+                $('#component_data_modify').modal('hide');
+                data_read();
+            }
+
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 5000, '#component_data_delete .notifications').Show_('No tiene permisos para eliminar registros en este formulario.');
+                return;
+            }
+
+            // Notification Error
+            if(response_data.status != 200)
+            {
+                new wtools.Notification('WARNING', 5000, '#component_data_delete .notifications').Show_('No se pudo eliminar el registro.');
+                return;
+            }
+        });
+    });
     
 });
