@@ -148,16 +148,38 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-danger me-auto">Borrar registro</button>
+                                        <button type="button" class="delete btn btn-danger me-auto">Borrar registro</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Guardar</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <!-- /Data: Add -->
+                        <!-- /Data: Modify -->
 
-                        <!-- Data: Modify -->
+                        <!-- Data: Delete -->
+                        <div class="modal fade" id="component_data_delete" tabindex="-1" aria-labelledby="component_data_delete_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_data_delete_label">Borrar registro</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>Seguro desea eliminar el registro ID #<strong class="id"></strong></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Data: Delete -->
+
+                        <!-- Data: Filter -->
                         <div id="component_data_filter" class="modal fade" tabindex="-1" aria-labelledby="component_data_filter_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
