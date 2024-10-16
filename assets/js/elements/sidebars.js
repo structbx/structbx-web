@@ -45,12 +45,6 @@ class Sidebars
                     <span class="ms-2">Columnas</span>
                 </a>
             </div>
-            <div class="nav-item">
-                <a class="menu_interface_design nav-link mb-2" href="#interface_design" menu="interface_design">
-                    <i class="fas fa-table"></i>
-                    <span class="ms-2">Diseño</span>
-                </a>
-            </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
             <div class="nav-item">
                 <a class="menu_history nav-link mb-2" href="#history" menu="history">
