@@ -59,6 +59,9 @@ class Headers
                 <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <span id="space_name" class="nav-link btn btn-ligth-static"></span>
+                        </li>
+                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
                             <a class="nav-link btn btn-ligth" aria-current="page" href="../start/">
                                 <i class="fas fa-chevron-left me-2"></i>
                                 Inicio
