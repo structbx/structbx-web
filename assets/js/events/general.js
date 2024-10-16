@@ -10,6 +10,13 @@ $(function ()
             if(response_data.status != 200)
                 return;
             
+            // Handle no results or zero results
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al espacio.');
+                return;
+            }
+            
             $("#space_name").html(response_data.body.data[0].name);
         });
     };
