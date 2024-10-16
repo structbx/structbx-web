@@ -60,6 +60,11 @@
     border-color:#fff;
     color:#fff !important;
 }
+.btn-ligth-static{
+    background: none;
+    border-color:#fff;
+    color:#fff !important;
+}
 .btn-ligth:hover{
     background-color: #eee063;
     color:#333 !important;
