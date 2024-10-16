@@ -73,7 +73,7 @@ $(function()
                                             </h3>
 											<p class="mb-2 text-muted">Formulario</p>
 											<div class="mb-0">
-												<span class="badge bg-secondary me-2"> +10k de registros </span>
+												<span class="badge bg-secondary me-2">${row.total} registros</span>
 											</div>
 										</div>
 										<div class="d-inline-block ms-3">
@@ -152,16 +152,33 @@ $(function()
         {
             wait.Off_();
 
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 0, '#component_forms_add .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                return;
+            }
+
+            // Notification Error
+            if(response_data.status != 200)
+            {
+                new wtools.Notification('WARNING', 0, '#component_forms_add .notifications').Show_('Hubo un error al crear el formulario.');
+                return;
+            }
+
+            // Handle no results or zero results
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('SUCCESS', 0, '#component_forms_add .notifications').Show_('Sin resultados.');
+                return;
+            }
+
             // Notifications
             if(response_data.status == 200)
             {
                 new wtools.Notification('SUCCESS').Show_('Formulario creado exitosamente.');
                 $('#component_forms_add').modal('hide');
                 form_read();
-            }
-            else
-            {
-                new wtools.Notification('ERROR', 0, '#component_forms_add .notifications').Show_('Hubo un error al crear el formulario: ' + response_data.body.message);
             }
         });
     });
@@ -197,6 +214,13 @@ $(function()
                 return;
             }
             
+            // Handle no results or zero results
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al formulario.');
+                return;
+            }
+
             $('#component_forms_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
             $('#component_forms_modify input[name="name"]').val(response_data.body.data[0].name);
             $('#component_forms_modify select[name="state"]').val(response_data.body.data[0].state);
