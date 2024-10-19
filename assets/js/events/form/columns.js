@@ -92,7 +92,7 @@ $(function()
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
 
-                return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
+                return new wtools.UIElementsPackage(`<tr record-id="${row.id}"></tr>`, elements).Pack_();
             });
         });
     };
@@ -194,6 +194,79 @@ $(function()
                 columns_read();
             }
         });
+    });
+
+    // Read column to modify
+    $(document).on("click", '#component_columns_read table tbody tr', (e) =>
+    {
+        const read_modify = () => 
+        {
+            e.preventDefault();
+
+            // Wait animation
+            let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+            // Get Form identifier
+            const url_params = new URLSearchParams(window.location.search);
+            const form_identifier = url_params.get('identifier');
+            if(form_identifier == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+                return;
+            }
+
+            // Get Data ID
+            let data_id = $(e.currentTarget).attr('record-id');
+            if(data_id == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la columna.');
+                return;
+            }
+
+            // Setup form to modify
+            $('#component_data_modify table tbody').html('');
+            
+            // Read form to modify
+            new wtools.Request(server_config.current.api + `/forms/columns/read/id?id=${data_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+            {
+                // Permissions error
+                if(response_data.status == 401)
+                {
+                    new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
+                    return;
+                }
+
+                // Notification Error
+                if(response_data.status != 200)
+                {
+                    new wtools.Notification('WARNING').Show_('No se pudo acceder a las columnas de este formulario.');
+                    return;
+                }
+
+                // Handle no results or zero results
+                if(response_data.body.data == undefined || response_data.body.data.length < 1)
+                {
+                    new wtools.Notification('SUCCESS').Show_('Sin resultados.');
+                    return;
+                }
+
+                // Set data
+                $('#component_columns_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
+                $('#component_columns_modify input[name="name"]').val(response_data.body.data[0].name);
+                $('#component_columns_modify input[name="length"]').val(response_data.body.data[0].length);
+                $('#component_columns_modify select[name="required"]').val(response_data.body.data[0].required);
+                $('#component_columns_modify input[name="default_value"]').val(response_data.body.data[0].default_value);
+                $('#component_columns_modify textarea[name="description"]').val(response_data.body.data[0].description);
+                $('#component_columns_modify select[name="id_column_type"]').val(response_data.body.data[0].id_column_type);
+    
+                wait.Off_();
+                $('#component_columns_modify form').removeClass('was-validated');
+                $('#component_columns_modify').modal('show');
+            });
+        }
+        options_column_type_init(options_column_type, read_modify);
     });
     
 });
