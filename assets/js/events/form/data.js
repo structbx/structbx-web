@@ -100,6 +100,7 @@ $(function()
                 // Permissions error
                 if(response_data.status == 401)
                 {
+                    wait.Off_();
                     new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
                     return;
                 }
@@ -107,6 +108,7 @@ $(function()
                 // Notification Error
                 if(response_data.status != 200)
                 {
+                    wait.Off_();
                     new wtools.Notification('WARNING').Show_('No se pudo acceder a la data de este formulario.');
                     return;
                 }
@@ -114,7 +116,8 @@ $(function()
                 // Handle no results or zero results
                 if(response_data.body.data == undefined || response_data.body.data.length < 1)
                 {
-                    new wtools.Notification('SUCCESS').Show_('Sin resultados.');
+                    wait.Off_();
+                    new wtools.Notification('WARNING').Show_('Debe crear columnas para agregar registros.');
                     return;
                 }
                 
@@ -140,6 +143,7 @@ $(function()
                 });
 
                 wait.Off_();
+                $('#component_data_add form').removeClass('was-validated');
                 $('#component_data_add').modal('show');
             });
 
@@ -302,6 +306,7 @@ $(function()
                 });
 
                 wait.Off_();
+                $('#component_data_modify form').removeClass('was-validated');
                 $('#component_data_modify').modal('show');
             });
 
