@@ -166,13 +166,6 @@ $(function()
                 return;
             }
 
-            // Handle no results or zero results
-            if(response_data.body.data == undefined || response_data.body.data.length < 1)
-            {
-                new wtools.Notification('SUCCESS', 0, '#component_forms_add .notifications').Show_('Sin resultados.');
-                return;
-            }
-
             // Notifications
             if(response_data.status == 200)
             {
