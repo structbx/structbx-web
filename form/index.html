@@ -339,24 +339,34 @@
                                 <div class="flex-grow-1 align-self-center">
                                     <span class="text-dark fw-bold">Todas las columnas</span>
                                 </div>
+                                <div class="p-2">
+                                    <button class="btn btn-dark-shadow add">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="p-2">
+                                    <button class="update btn btn-dark-shadow">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
                                         <button
                                             class="btn btn-dark-shadow dropdown-toggle"
-                                            type="button" id="dropdown_menu_options_data_columns"
+                                            type="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
                                             <i class="fas fa-list"></i>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdown_menu_options_data_columns">
+                                        <ul class="dropdown-menu">
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_add">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_columns_add">
                                                     Crear nueva columna
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#columns_link">
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_columns_add">
                                                     Enlazar formulario
                                                 </a>
                                             </li>
@@ -368,60 +378,110 @@
                             <!-- Contents -->
                             <div class="mb-2 mt-4">
 
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Columna</th>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Obligatorio</th>
-                                            <th scope="col">Valor por defecto</th>
-                                            <th scope="col">Enlace</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Nombre</th>
-                                            <td scope="row">Texto</td>
-                                            <td scope="row">S&iacute;</td>
-                                            <td scope="row">Ninguno</td>
-                                            <td scope="row">No</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Precio</th>
-                                            <td scope="row">N&uacute;mero decimal</td>
-                                            <td scope="row">S&iacute;</td>
-                                            <td scope="row">Ninguno</td>
-                                            <td scope="row">No</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Descripci&oacute;n</th>
-                                            <td scope="row">Texto largo</td>
-                                            <td scope="row">No</td>
-                                            <td scope="row">Ninguno</td>
-                                            <td scope="row">No</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Categor&iacute;a</th>
-                                            <td scope="row">Selecci&oacute;n</td>
-                                            <td scope="row">S&iacute;</td>
-                                            <td scope="row">Ninguno</td>
-                                            <td scope="row">S&iacute;</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Fecha de compra</th>
-                                            <td scope="row">Fecha y hora</td>
-                                            <td scope="row">S&iacute;</td>
-                                            <td scope="row">Ninguno</td>
-                                            <td scope="row">No</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead class="table-light text-center align-middle text-nowrap">
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Columna</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Longitud</th>
+                                                <th scope="col">Obligatorio</th>
+                                                <th scope="col">Valor por defecto</th>
+                                                <th scope="col">Descripci&oacute;n</th>
+                                                <th scope="col">Fecha de creaci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="notifications"></div>
 
                             </div>
                             <!-- /Contents -->
                             
                         </article>
                         <!-- /Columns: All columns -->
+
+                        <!-- Columns: Add -->
+                        <div id="component_columns_add" class="modal fade" tabindex="-1" aria-labelledby="component_columns_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_columns_add_label">A&ntilde;adir columna</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Identificador de columna</th>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="identifier" value="nueva_columna">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Nombre de columna</th>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="name" value="Nueva columna">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Tipo</th>
+                                                    <td>
+                                                        <select class="form-select" name="id_column_type">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Obligatorio</th>
+                                                    <td>
+                                                        <select class="form-select" name="required">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Descripcion</th>
+                                                    <td>
+                                                        <textarea class="form-control" name="description"></textarea>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="my-2">
+                                            <a class="btn dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#component_columns_add_avanced" aria-expanded="false" aria-controls="component_columns_add_avanced">
+                                                Avanzado
+                                            </a>
+                                        </div>
+                                        <div class="collapse" id="component_columns_add_avanced">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Longitud</th>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="length">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Valor por defecto</th>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="default_value">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Crear columna</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Columns: Add -->
 
                         <!-- Columns: Link -->
                         <div id="component_columns_link" class="modal fade" tabindex="-1" aria-labelledby="component_columns_link_label" aria-hidden="true">
@@ -454,72 +514,6 @@
                             </div>
                         </div>
                         <!-- /Columns: Link -->
-
-                        <!-- Columns: Add -->
-                        <div id="component_columns_add" class="modal fade" tabindex="-1" aria-labelledby="component_columns_add_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="component_columns_add_label">A&ntilde;adir columna</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Nombre de columna</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="name" value="Nueva columna">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Tipo</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="1">Texto</option>
-                                                            <option value="1">Texto largo</option>
-                                                            <option value="1">N&uacute;mero entero</option>
-                                                            <option value="1">N&uacute;mero decimal</option>
-                                                            <option value="1">Fecha</option>
-                                                            <option value="1">Fecha y hora</option>
-                                                            <option value="1">Archivo</option>
-                                                            <option value="1">Selecci&oacute;n</option>
-                                                            <option value="1">Casillas de verificaci&oacute;n</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Obligatorio</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="1">S&iacute;</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Valor por defecto</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Descripcion</th>
-                                                    <td>
-                                                        <textarea class="form-control" name=""></textarea>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Crear columna</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Columns: Add -->
 
                     </section>
                     <!-- /Columns section -->
@@ -917,6 +911,7 @@
             <script src="../assets/js/events/general.js"></script>
             <script src="../assets/js/events/form/form_general.js"></script>
             <script src="../assets/js/events/form/data.js"></script>
+            <script src="../assets/js/events/form/columns.js"></script>
 
         <!-- Javascript -->
     </body>
