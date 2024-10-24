@@ -134,7 +134,7 @@ $(function()
         options_column_type_init(options_column_type, add);
     });
 
-    // Add
+    // Add Column
     $('#component_columns_add form').submit((e) =>
     {
         e.preventDefault();
@@ -192,6 +192,7 @@ $(function()
                 new wtools.Notification('SUCCESS').Show_('Columna creada exitosamente.');
                 $('#component_columns_add').modal('hide');
                 columns_read();
+                $('#component_data_read .update').click();
             }
         });
     });
@@ -346,6 +347,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Columna modificada exitosamente.');
             $('#component_columns_modify').modal('hide');
             columns_read();
+            $('#component_data_read .update').click();
         });
     });
     
@@ -400,6 +402,7 @@ $(function()
                 $('#component_columns_delete').modal('hide');
                 $('#component_columns_modify').modal('hide');
                 columns_read();
+                $('#component_data_read .update').click();
             }
 
             // Permissions error
