@@ -92,7 +92,7 @@ $(function()
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
 
-                return new wtools.UIElementsPackage(`<tr record-id="${row.id}"></tr>`, elements).Pack_();
+                return new wtools.UIElementsPackage(`<tr column-id="${row.id}"></tr>`, elements).Pack_();
             });
         });
     };
@@ -216,9 +216,9 @@ $(function()
                 return;
             }
 
-            // Get Data ID
-            let data_id = $(e.currentTarget).attr('record-id');
-            if(data_id == undefined)
+            // Get ID
+            let id = $(e.currentTarget).attr('column-id');
+            if(id == undefined)
             {
                 wait.Off_();
                 new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la columna.');
@@ -229,7 +229,7 @@ $(function()
             $('#component_data_modify table tbody').html('');
             
             // Read form to modify
-            new wtools.Request(server_config.current.api + `/forms/columns/read/id?id=${data_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/forms/columns/read/id?id=${id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
                 // Permissions error
                 if(response_data.status == 401)
@@ -346,6 +346,75 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Columna modificada exitosamente.');
             $('#component_columns_modify').modal('hide');
             columns_read();
+        });
+    });
+    
+    // Read column to Delete
+    $('#component_columns_modify .delete').click((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Data
+        let data = new FormData($('#component_columns_modify form')[0]);
+        const id = data.get('id');
+
+        // Setup data to delete
+        $('#component_columns_delete input[name=id]').val(id);
+        $('#component_columns_delete strong.id').html(id);
+        $('#component_columns_delete').modal('show');
+        wait.Off_();
+    });
+    
+    // Delete column
+    $('#component_columns_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_columns_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data
+        const id = $('#component_columns_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/columns/delete?id=${id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+            if(response_data.status == 200)
+            {
+                new wtools.Notification('SUCCESS').Show_('Columna eliminada.');
+                $('#component_columns_delete').modal('hide');
+                $('#component_columns_modify').modal('hide');
+                columns_read();
+            }
+
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 0, '#component_columns_delete .notifications').Show_('No tiene permisos para eliminar esta columna.');
+                return;
+            }
+
+            // Notification Error
+            if(response_data.status != 200)
+            {
+                new wtools.Notification('WARNING', 0, '#component_columns_delete .notifications').Show_('No se pudo eliminar la columna: ' + response_data.body.message);
+                return;
+            }
         });
     });
     
