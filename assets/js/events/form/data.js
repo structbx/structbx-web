@@ -95,7 +95,7 @@ $(function()
             $('#component_data_add table tbody').html('');
             
             // Read form to modify
-            new wtools.Request(server_config.current.api + `/forms/data/columns/read?identifier=${form_identifier}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/forms/columns/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
                 // Permissions error
                 if(response_data.status == 401)
@@ -124,6 +124,9 @@ $(function()
                 // Results elements creator
                 new wtools.UIElementsCreator('#component_data_add table tbody', response_data.body.data).Build_((row) =>
                 {
+                    if(row.identifier == "id")
+                        return undefined;
+
                     let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
                     let form_element = form_element_object.Get_();
                     let form_icon = form_element_object.GetIcon_();
