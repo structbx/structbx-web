@@ -69,7 +69,7 @@ $(function ()
         $(`#${element}`).addClass(`col-md-${new_size}`);
     });
 
-    // Read current Form
+    // Read Header Form
     const form_read = () =>
     {
         // Wait animation
@@ -98,11 +98,110 @@ $(function ()
                 window.location.href = "../start/#forms";
                 return;
             }
-                
-            $('#form_name').html(response_data.body.data[0].name);
+            
+            // Setup form name
+            const form = response_data.body.data[0].name;
+            if(form == undefined)
+                window.location.href = "../start/#forms";
+            else
+            {
+                $('#form_name').html(form);
+                $('#form_title').html(form);
+            }
         });
     };
     form_read();
     $('#component_forms_read .update').click(() => form_read());
+    
+    // Read all Header forms
+    const form_header_read_all = () =>
+    {
+        $('#component_title_change table tbody').html('');
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_title_change .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
+        {
+            // Clean
+            wait.Off_();
+            $('#component_title_change .notifications').html('');
+            $('#component_title_change table tbody').html('');
+
+            // Permissions error
+            if(response_data.status == 401)
+            {
+                new wtools.Notification('WARNING', 0, '#component_title_change .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                return;
+            }
+
+            // Notification Error
+            if(response_data.status != 200)
+            {
+                new wtools.Notification('WARNING', 0, '#component_title_change .notifications').Show_('No se pudo acceder a los formularios.');
+                return;
+            }
+
+            // Handle no results or zero results
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('SUCCESS', 0, '#component_title_change .notifications').Show_('Sin resultados.');
+                return;
+            }
+
+            // Results elements creator
+            $('#component_title_change .contents').html('');
+            let elements = []; let cont = 0;
+            for(let row of response_data.body.data)
+            {
+                if(cont < 2)
+                {
+                    elements.push(`
+                        <div class="col-12 col-sm-6 col-xxl-3 d-flex mb-4">
+                            <div class="card flex-fill">
+                                <div class="card-body py-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h3 class="mb-2">
+                                                <a class="text-decoration-none text-dark" href="../form?identifier=${row.identifier}">
+                                                    ${row.name}
+                                                </a>
+                                            </h3>
+                                            <p class="mb-2 text-muted">Formulario</p>
+                                            <div class="mb-0">
+                                                <span class="badge bg-secondary me-2">${row.total} registros</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    `);
+                }
+                else
+                {
+                    let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                    $('#component_title_change .contents').append(ui_element);
+                    cont = 0;
+                    elements = [];
+                }
+            }
+            if(elements.length > 0)
+            {
+                let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                $('#component_title_change .contents').append(ui_element);
+            }
+        });
+    };
+    form_header_read_all();
+    $('#component_forms_read .update').click(() => form_header_read_all());
+
+    // Click on change form
+    $('#form_name').click(() => 
+    {
+        form_header_read_all();
+        $('#component_title_change').modal('show');
+    });
     
 });
