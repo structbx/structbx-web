@@ -205,14 +205,14 @@ $(function()
             // Permissions error
             if(response_data.status == 401)
             {
-                new wtools.Notification('WARNING', 5000, '#component_data_add .notifications').Show_('No tiene permisos para guardar registros en este formulario.');
+                new wtools.Notification('WARNING', 0, '#component_data_add .notifications').Show_('No tiene permisos para guardar registros en este formulario.');
                 return;
             }
 
             // Notification Error
             if(response_data.status != 200)
             {
-                new wtools.Notification('WARNING', 5000, '#component_data_add .notifications').Show_('No se pudo guardar el nuevo registro.');
+                new wtools.Notification('WARNING', 0, '#component_data_add .notifications').Show_('No se pudo guardar el nuevo registro.');
                 return;
             }
         });
@@ -368,20 +368,20 @@ $(function()
             // Permissions error
             if(response_data.status == 401)
             {
-                new wtools.Notification('WARNING', 5000, '#component_data_modify .notifications').Show_('No tiene permisos para modificar registros en este formulario.');
+                new wtools.Notification('WARNING', 0, '#component_data_modify .notifications').Show_('No tiene permisos para modificar registros en este formulario.');
                 return;
             }
 
             // Notification Error
             if(response_data.status != 200)
             {
-                new wtools.Notification('WARNING', 5000, '#component_data_modify .notifications').Show_('No se pudo modificar el registro.');
+                new wtools.Notification('WARNING', 0, '#component_data_modify .notifications').Show_('No se pudo modificar el registro: ' + response_data.body.message);
                 return;
             }
         });
     });
 
-    // Read form to Delete
+    // Read record to Delete
     $('#component_data_modify .delete').click((e) =>
     {
         e.preventDefault();
@@ -400,7 +400,7 @@ $(function()
         wait.Off_();
     });
     
-    // Delete data
+    // Delete record
     $('#component_data_delete form').submit((e) =>
     {
         e.preventDefault();
@@ -437,14 +437,14 @@ $(function()
             // Permissions error
             if(response_data.status == 401)
             {
-                new wtools.Notification('WARNING', 5000, '#component_data_delete .notifications').Show_('No tiene permisos para eliminar registros en este formulario.');
+                new wtools.Notification('WARNING', 0, '#component_data_delete .notifications').Show_('No tiene permisos para eliminar registros en este formulario.');
                 return;
             }
 
             // Notification Error
             if(response_data.status != 200)
             {
-                new wtools.Notification('WARNING', 5000, '#component_data_delete .notifications').Show_('No se pudo eliminar el registro.');
+                new wtools.Notification('WARNING', 0, '#component_data_delete .notifications').Show_('No se pudo eliminar el registro: ' + response_data.body.message);
                 return;
             }
         });
