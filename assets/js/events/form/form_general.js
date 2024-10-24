@@ -111,7 +111,6 @@ $(function ()
         });
     };
     form_read();
-    $('#component_forms_read .update').click(() => form_read());
     
     // Read all Header forms
     const form_header_read_all = () =>
@@ -195,7 +194,6 @@ $(function ()
         });
     };
     form_header_read_all();
-    $('#component_forms_read .update').click(() => form_header_read_all());
 
     // Click on change form
     $('#form_name').click(() => 
