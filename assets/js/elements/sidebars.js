@@ -12,10 +12,17 @@ class Sidebars
                     <span class="ms-2">Formularios</span>
                 </a>
             </div>
+            <div class="nav-item ps-4">
+                <div class="ps-2"  style="border-left: 1px solid #DDD;">
+                    <a class="nav-link" href="#forms" menu="forms" data-bs-toggle="modal" data-bs-target="#component_forms_add">
+                        <span>Nuevo formulario</span>
+                    </a>
+                </div>
+            </div>
             <div class="nav-item">
                 <a class="menu_spaces nav-link mb-2" href="#spaces" menu="spaces">
                     <i class="fas fa-building"></i>
-                    <span class="ms-2">Espacio</span>
+                    <span class="ms-2">Espacios</span>
                 </a>
             </div>
             <div class="nav-item">
@@ -39,11 +46,37 @@ class Sidebars
                     <span class="ms-2">Data</span>
                 </a>
             </div>
+            <div class="nav-item ps-4">
+                <div class="ps-2"  style="border-left: 1px solid #DDD;">
+                    <a class="nav-link data_add" href="#data" menu="data">
+                        <span>Nuevo</span>
+                    </a>
+                    <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_filter">
+                        <span>Filtrar</span>
+                    </a>
+                    <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_import">
+                        <span>Importar</span>
+                    </a>
+                    <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_group">
+                        <span>Agrupar</span>
+                    </a>
+                </div>
+            </div>
             <div class="nav-item">
                 <a class="menu_columns nav-link mb-2 active" href="#columns" menu="columns">
                     <i class="fas fa-columns"></i>
                     <span class="ms-2">Columnas</span>
                 </a>
+            </div>
+            <div class="nav-item ps-4">
+                <div class="ps-2"  style="border-left: 1px solid #DDD;">
+                    <a class="nav-link mb-2" href="#columns" menu="columns" data-bs-toggle="modal" data-bs-target="#component_columns_add">
+                        <span>Nuevo</span>
+                    </a>
+                    <a class="nav-link mb-2" href="#columns" menu="columns" data-bs-toggle="modal" data-bs-target="#component_columns_link">
+                        <span>Enlazar</span>
+                    </a>
+                </div>
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
             <div class="nav-item">
