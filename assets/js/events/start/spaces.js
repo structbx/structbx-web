@@ -3,8 +3,63 @@ $(function()
     // General
     (function spaces_general()
     {
+
+        // Read spaces
+        const read_spaces = () =>
+        {
+            // Wait animation
+            let wait = new wtools.ElementState('#component_spaces_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+            // Request
+            new wtools.Request(server_config.current.api + `/spaces/read`).Exec_((response_data) =>
+            {
+                // Clean
+                wait.Off_();
+                $('#component_spaces_read .notifications').html('');
+                $('#component_spaces_read table tbody').html('');
+
+                // Permissions error
+                if(response_data.status == 401)
+                {
+                    new wtools.Notification('WARNING', 0, '#component_spaces_read .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                    return;
+                }
+
+                // Notification Error
+                if(response_data.status != 200)
+                {
+                    new wtools.Notification('WARNING', 0, '#component_spaces_read .notifications').Show_('No se pudo acceder a los espacios: ' + response_data.body.message);
+                    return;
+                }
+
+                // Handle no results or zero results
+                if(response_data.body.data == undefined || response_data.body.data.length < 1)
+                {
+                    new wtools.Notification('SUCCESS', 0, '#component_spaces_read .notifications').Show_('Sin resultados.');
+                    return;
+                }
+
+                // Results elements creator
+                wait.Off_();
+                $('#component_spaces_read .notifications').html('');
+                $('#component_spaces_read table tbody').html('');
+                new wtools.UIElementsCreator('#component_spaces_read table tbody', response_data.body.data).Build_((row) =>
+                {
+                    let elements = [
+                        `<th scope="row">${row.name}</th>`
+                        ,`<td scope="row">${row.description}</td>`
+                        ,`<td scope="row">${row.created_at}</td>`
+                    ];
+
+                    return new wtools.UIElementsPackage(`<tr space-id="${row.id}"></tr>`, elements).Pack_();
+                });
+            });
+        }
+        read_spaces();
+        $('#component_spaces_read .update').click(() => read_spaces());
+
         // Read current space
-        const spaces_read_id = () =>
+        /*const spaces_read_id = () =>
         {
             // Wait animation
             let wait = new wtools.ElementState('#component_spaces_general .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -76,7 +131,7 @@ $(function()
                     new wtools.Notification('ERROR', 0, '#component_spaces_general .notifications').Show_('Hubo un error al modificar la organizaci&oacute;n: ' + response_data.body.message);
                 }
             });
-        });
+        });*/
     })();
 
     // Logo
@@ -140,7 +195,7 @@ $(function()
     (function spaces_users()
     {
         // Read
-        const spaces_read_id = () =>
+        /*const spaces_read_id = () =>
         {
             // Wait animation
             let wait = new wtools.ElementState('#component_spaces_users .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -209,6 +264,6 @@ $(function()
     
             });
         };
-        spaces_read_id();    
+        spaces_read_id();    */
     })();
 });
