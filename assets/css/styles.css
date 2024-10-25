@@ -197,3 +197,10 @@ table tr .dropdown .dropdown-menu
 .form-design-item:hover {
     border: 1px dashed #42464e;
 }
+
+/* Modals elements */
+
+.modal-header{
+    background-color: #145da0 !important;
+    color: #fff !important;
+}
