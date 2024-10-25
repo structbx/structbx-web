@@ -193,7 +193,7 @@
                         <!-- Spaces: Nav -->
                         <ul class="nav_spaces nav nav-tabs mb-4">
                             <li class="nav-item">
-                                <a class="menu_spaces_general nav-link" href="#spaces" menu="spaces_general">General</a>
+                                <a class="menu_spaces_read nav-link" href="#spaces" menu="spaces_read">Mis espacios</a>
                             </li>
                             <li class="nav-item">
                                 <a class="menu_spaces_logo nav-link" href="#spaces" menu="spaces_logo">Logo</a>
@@ -210,42 +210,50 @@
                         </ul>
                         <!-- /Spaces: Nav -->
 
-                        <!-- Spaces: General -->
-                        <section id="component_spaces_general" class="section_spaces_general d-none">
+                        <!-- Spaces: Read -->
+                        <section id="component_spaces_read" class="section_spaces_read d-none">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                     <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">General</span>
+                                        <span class="text-dark fw-bold">Mis espacios</span>
+                                    </div>
+                                    <div class="p-2">
+                                        <button class="btn btn-dark-shadow add">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="p-2">
+                                        <button class="update btn btn-dark-shadow">
+                                            <i class="fas fa-sync"></i>
+                                        </button>
                                     </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
+                                    
                                     <div class="notifications"></div>
-                                    <form novalidate>
-                                        <table class="table">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-bordered">
+                                            <thead class="table-light text-center align-middle text-nowrap">
+                                                <tr>
+                                                    <th scope="col">Espacio</th>
+                                                    <th scope="col">Descripci&oacute;n</th>
+                                                    <th scope="col">Fecha de creaci&oacute;n</th>
+                                                </tr>
+                                            </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Nombre del espacio</td>
-                                                    <td><input class="form-control" type="text" name="name"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Descripci&oacute;n</td>
-                                                    <td><textarea class="form-control" type="text" name="description"></textarea></td>
-                                                </tr>
                                             </tbody>
                                         </table>
-                                        <div class="mt-2">
-                                            <button class="btn btn-primary" type="submit">Guardar</button>
-                                        </div>
-                                    </form>
+                                    </div>
+
                                 </div>
                                 <!-- /Contents -->
                                 
                             </article>
                         </section>
-                        <!-- /Spaces: General -->
+                        <!-- /Spaces: Read -->
 
                         <!-- Spaces: Logo -->
                         <section id="component_spaces_logo" class="section_spaces_logo d-none">
