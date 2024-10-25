@@ -72,7 +72,7 @@ $(function()
     $('#component_data_read .update').click(() => data_read());
     
     // Read Form Columns to Add new record
-    $(document).on("click", '#component_data_read .add', (e) =>
+    const read_form_columns_add = (e) =>
     {
         try
         {
@@ -156,7 +156,9 @@ $(function()
             new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error: ${error}.`);
             return;
         }
-    });
+    };
+    $('#component_data_read .add').click((e) => read_form_columns_add(e));
+    $('a.data_add').click((e) => read_form_columns_add(e));
     
     // Add record
     $('#component_data_add form').submit((e) =>
