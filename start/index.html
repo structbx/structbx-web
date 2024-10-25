@@ -91,14 +91,6 @@
                                                     <td><input class="form-control" type="text" name="name" required></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Estado</td>
-                                                    <td><select class="form-select" name="state" required></select></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Privacidad</td>
-                                                    <td><select class="form-select" name="privacity" required></select></td>
-                                                </tr>
-                                                <tr>
                                                     <td>Descripci&oacute;n</td>
                                                     <td><textarea class="form-control" type="text" name="description"></textarea></td>
                                                 </tr>
@@ -254,6 +246,42 @@
                             </article>
                         </section>
                         <!-- /Spaces: Read -->
+
+                        <!-- Spaces: Add -->
+                        <div class="modal fade" id="component_spaces_add" tabindex="-1" aria-labelledby="component_spaces_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Crear nuevo espacio</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Identificador</td>
+                                                    <td><input class="form-control" type="text" name="identifier" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td><input class="form-control" type="text" name="name" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Descripci&oacute;n</td>
+                                                    <td><textarea class="form-control" type="text" name="description"></textarea></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Crear</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Spaces: Add -->
 
                         <!-- Spaces: Logo -->
                         <section id="component_spaces_logo" class="section_spaces_logo d-none">
