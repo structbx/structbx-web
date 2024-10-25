@@ -1,11 +1,11 @@
 $(function()
 {
-    // General
-    (function spaces_general()
+    // My Spaces
+    (function spaces_my_spaces()
     {
 
         // Read spaces
-        const read_spaces = () =>
+        const spaces_read = () =>
         {
             // Wait animation
             let wait = new wtools.ElementState('#component_spaces_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -55,8 +55,63 @@ $(function()
                 });
             });
         }
-        read_spaces();
-        $('#component_spaces_read .update').click(() => read_spaces());
+        spaces_read();
+        $('#component_spaces_read .update').click(() => spaces_read());
+
+        // Click on Add Space button
+        $('#component_spaces_read .add').click(() => 
+        {
+            $('#component_spaces_add').modal('show');
+        });
+
+        // Add Space
+        $('#component_spaces_add form').submit((e) =>
+        {
+            e.preventDefault();
+
+            // Wait animation
+            let wait = new wtools.ElementState('#component_spaces_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+            // Form check
+            const check = new wtools.FormChecker(e.target).Check_();
+            if(!check)
+            {
+                $('#component_spaces_add .notifications').html('');
+                wait.Off_();
+                new wtools.Notification('WARNING', 5000, '#component_spaces_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+                return;
+            }
+
+            // Data collection
+            const data = new FormData($('#component_spaces_add form')[0]);
+
+            // Request
+            new wtools.Request(server_config.current.api + "/spaces/add", "POST", data, false).Exec_((response_data) =>
+            {
+                wait.Off_();
+
+                // Permissions error
+                if(response_data.status == 401)
+                {
+                    new wtools.Notification('WARNING', 0, '#component_spaces_add .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                    return;
+                }
+
+                // Notification Error
+                if(response_data.status != 200)
+                {
+                    new wtools.Notification('WARNING', 0, '#component_spaces_add .notifications').Show_('No se pudo crear el espacio: ' + response_data.body.message);
+                    return;
+                }
+
+                // Notifications
+                if(response_data.status == 200)
+                {
+                    new wtools.Notification('SUCCESS').Show_('Espacio creado exitosamente.');
+                    location.reload();
+                }
+            });
+        });
 
         // Read current space
         /*const spaces_read_id = () =>
