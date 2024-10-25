@@ -5,3 +5,7 @@
     margin: none;
     padding: none;
 }
+
+body{
+    --bs-body-font-size: .8rem !important;
+}
