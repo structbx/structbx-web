@@ -14,7 +14,7 @@ class Sidebars
             </div>
             <div class="nav-item ps-4">
                 <div class="ps-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link" href="#forms" menu="forms" data-bs-toggle="modal" data-bs-target="#component_forms_add">
+                    <a class="nav-link" href="#forms" menu="forms">
                         <span>Nuevo formulario</span>
                     </a>
                 </div>
@@ -29,6 +29,38 @@ class Sidebars
                 <a class="menu_settings nav-link mb-2" href="#settings" menu="settings">
                     <i class="fas fa-cog"></i>
                     <span class="ms-2">Configuraci&oacute;n</span>
+                </a>
+            </div>
+        `));
+
+        $(".sidebar_menu").append(sidebar_menu);
+    }
+    SidebarMenuSpace_ ()
+    {
+        let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
+        sidebar_menu.append($(`
+            <div class="nav-item">
+                <a class="menu_space nav-link mb-2" href="#space" menu="space">
+                    <i class="fas fa-building"></i>
+                    <span class="ms-2">Espacio</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_users nav-link mb-2" href="#users" menu="users">
+                    <i class="fas fa-users"></i>
+                    <span class="ms-2">Usuarios</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
+                    <i class="fas fa-layer-group"></i>
+                    <span class="ms-2">Grupos</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_permissions nav-link mb-2" href="#permissions" menu="permissions">
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="ms-2">Permisos</span>
                 </a>
             </div>
         `));
@@ -58,7 +90,7 @@ class Sidebars
                         <span>Importar</span>
                     </a>
                     <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_group">
-                        <span>Agrupar</span>
+                        <span>Ordenar</span>
                     </a>
                 </div>
             </div>
@@ -79,12 +111,6 @@ class Sidebars
                 </div>
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
-            <div class="nav-item">
-                <a class="menu_history nav-link mb-2" href="#history" menu="history">
-                    <i class="fas fa-history"></i>
-                    <span class="ms-2">Historial</span>
-                </a>
-            </div>
             <div class="nav-item">
                 <a class="menu_bin nav-link mb-2" href="#bin" menu="bin">
                     <i class="fas fa-trash"></i>
