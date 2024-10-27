@@ -46,7 +46,8 @@ $(function()
                 new wtools.UIElementsCreator('#component_spaces_read table tbody', response_data.body.data).Build_((row) =>
                 {
                     let elements = [
-                        `<th scope="row">${row.name}</th>`
+                        `<th scope="row"><a href="/space?identifier=${row.identifier}">${row.identifier}</a></th>`
+                        ,`<th scope="row">${row.name}</th>`
                         ,`<td scope="row">${row.description}</td>`
                         ,`<td scope="row">${row.created_at}</td>`
                     ];
@@ -113,6 +114,104 @@ $(function()
             });
         });
 
+        // Read space to modify
+        /*$(document).on("click", '#component_spaces_read table tbody tr', (e) =>
+        {
+            e.preventDefault();
+
+            // Wait animation
+            let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+            // Get ID
+            let id = $(e.currentTarget).attr('space-id');
+            if(id == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+                return;
+            }
+
+            // Read form to modify
+            new wtools.Request(server_config.current.api + `/spaces/read/id?id_space=${id}`).Exec_((response_data) =>
+            {
+                // Permissions error
+                if(response_data.status == 401)
+                {
+                    new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
+                    return;
+                }
+
+                // Notification Error
+                if(response_data.status != 200)
+                {
+                    new wtools.Notification('WARNING').Show_('No se pudo acceder a este espacio: ' + response_data.body.message);
+                    return;
+                }
+
+                // Handle no results or zero results
+                if(response_data.body.data == undefined || response_data.body.data.length < 1)
+                {
+                    new wtools.Notification('SUCCESS').Show_('Sin resultados.');
+                    return;
+                }
+
+                // Set data
+                $('#component_spaces_modify input[name="id"]').val(response_data.body.data[0].id);
+                $('#component_spaces_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
+                $('#component_spaces_modify input[name="name"]').val(response_data.body.data[0].name);
+                $('#component_spaces_modify textarea[name="description"]').val(response_data.body.data[0].description);
+    
+                wait.Off_();
+                $('#component_spaces_modify form').removeClass('was-validated');
+                $('#component_spaces_modify').modal('show');
+            });
+        });
+
+        // Modify space
+        $('#component_spaces_modify form').submit((e) =>
+        {
+            e.preventDefault();
+    
+            // Wait animation
+            let wait = new wtools.ElementState('#component_spaces_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+    
+            // Form check
+            const check = new wtools.FormChecker(e.target).Check_();
+            if(!check)
+            {
+                wait.Off_();
+                $('#component_spaces_modify .notifications').html('');
+                new wtools.Notification('WARNING', 5000, '#component_spaces_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
+                return;
+            }
+    
+            // Data collection
+            const new_data = new FormData($('#component_spaces_modify form')[0]);
+    
+            // Request
+            new wtools.Request(server_config.current.api + "/spaces/modify", "PUT", new_data, false).Exec_((response_data) =>
+            {
+                wait.Off_();
+    
+                // Permissions error
+                if(response_data.status == 401)
+                {
+                    new wtools.Notification('WARNING', 0, '#component_spaces_modify .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                    return;
+                }
+    
+                // Notification Error
+                if(response_data.status != 200)
+                {
+                    new wtools.Notification('WARNING', 0, '#component_spaces_modify .notifications').Show_('Hubo un error al modificar el espacio: ' + response_data.body.message);
+                    return;
+                }
+            
+                new wtools.Notification('SUCCESS').Show_('Espacio modificado exitosamente.');
+                location.reload();
+            });
+        });*/
+        
         // Read current space
         /*const spaces_read_id = () =>
         {
