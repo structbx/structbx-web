@@ -11,29 +11,29 @@ class ResponseManager
     }
     Verify_()
     {
-        if(response_data.status >= 200 && response_data.status < 300)
+        if(this.response.status >= 200 && this.response.status < 300)
         {
             return true;
         }
-        else if(response_data.status == 401)
+        else if(this.response.status == 401)
         {
             this.Warning_().Show_('No tiene permisos para acceder a este recurso.' + this.target);
             return false;
         }
-        if(response_data.status >= 500 && response_data.status < 600)
+        if(this.response.status >= 500 && this.response.status < 600)
         {
-            if(response_data != undefined && response_data.body != undefined && response_data.body.message != undefined)
+            if(this.response != undefined && this.response.body != undefined && this.response.body.message != undefined)
             {
-                const error_message = response_data.body.message;
+                const error_message = this.response.body.message;
                 this.Error_().Show_('Hubo un error con la comunicaci&oacute;n al servidor' + this.target + ': ' + error_message);
             }
             return false;
         }
         else
         {
-            if(response_data != undefined && response_data.body != undefined && response_data.body.message != undefined)
+            if(this.response != undefined && this.response.body != undefined && this.response.body.message != undefined)
             {
-                const error_message = response_data.body.message;
+                const error_message = this.response.body.message;
                 Warning_().Show_('Hubo un error al realizar la operaci&oacute;n' + this.target + ': ' + error_message);
             }
             return false;
