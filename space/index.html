@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>StructBI - Plataforma de gesti&oacute;n y an&aacute;lisis de datos</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/libraries/fontawesome-v5.9.0.min.css">
+
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <!-- /CSS files -->
+
+    </head>
+    <body id="structbi" class="position-relative">
+
+        <header class="main_header navbar navbar-dark navbar-expand-md navbar-light bg-dark text-white">
+        </header>
+
+        <div class="container-fluid container-xxl">
+            <div class="row">
+
+                <!--- Sidebar menu --->
+                <aside class="sidebar_menu sidebar col-md-3 col-lg-2 d-md-block bg-light collapse px-4">
+                </aside>
+                <!-- /Sidebar menu -->
+
+                <!-- Main content -->
+                <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
+
+                    <!-- Space section -->
+                    <section class="section_space d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Espacio</h2>
+                        </div>
+
+                        <!-- Space: Modify -->
+                        <section id="component_space_modify">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Mis espacios</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    
+                                    <div class="notifications"></div>
+                                    <form novalidate>
+                                        <input type="hidden" name="id" required>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Identificador de espacio</th>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="identifier">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Nombre del espacio</th>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="name">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Descripcion</th>
+                                                    <td>
+                                                        <textarea class="form-control" name="description"></textarea>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="mt-2">
+                                            <button type="button" class="delete btn btn-danger me-auto">Borrar espacio</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Space: Modify -->
+
+                    </section>
+                    <!-- /Space section -->
+
+                    <!-- Users section -->
+                    <section class="section_users d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Usuarios</h2>
+                        </div>
+
+                        <!-- Spaces: Users -->
+                        <section id="component_users_read">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Usuarios</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    <div class="notifications"></div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Usuario</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Organizaci&oacute;n</th>
+                                                <th scope="col">Grupo</th>
+                                                <th scope="col">Creado</th>
+                                                <th scope="col">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Spaces: Users -->
+
+                    </section>
+                    <!-- /Users section -->
+
+                    <!-- Groups section -->
+                    <section class="section_groups d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Grupos</h2>
+                        </div>
+
+                        <!-- Spaces: Groups -->
+                        <section id="component_groups_read">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Grupos</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre del grupo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">Administrador</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Spaces: Groups -->
+
+                    </section>
+                    <!-- /Groups section -->
+
+                    <!-- Permissions section -->
+                    <section class="section_permissions d-none">
+                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="h2">Permisos</h2>
+                        </div>
+
+                        <!-- Spaces: Permissions -->
+                        <section id="component_permissions_read">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Permisos</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Permiso en</th>
+                                                <th scope="col">Acci&oacute;n</th>
+                                                <th scope="col">Grupo</th>
+                                                <th scope="col">Creado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">Dashboards</td>
+                                                <td scope="row">Leer</td>
+                                                <td scope="row">Administrador</td>
+                                                <td scope="row">24/03/2024 12:23</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
+                        <!-- /Spaces: Permissions -->
+
+                    </section>
+                    <!-- /Permissions section -->
+
+                    <!-- Footer -->
+                    <footer class="main_footer container">
+                    </footer>
+                    <!-- /Footer -->
+                    
+                </main>
+                <!-- /Main content -->
+
+                <!-- Notifications -->
+                <div class="row">
+                    <div id="notifications" class="col-sm-4 position-fixed top-0 end-0 sticky-top p-2">
+                    </div>
+                </div>
+                <!-- Notifications -->
+        
+            </div>
+        </div>
+
+        <!-- Wait animation -->
+        <div id="wait_animation_page">
+        </div>
+        <!-- /Wait animation -->
+
+        <!-- Javascript -->
+            <!-- Libraries -->
+            <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+            <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="../assets/js/libraries/wtools/wtools.js"></script>
+
+            <!-- General -->
+            <script src="../assets/js/main.js"></script>
+
+            <!-- Elements -->
+            <script src="../assets/js/elements/headers.js"></script>
+            <script src="../assets/js/elements/footers.js"></script>
+            <script src="../assets/js/elements/sidebars.js"></script>
+
+            <!-- Events -->
+            <script src="../assets/js/events/general.js"></script>
+            <script src="../assets/js/events/space/space_general.js"></script>
+
+        <!-- Javascript -->
+    </body>
+</html>
