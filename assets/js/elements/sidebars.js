@@ -14,7 +14,7 @@ class Sidebars
             </div>
             <div class="nav-item ps-4">
                 <div class="ps-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link" href="#forms" menu="forms">
+                    <a class="nav-link form_add" href="#forms" menu="forms">
                         <span>Nuevo formulario</span>
                     </a>
                 </div>
