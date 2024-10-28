@@ -32,7 +32,7 @@ $(function()
             $('#component_forms_read .notifications').html('');
             $('#component_forms_read .contents').html('');
 
-            // Manage error
+            // Manage response
             const result = new ResponseManager(response_data, '#component_forms_read .notifications', 'Formularios: Leer');
             if(!result.Verify_())
                 return;
@@ -64,27 +64,6 @@ $(function()
 											<p class="mb-2 text-muted">Formulario</p>
 											<div class="mb-0">
 												<span class="badge bg-secondary me-2">${row.total} registros</span>
-											</div>
-										</div>
-										<div class="d-inline-block ms-3">
-											<div class="stat">
-                                                <div class="dropdown">
-                                                    <a class="text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-h"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item modify" form_id="${row.id}" form_name="${row.name}">
-                                                                Editar
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item delete" form_id="${row.id}" form_name="${row.name}">
-                                                                Eliminar
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
 											</div>
 										</div>
 									</div>
@@ -155,136 +134,6 @@ $(function()
             $('#component_forms_add').modal('hide');
             wtools.CleanForm('#component_forms_add form');
             form_read();
-        });
-    });
-
-    // Read Form to Modify
-    $(document).on("click", '#component_forms_read .contents .modify', (e) =>
-    {
-        e.preventDefault();
-
-        // Wait animation
-        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-
-        // Form data
-        const form_id = $(e.target).attr('form_id');
-        const form_name = $(e.target).attr('form_name');
-
-        // Setup form to modify
-        $('#component_forms_modify input[name="id"]').val(form_id);
-        $('#component_forms_modify .modal-title strong.header').html(form_name);
-        
-        // Read form to modify
-        new wtools.Request(server_config.current.api + `/forms/read/id?id=${form_id}`).Exec_((response_data) =>
-        {
-            $('#component_forms_modify .notifications').html('');
-
-            // Manage error
-            const result = new ResponseManager(response_data, '#component_forms_modify .notifications', 'Formularios: Editar');
-            if(!result.Verify_())
-                return;
-
-            // Handle no results or zero results
-            if(response_data.body.data.length < 1)
-            {
-                new wtools.Notification('WARNING').Show_('Parece que el formulario no existe.');
-                return;
-            }
-
-            $('#component_forms_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
-            $('#component_forms_modify input[name="name"]').val(response_data.body.data[0].name);
-            $('#component_forms_modify select[name="state"]').val(response_data.body.data[0].state);
-            $('#component_forms_modify select[name="privacity"]').val(response_data.body.data[0].privacity);
-            $('#component_forms_modify textarea[name="description"]').val(response_data.body.data[0].description);
-
-            wait.Off_();
-            $('#component_forms_modify').modal('show');
-        });
-    });
-
-    // Modify form
-    $('#component_forms_modify form').submit((e) =>
-    {
-        e.preventDefault();
-
-        // Wait animation
-        let wait = new wtools.ElementState('#component_forms_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
-
-        // Form check
-        const check = new wtools.FormChecker(e.target).Check_();
-        if(!check)
-        {
-            wait.Off_();
-            $('#component_forms_modify .notifications').html('');
-            new wtools.Notification('WARNING', 5000, '#component_forms_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
-            return;
-        }
-
-        // Data collection
-        const data = new FormData($('#component_forms_modify form')[0]);
-
-        // Request
-        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", data, false).Exec_((response_data) =>
-        {
-            wait.Off_();
-            
-            // Manage error
-            const result = new ResponseManager(response_data, '#component_forms_modify .notifications', 'Formularios: Editar');
-            if(!result.Verify_())
-                return;
-
-            new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
-            $('#component_forms_modify').modal('hide');
-            wtools.CleanForm('#component_forms_modify form')
-            form_read();
-        });
-    });
-
-    // Read form to Delete
-    $(document).on("click", '#component_forms_read .delete', (e) =>
-    {
-        e.preventDefault();
-
-        // Wait animation
-        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-
-        // Form data
-        const form_id = $(e.target).attr('form_id');
-        const form_name = $(e.target).attr('form_name');
-
-        // Setup form to delete
-        $('#component_forms_delete input[name=id]').val(form_id);
-        $('#component_forms_delete strong.header').html(form_name);
-        $('#component_forms_delete strong.name').html(form_name);
-        $('#component_forms_add .notifications').html('');
-        $('#component_forms_delete').modal('show');
-        wait.Off_();
-    });
-
-    // Delete form
-    $('#component_forms_delete form').submit((e) =>
-    {
-        e.preventDefault();
-
-        // Wait animation
-        let wait = new wtools.ElementState('#component_forms_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
-
-        // Data
-        const form_id = $('#component_forms_delete input[name=id]').val();
-
-        // Request
-        new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
-        {
-            wait.Off_();
-
-            // Manage error
-            const result = new ResponseManager(response_data, '#component_forms_delete .notifications', 'Formularios: Eliminar');
-            if(!result.Verify_())
-                return;
-
-            form_read();
-            new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
-            $('#component_forms_delete').modal('hide');
         });
     });
 });
