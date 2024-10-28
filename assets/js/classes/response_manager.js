@@ -34,7 +34,7 @@ class ResponseManager
             if(this.response != undefined && this.response.body != undefined && this.response.body.message != undefined)
             {
                 const error_message = this.response.body.message;
-                Warning_().Show_('Hubo un error al realizar la operaci&oacute;n' + this.target + ': ' + error_message);
+                this.Warning_().Show_('Hubo un error al realizar la operaci&oacute;n' + this.target + ': ' + error_message);
             }
             return false;
         }
@@ -42,15 +42,15 @@ class ResponseManager
     Warning_()
     {
         if(this.component == '')
-            return wtools.Notification('WARNING');
+            return new wtools.Notification('WARNING');
         else
-        return wtools.Notification('WARNING', 0, this.component);
+            return new wtools.Notification('WARNING', 0, this.component);
     }
     Error_()
     {
         if(this.component == '')
-            return wtools.Notification('ERROR');
+            return new wtools.Notification('ERROR');
         else
-        return wtools.Notification('ERROR', 0, this.component);
+            return new wtools.Notification('ERROR', 0, this.component);
     }
 }
