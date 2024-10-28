@@ -15,7 +15,7 @@ $(function()
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read?identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
