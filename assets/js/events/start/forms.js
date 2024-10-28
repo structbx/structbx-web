@@ -30,29 +30,19 @@ $(function()
             // Clean
             wait.Off_();
             $('#component_forms_read .notifications').html('');
-            $('#component_forms_read table tbody').html('');
+            $('#component_forms_read .contents').html('');
 
-            // Permissions error
-            if(response_data.status == 401)
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_forms_read .notifications', 'Formularios: Leer');
+            if(!result.Verify_())
+                return;
+
+            if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING', 0, '#component_forms_read .notifications').Show_('No tiene permisos para acceder a este recurso.');
+                new wtools.Notification('SUCCESS', 5000, '#component_forms_read .notifications').Show_('Sin resultados.');
                 return;
             }
-
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_forms_read .notifications').Show_('No se pudo acceder a los formularios.');
-                return;
-            }
-
-            // Handle no results or zero results
-            if(response_data.body.data == undefined || response_data.body.data.length < 1)
-            {
-                new wtools.Notification('SUCCESS', 0, '#component_forms_read .notifications').Show_('Sin resultados.');
-                return;
-            }
-
+            
             // Results elements creator
             $('#component_forms_read .contents').html('');
             let elements = []; let cont = 0;
@@ -121,6 +111,15 @@ $(function()
     form_read();
     $('#component_forms_read .update').click(() => form_read());
     
+    // Click on Add Button
+    const click_add_button = () =>
+    {
+        $('#component_forms_add .notifications').html('');
+        $('#component_forms_add').modal('show');
+    }
+    $('#component_forms_read .add').click(() => click_add_button());
+    $('a.form_add').click(() => click_add_button());
+
     // Add
     $('#component_forms_add form').submit((e) =>
     {
@@ -140,39 +139,22 @@ $(function()
         }
 
         // Data collection
-        const data = new FormData();
-        data.append("identifier", $('#component_forms_add input[name="identifier"]').val());
-        data.append("name", $('#component_forms_add input[name="name"]').val());
-        data.append("state", $('#component_forms_add select[name="state"]').val());
-        data.append("privacity", $('#component_forms_add select[name="privacity"]').val());
-        data.append("description", $('#component_forms_add textarea[name="description"]').val());
+        const data = new FormData($('#component_forms_add form')[0]);
 
         // Request
         new wtools.Request(server_config.current.api + "/forms/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_forms_add .notifications').Show_('No tiene permisos para acceder a este recurso.');
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_forms_add .notifications', 'Formularios: A&ntilde;adir');
+            if(!result.Verify_())
                 return;
-            }
-
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_forms_add .notifications').Show_('Hubo un error al crear el formulario.');
-                return;
-            }
-
-            // Notifications
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Formulario creado exitosamente.');
-                $('#component_forms_add').modal('hide');
-                form_read();
-            }
+            
+            new wtools.Notification('SUCCESS').Show_('Formulario creado exitosamente.');
+            $('#component_forms_add').modal('hide');
+            wtools.CleanForm('#component_forms_add form');
+            form_read();
         });
     });
 
@@ -195,22 +177,17 @@ $(function()
         // Read form to modify
         new wtools.Request(server_config.current.api + `/forms/read/id?id=${form_id}`).Exec_((response_data) =>
         {
-            if(response_data.status != 200)
-            {
-                $(':input','#component_forms_modify form')
-                    .not(':button, :submit, :reset, :hidden')
-                    .val('')
-                    .prop('checked', false)
-                    .prop('selected', false);
-                wait.Off_();
-                new wtools.Notification('WARNING').Show_('No se pudo acceder al formulario.');
+            $('#component_forms_modify .notifications').html('');
+
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_forms_modify .notifications', 'Formularios: Editar');
+            if(!result.Verify_())
                 return;
-            }
-            
+
             // Handle no results or zero results
-            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING').Show_('No se pudo acceder al formulario.');
+                new wtools.Notification('WARNING').Show_('Parece que el formulario no existe.');
                 return;
             }
 
@@ -244,28 +221,22 @@ $(function()
         }
 
         // Data collection
-        const new_data = new FormData();
-        new_data.append("id", $('#component_forms_modify input[name="id"]').val());
-        new_data.append("identifier", $('#component_forms_modify input[name="identifier"]').val());
-        new_data.append("name", $('#component_forms_modify input[name="name"]').val());
-        new_data.append("state", $('#component_forms_modify select[name="state"]').val());
-        new_data.append("privacity", $('#component_forms_modify select[name="privacity"]').val());
-        new_data.append("description", $('#component_forms_modify textarea[name="description"]').val());
+        const data = new FormData($('#component_forms_modify form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", new_data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
-                $('#component_forms_modify').modal('hide');
-                form_read();
-            }
-            else
-            {
-                new wtools.Notification('ERROR', 0, '#component_forms_modify .notifications').Show_('Hubo un error al modificar el formulario: ' + response_data.body.message);
-            }
+            
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_forms_modify .notifications', 'Formularios: Editar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Formulario modificado exitosamente.');
+            $('#component_forms_modify').modal('hide');
+            wtools.CleanForm('#component_forms_modify form')
+            form_read();
         });
     });
 
@@ -285,6 +256,7 @@ $(function()
         $('#component_forms_delete input[name=id]').val(form_id);
         $('#component_forms_delete strong.header').html(form_name);
         $('#component_forms_delete strong.name').html(form_name);
+        $('#component_forms_add .notifications').html('');
         $('#component_forms_delete').modal('show');
         wait.Off_();
     });
@@ -305,16 +277,14 @@ $(function()
         {
             wait.Off_();
 
-            if(response_data.status == 200)
-            {
-                form_read();
-                new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
-                $('#component_forms_delete').modal('hide');
-            }
-            else
-            {
-                new wtools.Notification('ERROR', 0, '#component_forms_delete .notifications').Show_('Hubo un error al eliminar el formulario: ' + response_data.body.message);
-            }
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_forms_delete .notifications', 'Formularios: Eliminar');
+            if(!result.Verify_())
+                return;
+
+            form_read();
+            new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
+            $('#component_forms_delete').modal('hide');
         });
     });
 });
