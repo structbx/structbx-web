@@ -108,7 +108,7 @@ class Headers
                                 Inicio
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
                             <span id="space_name" class="nav-link btn btn-ligth-static"></span>
                         </li>
                         <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
