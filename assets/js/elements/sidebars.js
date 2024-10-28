@@ -112,12 +112,6 @@ class Sidebars
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
             <div class="nav-item">
-                <a class="menu_bin nav-link mb-2" href="#bin" menu="bin">
-                    <i class="fas fa-trash"></i>
-                    <span class="ms-2">Papelera</span>
-                </a>
-            </div>
-            <div class="nav-item">
                 <a class="menu_settings nav-link mb-2" href="#settings" menu="settings">
                     <i class="fas fa-file"></i>
                     <span class="ms-2">Configuraci&oacute;n</span>
