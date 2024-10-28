@@ -13,7 +13,7 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item ps-4">
-                <div class="ps-2"  style="border-left: 1px solid #DDD;">
+                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
                     <a class="nav-link form_add" href="#forms" menu="forms">
                         <span>Nuevo formulario</span>
                     </a>
@@ -79,17 +79,17 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item ps-4">
-                <div class="ps-2"  style="border-left: 1px solid #DDD;">
+                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
                     <a class="nav-link data_add" href="#data" menu="data">
                         <span>Nuevo</span>
                     </a>
-                    <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_filter">
+                    <a class="nav-link data_filter" href="#data" menu="data">
                         <span>Filtrar</span>
                     </a>
-                    <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_import">
+                    <a class="nav-link data_import" href="#data" menu="data">
                         <span>Importar</span>
                     </a>
-                    <a class="nav-link" href="#data" menu="data" data-bs-toggle="modal" data-bs-target="#component_data_group">
+                    <a class="nav-link data_order" href="#data" menu="data">
                         <span>Ordenar</span>
                     </a>
                 </div>
@@ -101,11 +101,11 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item ps-4">
-                <div class="ps-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link mb-2" href="#columns" menu="columns" data-bs-toggle="modal" data-bs-target="#component_columns_add">
+                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
+                    <a class="nav-link column_add" href="#columns" menu="columns">
                         <span>Nuevo</span>
                     </a>
-                    <a class="nav-link mb-2" href="#columns" menu="columns" data-bs-toggle="modal" data-bs-target="#component_columns_link">
+                    <a class="nav-link column_link" href="#columns" menu="columns">
                         <span>Enlazar</span>
                     </a>
                 </div>
