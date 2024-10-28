@@ -362,10 +362,11 @@ $(function()
         // Data
         let data = new FormData($('#component_columns_modify form')[0]);
         const id = data.get('id');
+        const identifier = data.get('identifier');
 
         // Setup data to delete
         $('#component_columns_delete input[name=id]').val(id);
-        $('#component_columns_delete strong.id').html(id);
+        $('#component_columns_delete strong.id').html(identifier);
         $('#component_columns_delete').modal('show');
         wait.Off_();
     });
