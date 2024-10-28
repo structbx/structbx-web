@@ -41,11 +41,9 @@ $(function ()
             $('#space_all_spaces').html('');
 
             // Manage error
-            if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
-            {
-                new wtools.Notification('WARNING').Show_('No se pudo acceder a los espacios.');
+            const result = new ResponseManager(response_data, '');
+            if(!result.Verify_())
                 return;
-            }
             
             // Results elements creator
             new wtools.UIElementsCreator('#space_all_spaces', response_data.body.data).Build_((row) =>
@@ -86,12 +84,10 @@ $(function ()
         // Read dashboard to modify
         new wtools.Request(server_config.current.api + `/spaces/change`, "POST", new_data).Exec_((response_data) =>
         {
-            if(response_data.status != 200)
-            {
-                wait.Off_();
-                new wtools.Notification('WARNING').Show_('No se pudo cambiar el espacio actual.');
+            // Manage error
+            const result = new ResponseManager(response_data, '');
+            if(!result.Verify_())
                 return;
-            }
             
             location.reload();
 
