@@ -84,7 +84,7 @@ $(function()
     });
 
     // Read form to Delete
-    $(document).on("click", '#component_settings_general .delete', (e) =>
+    $(document).on("click", '#component_settings_general_delete .delete', (e) =>
     {
         e.preventDefault();
 
@@ -92,28 +92,28 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Form data
-        const form_id = $(e.target).attr('form_id');
-        const form_name = $(e.target).attr('form_name');
+        const form_id = $('#component_settings_general input[name="id"]').val();
+        const form_name = $('#component_settings_general input[name="name"]').val();
 
         // Setup form to delete
-        $('#component_forms_delete input[name=id]').val(form_id);
-        $('#component_forms_delete strong.header').html(form_name);
-        $('#component_forms_delete strong.name').html(form_name);
-        $('#component_forms_add .notifications').html('');
-        $('#component_forms_delete').modal('show');
+        $('#component_settings_delete input[name=id]').val(form_id);
+        $('#component_settings_delete strong.header').html(form_name);
+        $('#component_settings_delete strong.name').html(form_name);
+        $('#component_settings_delete .notifications').html('');
+        $('#component_settings_delete').modal('show');
         wait.Off_();
     });
 
     // Delete form
-    $('#component_forms_delete form').submit((e) =>
+    $('#component_settings_delete form').submit((e) =>
     {
         e.preventDefault();
 
         // Wait animation
-        let wait = new wtools.ElementState('#component_forms_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+        let wait = new wtools.ElementState('#component_settings_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Data
-        const form_id = $('#component_forms_delete input[name=id]').val();
+        const form_id = $('#component_settings_delete input[name=id]').val();
 
         // Request
         new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
@@ -121,13 +121,12 @@ $(function()
             wait.Off_();
 
             // Manage error
-            const result = new ResponseManager(response_data, '#component_forms_delete .notifications', 'Formularios: Eliminar');
+            const result = new ResponseManager(response_data, '#component_settings_delete .notifications', 'Formularios: Eliminar');
             if(!result.Verify_())
                 return;
 
-            settings_read();
             new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
-            $('#component_forms_delete').modal('hide');
+            window.location.href = `/start`
         });
     });
 });
