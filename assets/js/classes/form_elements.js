@@ -181,7 +181,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <input class="form-control" type="text" name="${identifier}" maxlength="${maxlength}" required="${required}" value="${value}"/>
+                <input class="form-control" type="text" name="${identifier}" maxlength="${maxlength}" 
+                ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
@@ -189,7 +190,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <textarea class="form-control" name="${identifier}" maxlength="${maxlength}" required="${required}">${value}</textarea>
+                <textarea class="form-control" name="${identifier}" maxlength="${maxlength}" 
+                ${required == '1' ? 'required' : ''}>${value}</textarea>
             </td>
         `;
     }
@@ -197,7 +199,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <input class="form-control" type="number" name="${identifier}" maxlength="${maxlength}" required="${required}" value="${value}"/>
+                <input class="form-control" type="number" name="${identifier}" maxlength="${maxlength}"
+                ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
@@ -205,7 +208,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <input class="form-control" type="number" name="${identifier}" maxlength="${maxlength}" required="${required}" value="${value}"/>
+                <input class="form-control" type="number" name="${identifier}" maxlength="${maxlength}" 
+                ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
@@ -223,7 +227,8 @@ class FormElements
 
         return `
             <td scope="row">
-                <input class="form-control" type="date" name="${identifier}" required="${required}" value="${value}"/>
+                <input class="form-control" type="date" name="${identifier}" 
+                ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
@@ -231,7 +236,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <input class="form-control" type="time" name="${identifier}" required="${required}" value="${value}"/>
+                <input class="form-control" type="time" name="${identifier}" 
+                ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
@@ -239,7 +245,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <input class="form-control" type="file" name="${identifier}" required="${required}"/>
+                <input class="form-control" type="file" name="${identifier}" 
+                ${required == '1' ? 'required' : ''}/>
             </td>
         `;
     }
@@ -247,7 +254,8 @@ class FormElements
     {
         return `
             <td scope="row">
-                <input class="form-control" type="file" name="${identifier}" required="${required}"/>
+                <input class="form-control" type="file" name="${identifier}" 
+                ${required == '1' ? 'required' : ''}/>
             </td>
         `;
     }
@@ -255,7 +263,7 @@ class FormElements
     {
         return `
             <td scope="row">
-                <select class="form-select" name="${identifier}" required="${required}">
+                <select class="form-select" name="${identifier}" ${required == '1' ? 'required' : ''}>
                     <option value="">-- Ninguno --</option>
                 </select>
             </td>
