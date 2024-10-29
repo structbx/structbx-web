@@ -232,22 +232,13 @@ $(function()
             // Read form to modify
             new wtools.Request(server_config.current.api + `/forms/columns/read/id?id=${id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
-                // Permissions error
-                if(response_data.status == 401)
-                {
-                    new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
+                // Manage response
+                const result = new ResponseManager(response_data, '', 'Columnas: Modificar');
+                if(!result.Verify_())
                     return;
-                }
-
-                // Notification Error
-                if(response_data.status != 200)
-                {
-                    new wtools.Notification('WARNING').Show_('No se pudo acceder a las columnas de este formulario.');
-                    return;
-                }
-
+    
                 // Handle no results or zero results
-                if(response_data.body.data == undefined || response_data.body.data.length < 1)
+                if(response_data.body.data.length < 1)
                 {
                     new wtools.Notification('SUCCESS').Show_('Sin resultados.');
                     return;
@@ -330,20 +321,11 @@ $(function()
         {
             wait.Off_();
 
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_modify .notifications').Show_('No tiene permisos para acceder a este recurso.');
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_columns_modify .notifications', 'Columnas: Modificar');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_modify .notifications').Show_('Hubo un error al modificar la columna: ' + response_data.body.message);
-                return;
-            }
-        
             new wtools.Notification('SUCCESS').Show_('Columna modificada exitosamente.');
             $('#component_columns_modify').modal('hide');
             columns_read();
@@ -397,28 +379,17 @@ $(function()
         new wtools.Request(server_config.current.api + `/forms/columns/delete?id=${id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Columna eliminada.');
-                $('#component_columns_delete').modal('hide');
-                $('#component_columns_modify').modal('hide');
-                columns_read();
-                $('#component_data_read .update').click();
-            }
-
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_delete .notifications').Show_('No tiene permisos para eliminar esta columna.');
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_columns_delete .notifications', 'Columnas: Eliminar');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_delete .notifications').Show_('No se pudo eliminar la columna: ' + response_data.body.message);
-                return;
-            }
+            new wtools.Notification('SUCCESS').Show_('Columna eliminada.');
+            $('#component_columns_delete').modal('hide');
+            $('#component_columns_modify').modal('hide');
+            columns_read();
+            $('#component_data_read .update').click();
         });
     });
     
