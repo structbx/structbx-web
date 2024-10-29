@@ -40,7 +40,7 @@ $(function ()
         }
 
         // Data collection
-        const data = new FormData();
+        const data = new FormData($('#component_login form'));
         data.append("username", $('#component_login input[name="user"]').val());
         data.append("password", $('#component_login input[name="password"]').val());
 
@@ -55,6 +55,7 @@ $(function ()
             {
                 new wtools.Notification('SUCCESS').Show_('Inicio de sesi&oacute;n exitoso. Espere...');
                 window.location.href = "../start/";
+                return;
             }
             else if(response_data.status == 401)
             {
