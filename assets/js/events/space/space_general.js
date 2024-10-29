@@ -32,8 +32,17 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_space_modify .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const space_identifier = url_params.get('identifier');
+        if(space_identifier == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            return;
+        }
+
         // Request
-        new wtools.Request(server_config.current.api + "/spaces/read/id").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/spaces/read/id?identifier=${space_identifier}`).Exec_((response_data) =>
         {
             // Manage response
             const result = new ResponseManager(response_data, '#component_space_modify .notifications', 'Espacios: Modificar');
