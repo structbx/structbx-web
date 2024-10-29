@@ -21,6 +21,23 @@ $(function ()
     };
     verify_session();
 
+    // Read and set current Space
+    const spaces_read_set_id = (callback) =>
+    {
+        // Request
+        new wtools.Request(server_config.current.api + "/spaces/read/id").Exec_((response_data) =>
+        {
+            // Manage error
+            if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al espacio.');
+                return;
+            }
+
+            callback();
+        });
+    };
+
     // Login
     $('#component_login form').submit((e) =>
     {
@@ -40,9 +57,7 @@ $(function ()
         }
 
         // Data collection
-        const data = new FormData($('#component_login form'));
-        data.append("username", $('#component_login input[name="user"]').val());
-        data.append("password", $('#component_login input[name="password"]').val());
+        const data = new FormData($('#component_login form')[0]);
 
         // Request
         new wtools.Request(server_config.current.api + "/system/login", "POST", data, false).Exec_((response_data) =>
@@ -54,7 +69,8 @@ $(function ()
             if(response_data.status == 200)
             {
                 new wtools.Notification('SUCCESS').Show_('Inicio de sesi&oacute;n exitoso. Espere...');
-                window.location.href = "../start/";
+                const callback = () => {window.location.href = "../start/"};
+                spaces_read_set_id(callback);
                 return;
             }
             else if(response_data.status == 401)
