@@ -103,6 +103,9 @@ table tr .dropdown .dropdown-menu
 {
     min-width: 3rem;
 }
+.table-light{
+    --bs-table-bg: #f5f5f5 !important;
+}
 
 /* --- Navbar --- */
 
