@@ -93,7 +93,9 @@ $(function ()
             $('#form_name').html('');
 
             // Permissions error
-            if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_data_add .notifications', 'Data: A&ntilde;adir');
+            if(!result.Verify_())
             {
                 window.location.href = "../start/#forms";
                 return;
@@ -128,21 +130,12 @@ $(function ()
             $('#component_title_change .notifications').html('');
             $('#component_title_change table tbody').html('');
 
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_title_change .notifications').Show_('No tiene permisos para acceder a este recurso.');
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_title_change .notifications', '');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_title_change .notifications').Show_('No se pudo acceder a los formularios.');
-                return;
-            }
-
-            // Handle no results or zero results
+            // Handle zero results
             if(response_data.body.data == undefined || response_data.body.data.length < 1)
             {
                 new wtools.Notification('SUCCESS', 0, '#component_title_change .notifications').Show_('Sin resultados.');
