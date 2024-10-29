@@ -23,22 +23,13 @@ $(function()
             $('#component_data_read table thead tr').html('');
             $('#component_data_read table tbody').html('');
 
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_read .notifications').Show_('No tiene permisos para acceder a este recurso.');
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_data_read .notifications', 'Data: Leer');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_read .notifications').Show_('No se pudo acceder a la data de este formulario.');
-                return;
-            }
-
-            // Handle no results or zero results
-            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            // Handle zero results
+            if(response_data.body.data.length < 1)
             {
                 new wtools.Notification('SUCCESS', 0, '#component_data_read .notifications').Show_('Sin resultados.');
                 return;
@@ -97,24 +88,13 @@ $(function()
             // Read form to modify
             new wtools.Request(server_config.current.api + `/forms/columns/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
-                // Permissions error
-                if(response_data.status == 401)
-                {
-                    wait.Off_();
-                    new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
-                    return;
-                }
+                // Manage response
+                const result = new ResponseManager(response_data, '', 'Data: Modificar');
+                if(!result.Verify_())
+                    return;    
 
-                // Notification Error
-                if(response_data.status != 200)
-                {
-                    wait.Off_();
-                    new wtools.Notification('WARNING').Show_('No se pudo acceder a la data de este formulario.');
-                    return;
-                }
-
-                // Handle no results or zero results
-                if(response_data.body.data == undefined || response_data.body.data.length < 1)
+                // Handle zero results
+                if(response_data.body.data.length < 1)
                 {
                     wait.Off_();
                     new wtools.Notification('WARNING').Show_('Debe crear columnas para agregar registros.');
@@ -197,26 +177,15 @@ $(function()
         new wtools.Request(server_config.current.api + "/forms/data/add", "POST", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Registro guardado.');
-                $('#component_data_add').modal('hide');
-                data_read();
-            }
-
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_add .notifications').Show_('No tiene permisos para guardar registros en este formulario.');
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_data_add .notifications', 'Data: A&ntilde;adir');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_add .notifications').Show_('No se pudo guardar el nuevo registro.');
-                return;
-            }
+            new wtools.Notification('SUCCESS').Show_('Registro guardado.');
+            $('#component_data_add').modal('hide');
+            data_read();
         });
     });
     
@@ -255,22 +224,13 @@ $(function()
             // Read form to modify
             new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${data_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
-                // Permissions error
-                if(response_data.status == 401)
-                {
-                    new wtools.Notification('WARNING').Show_('No tiene permisos para acceder a este recurso.');
+                // Manage response
+                const result = new ResponseManager(response_data, '', 'Data: Modificar');
+                if(!result.Verify_())
                     return;
-                }
-
-                // Notification Error
-                if(response_data.status != 200)
-                {
-                    new wtools.Notification('WARNING').Show_('No se pudo acceder a la data de este formulario.');
-                    return;
-                }
-
+    
                 // Handle no results or zero results
-                if(response_data.body.data == undefined || response_data.body.data.length < 1 || response_data.body.columns_meta.data < 1)
+                if(response_data.body.data.length < 1 || response_data.body.columns_meta.data < 1)
                 {
                     new wtools.Notification('SUCCESS').Show_('Sin resultados.');
                     return;
@@ -360,26 +320,15 @@ $(function()
         new wtools.Request(server_config.current.api + "/forms/data/modify", "PUT", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Registro Actualizado.');
-                $('#component_data_modify').modal('hide');
-                data_read();
-            }
-
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_modify .notifications').Show_('No tiene permisos para modificar registros en este formulario.');
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_data_nodify .notifications', 'Data: Modificar');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_modify .notifications').Show_('No se pudo modificar el registro: ' + response_data.body.message);
-                return;
-            }
+            new wtools.Notification('SUCCESS').Show_('Registro Actualizado.');
+            $('#component_data_modify').modal('hide');
+            data_read();
         });
     });
 
@@ -428,27 +377,16 @@ $(function()
         new wtools.Request(server_config.current.api + `/forms/data/delete?id=${data_id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Registro eliminado.');
-                $('#component_data_delete').modal('hide');
-                $('#component_data_modify').modal('hide');
-                data_read();
-            }
-
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_delete .notifications').Show_('No tiene permisos para eliminar registros en este formulario.');
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_data_delete .notifications', 'Data: Eliminar');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_data_delete .notifications').Show_('No se pudo eliminar el registro: ' + response_data.body.message);
-                return;
-            }
+            new wtools.Notification('SUCCESS').Show_('Registro eliminado.');
+            $('#component_data_delete').modal('hide');
+            $('#component_data_modify').modal('hide');
+            data_read();
         });
     });
     
