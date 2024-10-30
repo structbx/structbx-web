@@ -264,7 +264,6 @@ class FormElements
         return `
             <td scope="row">
                 <select class="form-select" name="${identifier}" ${required == '1' ? 'required' : ''}>
-                    <option value="">-- Ninguno --</option>
                 </select>
             </td>
         `;
