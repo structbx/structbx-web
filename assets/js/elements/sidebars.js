@@ -105,9 +105,6 @@ class Sidebars
                     <a class="nav-link column_add" href="#columns" menu="columns">
                         <span>Nuevo</span>
                     </a>
-                    <a class="nav-link column_link" href="#columns" menu="columns">
-                        <span>Enlazar</span>
-                    </a>
                 </div>
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
