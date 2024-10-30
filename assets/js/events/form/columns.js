@@ -138,7 +138,7 @@ $(function()
     });
 
     // Click on Add Button
-    $('#component_columns_read .add').click(() => 
+    const read_form_columns_add = () =>
     {
         const add = () =>
         {
@@ -149,7 +149,10 @@ $(function()
             $('#component_columns_add').modal('show');
         }
         options_column_type_init(options_column_type, add);
-    });
+    }
+
+    $('#component_columns_read .add').click(() => read_form_columns_add());
+    $('a.column_add').click(() => read_form_columns_add());
 
     // Add Column
     $('#component_columns_add form').submit((e) =>
