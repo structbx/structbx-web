@@ -362,7 +362,7 @@
                             <h2 class="h2">Columnas</h2>
                         </div>
 
-                        <!-- Columns: All columns -->
+                        <!-- Columns: Read -->
                         <article id="component_columns_read" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -418,6 +418,7 @@
                                                 <th scope="col">Longitud</th>
                                                 <th scope="col">Obligatorio</th>
                                                 <th scope="col">Valor por defecto</th>
+                                                <th scope="col">Enlace a</th>
                                                 <th scope="col">Descripci&oacute;n</th>
                                                 <th scope="col">Fecha de creaci&oacute;n</th>
                                             </tr>
@@ -432,7 +433,7 @@
                             <!-- /Contents -->
                             
                         </article>
-                        <!-- /Columns: All columns -->
+                        <!-- /Columns: Read -->
 
                         <!-- Columns: Add -->
                         <div id="component_columns_add" class="modal fade" tabindex="-1" aria-labelledby="component_columns_add_label" aria-hidden="true">
@@ -500,6 +501,13 @@
                                                             <input type="text" class="form-control" name="default_value">
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <th scope="row">Enlazar a</th>
+                                                        <td>
+                                                            <select class="form-select" name="link_to">
+                                                            </select>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -522,6 +530,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+
                                         <div class="notifications"></div>
                                         <input type="hidden" name="id" required>
                                         <table class="table">
@@ -580,9 +589,17 @@
                                                             <input type="text" class="form-control" name="default_value">
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <th scope="row">Enlazar a</th>
+                                                        <td>
+                                                            <select class="form-select" name="link_to">
+                                                            </select>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="delete btn btn-danger me-auto">Borrar columna</button>
@@ -615,38 +632,6 @@
                             </div>
                         </div>
                         <!-- /Columns: Delete -->
-
-                        <!-- Columns: Link -->
-                        <div id="component_columns_link" class="modal fade" tabindex="-1" aria-labelledby="component_columns_link_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="component_columns_link_label">Enlazar formulario</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Formulario</th>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="1">Compras</option>
-                                                            <option value="1">Ventas</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Enlazar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Columns: Link -->
 
                     </section>
                     <!-- /Columns section -->
@@ -697,7 +682,7 @@
                         </article>
                         <!-- /Settings: General -->
 
-                        <!-- Settings: General -->
+                        <!-- Settings: General: Delete -->
                         <article id="component_settings_general_delete" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -717,7 +702,7 @@
                             </div>
                             <!-- /Contents -->
                         </article>
-                        <!-- /Settings: General -->
+                        <!-- /Settings: General: Delete -->
 
                         <!-- Settings: Delete -->
                         <div id="component_settings_delete" class="modal fade" tabindex="-1" aria-hidden="true">
