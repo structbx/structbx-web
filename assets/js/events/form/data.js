@@ -123,7 +123,7 @@ $(function()
                     {
                         let options = new wtools.SelectOptions();
 
-                        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${row.identifier}`).Exec_((response_data) =>
+                        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${row.link_to_form}`).Exec_((response_data) =>
                         {
                             try
                             {
