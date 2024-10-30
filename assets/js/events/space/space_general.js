@@ -102,4 +102,51 @@ $(function()
             window.location.href = `/space?identifier=${space_identifier}#space`;
         });
     });
+
+    // Read form to Delete
+    $(document).on("click", '#component_space_delete .delete', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Form data
+        const form_id = $('#component_space_modify input[name="id"]').val();
+        const form_name = $('#component_space_modify input[name="name"]').val();
+
+        // Setup form to delete
+        $('#component_space_delete_final input[name=id]').val(form_id);
+        $('#component_space_delete_final strong.header').html(form_name);
+        $('#component_space_delete_final strong.name').html(form_name);
+        $('#component_space_delete_final .notifications').html('');
+        $('#component_space_delete_final').modal('show');
+        wait.Off_();
+    });
+
+    // Delete form
+    $('#component_space_delete_final form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_space_delete_final form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Data
+        const space_id = $('#component_space_delete_final input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/spaces/delete?id=${space_id}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_space_delete_final .notifications', 'Espacios: Eliminar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Espacio eliminado exitosamente.');
+            window.location.href = `/start`
+        });
+    });
 });
