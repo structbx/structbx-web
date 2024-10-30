@@ -82,10 +82,10 @@ $(function()
                 return;
             }
 
-            // Setup form to modify
+            // Setup data columns
             $('#component_data_add table tbody').html('');
             
-            // Read form to modify
+            // Read and setup columns
             new wtools.Request(server_config.current.api + `/forms/columns/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
                 // Manage response
@@ -107,8 +107,9 @@ $(function()
                     if(row.identifier == "id")
                         return undefined;
 
+                    // If column type is a NORMAL type
                     let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
-                    let form_element = form_element_object.Get_();
+                    let form_element = $(form_element_object.Get_());
                     let form_icon = form_element_object.GetIcon_();
 
                     if(form_element == undefined)
@@ -117,6 +118,38 @@ $(function()
                         return;
                     }
 
+                    // If column type is SELECTION
+                    const options_link_to_init = (element) => 
+                    {
+                        let options = new wtools.SelectOptions();
+
+                        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${row.identifier}`).Exec_((response_data) =>
+                        {
+                            try
+                            {
+                                let tmp_options = [];
+                                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
+                                for(let row of response_data.body.data)
+                                {
+                                    const col1 = response_data.body.columns[0];
+                                    const col2 = response_data.body.columns[1];
+                                    tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
+                                }
+                    
+                                options.options = tmp_options;
+                                let element_building = $(element).find('select');
+                                options.Build_(element_building);
+                            }
+                            catch(error)
+                            {
+                                new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_(`No se pudo acceder a la columna enlazada (${row.name}).`);
+                            }
+                        });
+                    }
+                    if(row.column_type == "selection")
+                        options_link_to_init(form_element)
+
+                    // Final elements
                     let elements = [
                         `<th scope="row">${form_icon}${row.name}</th>`
                         ,form_element
