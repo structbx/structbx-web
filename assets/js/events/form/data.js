@@ -62,6 +62,42 @@ $(function()
     data_read();
     $('#component_data_read .update').click(() => data_read());
     
+    // Function If column type is SELECTION
+    const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
+    {
+        let options = new wtools.SelectOptions();
+
+        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${link_to_form}`).Exec_((response_data) =>
+        {
+            try
+            {
+                let tmp_options = [];
+                if(selected == undefined)
+                    tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
+                else
+                    tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
+
+                for(let row of response_data.body.data)
+                {
+                    const col1 = response_data.body.columns[0];
+                    const col2 = response_data.body.columns[1];
+                    if(selected == row[col1])
+                        tmp_options.push(new wtools.OptionValue(row[col1], row[col2], true));
+                    else
+                        tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
+                }
+    
+                options.options = tmp_options;
+                let element_building = $(element).find('select');
+                options.Build_(element_building);
+            }
+            catch(error)
+            {
+                new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a la columna enlazada (${column_name}).`);
+            }
+        });
+    }
+    
     // Read Form Columns to Add new record
     const read_form_columns_add = (e) =>
     {
@@ -119,35 +155,8 @@ $(function()
                     }
 
                     // If column type is SELECTION
-                    const options_link_to_init = (element) => 
-                    {
-                        let options = new wtools.SelectOptions();
-
-                        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${row.link_to_form}`).Exec_((response_data) =>
-                        {
-                            try
-                            {
-                                let tmp_options = [];
-                                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
-                                for(let row of response_data.body.data)
-                                {
-                                    const col1 = response_data.body.columns[0];
-                                    const col2 = response_data.body.columns[1];
-                                    tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
-                                }
-                    
-                                options.options = tmp_options;
-                                let element_building = $(element).find('select');
-                                options.Build_(element_building);
-                            }
-                            catch(error)
-                            {
-                                new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_(`No se pudo acceder a la columna enlazada (${row.name}).`);
-                            }
-                        });
-                    }
                     if(row.column_type == "selection")
-                        options_link_to_init(form_element)
+                        options_link_to_init(form_element, row.link_to_form, row.name, '#component_data_add .notifications');
 
                     // Final elements
                     let elements = [
@@ -260,11 +269,16 @@ $(function()
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Modificar');
                 if(!result.Verify_())
+                {
+                    wait.Off_();
                     return;
+                }
     
                 // Handle no results or zero results
-                if(response_data.body.data.length < 1 || response_data.body.columns_meta.data < 1)
+                // if(response_data.body.data.length < 1 || response_data.body.columns_meta != undefined)
+                if(response_data.body.data.length < 1)
                 {
+                    wait.Off_();
                     new wtools.Notification('SUCCESS').Show_('Sin resultados.');
                     return;
                 }
@@ -280,7 +294,7 @@ $(function()
                 new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
                 {
                     let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
-                    let form_element = form_element_object.Get_();
+                    let form_element = $(form_element_object.Get_());
                     let form_icon = form_element_object.GetIcon_();
 
                     if(form_element == undefined)
@@ -294,6 +308,10 @@ $(function()
                         $('#component_data_modify input[name="id"]').val(data_id);
                         return;
                     }
+
+                    // If column type is SELECTION
+                    if(row.column_type == "selection")
+                        options_link_to_init(form_element, row.link_to_form, row.name, '#component_data_modify .notifications', row.value);
 
                     let elements = [
                         `<th scope="row">${form_icon}${row.name}</th>`
