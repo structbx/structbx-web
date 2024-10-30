@@ -33,6 +33,30 @@ $(function()
     });
     options_column_type_init(options_column_type, () => {})
 
+    let options_link_to = new wtools.SelectOptions();
+    const options_link_to_init = (options, callback) => new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
+    {
+        try
+        {
+            let tmp_options = [];
+            tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
+            for(let row of response_data.body.data)
+                tmp_options.push(new wtools.OptionValue(row.id, row.name));
+
+            options.options = tmp_options;
+            options.Build_('#component_columns_add select[name="link_to"]');
+            options.Build_('#component_columns_modify select[name="link_to"]');
+            callback();
+        }
+        catch(error)
+        {
+            new wtools.Notification('WARNING').Show_('No se pudo acceder a los formulario a enlazar.');
+            new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_('No se pudo acceder a los formulario a enlazar.');
+            new wtools.Notification('WARNING', 0, '#component_columns_modify .notifications').Show_('No se pudo acceder a los formulario a enlazar.');
+        }
+    });
+    options_link_to_init(options_link_to, () => {})
+
     // Read columns
     const columns_read = () =>
     {
@@ -54,22 +78,13 @@ $(function()
             $('#component_columns_read .notifications').html('');
             $('#component_columns_read table tbody').html('');
 
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_read .notifications').Show_('No tiene permisos para acceder a este recurso.');
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_columns_read .notifications', 'Columnas: Leer');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_read .notifications').Show_('No se pudo acceder a las columnas.');
-                return;
-            }
-
-            // Handle no results or zero results
-            if(response_data.body.data == undefined || response_data.body.data.length < 1)
+            // Handle zero results
+            if(response_data.body.data.length < 1)
             {
                 new wtools.Notification('SUCCESS', 0, '#component_columns_read .notifications').Show_('Sin resultados.');
                 return;
@@ -88,6 +103,7 @@ $(function()
                     ,`<td scope="row">${row.length}</td>`
                     ,`<td scope="row">${options_required.ValueToOption_(row.required)}</td>`
                     ,`<td scope="row">${row.default_value}</td>`
+                    ,`<td scope="row">${row.link_to_form_name}</td>`
                     ,`<td scope="row">${row.description}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
@@ -129,6 +145,7 @@ $(function()
             $('#component_columns_add .notifications').html('');
             $('#component_columns_add form select[name="id_column_type"]').val("1");
             $('#component_columns_add form input[name="length"]').val("100");
+            $('#component_columns_add form select[name="link_to"]').val("");
             $('#component_columns_add').modal('show');
         }
         options_column_type_init(options_column_type, add);
@@ -172,28 +189,17 @@ $(function()
         {
             wait.Off_();
 
-            // Permissions error
-            if(response_data.status == 401)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_('No tiene permisos para acceder a este recurso.');
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_columns_add .notifications', 'Columnas: A&ntilde;adir');
+            if(!result.Verify_())
                 return;
-            }
 
-            // Notification Error
-            if(response_data.status != 200)
-            {
-                new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_('No se pudo crear la columna: ' + response_data.body.message);
-                return;
-            }
-
-            // Notifications
-            if(response_data.status == 200)
-            {
-                new wtools.Notification('SUCCESS').Show_('Columna creada exitosamente.');
-                $('#component_columns_add').modal('hide');
-                columns_read();
-                $('#component_data_read .update').click();
-            }
+            new wtools.Notification('SUCCESS').Show_('Columna creada exitosamente.');
+            $('#component_columns_add').modal('hide');
+            columns_read();
+            $('#component_data_read .update').click();
+            wtools.CleanForm($('#component_columns_add form')[0]);
+            $('#component_columns_add .notifications').html('');
         });
     });
 
@@ -253,6 +259,7 @@ $(function()
                 $('#component_columns_modify input[name="default_value"]').val(response_data.body.data[0].default_value);
                 $('#component_columns_modify textarea[name="description"]').val(response_data.body.data[0].description);
                 $('#component_columns_modify select[name="id_column_type"]').val(response_data.body.data[0].id_column_type);
+                $('#component_columns_modify select[name="link_to"]').val(response_data.body.data[0].link_to);
     
                 wait.Off_();
                 $('#component_columns_modify form').removeClass('was-validated');
@@ -330,6 +337,8 @@ $(function()
             $('#component_columns_modify').modal('hide');
             columns_read();
             $('#component_data_read .update').click();
+            wtools.CleanForm($('#component_columns_modify form')[0]);
+            $('#component_columns_modify .notifications').html('');
         });
     });
     
