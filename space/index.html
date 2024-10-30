@@ -76,7 +76,6 @@
                                             </tbody>
                                         </table>
                                         <div class="mt-2">
-                                            <button type="button" class="delete btn btn-danger me-auto">Borrar espacio</button>
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                         </div>
                                     </form>
@@ -87,6 +86,28 @@
                             </article>
                         </section>
                         <!-- /Space: Modify -->
+
+                        <!-- Settings: Delete -->
+                        <article id="component_space_delete" class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Eliminar espacio</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2">
+
+                                <div class="notifications"></div>
+                                <div class="mt-2">
+                                    <span>Esta acci&oacute;n no se puede deshacer:</span>
+                                    <button type="submit" class="btn btn-danger ms-2 delete">Eliminar espacio</button>
+                                </div>
+                            </div>
+                            <!-- /Contents -->
+                        </article>
+                        <!-- /Settings: Delete -->
 
                     </section>
                     <!-- /Space section -->
@@ -252,6 +273,10 @@
 
             <!-- General -->
             <script src="../assets/js/main.js"></script>
+
+            <!-- Classes -->
+            <script src="../assets/js/classes/form_elements.js"></script>
+            <script src="../assets/js/classes/response_manager.js"></script>
 
             <!-- Elements -->
             <script src="../assets/js/elements/headers.js"></script>
