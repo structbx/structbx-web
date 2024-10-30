@@ -87,7 +87,7 @@
                         </section>
                         <!-- /Space: Modify -->
 
-                        <!-- Settings: Delete -->
+                        <!-- Space: Delete -->
                         <article id="component_space_delete" class="card p-4 bg-white mb-4">
                             <!-- Card header -->
                             <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -102,12 +102,37 @@
                                 <div class="notifications"></div>
                                 <div class="mt-2">
                                     <span>Esta acci&oacute;n no se puede deshacer:</span>
-                                    <button type="submit" class="btn btn-danger ms-2 delete">Eliminar espacio</button>
+                                    <button class="btn btn-danger ms-2 delete">Eliminar espacio</button>
                                 </div>
                             </div>
                             <!-- /Contents -->
                         </article>
-                        <!-- /Settings: Delete -->
+                        <!-- /Space: Delete -->
+
+                        <!-- Space: Delete: Final -->
+                        <div id="component_space_delete_final" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Eliminar espacio <strong class="header"></strong></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>
+                                            Seguro desea eliminar el espacio <strong class="name"></strong>, 
+                                            esto eliminar&aacute; todos los formularios y registros en &eacute;l
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Space: Delete: Final -->
 
                     </section>
                     <!-- /Space section -->
