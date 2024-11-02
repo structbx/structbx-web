@@ -133,6 +133,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Formulario creado exitosamente.');
             $('#component_forms_add').modal('hide');
             wtools.CleanForm('#component_forms_add form');
+            $('#component_forms_add form').removeClass('was-validated');
             form_read();
         });
     });
