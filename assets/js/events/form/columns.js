@@ -144,6 +144,7 @@ $(function()
         {
             $('#component_columns_add .notifications').html('');
             $('#component_columns_add form select[name="id_column_type"]').val("1");
+            $('#component_columns_add form select[name="required"]').val("0");
             $('#component_columns_add form input[name="length"]').val("100");
             $('#component_columns_add form select[name="link_to"]').val("");
             $('#component_columns_add').modal('show');
@@ -203,6 +204,7 @@ $(function()
             $('#component_data_read .update').click();
             wtools.CleanForm($('#component_columns_add form')[0]);
             $('#component_columns_add .notifications').html('');
+            $('#component_columns_add form').removeClass('was-validated');
         });
     });
 
