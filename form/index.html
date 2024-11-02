@@ -32,13 +32,8 @@
                 <main class="main_content col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
 
                     <!-- Title section -->
-                    <section class="mb-4">
+                    <section>
                         
-                        <!-- Title: Form Title -->
-                        <h1 id="form_title" class="h1"></h1>
-                        <hr>
-                        <!-- /Title: Form Title -->
-
                         <!-- Title: Change form -->
                         <div class="modal fade" id="component_title_change" tabindex="-1" aria-labelledby="component_title_change_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -63,8 +58,12 @@
 
                     <!-- Data section -->
                     <section class="section_data d-none">
-                        <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Data</h2>
+                        <div class="pb-2 mb-3 border-bottom">
+                            <ol class="breadcrumb h4">
+                                <li class="breadcrumb-item">Formulario</li>
+                                <li class="breadcrumb-item"><span class="form_title"></span></li>
+                                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                            </ol>
                         </div>
 
                         <!-- Data: All data -->
@@ -358,8 +357,12 @@
 
                     <!-- Columns section -->
                     <section class="section_columns d-none">
-                        <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Columnas</h2>
+                        <div class="pb-2 mb-3 border-bottom">
+                            <ol class="breadcrumb h4">
+                                <li class="breadcrumb-item">Formulario</li>
+                                <li class="breadcrumb-item"><span class="form_title"></span></li>
+                                <li class="breadcrumb-item active" aria-current="page">Columnas</li>
+                            </ol>
                         </div>
 
                         <!-- Columns: Read -->
@@ -378,30 +381,6 @@
                                     <button class="update btn btn-dark-shadow">
                                         <i class="fas fa-sync"></i>
                                     </button>
-                                </div>
-                                <div class="p-2 bd-highlight">
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-dark-shadow dropdown-toggle"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                            <i class="fas fa-list"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_columns_add">
-                                                    Crear nueva columna
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#component_columns_add">
-                                                    Enlazar formulario
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </header>
                             <!-- /Card header -->
@@ -638,8 +617,12 @@
 
                     <!-- Settings section -->
                     <section class="section_settings d-none">
-                        <div class="pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="h2">Configuraciones</h2>
+                        <div class="pb-2 mb-3 border-bottom">
+                            <ol class="breadcrumb h4">
+                                <li class="breadcrumb-item">Formulario</li>
+                                <li class="breadcrumb-item"><span class="form_title"></span></li>
+                                <li class="breadcrumb-item active" aria-current="page">Configuraciones</li>
+                            </ol>
                         </div>
 
                         <!-- Settings: General -->
