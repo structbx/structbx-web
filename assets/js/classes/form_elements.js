@@ -15,7 +15,7 @@ class FormElements
                 return_element = this.Text_
                 (
                     wtools.IFUndefined(this.data.identifier, "")
-                    ,wtools.IFUndefined(this.data.maxlength, "")
+                    ,wtools.IFUndefined(this.data.length, "")
                     ,wtools.IFUndefined(this.data.required, "")
                     ,wtools.IFUndefined(this.data.value, "")
                 );
@@ -26,7 +26,7 @@ class FormElements
                 return_element = this.LongText_
                 (
                     wtools.IFUndefined(this.data.identifier, "")
-                    ,wtools.IFUndefined(this.data.maxlength, "")
+                    ,wtools.IFUndefined(this.data.length, "")
                     ,wtools.IFUndefined(this.data.required, "")
                     ,wtools.IFUndefined(this.data.value, "")
                 );
@@ -37,7 +37,7 @@ class FormElements
                 return_element = this.IntNumber_
                 (
                     wtools.IFUndefined(this.data.identifier, "")
-                    ,wtools.IFUndefined(this.data.maxlength, "")
+                    ,wtools.IFUndefined(this.data.length, "")
                     ,wtools.IFUndefined(this.data.required, "")
                     ,wtools.IFUndefined(this.data.value, "")
                 );
@@ -48,7 +48,7 @@ class FormElements
                 return_element = this.DecimalNumber_
                 (
                     wtools.IFUndefined(this.data.identifier, "")
-                    ,wtools.IFUndefined(this.data.maxlength, "")
+                    ,wtools.IFUndefined(this.data.length, "")
                     ,wtools.IFUndefined(this.data.required, "")
                     ,wtools.IFUndefined(this.data.value, "")
                 );
@@ -108,7 +108,7 @@ class FormElements
                 return_element = this.Text_
                 (
                     wtools.IFUndefined(this.data.identifier, "")
-                    ,wtools.IFUndefined(this.data.maxlength, "")
+                    ,wtools.IFUndefined(this.data.length, "")
                     ,wtools.IFUndefined(this.data.required, "")
                     ,wtools.IFUndefined(this.data.value, "")
                 );
@@ -177,39 +177,59 @@ class FormElements
 
         return return_element;
     }
-    Text_(identifier, maxlength, required, value)
+    Text_(identifier, length, required, value)
     {
         return `
             <td scope="row">
-                <input class="form-control" type="text" name="${identifier}" maxlength="${maxlength}" 
+                <input class="form-control" type="text" name="${identifier}" maxlength="${length}" 
                 ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
-    LongText_(identifier, maxlength, required, value)
+    LongText_(identifier, length, required, value)
     {
         return `
             <td scope="row">
-                <textarea class="form-control" name="${identifier}" maxlength="${maxlength}" 
+                <textarea class="form-control" name="${identifier}" maxlength="${length}" 
                 ${required == '1' ? 'required' : ''}>${value}</textarea>
             </td>
         `;
     }
-    IntNumber_(identifier, maxlength, required, value)
+    IntNumber_(identifier, length, required, value)
     {
         return `
             <td scope="row">
-                <input class="form-control" type="number" name="${identifier}" maxlength="${maxlength}"
+                <input class="form-control" type="number" name="${identifier}" maxlength="${length}"
                 ${required == '1' ? 'required' : ''} value="${value}"/>
             </td>
         `;
     }
-    DecimalNumber_(identifier, maxlength, required, value)
+    DecimalNumber_(identifier, length, required, value)
     {
+        let length_array = length.split(',');
+        let maxlength = "";
+        let step_l = 1;
+        let step = "0.1";
+        if(length_array[0] != undefined)
+            maxlength = length_array[0];
+
+        if(length_array[1] != undefined)
+            step_l = length_array[1];
+
+        try
+        {
+            let p = Math.pow(10, step_l);
+            step = 1/p;
+        }
+        catch(error)
+        {
+            step = "0.1";
+        }
+
         return `
             <td scope="row">
                 <input class="form-control" type="number" name="${identifier}" maxlength="${maxlength}" 
-                ${required == '1' ? 'required' : ''} value="${value}"/>
+                ${required == '1' ? 'required' : ''} value="${value}" step="${step}"/>
             </td>
         `;
     }
