@@ -108,7 +108,7 @@ $(function ()
             else
             {
                 $('#form_name').html(form);
-                $('#form_title').html(form);
+                $('.form_title').html(form);
             }
         });
     };
