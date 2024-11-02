@@ -92,6 +92,9 @@ class Sidebars
                     <a class="nav-link data_order" href="#data" menu="data">
                         <span>Ordenar</span>
                     </a>
+                    <a class="nav-link data_order" href="#data" menu="data">
+                        <span>Exportar</span>
+                    </a>
                 </div>
             </div>
             <div class="nav-item">
