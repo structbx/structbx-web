@@ -52,4 +52,9 @@ $(function ()
         });
     });
         
+    const go_to_settings = () =>
+    {
+        window.location.href = "/start#settings";
+    }
+    $(document).on('click', '.go-settings-button', (e) => go_to_settings());
 });
