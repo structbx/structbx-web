@@ -35,6 +35,7 @@ $(function()
                 let elements = [
                     `<th scope="row"><a href="/space?identifier=${row.identifier}">${row.identifier}</a></th>`
                     ,`<th scope="row">${row.name}</th>`
+                    ,`<td scope="row">${row.size} MB</td>`
                     ,`<td scope="row">${row.description}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
