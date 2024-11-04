@@ -39,9 +39,29 @@ $(function()
             new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
             {
                 let elements = [];
+                const basic_push = (row, column) => {elements.push(`<td scope="row">${row[column]}</td>`)};
+                let key = 0;
                 for(let column of response_data.body.columns)
                 {
-                    elements.push(`<td scope="row">${row[column]}</td>`);
+                    let column_meta = response_data.body.columns_meta.data[key];
+                    if(column_meta != undefined)
+                    {
+                        if(row[column] != "")
+                        {
+                            if(column_meta.column_type == "image")
+                                elements.push(`<td scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}" alt="${column}" width="100px"></td>`);
+                            else if(column_meta.column_type == "file")
+                                elements.push(`<td scope="row">${row[column]}</td>`);
+                            else
+                                basic_push(row, column);
+                        }
+                        else
+                            basic_push(row, column);
+                    }
+                    else
+                        basic_push(row, column);
+
+                    key++;
                 }
 
                 return new wtools.UIElementsPackage(`<tr record-id="${row.ID}"></tr>`, elements).Pack_();
@@ -104,6 +124,8 @@ $(function()
         try
         {
             e.preventDefault();
+
+            $('#component_data_add .notifications').html('');
 
             // Wait animation
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
@@ -262,6 +284,7 @@ $(function()
 
             // Setup form to modify
             $('#component_data_modify table tbody').html('');
+            $('#component_data_modify .notifications').html('');
             
             // Read form to modify
             new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${data_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
@@ -373,7 +396,7 @@ $(function()
             wait.Off_();
             
             // Manage response
-            const result = new ResponseManager(response_data, '#component_data_nodify .notifications', 'Data: Modificar');
+            const result = new ResponseManager(response_data, '#component_data_modify .notifications', 'Data: Modificar');
             if(!result.Verify_())
                 return;
 
