@@ -49,7 +49,7 @@ $(function()
                         if(row[column] != "")
                         {
                             if(column_meta.column_type == "image")
-                                elements.push(`<td scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}" alt="${column}" width="100px"></td>`);
+                                elements.push(`<td scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
                             else if(column_meta.column_type == "file")
                                 elements.push(`<td scope="row">${row[column]}</td>`);
                             else
@@ -71,7 +71,7 @@ $(function()
             let keys = response_data.body.columns_meta.data;
             new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
             {
-                let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
+                let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
                 let form_icon = form_element_object.GetIcon_();
 
                 return [`<th scope="col">${form_icon}${row.name}</th>`];
@@ -166,7 +166,7 @@ $(function()
                         return undefined;
 
                     // If column type is a NORMAL type
-                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
+                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
                     let form_element = $(form_element_object.Get_());
                     let form_icon = form_element_object.GetIcon_();
 
@@ -316,7 +316,7 @@ $(function()
                 // Results elements creator
                 new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
                 {
-                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row);
+                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
                     let form_element = $(form_element_object.Get_());
                     let form_icon = form_element_object.GetIcon_();
 
