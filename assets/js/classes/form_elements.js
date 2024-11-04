@@ -263,21 +263,42 @@ class FormElements
     }
     File_(identifier, required, value)
     {
-        return `
+        let result = `
             <td scope="row">
                 <input class="form-control" type="file" name="${identifier}" 
                 ${required == '1' ? 'required' : ''}/>
-            </td>
         `;
+        if(value != undefined && value != '')
+        {
+            result += `
+                <a class="link mt-2" target="_blank" href="/api/forms/data/file/read?filepath=${value}">Ver</a>
+                <td>
+            `;
+        }
+        else
+            result += '</td>';
+
+        return result;
     }
     Image_(identifier, required, value)
     {
-        return `
+        let result = `
             <td scope="row">
                 <input class="form-control" type="file" name="${identifier}" 
-                ${required == '1' ? 'required' : ''}/>
-            </td>
+                    ${required == '1' ? 'required' : ''}/>
         `;
+        if(value != undefined && value != '')
+        {
+            result += `
+                    <a class="link mt-2" target="_blank" href="/api/forms/data/file/read?filepath=${value}">
+                        <img class="" src="/api/forms/data/file/read?filepath=${value}" alt="${value}" width="100px">
+                    </a>
+                </td>`;
+        }
+        else
+            result += '</td>';
+
+        return result;
     }
     Selection_(identifier, required)
     {
