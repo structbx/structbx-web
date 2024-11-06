@@ -402,6 +402,7 @@
                                                 <th scope="col">ID</th>
                                                 <th scope="col">Columna</th>
                                                 <th scope="col">Tipo</th>
+                                                <th scope="col">Posici&oacute;n</th>
                                                 <th scope="col">Longitud</th>
                                                 <th scope="col">Obligatorio</th>
                                                 <th scope="col">Valor por defecto</th>
@@ -525,13 +526,13 @@
                                                 <tr>
                                                     <th scope="row">Identificador de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="identifier" value="nueva_columna">
+                                                        <input type="text" class="form-control" name="identifier" value="nueva_columna" required>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="name" value="Nueva columna">
+                                                        <input type="text" class="form-control" name="name" value="Nueva columna" required>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -539,6 +540,12 @@
                                                     <td>
                                                         <select class="form-select" name="id_column_type">
                                                         </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Posici&oacute;n</th>
+                                                    <td>
+                                                        <input type="number" class="form-control" name="position" required>
                                                     </td>
                                                 </tr>
                                                 <tr>

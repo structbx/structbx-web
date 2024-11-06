@@ -100,6 +100,7 @@ $(function()
                     `<th scope="row">${row.identifier}</th>`
                     ,`<td scope="row">${row.name}</td>`
                     ,`<td scope="row">${row.column_type_name}</td>`
+                    ,`<td scope="row">${row.position}</td>`
                     ,`<td scope="row">${row.length}</td>`
                     ,`<td scope="row">${options_required.ValueToOption_(row.required)}</td>`
                     ,`<td scope="row">${row.default_value}</td>`
@@ -261,6 +262,7 @@ $(function()
                 $('#component_columns_modify input[name="name"]').val(response_data.body.data[0].name);
                 $('#component_columns_modify input[name="length"]').val(response_data.body.data[0].length);
                 $('#component_columns_modify select[name="required"]').val(response_data.body.data[0].required);
+                $('#component_columns_modify input[name="position"]').val(response_data.body.data[0].position);
                 $('#component_columns_modify input[name="default_value"]').val(response_data.body.data[0].default_value);
                 $('#component_columns_modify textarea[name="description"]').val(response_data.body.data[0].description);
                 $('#component_columns_modify select[name="id_column_type"]').val(response_data.body.data[0].id_column_type);
