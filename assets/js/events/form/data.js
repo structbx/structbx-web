@@ -51,7 +51,19 @@ $(function()
                             if(column_meta.column_type == "image")
                                 elements.push(`<td scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
                             else if(column_meta.column_type == "file")
-                                elements.push(`<td scope="row">${row[column]}</td>`);
+                            {
+                                if(row[column].length > 10)
+                                {
+                                    let n = "";
+                                    let max = row[column].length - 1;
+                                    for(let i = max; i > max - 10; i--)
+                                        n = row[column][i] + n;
+                                        
+                                    elements.push(`<td scope="row" max-width="100px">...${n}</td>`);
+                                }
+                                else
+                                    elements.push(`<td scope="row" max-width="100px">${row[column]}</td>`);
+                            }
                             else
                                 basic_push(row, column);
                         }
