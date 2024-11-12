@@ -136,6 +136,17 @@ $(function()
             $('#component_columns_add form input[name="length"]').val("100");
         else
             $('#component_columns_add form input[name="length"]').val("");
+
+        if(value == "9")
+        {
+            $('#component_columns_add form input[name="link_to"]').val("");
+            $('#component_columns_add form select[name="link_to"]').prop('disabled', false);
+        }
+        else
+        {
+            $('#component_columns_add form input[name="link_to"]').val("");
+            $('#component_columns_add form select[name="link_to"]').prop('disabled', true);
+        }
     });
 
     // Click on Add Button
@@ -148,6 +159,7 @@ $(function()
             $('#component_columns_add form select[name="required"]').val("0");
             $('#component_columns_add form input[name="length"]').val("100");
             $('#component_columns_add form select[name="link_to"]').val("");
+            $('#component_columns_add form select[name="link_to"]').prop('disabled', true);
             $('#component_columns_add').modal('show');
         }
         options_column_type_init(options_column_type, add);
@@ -267,6 +279,8 @@ $(function()
                 $('#component_columns_modify textarea[name="description"]').val(response_data.body.data[0].description);
                 $('#component_columns_modify select[name="id_column_type"]').val(response_data.body.data[0].id_column_type);
                 $('#component_columns_modify select[name="link_to"]').val(response_data.body.data[0].link_to);
+                if(response_data.body.data[0].link_to == "")
+                    $('#component_columns_modify form select[name="link_to"]').prop('disabled', true);
     
                 wait.Off_();
                 $('#component_columns_modify form').removeClass('was-validated');
@@ -296,6 +310,17 @@ $(function()
             $('#component_columns_modify form input[name="length"]').val("100");
         else
             $('#component_columns_modify form input[name="length"]').val("");
+
+        if(value == "9")
+        {
+            $('#component_columns_modify form input[name="link_to"]').val("");
+            $('#component_columns_modify form select[name="link_to"]').prop('disabled', false);
+        }
+        else
+        {
+            $('#component_columns_modify form input[name="link_to"]').val("");
+            $('#component_columns_modify form select[name="link_to"]').prop('disabled', true);
+        }
     });
     
     // Modify column
