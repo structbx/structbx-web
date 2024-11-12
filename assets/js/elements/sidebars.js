@@ -86,7 +86,7 @@ class Sidebars
                     <a class="nav-link data_filter" href="#data" menu="data">
                         <span>Filtrar</span>
                     </a>
-                    <a class="nav-link data_import" href="#data" menu="data">
+                    <!--<a class="nav-link data_import" href="#data" menu="data">
                         <span>Importar</span>
                     </a>
                     <a class="nav-link data_order" href="#data" menu="data">
@@ -94,7 +94,7 @@ class Sidebars
                     </a>
                     <a class="nav-link data_order" href="#data" menu="data">
                         <span>Exportar</span>
-                    </a>
+                    </a>-->
                 </div>
             </div>
             <div class="nav-item">
