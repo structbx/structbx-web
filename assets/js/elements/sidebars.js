@@ -26,10 +26,29 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
-                <a class="menu_settings nav-link mb-2" href="#settings" menu="settings">
+                <a class="nav-link mb-2" href="#my_account" menu="my_account">
                     <i class="fas fa-cog"></i>
-                    <span class="ms-2">Configuraci&oacute;n</span>
+                    <span class="ms-2">Administraci&oacute;n</span>
                 </a>
+            </div>
+            <div class="nav-item ps-4">
+                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
+                    <a class="menu_my_account nav-link mb-2" href="#my_account" menu="my_account">
+                        <span>Mi cuenta</span>
+                    </a>
+                    <a class="menu_organization nav-link mb-2" href="#organization" menu="organization">
+                        <span>Organizaci&oacute;n</span>
+                    </a>
+                    <a class="menu_users nav-link mb-2" href="#users" menu="users">
+                        <span>Usuarios</span>
+                    </a>
+                    <a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
+                        <span>Grupos</span>
+                    </a>
+                    <a class="menu_permissions nav-link mb-2" href="#permissions" menu="permissions">
+                        <span>Permisos</span>
+                    </a>
+                </div>
             </div>
         `));
 
@@ -51,18 +70,6 @@ class Sidebars
                     <span class="ms-2">Usuarios</span>
                 </a>
             </div>
-            <div class="nav-item">
-                <a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
-                    <i class="fas fa-layer-group"></i>
-                    <span class="ms-2">Grupos</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a class="menu_permissions nav-link mb-2" href="#permissions" menu="permissions">
-                    <i class="fas fa-sliders-h"></i>
-                    <span class="ms-2">Permisos</span>
-                </a>
-            </div>
         `));
 
         $(".sidebar_menu").append(sidebar_menu);
@@ -80,19 +87,19 @@ class Sidebars
             </div>
             <div class="nav-item ps-4">
                 <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link data_add" href="#data" menu="data">
+                    <a class="nav-link data_add mb-2" href="#data" menu="data">
                         <span>Nuevo</span>
                     </a>
-                    <a class="nav-link data_filter" href="#data" menu="data">
+                    <a class="nav-link data_filter mb-2" href="#data" menu="data">
                         <span>Filtrar</span>
                     </a>
-                    <!--<a class="nav-link data_import" href="#data" menu="data">
+                    <!--<a class="nav-link data_import mb-2" href="#data" menu="data">
                         <span>Importar</span>
                     </a>
-                    <a class="nav-link data_order" href="#data" menu="data">
+                    <a class="nav-link data_order mb-2" href="#data" menu="data">
                         <span>Ordenar</span>
                     </a>
-                    <a class="nav-link data_order" href="#data" menu="data">
+                    <a class="nav-link data_order mb-2" href="#data" menu="data">
                         <span>Exportar</span>
                     </a>-->
                 </div>
