@@ -28,4 +28,40 @@ $(function()
     };
     organization_read();
     
+    // Modify space
+    $('#component_organization_read form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_organization_read form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_organization_read .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_organization_read .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_organization_read form')[0]);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/organizations/modify", "PUT", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_organization_read .notifications', 'Organizaci&oacute;n: Modificar');
+            if(!result.Verify_())
+                return;
+            
+            new wtools.Notification('SUCCESS').Show_('Organizaci&oacute;n modificada exitosamente.');
+            location.reload();
+        });
+    });
+    
 });
