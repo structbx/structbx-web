@@ -16,7 +16,7 @@ $(function()
         let wait = new wtools.ElementState('#component_users_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
-        new wtools.Request(server_config.current.api + `/users/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/organizations/users/read`).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -50,5 +50,34 @@ $(function()
     };
     users_read();
     $('#component_users_read .update').click(() => users_read());
+    
+    // Read Current User
+    const users_read_current = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('#component_my_account_general .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+        // Request
+        new wtools.Request(server_config.current.api + `/organizations/users/current/read`).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_my_account_general .notifications', 'Usuario actual: Leer');
+            if(!result.Verify_())
+                return;
+            
+            // Handle zero results
+            if(response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING', '#component_my_account_general .notifications').Show_('No se pudo acceder al usuario actual.');
+                return;
+            }
+
+            $('#component_my_account_general input[name="username"]').val(response_data.body.data[0].username);
+
+        });
+    };
+    users_read_current();
     
 });
