@@ -237,21 +237,19 @@
                             <div class="mb-2 mt-4">
 
                                 <div class="notifications"></div>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Nombre completo</th>
-                                            <td scope="row"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Correo</th>
-                                            <td scope="row"><input type="email" class="form-control"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="mt-2">
-                                    <button class="btn btn-primary">Guardar</button>
-                                </div>
+                                <form novalidate>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Correo electr&oacute;nico</th>
+                                                <td scope="row"><input type="email" class="form-control" name="username"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
 
                             </div>
                             <!-- /Contents -->
@@ -272,25 +270,27 @@
                             <div class="mb-2 mt-4">
 
                                 <div class="notifications"></div>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Contrase&ntilde;a actual</th>
-                                            <td scope="row"><input type="password" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Nueva contrase&ntilde;a</th>
-                                            <td scope="row"><input type="password" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Repetir contrase&ntilde;a actual</th>
-                                            <td scope="row"><input type="password" class="form-control"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="mt-2">
-                                    <button class="btn btn-primary">Guardar</button>
-                                </div>
+                                <form novalidate>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Contrase&ntilde;a actual</th>
+                                                <td scope="row"><input type="password" class="form-control" name="current_password"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Nueva contrase&ntilde;a</th>
+                                                <td scope="row"><input type="password" class="form-control" name="new_password"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Repetir contrase&ntilde;a actual</th>
+                                                <td scope="row"><input type="password" class="form-control" name="repeat_new_password"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
                                 
                             </div>
                             <!-- /Contents -->
