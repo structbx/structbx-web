@@ -9,36 +9,26 @@ $(function()
     options_status.Build_('#component_users_read select[name="required"]');
     options_status.Build_('#component_users_read select[name="required"]');
 
-    // Read Spaces Users
-    const spaces_users_read = () =>
+    // Read Users
+    const users_read = () =>
     {
         // Wait animation
         let wait = new wtools.ElementState('#component_users_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
-        // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const space_identifier = url_params.get('identifier');
-        if(space_identifier == undefined)
-        {
-            new wtools.Notification('WARNING', '#component_users_read .notifications').Show_('No se encontr&oacute; el identificador del espacio.');
-            window.location.href = "/start/"
-            return;
-        }
-
         // Request
-        new wtools.Request(server_config.current.api + `/spaces/users/read?space_id=${space_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/users/read`).Exec_((response_data) =>
         {
             wait.Off_();
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_users_read .notifications', 'Espacios: Modificar');
+            const result = new ResponseManager(response_data, '#component_users_read .notifications', 'Usuarios: Leer');
             if(!result.Verify_())
                 return;
             
             // Handle zero results
             if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING', '#component_users_read .notifications').Show_('No se pudo acceder a la informaci&oacute;n general del espacio.');
+                new wtools.Notification('WARNING', '#component_users_read .notifications').Show_('No se pudo acceder a los usuarios.');
                 return;
             }
 
@@ -58,7 +48,7 @@ $(function()
             });
         });
     };
-    spaces_users_read();
-    $('#component_users_read .update').click(() => spaces_users_read());
+    users_read();
+    $('#component_users_read .update').click(() => users_read());
     
 });
