@@ -312,34 +312,38 @@
                         </div>
 
                         <!-- Organization: General -->
-                        <article class="card p-4 bg-white mb-4">
-                            <!-- Card header -->
-                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Informaci&oacute;n general</span>
-                                </div>
-                            </header>
-                            <!-- /Card header -->
-                            <!-- Contents -->
-                            <div class="mb-2 mt-4">
+                        <section  id="component_organization_read">
+                            <article class="card p-4 bg-white mb-4">
+                                <!-- Card header -->
+                                <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                    <div class="flex-grow-1 align-self-center">
+                                        <span class="text-dark fw-bold">Informaci&oacute;n general</span>
+                                    </div>
+                                </header>
+                                <!-- /Card header -->
+                                <!-- Contents -->
+                                <div class="mb-2 mt-4">
+    
+                                    <div class="notifications"></div>
+                                    <form novalidate>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Nombre de la organizaci&oacute;n</th>
+                                                    <td scope="row"><input type="text" class="form-control" name="name"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>    
+                                    </form>
 
-                                <div class="notifications"></div>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Nombre de la organizaci&oacute;n</th>
-                                            <td scope="row"><input type="text" class="form-control"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="mt-2">
-                                    <button class="btn btn-primary">Guardar</button>
                                 </div>
-
-                            </div>
-                            <!-- /Contents -->
-                            
-                        </article>
+                                <!-- /Contents -->
+                                
+                            </article>
+                        </section>
                         <!-- /Organization: General -->
 
                     </section>
@@ -537,6 +541,7 @@
             <!-- Events -->
             <script src="../assets/js/events/general.js"></script>
             <script src="../assets/js/events/start/start_general.js"></script>
+            <script src="../assets/js/events/start/organizations.js"></script>
             <script src="../assets/js/events/start/spaces.js"></script>
             <script src="../assets/js/events/start/forms.js"></script>
             <script src="../assets/js/events/start/users.js"></script>
