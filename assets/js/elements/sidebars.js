@@ -12,13 +12,6 @@ class Sidebars
                     <span class="ms-2">Formularios</span>
                 </a>
             </div>
-            <div class="nav-item ps-4">
-                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link form_add" href="#forms" menu="forms">
-                        <span>Nuevo formulario</span>
-                    </a>
-                </div>
-            </div>
             <div class="nav-item">
                 <a class="menu_spaces nav-link mb-2" href="#spaces" menu="spaces">
                     <i class="fas fa-building"></i>
@@ -87,13 +80,10 @@ class Sidebars
             </div>
             <div class="nav-item ps-4">
                 <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link data_add mb-2" href="#data" menu="data">
-                        <span>Nuevo</span>
-                    </a>
                     <a class="nav-link data_filter mb-2" href="#data" menu="data">
                         <span>Filtrar</span>
                     </a>
-                    <!--<a class="nav-link data_import mb-2" href="#data" menu="data">
+                    <a class="nav-link data_import mb-2" href="#data" menu="data">
                         <span>Importar</span>
                     </a>
                     <a class="nav-link data_order mb-2" href="#data" menu="data">
@@ -101,7 +91,7 @@ class Sidebars
                     </a>
                     <a class="nav-link data_order mb-2" href="#data" menu="data">
                         <span>Exportar</span>
-                    </a>-->
+                    </a>
                 </div>
             </div>
             <div class="nav-item">
@@ -109,13 +99,6 @@ class Sidebars
                     <i class="fas fa-columns"></i>
                     <span class="ms-2">Columnas</span>
                 </a>
-            </div>
-            <div class="nav-item ps-4">
-                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link column_add" href="#columns" menu="columns">
-                        <span>Nuevo</span>
-                    </a>
-                </div>
             </div>
             <h5 class="small text-uppercase text-muted">EXTRA</h5>
             <div class="nav-item">
