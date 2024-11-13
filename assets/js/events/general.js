@@ -54,7 +54,7 @@ $(function ()
         
     const go_to_settings = () =>
     {
-        window.location.href = "/start#settings";
+        window.location.href = "/start#my_account";
     }
     $(document).on('click', '.go-settings-button', (e) => go_to_settings());
 });
