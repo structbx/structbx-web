@@ -80,4 +80,40 @@ $(function()
     };
     users_read_current();
     
+    // Modify current user
+    $('#component_my_account_general form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_my_account_general form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_my_account_general .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_my_account_general .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_my_account_general form')[0]);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/organizations/users/current/username/modify", "PUT", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_my_account_general .notifications', 'Usuario actual: Modificar');
+            if(!result.Verify_())
+                return;
+            
+            $('#component_my_account_general .notifications').html('');
+            new wtools.Notification('SUCCESS').Show_('Usuario actual modificado exitosamente.');
+        });
+    });
+    
 });
