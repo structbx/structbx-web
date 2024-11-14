@@ -10,7 +10,7 @@ $(function()
         new wtools.Request(server_config.current.api + `/organizations/read`).Exec_((response_data) =>
         {
             wait.Off_();
-            
+
             // Manage response
             const result = new ResponseManager(response_data, '#component_organization_read .notifications', 'Espacios: Modificar');
             if(!result.Verify_())
@@ -28,7 +28,7 @@ $(function()
     };
     organization_read();
     
-    // Modify space
+    // Modify organization
     $('#component_organization_read form').submit((e) =>
     {
         e.preventDefault();
