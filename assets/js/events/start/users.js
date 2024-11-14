@@ -116,4 +116,42 @@ $(function()
         });
     });
     
+    // Modify password of current user
+    $('#component_my_account_change_password form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_my_account_change_password form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_my_account_change_password .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_my_account_change_password .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_my_account_change_password form')[0]);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/organizations/users/current/password/modify", "PUT", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_my_account_change_password .notifications', 'Contrase&ntilde;a: Modificar');
+            if(!result.Verify_())
+                return;
+            
+            $('#component_my_account_change_password .notifications').html('');
+            new wtools.Notification('SUCCESS').Show_('Contrase&ntilde;a modificada exitosamente.');
+            wtools.CleanForm($('#component_my_account_change_password form')[0]);
+            $('#component_my_account_change_password form').removeClass('was-validated');
+        });
+    });
+    
 });
