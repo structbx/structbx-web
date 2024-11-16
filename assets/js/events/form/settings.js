@@ -23,7 +23,7 @@ $(function()
             // Clean
             wait.Off_();
             $('#component_settings_general .notifications').html('');
-            wtools.CleanForm('#component_settings_general form');
+            wtools.CleanForm($('#component_settings_general form'));
 
             // Manage response
             const result = new ResponseManager(response_data, '#component_settings_general .notifications', 'Configuraciones: General');

@@ -215,7 +215,7 @@ $(function()
             $('#component_columns_add').modal('hide');
             columns_read();
             $('#component_data_read .update').click();
-            wtools.CleanForm($('#component_columns_add form')[0]);
+            wtools.CleanForm($('#component_columns_add form'));
             $('#component_columns_add .notifications').html('');
             $('#component_columns_add form').removeClass('was-validated');
         });
@@ -369,7 +369,7 @@ $(function()
             $('#component_columns_modify').modal('hide');
             columns_read();
             $('#component_data_read .update').click();
-            wtools.CleanForm($('#component_columns_modify form')[0]);
+            wtools.CleanForm($('#component_columns_modify form'));
             $('#component_columns_modify .notifications').html('');
         });
     });
