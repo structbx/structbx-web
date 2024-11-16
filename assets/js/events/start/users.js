@@ -307,5 +307,54 @@ $(function()
             $('#component_users_modify').modal('hide');
         });
     });
+
+    // Read user to Delete
+    $('#component_users_modify .delete').click((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Data
+        let data = new FormData($('#component_users_modify form')[0]);
+        const id = data.get('id');
+        const username = data.get('username');
+        console.log(username)
+
+        // Setup data to delete
+        $('#component_users_delete input[name=id]').val(id);
+        $('#component_users_delete strong.username').html(username);
+        $('#component_users_delete').modal('show');
+        wait.Off_();
+    });
+    
+    // Delete user
+    $('#component_users_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_users_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Data
+        const id = $('#component_users_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/organizations/users/delete?id=${id}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_users_delete .notifications', 'Usuarios: Eliminar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Usuario eliminado.');
+            $('#component_users_delete').modal('hide');
+            $('#component_users_modify').modal('hide');
+            users_read();
+        });
+    });
     
 });
