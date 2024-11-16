@@ -158,7 +158,8 @@
                                                 <tr>
                                                     <th scope="col">ID</th>
                                                     <th scope="col">Espacio</th>
-                                                    <th scope="col">Almacenamiento usado</th>
+                                                    <th scope="col">Almacenamiento en DB</th>
+                                                    <th scope="col">Almacenamiento en Disco</th>
                                                     <th scope="col">Descripci&oacute;n</th>
                                                     <th scope="col">Fecha de creaci&oacute;n</th>
                                                 </tr>
@@ -404,6 +405,44 @@
                             </article>
                         </section>
                         <!-- /Users: Read -->
+
+                        <!-- Users: Add -->
+                        <div id="component_users_add" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">A&ntilde;adir nuevo usuario</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Correo</td>
+                                                    <td><input class="form-control" type="email" name="username" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contrase&ntilde;a</td>
+                                                    <td><input class="form-control" type="password" name="password" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grupo</td>
+                                                    <td>
+                                                        <select class="form-select" name="id_group" required></select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Users: Add -->
 
                     </section>
                     <!-- /Users section -->
