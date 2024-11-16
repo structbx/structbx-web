@@ -67,7 +67,7 @@ $(function()
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
 
-                return new wtools.UIElementsPackage(`<tr column-id="${row.id}"></tr>`, elements).Pack_();
+                return new wtools.UIElementsPackage(`<tr user-id="${row.id}"></tr>`, elements).Pack_();
             });
         });
     };
@@ -218,6 +218,93 @@ $(function()
             users_read();
             wtools.CleanForm($('#component_users_add form'));
             $('#component_users_add').modal('hide');
+        });
+    });
+    
+    // Read user to modify
+    $(document).on("click", '#component_users_read table tbody tr', (e) =>
+    {
+        const read_modify = () => 
+        {
+            e.preventDefault();
+
+            // Wait animation
+            let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+            // Get ID
+            let id = $(e.currentTarget).attr('user-id');
+            if(id == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de usuario.');
+                return;
+            }
+
+            // Read user to modify
+            new wtools.Request(server_config.current.api + `/organizations/users/read/id?id=${id}`).Exec_((response_data) =>
+            {
+                // Manage response
+                const result = new ResponseManager(response_data, '', 'Usuarios: Modificar');
+                if(!result.Verify_())
+                    return;
+    
+                // Handle no results or zero results
+                if(response_data.body.data.length < 1)
+                {
+                    new wtools.Notification('SUCCESS').Show_('Sin resultados.');
+                    return;
+                }
+
+                wtools.CleanForm($('#component_users_modify form'));
+
+                // Set data
+                $('#component_users_modify input[name="id"]').val(response_data.body.data[0].id);
+                $('#component_users_modify input[name="username"]').val(response_data.body.data[0].username);
+                $('#component_users_modify select[name="status"]').val(response_data.body.data[0].status);
+                $('#component_users_modify select[name="id_group"]').val(response_data.body.data[0].id_group);
+
+                wait.Off_();
+                $('#component_users_modify').modal('show');
+            });
+        }
+        options_id_group_init(options_id_group, read_modify);
+    });
+    
+    // Modify User
+    $('#component_users_modify form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_users_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            $('#component_users_modify .notifications').html('');
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_users_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_users_modify form')[0]);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/organizations/users/modify", "PUT", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_users_modify .notifications', 'Usuarios: Modificar');
+            if(!result.Verify_())
+                return;
+            
+            new wtools.Notification('SUCCESS').Show_('Usuario creado exitosamente.');
+            users_read();
+            wtools.CleanForm($('#component_users_modify form'));
+            $('#component_users_modify').modal('hide');
         });
     });
     
