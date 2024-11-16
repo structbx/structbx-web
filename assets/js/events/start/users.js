@@ -6,8 +6,31 @@ $(function()
         new wtools.OptionValue("activo", "Activo", true)
         ,new wtools.OptionValue("inactivo", "Inactivo")
     ]);
-    options_status.Build_('#component_users_read select[name="required"]');
-    options_status.Build_('#component_users_read select[name="required"]');
+    options_status.Build_('#component_users_add select[name="status"]');
+    options_status.Build_('#component_users_modify select[name="status"]');
+
+    let options_id_group = new wtools.SelectOptions();
+    const options_id_group_init = (options, callback) => new wtools.Request(server_config.current.api + "/organizations/groups/read").Exec_((response_data) =>
+    {
+        try
+        {
+            let tmp_options = [];
+            for(let row of response_data.body.data)
+                tmp_options.push(new wtools.OptionValue(row.id, row.group));
+
+            options.options = tmp_options;
+            options.Build_('#component_users_add select[name="id_group"]');
+            options.Build_('#component_users_modify select[name="id_group"]');
+            callback();
+        }
+        catch(error)
+        {
+            new wtools.Notification('WARNING').Show_('No se pudo acceder a grupos.');
+            new wtools.Notification('WARNING', 0, '#component_users_add .notifications').Show_('No se pudo acceder a grupos.');
+            new wtools.Notification('WARNING', 0, '#component_users_modify .notifications').Show_('No se pudo acceder a grupos.');
+        }
+    });
+    options_id_group_init(options_id_group, () => {})
 
     // Read Users
     const users_read = () =>
@@ -149,8 +172,52 @@ $(function()
             
             $('#component_my_account_change_password .notifications').html('');
             new wtools.Notification('SUCCESS').Show_('Contrase&ntilde;a modificada exitosamente.');
-            wtools.CleanForm($('#component_my_account_change_password form')[0]);
+            wtools.CleanForm($('#component_my_account_change_password form'));
             $('#component_my_account_change_password form').removeClass('was-validated');
+        });
+    });
+    
+    // Click on Add User button
+    $('#component_users_read .add').click(() => 
+    {
+        $('#component_users_add').modal('show');
+    });
+
+    // Add User
+    $('#component_users_add form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_users_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            $('#component_users_add .notifications').html('');
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_users_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_users_add form')[0]);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/organizations/users/add", "POST", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_users_add .notifications', 'Usuarios: A&ntilde;adir');
+            if(!result.Verify_())
+                return;
+            
+            new wtools.Notification('SUCCESS').Show_('Usuario creado exitosamente.');
+            users_read();
+            wtools.CleanForm($('#component_users_add form'));
+            $('#component_users_add').modal('hide');
         });
     });
     
