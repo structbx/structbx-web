@@ -77,7 +77,7 @@ $(function()
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
 
-                return new wtools.UIElementsPackage(`<tr user-id="${row.id}"></tr>`, elements).Pack_();
+                return new wtools.UIElementsPackage(`<tr user-id="${row.id}" user-username="${row.username}"></tr>`, elements).Pack_();
             });
         });
     };
@@ -140,7 +140,7 @@ $(function()
     });
     
     // Read user to Delete
-    $('#component_users_modify .delete').click((e) =>
+    $(document).on("click", '#component_users_read table tbody tr', (e) =>
     {
         e.preventDefault();
 
@@ -148,10 +148,14 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Data
-        let data = new FormData($('#component_users_modify form')[0]);
-        const id = data.get('id');
-        const username = data.get('username');
-        console.log(username)
+        let id = $(e.currentTarget).attr('user-id');
+        let username = $(e.currentTarget).attr('user-username');
+        if(id == undefined || username == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; la informaci&oacute;n del usuario.');
+            return;
+        }
 
         // Setup data to delete
         $('#component_users_delete input[name=id]').val(id);
@@ -168,11 +172,21 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_users_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
+        // Get space identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const space_identifier = url_params.get('identifier');
+
+        if(space_identifier == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            return;
+        }
+        
         // Data
         const id = $('#component_users_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/organizations/users/delete?id=${id}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/spaces/users/delete?id=${id}&space_identifier=${space_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
             
