@@ -24,7 +24,7 @@ $(function()
                 tmp_options.push(new wtools.OptionValue(row.id, row.username));
 
             options.options = tmp_options;
-            options.Build_('#component_users_add select[name="username"]');
+            options.Build_('#component_users_add select[name="id_user"]');
             callback();
         }
         catch(error)
@@ -40,8 +40,18 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_users_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
+        // Get space identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const space_identifier = url_params.get('identifier');
+
+        if(space_identifier == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            return;
+        }
+
         // Request
-        new wtools.Request(server_config.current.api + `/spaces/users/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/spaces/users/read?identifier=${space_identifier}`).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -97,11 +107,22 @@ $(function()
             return;
         }
 
+        // Get space identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const space_identifier = url_params.get('identifier');
+
+        if(space_identifier == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            return;
+        }
+        
         // Data collection
         const data = new FormData($('#component_users_add form')[0]);
+        data.append('identifier_space', space_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/organizations/users/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/spaces/users/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -110,10 +131,11 @@ $(function()
             if(!result.Verify_())
                 return;
             
-            new wtools.Notification('SUCCESS').Show_('Usuario creado exitosamente.');
+            new wtools.Notification('SUCCESS').Show_('Usuario agregado exitosamente.');
             users_read();
             wtools.CleanForm($('#component_users_add form'));
             $('#component_users_add').modal('hide');
+            options_users_init(options_users, () => {});
         });
     });
     
