@@ -114,7 +114,6 @@ $(function()
         });
     };
     columns_read();
-    $('#component_columns_read .update').click(() => columns_read());
     
     // Setup Avanced values in Add
     $('#component_columns_add form select[name="id_column_type"]').change((e) =>
@@ -213,11 +212,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Columna creada exitosamente.');
             $('#component_columns_add').modal('hide');
-            columns_read();
-            $('#component_data_read .update').click();
-            wtools.CleanForm($('#component_columns_add form'));
-            $('#component_columns_add .notifications').html('');
-            $('#component_columns_add form').removeClass('was-validated');
+            location.reload();
         });
     });
 
@@ -367,10 +362,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Columna modificada exitosamente.');
             $('#component_columns_modify').modal('hide');
-            columns_read();
-            $('#component_data_read .update').click();
-            wtools.CleanForm($('#component_columns_modify form'));
-            $('#component_columns_modify .notifications').html('');
+            location.reload();
         });
     });
     
@@ -429,8 +421,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Columna eliminada.');
             $('#component_columns_delete').modal('hide');
             $('#component_columns_modify').modal('hide');
-            columns_read();
-            $('#component_data_read .update').click();
+            location.reload();
         });
     });
     

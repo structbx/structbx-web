@@ -46,7 +46,6 @@ $(function()
         });
     }
     spaces_read();
-    $('#component_spaces_read .update').click(() => spaces_read());
 
     // Click on Add Space button
     $('#component_spaces_read .add').click(() => 

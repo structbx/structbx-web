@@ -72,7 +72,6 @@ $(function()
         });
     };
     users_read();
-    $('#component_users_read .update').click(() => users_read());
     
     // Read Current User
     const users_read_current = () =>

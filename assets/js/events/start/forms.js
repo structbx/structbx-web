@@ -88,7 +88,6 @@ $(function()
         });
     };
     form_read();
-    $('#component_forms_read .update').click(() => form_read());
     
     // Click on Add Button
     const click_add_button = () =>

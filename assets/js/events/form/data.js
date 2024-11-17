@@ -92,7 +92,6 @@ $(function()
         });
     };
     data_read();
-    $('#component_data_read .update').click(() => data_read());
     
     // Function If column type is SELECTION
     const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
