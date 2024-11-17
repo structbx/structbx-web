@@ -300,7 +300,7 @@ $(function()
             if(!result.Verify_())
                 return;
             
-            new wtools.Notification('SUCCESS').Show_('Usuario creado exitosamente.');
+            new wtools.Notification('SUCCESS').Show_('Usuario modificado exitosamente.');
             users_read();
             wtools.CleanForm($('#component_users_modify form'));
             $('#component_users_modify').modal('hide');
@@ -319,7 +319,6 @@ $(function()
         let data = new FormData($('#component_users_modify form')[0]);
         const id = data.get('id');
         const username = data.get('username');
-        console.log(username)
 
         // Setup data to delete
         $('#component_users_delete input[name=id]').val(id);
