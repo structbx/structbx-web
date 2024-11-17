@@ -31,6 +31,22 @@ $(function ()
             if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
             {
                 new wtools.Notification('WARNING').Show_('No se pudo acceder al espacio.');
+
+                // Logout
+                new wtools.Request(server_config.current.api + "/system/logout", "POST").Exec_((response_data) =>
+                    {
+                        wait.Off_();
+            
+                        // Notifications
+                        if(response_data.status == 200)
+                        {
+                            window.location.href = "/login/";
+                        }
+                        else
+                        {
+                            new wtools.Notification('WARNING').Show_('No se pudo cerrar la sesi&oacute;n.');
+                        }
+                    });
                 return;
             }
 
