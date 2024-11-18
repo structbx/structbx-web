@@ -111,8 +111,6 @@ $(function()
             if(response_data.body.data.length > 0)
             {
                 const new_changeInt = response_data.body.data[0].change_int;
-                console.log(changeInt);
-                console.log(new_changeInt);
                 if(changeInt != new_changeInt)
                 {
                     data_read();
