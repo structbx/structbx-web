@@ -4,7 +4,7 @@ class Headers
     constructor(){}
     Header_()
     {
-        $(".main_header").append
+        $("#header_main").append
         (`
             <div class="container-fluid d-flex justify-content-between">
                 <a class="navbar-brand d-flex align-items-center" href="../start/">
@@ -48,7 +48,7 @@ class Headers
 
     HeaderSpace_ ()
     {
-        $(".main_header").append
+        $("#header_main").append
         (`
             <div class="container-fluid d-flex justify-content-between">
                 <a class="navbar-brand d-flex align-items-center" href="../start/">
@@ -94,7 +94,7 @@ class Headers
     }
     HeaderForm_()
     {
-        $(".main_header").append
+        $("#header_main").append
         (`
             <div class="container-fluid d-flex justify-content-between">
                 <a class="navbar-brand d-flex align-items-center" href="../start/">

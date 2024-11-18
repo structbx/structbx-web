@@ -25,7 +25,7 @@ $(function ()
         new Sidebars().SidebarMenuForm_();
         new Headers().HeaderForm_();
         new Footers().Footer_();
-        new wtools.MenuManager('.sidebar_menu', true);
+        new wtools.MenuManager('#menu_main', true);
     
     // Drag and drop Interface Design
     $("#component_interface_design_columns, #component_interface_design_layout").sortable({connectWith: ".connectedSortable"})

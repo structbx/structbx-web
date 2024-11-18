@@ -45,7 +45,7 @@ class Sidebars
             </div>
         `));
 
-        $(".sidebar_menu").append(sidebar_menu);
+        $("#menu_main").append(sidebar_menu);
     }
     SidebarMenuSpace_ ()
     {
@@ -65,7 +65,7 @@ class Sidebars
             </div>
         `));
 
-        $(".sidebar_menu").append(sidebar_menu);
+        $("#menu_main").append(sidebar_menu);
     }
     SidebarMenuForm_()
     {
@@ -81,13 +81,10 @@ class Sidebars
             <div class="nav-item ps-4">
                 <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
                     <a class="nav-link data_filter mb-2" href="#data" menu="data">
-                        <span>Filtrar</span>
+                        <span>Buscar</span>
                     </a>
                     <a class="nav-link data_import mb-2" href="#data" menu="data">
                         <span>Importar</span>
-                    </a>
-                    <a class="nav-link data_order mb-2" href="#data" menu="data">
-                        <span>Ordenar</span>
                     </a>
                     <a class="nav-link data_order mb-2" href="#data" menu="data">
                         <span>Exportar</span>
@@ -109,6 +106,6 @@ class Sidebars
             </div>
         `));
 
-        $(".sidebar_menu").append(sidebar_menu);
+        $("#menu_main").append(sidebar_menu);
     }
 }

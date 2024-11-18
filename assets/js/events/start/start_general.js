@@ -25,7 +25,7 @@ $(function ()
     new Sidebars().SidebarMenu_();
     new Headers().Header_();
     new Footers().Footer_();
-    new wtools.MenuManager('.sidebar_menu', true);
+    new wtools.MenuManager('#menu_main', true);
         
     // Read spaces
     const spaces_read = () =>
