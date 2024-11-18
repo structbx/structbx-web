@@ -90,16 +90,9 @@ $(function()
 
                 return [`<th scope="col">${form_icon}${row.name}</th>`];
             });
-            
-            /*new DataTable('#component_data_read_table', {
-                responsive: true
-                ,searching: false
-                ,ordering:  true
-                ,paging: false
-            });*/
         });
     };
-    //data_read();
+    data_read();
     
     // Read last id
     var changeInt = 0;
