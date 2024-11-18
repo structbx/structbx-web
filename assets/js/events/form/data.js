@@ -43,11 +43,13 @@ $(function()
                 let key = 0;
                 for(let column of response_data.body.columns)
                 {
+                    // Add row elements
                     let column_meta = response_data.body.columns_meta.data[key];
                     if(column_meta != undefined)
                     {
                         if(row[column] != "")
                         {
+                            // Verify if the column is image or file
                             if(column_meta.column_type == "image")
                                 elements.push(`<td scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
                             else if(column_meta.column_type == "file")
@@ -89,10 +91,46 @@ $(function()
                 return [`<th scope="col">${form_icon}${row.name}</th>`];
             });
             
+            /*new DataTable('#component_data_read_table', {
+                responsive: true
+                ,searching: false
+                ,ordering:  true
+                ,paging: false
+            });*/
         });
     };
-    data_read();
+    //data_read();
     
+    // Read last id
+    var changeInt = 0;
+    const data_read_changeInt = () =>
+    {
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+
+        if(form_identifier == undefined)
+            return;
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        {
+            if(response_data.body.data.length > 0)
+            {
+                const new_changeInt = response_data.body.data[0].change_int;
+                console.log(changeInt);
+                console.log(new_changeInt);
+                if(changeInt != new_changeInt)
+                {
+                    data_read();
+                    changeInt = new_changeInt;
+                }
+            }
+        });
+    };
+    data_read_changeInt();
+    setInterval(data_read_changeInt, 3000);
+
     // Function If column type is SELECTION
     const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
     {
