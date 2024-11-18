@@ -60,28 +60,25 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Data: Modify -->
+                        <!-- /Title: Change form -->
 
                     </section>
-                    <!-- /Title: Change form -->
+                    <!-- /Title section -->
 
                     <!-- Data section -->
                     <section class="section_data d-none">
-                        <div class="pb-2 mb-3 border-bottom">
-                            <ol class="breadcrumb h4">
+
+                        <!-- Data Header -->
+                        <div class="pb-2 mb-3 border-bottom d-flex">
+                            <!-- Breadcrumbs -->
+                            <ol class="breadcrumb h4 flex-grow-1 align-self-center">
                                 <li class="breadcrumb-item">Formulario</li>
                                 <li class="breadcrumb-item"><span class="form_title"></span></li>
                                 <li class="breadcrumb-item active" aria-current="page">Data</li>
                             </ol>
-                        </div>
-
-                        <!-- Data: All data -->
-                        <article id="component_data_read" class="card p-4 bg-white mb-4">
-                            <!-- Card header -->
-                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
-                                <div class="flex-grow-1 align-self-center">
-                                    <span class="text-dark fw-bold">Todos los registros</span>
-                                </div>
+                            <!-- /Breadcrumbs -->
+                            <!-- Buttons -->
+                            <section class="d-flex">
                                 <div class="p-2">
                                     <button class="btn btn-dark-shadow add">
                                         <i class="fas fa-plus"></i>
@@ -90,7 +87,7 @@
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
                                         <a class="btn btn-dark-shadow">
-                                            <i class="fas fa-filter"></i>
+                                            <i class="fas fa-search"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -112,33 +109,37 @@
                                             </li>
                                             <li>
                                                 <a class="dropdown-item order">
-                                                    Ordenar
+                                                    Exportar data
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                            </header>
-                            <!-- /Card header -->
-                            <!-- Contents -->
-                            <div class="mb-2 mt-4">
+                            </section>
+                            <!-- /Buttons -->
+                        </div>
+                        <!-- /Data Header -->
 
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead class="table-light text-center align-middle text-nowrap">
-                                            <tr></tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <!-- Data: Read -->
+                        <article id="component_data_read" class="bg-white">
+                            
+                            <!-- Contents -->
+                            <div class="">
+
                                 <div class="notifications"></div>
+                                <table id="component_data_read_table" class="table table-hover table-bordered table_data">
+                                    <thead class="table-light text-center align-middle text-nowrap" style="position:sticky;top:5rem;right:0;">
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
 
                             </div>
                             <!-- /Contents -->
                             
                         </article>
-                        <!-- /Data: All data -->
+                        <!-- /Data: Read -->
 
                         <!-- Data: Add -->
                         <div class="modal fade" id="component_data_add" tabindex="-1" aria-labelledby="component_data_add_label" aria-hidden="true">
@@ -386,26 +387,25 @@
                             <!-- Contents -->
                             <div class="mb-2 mt-4">
 
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead class="table-light text-center align-middle text-nowrap">
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Columna</th>
-                                                <th scope="col">Tipo</th>
-                                                <th scope="col">Posici&oacute;n</th>
-                                                <th scope="col">Longitud</th>
-                                                <th scope="col">Obligatorio</th>
-                                                <th scope="col">Valor por defecto</th>
-                                                <th scope="col">Enlace a</th>
-                                                <th scope="col">Descripci&oacute;n</th>
-                                                <th scope="col">Fecha de creaci&oacute;n</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table class="table table-hover table-bordered">
+                                    <thead class="table-light text-center align-middle text-nowrap">
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Columna</th>
+                                            <th scope="col">Tipo</th>
+                                            <th scope="col">Posici&oacute;n</th>
+                                            <th scope="col">Longitud</th>
+                                            <th scope="col">Obligatorio</th>
+                                            <th scope="col">Valor por defecto</th>
+                                            <th scope="col">Enlace a</th>
+                                            <th scope="col">Descripci&oacute;n</th>
+                                            <th scope="col">Fecha de creaci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                    
                                 <div class="notifications"></div>
 
                             </div>
