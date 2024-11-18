@@ -82,6 +82,7 @@
 table tr td,
 table tr th{
     padding: 10px 0 10px 0;
+    border: 1px solid #dadada !important;
 }
 
 table tr .dropdown-toggle::after {
@@ -105,6 +106,29 @@ table tr .dropdown .dropdown-menu
 }
 .table-light{
     --bs-table-bg: #f5f5f5 !important;
+}
+table.table_data
+{
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+table.table_data th {
+    border-left: none !important;
+    border-top: 1px solid #dadada !important;
+    border-bottom: 1px solid #dadada !important;
+    border-right: 1px solid #dadada !important;
+}
+
+table.table_data td {
+    border-left: none !important;
+    border-top: none !important;
+    border-bottom: 1px solid #dadada !important;
+    border-right: 1px solid #dadada !important;
+}
+
+table.table_data th:first-child,
+table.table_data td:first-child {
+    border-left: 1px solid #dadada !important;
 }
 
 /* --- Navbar --- */
@@ -170,14 +194,14 @@ table tr .dropdown .dropdown-menu
     text-decoration: underline;
     color:#796e0c;
 }
-.sidebar_menu .nav-link {
+#menu_main .nav-link {
     background: none;
     color:#333;
 }
-.sidebar_menu .nav-link:hover {
+#menu_main .nav-link:hover {
     background-color: #d8d8d8;
 }
-.sidebar_menu .nav-link.active {
+#menu_main .nav-link.active {
     background-color: #eee063;
     color:#333;
     text-decoration: none;
