@@ -3,8 +3,13 @@ $(function()
 
     // Read records
     var data_read_page = 0;
-    const data_read = () =>
+    var data_read_page_end = false;
+    const data_read = (reload = false) =>
     {
+        // Verify end of results
+        if(data_read_page_end && reload == false)
+            return;
+
         // Wait animation
         let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
@@ -15,9 +20,22 @@ $(function()
         if(form_identifier == undefined)
             return;
 
+        // Conditions request
+        let conditions = "";
+        if(reload)
+        {
+            const limit = $('#component_data_read table tbody')[0].rows.length;
+            $('#component_data_read table tbody').html('');
+            conditions = `?form-identifier=${form_identifier}&limit=${limit}`;
+        }
+        else
+        {
+            data_read_page++;
+            conditions = `?form-identifier=${form_identifier}&page=${data_read_page}`;
+        }
+
         // Request
-        data_read_page++;
-        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${form_identifier}&page=${data_read_page}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/data/read${conditions}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -31,7 +49,9 @@ $(function()
             // Handle zero results
             if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('SUCCESS', 0, '#component_data_read .notifications').Show_('Sin resultados.');
+                data_read_page_end = true;
+                if($('#component_data_read table tbody').html() == "")
+                    new wtools.Notification('SUCCESS', 0, '#component_data_read .notifications').Show_('Sin resultados.');
                 return;
             }
 
@@ -102,7 +122,8 @@ $(function()
     {
         if(window.innerHeight + window.scrollY >= document.body.offsetHeight)
         {
-            data_read();
+            if($('#component_data_read table tbody').html() != "")
+                data_read();
         }
     });
     
@@ -125,14 +146,16 @@ $(function()
                 const new_changeInt = response_data.body.data[0].change_int;
                 if(changeInt != new_changeInt)
                 {
-                    data_read();
+                    if(changeInt != 0)
+                        data_read(true);
+
                     changeInt = new_changeInt;
                 }
             }
         });
     };
     data_read_changeInt();
-    //setInterval(data_read_changeInt, 3000);
+    setInterval(data_read_changeInt, 3000);
 
     // Function If column type is SELECTION
     const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
@@ -300,7 +323,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Registro guardado.');
             $('#component_data_add').modal('hide');
-            data_read();
+            data_read(true);
         });
     });
     
@@ -453,7 +476,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Registro Actualizado.');
             $('#component_data_modify').modal('hide');
-            data_read();
+            data_read(true);
         });
     });
 
@@ -511,7 +534,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Registro eliminado.');
             $('#component_data_delete').modal('hide');
             $('#component_data_modify').modal('hide');
-            data_read();
+            data_read(true);
         });
     });
     
