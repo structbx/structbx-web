@@ -115,37 +115,43 @@ $(function()
     };
     columns_read();
     
-    // Setup Avanced values in Add
-    $('#component_columns_add form select[name="id_column_type"]').change((e) =>
+    // Setup avanced values
+    const SetupAvancedValues = (target) =>
     {
-        const value = $('#component_columns_add form select[name="id_column_type"]').val();
+        const value = $(target + ' form select[name="id_column_type"]').val();
         if(value == undefined)
         {
-            new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_('Error al configurar los valores avanzados.');
+            new wtools.Notification('WARNING', 0, target + ' .notifications').Show_('Error al configurar los valores avanzados.');
             return;
         }
         
         if(value == "2" || value == "5" || value == "6" || value == "7" || value == "8")
-            $('#component_columns_add form input[name="length"]').val("");
+            $(target + ' form input[name="length"]').val("");
         else if(value == "3" || value == "9")
-            $('#component_columns_add form input[name="length"]').val("11");
+            $(target + ' form input[name="length"]').val("11");
         else if(value == "4")
-            $('#component_columns_add form input[name="length"]').val("10,2");
+            $(target + ' form input[name="length"]').val("10,2");
         else if(value == "1")
-            $('#component_columns_add form input[name="length"]').val("100");
+            $(target + ' form input[name="length"]').val("100");
         else
-            $('#component_columns_add form input[name="length"]').val("");
+            $(target + ' form input[name="length"]').val("");
 
         if(value == "9")
         {
-            $('#component_columns_add form input[name="link_to"]').val("");
-            $('#component_columns_add form select[name="link_to"]').prop('disabled', false);
+            $(target + ' form select[name="link_to"]').val("");
+            $(target + ' form select[name="link_to"]').prop('disabled', false);
         }
         else
         {
-            $('#component_columns_add form input[name="link_to"]').val("");
-            $('#component_columns_add form select[name="link_to"]').prop('disabled', true);
+            $(target + ' form select[name="link_to"]').val("");
+            $(target + ' form select[name="link_to"]').prop('disabled', true);
         }
+    }
+
+    // Setup Avanced values in Add
+    $('#component_columns_add form select[name="id_column_type"]').change((e) =>
+    {
+        SetupAvancedValues('#component_columns_add');
     });
 
     // Click on Add Button
@@ -288,34 +294,7 @@ $(function()
     // Setup Avanced values in Modify
     $('#component_columns_modify form select[name="id_column_type"]').change((e) =>
     {
-        const value = $('#component_columns_modify form select[name="id_column_type"]').val();
-        if(value == undefined)
-        {
-            new wtools.Notification('WARNING', 0, '#component_columns_modify .notifications').Show_('Error al configurar los valores avanzados.');
-            return;
-        }
-        
-        if(value == "2" || value == "5" || value == "6" || value == "7" || value == "8")
-            $('#component_columns_modify form input[name="length"]').val("");
-        else if(value == "3" || value == "9")
-            $('#component_columns_modify form input[name="length"]').val("11");
-        else if(value == "4")
-            $('#component_columns_modify form input[name="length"]').val("10,2");
-        else if(value == "1")
-            $('#component_columns_modify form input[name="length"]').val("100");
-        else
-            $('#component_columns_modify form input[name="length"]').val("");
-
-        if(value == "9")
-        {
-            $('#component_columns_modify form input[name="link_to"]').val("");
-            $('#component_columns_modify form select[name="link_to"]').prop('disabled', false);
-        }
-        else
-        {
-            $('#component_columns_modify form input[name="link_to"]').val("");
-            $('#component_columns_modify form select[name="link_to"]').prop('disabled', true);
-        }
+        SetupAvancedValues('#component_columns_modify');
     });
     
     // Modify column
