@@ -119,62 +119,66 @@ class FormElements
 
         return return_element;
     }
-    GetIcon_()
+    GetIcon_(white = false)
     {
         let return_element;
         switch(this.element_type)
         {
             case "text":
             {
-                return_element = '<i class="fas fa-font me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-font';
                 break;
             }
             case "long-text":
             {
-                return_element = '<i class="fas fa-text-height me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-text-height';
                 break;
             }
             case "int-number":
             {
-                return_element = '<i class="fas fa-sort-numeric-up me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-sort-numeric-up';
                 break;
             }
             case "decimal-number":
             {
-                return_element = '<i class="fas fa-sort-numeric-up me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-sort-numeric-up';
                 break;
             }
             case "date":
             {
-                return_element = '<i class="fas fa-calendar-alt me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-calendar-alt';
                 break;
             }
             case "time":
             {
-                return_element = '<i class="fas fa-clock me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-clock';
                 break;
             }
             case "file":
             {
-                return_element = '<i class="fas fa-file me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-file';
                 break;
             }
             case "image":
             {
-                return_element = '<i class="fas fa-image me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-image';
                 break;
             }
             case "selection":
             {
-                return_element = '<i class="fas fa-hand-pointer me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-hand-pointer';
                 break;
             }
             default:
             {
-                return_element = '<i class="fas fa-font me-4 text-secondary"></i>';
+                return_element = '<i class="fas fa-font';
                 break;
             }
         }
+        if(white)
+            return_element += ' me-4 text-white"></i>';
+        else
+            return_element += ' me-4 text-secondary"></i>';
 
         return return_element;
     }
