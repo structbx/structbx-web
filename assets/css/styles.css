@@ -82,7 +82,6 @@
 table tr td,
 table tr th{
     padding: 10px 0 10px 0;
-    border: 1px solid #dadada !important;
 }
 
 table tr .dropdown-toggle::after {
@@ -111,6 +110,11 @@ table.table_data
 {
     border-collapse: separate !important;
     border-spacing: 0 !important;
+}
+table.table_data thead
+{
+    background-color: #145da0 !important;
+    color: #fff !important;
 }
 table.table_data th {
     border-left: none !important;
