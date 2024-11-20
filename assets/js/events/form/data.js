@@ -2,6 +2,7 @@ $(function()
 {
 
     // Read records
+    var data_read_page = 0;
     const data_read = () =>
     {
         // Wait animation
@@ -15,13 +16,12 @@ $(function()
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        data_read_page++;
+        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${form_identifier}&page=${data_read_page}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
             $('#component_data_read .notifications').html('');
-            $('#component_data_read table thead tr').html('');
-            $('#component_data_read table tbody').html('');
 
             // Manage response
             const result = new ResponseManager(response_data, '#component_data_read .notifications', 'Data: Leer');
@@ -82,17 +82,29 @@ $(function()
             });
 
             // Results elements creator (Columns)
-            let keys = response_data.body.columns_meta.data;
-            new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
+            if($('#component_data_read table thead tr').html() == "")
             {
-                let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
-                let form_icon = form_element_object.GetIcon_();
-
-                return [`<th scope="col">${form_icon}${row.name}</th>`];
-            });
+                let keys = response_data.body.columns_meta.data;
+                new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
+                {
+                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
+                    let form_icon = form_element_object.GetIcon_(true);
+    
+                    return [`<th scope="col">${form_icon}${row.name}</th>`];
+                });
+            }
         });
     };
     data_read();
+
+    // Data read Pagination
+    $(window).on("scroll", function()
+    {
+        if(window.innerHeight + window.scrollY >= document.body.offsetHeight)
+        {
+            data_read();
+        }
+    });
     
     // Read last id
     var changeInt = 0;
@@ -120,7 +132,7 @@ $(function()
         });
     };
     data_read_changeInt();
-    setInterval(data_read_changeInt, 3000);
+    //setInterval(data_read_changeInt, 3000);
 
     // Function If column type is SELECTION
     const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
@@ -241,8 +253,7 @@ $(function()
             return;
         }
     };
-    $('#component_data_read .add').click((e) => read_form_columns_add(e));
-    $('a.data_add').click((e) => read_form_columns_add(e));
+    $('.data_add').click((e) => read_form_columns_add(e));
     
     // Add record
     $('#component_data_add form').submit((e) =>
