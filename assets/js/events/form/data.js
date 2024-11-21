@@ -26,7 +26,10 @@ $(function()
         {
             const limit = $('#component_data_read table tbody')[0].rows.length;
             $('#component_data_read table tbody').html('');
-            conditions = `?form-identifier=${form_identifier}&limit=${limit}`;
+            if(limit < 20)
+                conditions = `?form-identifier=${form_identifier}&limit=20`;
+            else
+                conditions = `?form-identifier=${form_identifier}&limit=${limit}`;
         }
         else
         {
@@ -46,12 +49,25 @@ $(function()
             if(!result.Verify_())
                 return;
 
+            // Results elements creator (Columns)
+            if($('#component_data_read table thead tr').html() == "")
+            {
+                let keys = response_data.body.columns_meta.data;
+                new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
+                {
+                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
+                    let form_icon = form_element_object.GetIcon_(true);
+    
+                    return [`<th scope="col">${form_icon}${row.name}</th>`];
+                });
+            }
+
             // Handle zero results
             if(response_data.body.data.length < 1)
             {
                 data_read_page_end = true;
-                if($('#component_data_read table tbody').html() == "")
-                    new wtools.Notification('SUCCESS', 0, '#component_data_read .notifications').Show_('Sin resultados.');
+                //if($('#component_data_read table tbody').html() == "")
+                new wtools.Notification('SUCCESS', 0, '#component_data_read .notifications').Show_('Sin resultados.');
                 return;
             }
 
@@ -100,19 +116,6 @@ $(function()
 
                 return new wtools.UIElementsPackage(`<tr record-id="${row.ID}"></tr>`, elements).Pack_();
             });
-
-            // Results elements creator (Columns)
-            if($('#component_data_read table thead tr').html() == "")
-            {
-                let keys = response_data.body.columns_meta.data;
-                new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
-                {
-                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
-                    let form_icon = form_element_object.GetIcon_(true);
-    
-                    return [`<th scope="col">${form_icon}${row.name}</th>`];
-                });
-            }
         });
     };
     data_read();
@@ -155,7 +158,7 @@ $(function()
         });
     };
     data_read_changeInt();
-    setInterval(data_read_changeInt, 3000);
+    setInterval(data_read_changeInt, 5000);
 
     // Function If column type is SELECTION
     const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
@@ -323,6 +326,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Registro guardado.');
             $('#component_data_add').modal('hide');
+            data_read_page_end = false;
             data_read(true);
         });
     });
