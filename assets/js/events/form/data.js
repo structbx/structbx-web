@@ -4,6 +4,7 @@ $(function()
     // Read records
     var data_read_page = 0;
     var data_read_page_end = false;
+    var data_read_columns = [];
     const data_read = (reload = false) =>
     {
         // Verify end of results
@@ -13,32 +14,43 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
-        // Get Form identifier
+        // URL Params
         const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
 
+        // Get Form identifier
+        const form_identifier = url_params.get('identifier');
         if(form_identifier == undefined)
             return;
 
-        // Conditions request
-        let conditions = "";
+        // Get conditions
+        let conditions = ""
+        if(url_params.get('conditions') != undefined)
+            conditions = `&conditions=${url_params.get('conditions')}`;
+
+        // Get order
+        let order = ""
+        if(url_params.get('conditions') != undefined)
+            order = `&order=${url_params.get('order')}`;
+
+        // Path request
+        let path = "";
         if(reload)
         {
             const limit = $('#component_data_read table tbody')[0].rows.length;
             $('#component_data_read table tbody').html('');
             if(limit < 20)
-                conditions = `?form-identifier=${form_identifier}&limit=20`;
+                path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
             else
-                conditions = `?form-identifier=${form_identifier}&limit=${limit}`;
+            path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
         }
         else
         {
             data_read_page++;
-            conditions = `?form-identifier=${form_identifier}&page=${data_read_page}`;
+            path = `?form-identifier=${form_identifier}&page=${data_read_page}${conditions}${order}`;
         }
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read${conditions}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/data/read${path}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -53,10 +65,14 @@ $(function()
             if($('#component_data_read table thead tr').html() == "")
             {
                 let keys = response_data.body.columns_meta.data;
+                data_read_columns = [];
                 new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
                 {
                     let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
                     let form_icon = form_element_object.GetIcon_(true);
+
+                    // Add column to array
+                    data_read_columns.push({id: row.id, name: row.name});
     
                     return [`<th scope="col">${form_icon}${row.name}</th>`];
                 });
@@ -66,8 +82,7 @@ $(function()
             if(response_data.body.data.length < 1)
             {
                 data_read_page_end = true;
-                //if($('#component_data_read table tbody').html() == "")
-                new wtools.Notification('SUCCESS', 0, '#component_data_read .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 5000, '#component_data_read .notifications').Show_('Sin m&aacute;s resultados.');
                 return;
             }
 
@@ -144,7 +159,7 @@ $(function()
         // Request
         new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?form-identifier=${form_identifier}`).Exec_((response_data) =>
         {
-            if(response_data.body.data.length > 0)
+            if(response_data.body.data != undefined && response_data.body.data.length > 0)
             {
                 const new_changeInt = response_data.body.data[0].change_int;
                 if(changeInt != new_changeInt)
