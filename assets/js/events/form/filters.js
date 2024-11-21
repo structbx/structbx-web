@@ -54,22 +54,68 @@ $(function()
     // Read filters from URL
     const read_filters_from_path = () =>
     {
-        // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const conditions = url_params.get('conditions');
-        const order = url_params.get('order');
+        try
+        {
+            // Clean
+            $('#component_data_filter_conditions tbody').html('');
+            $('#component_data_filter_order tbody').html('');
 
-        if(conditions != undefined)
-        {
-            console.log(atob(conditions));
-        }
-        if(order != undefined)
-        {
-            /*for(let it of order.split(','))
+            // Get Form identifier
+            const url_params = new URLSearchParams(window.location.search);
+            const conditions = url_params.get('conditions');
+            const order = url_params.get('order');
+
+            if(conditions != undefined && conditions != "")
             {
+                let condition_decoded = atob(conditions);
+                let conditions_array = condition_decoded.split('AND');
 
-            }*/
-            console.log(atob(order));
+                for(let current_condition of conditions_array)
+                {
+                    let column = "";
+                    let condition = "";
+                    let value = "";
+                    let count = 0;
+                    for(let char of current_condition)
+                    {
+                        if(count == 0){count++;continue;}
+                        if(count == 1)
+                        {
+                            if(char == " "){count++; continue;}
+                            column += char;
+                        }
+                        else if(count == 2)
+                        {
+                            if(char == " "){count++; continue;}
+                            condition += char;
+                        }
+                        else if(count == 3)
+                        {
+                            value += char;
+                        }
+                    }
+                    column = column.replace("_structbi_column_", "");
+                    value = value.replaceAll("'", "");
+                    value = value.replaceAll("%", "");
+                    value = value.slice(0, value.length - 1);
+                    add_element_condition(column, condition, value);
+                }
+            }
+            if(order != undefined && order != "")
+            {
+                let order_decoded = atob(order);
+                for(let it of order_decoded.split(','))
+                {
+                    let it_split = it.split(' ');
+                    const column = it_split[0].replace("_structbi_column_", "");
+                    const order = it_split[1];
+                    add_element_order(column, order);
+                }
+            }
+        }
+        catch(error)
+        {
+            new wtools.Notification('SUCCESS', 5000, '#component_data_filter .notifications').Show_('No se pudieron decodificar los filtros actuales.');
         }
     }
 
@@ -91,10 +137,8 @@ $(function()
     });
 
     // Add elements conditions
-    $('#component_data_filter .add_condition').click(e => 
+    const add_element_condition = (column = undefined, condition = undefined, value = undefined) =>
     {
-        e.preventDefault();
-
         // Create row filter
         let row = ConditionElement()
 
@@ -103,16 +147,32 @@ $(function()
         {
             $(row).find('select[name=column]').append($(`<option value="${column.id}">${column.name}</option>`))
         }
+        if(column != undefined)
+        {
+            $(row).find('select[name=column]').val(column);
+        }
+        if(condition != undefined)
+        {
+            $(row).find('select[name=condition]').val(condition);
+        }
+        if(value != undefined)
+        {
+            $(row).find('input[name=value]').val(value);
+        }
 
         // Add row filter
         $('#component_data_filter_conditions tbody').append(row);
+    }
+
+    $('#component_data_filter .add_condition').click(e => 
+    {
+        e.preventDefault();
+        add_element_condition();
     });
 
     // Add elements order
-    $('#component_data_filter .add_order').click(e => 
+    const add_element_order = (column = undefined, order = undefined) =>
     {
-        e.preventDefault();
-
         // Create row filter
         let row = OrderElement();
 
@@ -121,9 +181,23 @@ $(function()
         {
             $(row).find('select[name=column]').append($(`<option value="${column.id}">${column.name}</option>`))
         }
+        if(column != undefined)
+        {
+            $(row).find('select[name=column]').val(column);
+        }
+        if(order != undefined)
+        {
+            $(row).find('select[name=order]').val(order);
+        }
 
         // Add row filter
         $('#component_data_filter_order tbody').append(row);
+    }
+
+    $('#component_data_filter .add_order').click(e => 
+    {
+        e.preventDefault();
+        add_element_order();
     });
 
     // Apply filters to URL
