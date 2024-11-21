@@ -81,12 +81,12 @@ class Sidebars
             <div class="nav-item ps-4">
                 <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
                     <a class="nav-link data_filter mb-2" href="#data" menu="data">
-                        <span>Buscar</span>
+                        <span>Filtrar y ordenar</span>
                     </a>
                     <a class="nav-link data_import mb-2" href="#data" menu="data">
                         <span>Importar</span>
                     </a>
-                    <a class="nav-link data_order mb-2" href="#data" menu="data">
+                    <a class="nav-link data_export mb-2" href="#data" menu="data">
                         <span>Exportar</span>
                     </a>
                 </div>

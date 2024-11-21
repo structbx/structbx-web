@@ -86,8 +86,8 @@
                                 </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
-                                        <a class="btn btn-dark-shadow">
-                                            <i class="fas fa-search"></i>
+                                        <a class="btn btn-dark-shadow data_filter">
+                                            <i class="fas fa-filter"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -103,12 +103,12 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a class="dropdown-item import">
+                                                <a class="dropdown-item data_import">
                                                     Importar data
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item order">
+                                                <a class="dropdown-item data_export">
                                                     Exportar data
                                                 </a>
                                             </li>
@@ -222,69 +222,46 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="d-block">
-                                            <button class="btn btn-primary ms-sm-auto">A&ntilde;adir filtro</button>
+
+                                        <div class="notifications"></div>
+                                        <div class="d-flex">
+                                            <h3 class="flex-grow-1">Condiciones</h3>
+                                            <button class="btn btn-dark-shadow add_condition"><i class="fas fa-plus"></i></button>
                                         </div>
-                                        <table class="table">
+                                        <table id="component_data_filter_conditions" class="table">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th scope="col">Columna</th>
                                                     <th scope="col">Condici&oacute;n</th>
                                                     <th scope="col">Valor</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option selected>Nombre</option>
-                                                            <option>Precio</option>
-                                                            <option>Descripci&oacute;n</option>
-                                                            <option>Categor&iacute;a</option>
-                                                            <option>Fecha de registro</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option>Contiene</option>
-                                                            <option>Igual</option>
-                                                            <option>Mayor que</option>
-                                                            <option>Menor que</option>
-                                                            <option>Mayor o igual que</option>
-                                                            <option>Menor o igual que</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="text" class="form-control" name=""/></td>
-                                                    <td><button type="button" class="btn-close" aria-label="Close"></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option>Nombre</option>
-                                                            <option>Precio</option>
-                                                            <option>Descripci&oacute;n</option>
-                                                            <option>Categor&iacute;a</option>
-                                                            <option selected>Fecha de registro</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option>Igual</option>
-                                                            <option>Mayor que</option>
-                                                            <option>Menor que</option>
-                                                            <option>Mayor o igual que</option>
-                                                            <option>Menor o igual que</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="date" class="form-control" name=""/></td>
-                                                    <td><button type="button" class="btn-close" aria-label="Close"></button></td>
-                                                </tr>
                                             </tbody>
                                         </table>
+
+                                        <div class="mt-4 d-flex">
+                                            <h3 class="flex-grow-1">Ordenamiento</h3>
+                                            <button class="btn btn-dark-shadow add_order"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                        <table id="component_data_filter_order" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th scope="col">Columna</th>
+                                                    <th scope="col">Orden</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                     <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger me-auto reset_filters" data-bs-dismiss="modal">Resetear filtros</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Aplicar filtros</button>
+                                        <button type="submit" class="btn btn-primary">Aplicar filtros</button>
                                     </div>
                                 </form>
                             </div>
