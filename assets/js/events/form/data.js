@@ -633,10 +633,13 @@ $(function()
             a.href = url;
             let timestamp = new Date().getTime();
             let filename = `export_${timestamp}.csv`;
-            a.download = 'mi_archivo.csv';
+            a.download = filename;
             a.click();
             URL.revokeObjectURL(url);
             document.body.removeChild(a);
+
+            wait.Off_();
+            new wtools.Notification('SUCCESS').Show_(`Exportaci&oacute;n exitosa`);
         })
         .catch(error => {
             new wtools.Notification('WARNING').Show_(`Error al descargar el archivo: ${error}.`);
