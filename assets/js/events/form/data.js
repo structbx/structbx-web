@@ -559,4 +559,88 @@ $(function()
         });
     });
     
+    // Export Data
+    $('.data_export').click((e) =>
+    {
+        e.preventDefault();
+
+        $('#component_data_export').modal('show');
+    });
+
+    $('#component_data_export .export').click((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
+
+        // URL Params
+        const url_params = new URLSearchParams(window.location.search);
+
+        // Get Form identifier
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
+            return;
+
+        // Get conditions
+        let conditions = ""
+        if(url_params.get('conditions') != undefined)
+            conditions = `&conditions=${url_params.get('conditions')}`;
+
+        // Get order
+        let order = ""
+        if(url_params.get('conditions') != undefined)
+            order = `&order=${url_params.get('order')}`;
+
+        // Path request
+        const limit = $('#component_data_read table tbody')[0].rows.length;
+        if(limit < 20)
+            path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
+        else
+        path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/data/read${path}&export=true`, ).MakeHTTPRequest()
+        .then(response => response.body)
+        .then(stream => 
+        {
+            const reader = stream.getReader();
+            let content = [];
+
+            return new ReadableStream(
+            {
+                async start(controller)
+                {
+                    while (true) 
+                    {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        content.push(value);
+                        controller.enqueue(value);
+                    }
+                    controller.close();
+                }
+            });
+        })
+        .then(stream => new Response(stream))
+        .then(response => response.blob())
+        .then(blob =>
+        {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            document.body.appendChild(a);
+            a.style.display = 'none';
+            a.href = url;
+            let timestamp = new Date().getTime();
+            let filename = `export_${timestamp}.csv`;
+            a.download = 'mi_archivo.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        })
+        .catch(error => {
+            new wtools.Notification('WARNING').Show_(`Error al descargar el archivo: ${error}.`);
+        });
+    });
+        
 });
