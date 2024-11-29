@@ -282,15 +282,17 @@
                                                 <tr>
                                                     <th scope="row">Archivo fuente</th>
                                                     <td>
-                                                        <input type="file" class="form-control" name="">
+                                                        <input type="file" class="form-control" name="file">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Separador</th>
                                                     <td>
-                                                        <select class="form-select" name="">
+                                                        <select class="form-select" name="separator">
                                                             <option value="1">TAB</option>
                                                             <option value="2">,</option>
+                                                            <option value="3">Espacio</option>
+                                                            <option value="4">;</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -333,6 +335,28 @@
                             </div>
                         </div>
                         <!-- /Data: Import data -->
+
+                        <!-- Data: Export data -->
+                        <div id="component_data_export" class="modal fade" tabindex="-1" aria-labelledby="component_data_export_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_data_export_label">Exportar data</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <p>Confirmar exportar la data junto con los filtros aplicados:</p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary export" data-bs-dismiss="modal">Exportar data</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Data: Export data -->
 
                     </section>
                     <!-- /Data section -->
