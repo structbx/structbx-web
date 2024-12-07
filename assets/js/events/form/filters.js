@@ -94,7 +94,7 @@ $(function()
                             value += char;
                         }
                     }
-                    column = column.replace("_structbi_column_", "");
+                    column = column.replace("_structbx_column_", "");
                     value = value.replaceAll("'", "");
                     value = value.replaceAll("%", "");
                     value = value.slice(0, value.length - 1);
@@ -107,7 +107,7 @@ $(function()
                 for(let it of order_decoded.split(','))
                 {
                     let it_split = it.split(' ');
-                    const column = it_split[0].replace("_structbi_column_", "");
+                    const column = it_split[0].replace("_structbx_column_", "");
                     const order = it_split[1];
                     add_element_order(column, order);
                 }
@@ -217,14 +217,14 @@ $(function()
             switch(condition)
             {
                 case 'LIKE':
-                    conditions.push(` _structbi_column_${column} ${condition} '%${value}%' `);
+                    conditions.push(` _structbx_column_${column} ${condition} '%${value}%' `);
                     break;
                 case '=':
                 case '>':
                 case '<':
                 case '>=':
                 case '<=':
-                    conditions.push(` _structbi_column_${column} ${condition} '${value}' `);
+                    conditions.push(` _structbx_column_${column} ${condition} '${value}' `);
                     break;
             }
         });
@@ -236,7 +236,7 @@ $(function()
             const order = $(this).find('select[name="order"]').val();
         
             // Add parameter to the array
-            orders.push(`_structbi_column_${column} ${order}`);
+            orders.push(`_structbx_column_${column} ${order}`);
         });
         
         // Join the parameters

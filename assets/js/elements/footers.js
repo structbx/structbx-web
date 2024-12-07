@@ -12,7 +12,7 @@ class Footers
         (`
             <div class="py-3 my-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; ${year} StructBI.</div>
+                    <div class="text-muted">Copyright &copy; ${year} StructBX.</div>
                     <div>
                         <a href="#">Pol&iacute;tica de privacidad</a>
                         &middot;

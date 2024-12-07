@@ -11,7 +11,7 @@ class Headers
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
-                    <strong class="container ml-2 d-none d-md-block">StructBI</strong>
+                    <strong class="container ml-2 d-none d-md-block">StructBX</strong>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
@@ -55,7 +55,7 @@ class Headers
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
-                    <strong class="container ml-2 d-none d-md-block">StructBI</strong>
+                    <strong class="container ml-2 d-none d-md-block">StructBX</strong>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
@@ -101,7 +101,7 @@ class Headers
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
-                    <strong class="container ml-2 d-none d-md-block">StructBI</strong>
+                    <strong class="container ml-2 d-none d-md-block">StructBX</strong>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
