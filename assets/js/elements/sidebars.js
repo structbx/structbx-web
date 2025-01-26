@@ -71,38 +71,10 @@ class Sidebars
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
-            <h5 class="small text-uppercase text-muted">GENERAL</h5>
-            <div class="nav-item">
-                <a class="menu_data nav-link mb-2 active" href="#data" menu="data">
-                    <i class="fas fa-database"></i>
-                    <span class="ms-2">Data</span>
-                </a>
-            </div>
-            <div class="nav-item ps-4">
-                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
-                    <a class="nav-link data_filter mb-2" href="#data" menu="data">
-                        <span>Filtrar y ordenar</span>
-                    </a>
-                    <a class="nav-link data_import mb-2" href="#data" menu="data">
-                        <span>Importar</span>
-                    </a>
-                    <a class="nav-link data_export mb-2" href="#data" menu="data">
-                        <span>Exportar</span>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a class="menu_columns nav-link mb-2 active" href="#columns" menu="columns">
-                    <i class="fas fa-columns"></i>
-                    <span class="ms-2">Columnas</span>
-                </a>
-            </div>
-            <h5 class="small text-uppercase text-muted">EXTRA</h5>
-            <div class="nav-item">
-                <a class="menu_settings nav-link mb-2" href="#settings" menu="settings">
-                    <i class="fas fa-file"></i>
-                    <span class="ms-2">Configuraci&oacute;n</span>
-                </a>
+            <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
+            <div id="component_sidebar_forms">
+                <div class="notifications"></div>
+                <div class="contents"></div>
             </div>
         `));
 

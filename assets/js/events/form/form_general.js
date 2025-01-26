@@ -112,87 +112,68 @@ $(function ()
     };
     form_read();
     
-    // Read all Header forms
-    const form_header_read_all = () =>
+    // Read all Sidebar forms
+    const form_sidebar_read_all = () =>
     {
-        $('#component_title_change table tbody').html('');
+        $('#component_sidebar_forms .contents').html('');
 
         // Wait animation
-        let wait = new wtools.ElementState('#component_title_change .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+        let wait = new wtools.ElementState('#component_sidebar_forms .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
 
         // Request
         new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
-            $('#component_title_change .notifications').html('');
-            $('#component_title_change table tbody').html('');
+            $('#component_sidebar_forms .notifications').html('');
+            $('#component_sidebar_forms .contents').html('');
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_title_change .notifications', '');
+            const result = new ResponseManager(response_data, '#component_sidebar_forms .notifications', '');
             if(!result.Verify_())
                 return;
 
             // Handle zero results
             if(response_data.body.data == undefined || response_data.body.data.length < 1)
             {
-                new wtools.Notification('SUCCESS', 0, '#component_title_change .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms .notifications').Show_('Sin resultados.');
                 return;
             }
 
             // Results elements creator
-            $('#component_title_change .contents').html('');
-            let elements = []; let cont = 0;
+            $('#component_sidebar_forms .contents').html('');
+            let elements = [];
             for(let row of response_data.body.data)
             {
-                if(cont < 2)
+                if(row.identifier == form_identifier)
                 {
                     elements.push(`
-                        <div class="col-12 col-sm-6 col-xxl-3 d-flex mb-4">
-                            <div class="card flex-fill">
-                                <div class="card-body py-4">
-                                    <div class="d-flex align-items-start">
-                                        <div class="flex-grow-1">
-                                            <h3 class="mb-2">
-                                                <a class="text-decoration-none text-dark" href="../form?identifier=${row.identifier}">
-                                                    ${row.name}
-                                                </a>
-                                            </h3>
-                                            <p class="mb-2 text-muted">Formulario</p>
-                                            <div class="mb-0">
-                                                <span class="badge bg-secondary me-2">${row.total} registros</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
+                        <a class="menu_data nav-link mb-2 active" href="/form?identifier=${row.identifier}">
+                            <i class="fas fa-database"></i>
+                            <span class="ms-2">${row.name}</span>
+                        </a>
                     `);
                 }
                 else
                 {
-                    let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
-                    $('#component_title_change .contents').append(ui_element);
-                    cont = 0;
-                    elements = [];
+                    elements.push(`
+                        <a class="menu_data nav-link mb-2" href="/form?identifier=${row.identifier}">
+                            <i class="fas fa-database"></i>
+                            <span class="ms-2">${row.name}</span>
+                        </a>
+                    `);
                 }
             }
-            if(elements.length > 0)
-            {
-                let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
-                $('#component_title_change .contents').append(ui_element);
-            }
+            let ui_element = new wtools.UIElementsPackage('<div class="nav-item"></div>', elements).Pack_();
+            $('#component_sidebar_forms .contents').append(ui_element);
         });
     };
-    form_header_read_all();
+    form_sidebar_read_all();
 
-    // Click on change form
-    $('#form_name').click(() => 
-    {
-        form_header_read_all();
-        $('#component_title_change').modal('show');
-    });
-    
     // Go to Form data
     $(document).on('click', '.go_form', (e) =>
     {
