@@ -23,9 +23,7 @@ $(function ()
 
     // Elements
         new Sidebars().SidebarMenuForm_();
-        new Headers().HeaderForm_();
         new Footers().Footer_();
-        new wtools.MenuManager('#menu_main', true);
     
     // Drag and drop Interface Design
     $("#component_interface_design_columns, #component_interface_design_layout").sortable({connectWith: ".connectedSortable"})
@@ -193,6 +191,57 @@ $(function ()
     {
         form_header_read_all();
         $('#component_title_change').modal('show');
+    });
+    
+    // Go to Form data
+    $(document).on('click', '.go_form', (e) =>
+    {
+        e.preventDefault();
+
+        // URL Params
+        const url_params = new URLSearchParams(window.location.search);
+
+        // Get Form identifier
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
+            return;
+
+        document.location.href = `/form?identifier=${form_identifier}`;
+
+    });
+    
+    // Go to Columns settings
+    $(document).on('click', '.go_columns', (e) =>
+    {
+        e.preventDefault();
+
+        // URL Params
+        const url_params = new URLSearchParams(window.location.search);
+
+        // Get Form identifier
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
+            return;
+
+        document.location.href = `/form/columns?identifier=${form_identifier}`;
+
+    });
+
+    // Go to Form Settings
+    $(document).on('click', '.go_settings', (e) =>
+    {
+        e.preventDefault();
+
+        // URL Params
+        const url_params = new URLSearchParams(window.location.search);
+
+        // Get Form identifier
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
+            return;
+
+        document.location.href = `/form/settings?identifier=${form_identifier}`;
+
     });
     
 });
