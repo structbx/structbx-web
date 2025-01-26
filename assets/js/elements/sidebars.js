@@ -35,12 +35,12 @@ class Sidebars
                     <a class="menu_users nav-link mb-2" href="#users" menu="users">
                         <span>Usuarios</span>
                     </a>
-                    <!--<a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
+                    <a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
                         <span>Grupos</span>
                     </a>
                     <a class="menu_permissions nav-link mb-2" href="#permissions" menu="permissions">
                         <span>Permisos</span>
-                    </a>-->
+                    </a>
                 </div>
             </div>
         `));
