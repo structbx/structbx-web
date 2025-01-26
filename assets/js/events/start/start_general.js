@@ -67,7 +67,7 @@ $(function ()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Data
-        let current_space = $('#space_name').html();
+        let current_space = $('.space_name').html();
         let new_space = $(e.target).html();
 
         if(current_space == new_space)
