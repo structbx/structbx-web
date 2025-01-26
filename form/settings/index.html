@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Configuraciones - Formulario - StructBX</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/libraries/fontawesome-v5.9.0.min.css">
+
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <!-- /CSS files -->
+
+        <!-- JS Libraries -->
+        <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+        <script src="../assets/js/libraries/bootstrap-v5.1.1/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../assets/js/libraries/wtools/wtools.js"></script>
+        <!-- /JS Libraries -->
+         
+    </head>
+    <body id="structbx" class="position-relative bg-light">
+
+        <header id="header_main" class="navbar navbar-dark navbar-expand-md navbar-light bg-dark text-white">
+        </header>
+
+        <div class="container-fluid container-xxl">
+
+            <div class="row">
+
+                <!--- Sidebar menu --->
+                <aside id="menu_main" class="sidebar col-md-3 col-lg-2 d-md-block bg-light collapse px-4">
+                </aside>
+                <!-- /Sidebar menu -->
+
+                <!-- Main content -->
+                <main id="contents_main" class="col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
+
+                    <!-- Settings section -->
+                    <section class="section_settings">
+                        <div class="pb-2 mb-3 border-bottom">
+                            <ol class="breadcrumb h4">
+                                <li class="breadcrumb-item"><span class="form_title"></span></li>
+                                <li class="breadcrumb-item active" aria-current="page">Configuraciones</li>
+                            </ol>
+                        </div>
+
+                        <!-- Settings: General -->
+                        <article id="component_settings_general" class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">General</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2">
+
+                                <div class="notifications"></div>
+                                <form novalidate>
+                                    <input type="hidden" name="id"/>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Identificador</th>
+                                                <td><input type="text" class="form-control" name="identifier"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Nombre</th>
+                                                <td><input type="text" class="form-control" name="name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Descripci&oacute;n</th>
+                                                <td><textarea class="form-control" name="description"></textarea></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /Contents -->
+                        </article>
+                        <!-- /Settings: General -->
+
+                        <!-- Settings: General: Delete -->
+                        <article id="component_settings_general_delete" class="card p-4 bg-white mb-4">
+                            <!-- Card header -->
+                            <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
+                                <div class="flex-grow-1 align-self-center">
+                                    <span class="text-dark fw-bold">Eliminar formulario</span>
+                                </div>
+                            </header>
+                            <!-- /Card header -->
+                            <!-- Contents -->
+                            <div class="mb-2">
+
+                                <div class="notifications"></div>
+                                <div class="mt-2">
+                                    <span>Esta acci&oacute;n no se puede deshacer:</span>
+                                    <button class="btn btn-danger ms-2 delete">Eliminar formulario</button>
+                                </div>
+                            </div>
+                            <!-- /Contents -->
+                        </article>
+                        <!-- /Settings: General: Delete -->
+
+                        <!-- Settings: Delete -->
+                        <div id="component_settings_delete" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Eliminar formulario <strong class="header"></strong></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>
+                                            Seguro desea eliminar el formulario <strong class="name"></strong>, esto eliminar&aacute; todos los registros
+                                            en &eacute;l
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Settings: Delete -->
+
+                    </section>
+                    <!-- /Settings section -->
+
+                    <!-- Footer -->
+                    <footer class="main_footer container">
+                    </footer>
+                    <!-- /Footer -->
+                    
+                </main>
+                <!-- /Main content -->
+
+                <!-- Notifications -->
+                <div class="row">
+                    <div id="notifications" class="col-sm-4 position-fixed top-0 end-0 sticky-top p-2">
+                    </div>
+                </div>
+                <!-- Notifications -->
+        
+            </div>
+        </div>
+
+        <!-- Wait animation -->
+        <div id="wait_animation_page">
+        </div>
+        <!-- /Wait animation -->
+
+        <!-- Javascript -->
+            <!-- General -->
+            <script src="../assets/js/main.js"></script>
+
+            <!-- Classes -->
+            <script src="../assets/js/classes/form_elements.js"></script>
+            <script src="../assets/js/classes/response_manager.js"></script>
+
+            <!-- Elements -->
+            <script src="../assets/js/elements/headers.js"></script>
+            <script src="../assets/js/elements/footers.js"></script>
+            <script src="../assets/js/elements/sidebars.js"></script>
+
+            <!-- Events -->
+            <script src="../assets/js/events/general.js"></script>
+            <script src="../assets/js/events/form/form_general.js"></script>
+            <script src="../assets/js/events/form/settings.js"></script>
+
+            <!-- Custom -->
+            <script>
+                $(function() {
+                    new Headers().HeaderForm_("settings");
+                });
+            </script>
+
+        <!-- Javascript -->
+    </body>
+</html>
