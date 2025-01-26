@@ -1,5 +1,19 @@
 $(function()
 {
+    // SELECT options
+    const options_permissions = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "No", true)
+        ,new wtools.OptionValue("1", "S&iacute;")
+    ]);
+    options_permissions.Build_('#component_settings_permissions_add select[name="read"]');
+    options_permissions.Build_('#component_settings_permissions_modify select[name="read"]');
+    options_permissions.Build_('#component_settings_permissions_add select[name="add"]');
+    options_permissions.Build_('#component_settings_permissions_modify select[name="add"]');
+    options_permissions.Build_('#component_settings_permissions_add select[name="modify"]');
+    options_permissions.Build_('#component_settings_permissions_modify select[name="modify"]');
+    options_permissions.Build_('#component_settings_permissions_add select[name="delete"]');
+    options_permissions.Build_('#component_settings_permissions_modify select[name="delete"]');
 
     // Read
     const settings_read = () =>
@@ -44,6 +58,57 @@ $(function()
     };
     settings_read();
 
+    // Read form permissions
+    const settings_read_permissions = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('#component_settings_permissions .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+        
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/permissions/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        {
+            // Clean
+            wait.Off_();
+            $('#component_settings_permissions .notifications').html('');
+            wtools.CleanForm($('#component_settings_permissions table tbody'));
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_settings_permissions .notifications', 'Configuraciones: Permisos');
+            if(!result.Verify_())
+                return;
+
+            if(response_data.body.data.length < 1)
+            {
+                new wtools.Notification('SUCCESS', 5000, '#component_settings_permissions .notifications').Show_('Sin resultados.');
+                return;
+            }
+            
+            new wtools.UIElementsCreator('#component_settings_permissions table tbody', response_data.body.data).Build_((row) =>
+            {
+                let elements = [
+                    `<th scope="row">${row.username}</th>`
+                    ,`<td scope="row">${options_permissions.ValueToOption_(row.read)}</td>`
+                    ,`<td scope="row">${options_permissions.ValueToOption_(row.add)}</td>`
+                    ,`<td scope="row">${options_permissions.ValueToOption_(row.modify)}</td>`
+                    ,`<td scope="row">${options_permissions.ValueToOption_(row.delete)}</td>`
+                ];
+
+                return new wtools.UIElementsPackage(`<tr permission-id="${row.id}"></tr>`, elements).Pack_();
+            });
+        });
+    };
+    settings_read_permissions();
+    
     // Modify form
     $('#component_settings_general form').submit((e) =>
     {
