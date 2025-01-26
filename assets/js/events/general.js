@@ -47,7 +47,7 @@ $(function ()
             }
             
             // Setup space name
-            $("#space_name").html(response_data.body.data[0].name);
+            $(".space_name").html(response_data.body.data[0].name);
         });
     };
     spaces_read_id();
