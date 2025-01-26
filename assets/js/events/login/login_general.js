@@ -91,10 +91,12 @@ $(function ()
             }
             else if(response_data.status == 401)
             {
+                $('#component_login form input[name=password]').val('');
                 new wtools.Notification('ERROR', 0, '#component_login .notifications').Show_("Usuario o contrase&ntilde;a incorrectos.");
             }
             else
             {
+                $('#component_login form input[name=password]').val('');
                 new wtools.Notification('ERROR', 0, '#component_login .notifications').Show_("Error al iniciar sesi&oacute;n");
             }
         });
