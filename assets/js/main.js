@@ -1,6 +1,6 @@
 
 var server_config = new wtools.ServerConfig(
-    url_production = new wtools.SeverConfigPair("structbx.com", "https://structbx.com")
-    ,url_development = new wtools.SeverConfigPair("localhost", "https://localhost:3000")
+    url_production = new wtools.SeverConfigPair("", "")
+    ,url_development = new wtools.SeverConfigPair("", "")
     ,api_url = "/api"
 );
