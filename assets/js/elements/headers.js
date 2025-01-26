@@ -11,7 +11,6 @@ class Headers
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
-                    <strong class="container ml-2 d-none d-md-block">StructBX</strong>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
@@ -19,11 +18,13 @@ class Headers
                 <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item ms-md-2 mt-2 mt-md-0">
-                            <span id="organization_name" class="nav-link btn btn-ligth-static"></span>
+                            <div class="d-flex align-items-center h-100">
+                                <h4 id="organization_name" class="m-0"></h4>
+                            </div>
                         </li>
+                        <div class="vr mx-4"></div>
                         <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
-                            <a id="space_name" class="nav-link dropdown-toggle btn btn-ligth" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            </a>
+                            <a class="nav-link dropdown-toggle btn btn-ligth space_name" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                             <ul id="space_all_spaces" class="dropdown-menu" aria-labelledby="space_name">
                             </ul>
                         </li>
@@ -55,7 +56,6 @@ class Headers
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
-                    <strong class="container ml-2 d-none d-md-block">StructBX</strong>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
@@ -63,16 +63,16 @@ class Headers
                 <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item ms-md-2 mt-2 mt-md-0">
+                            <div class="d-flex align-items-center h-100">
+                                <h4 id="organization_name" class="m-0"></h4>
+                            </div>
+                        </li>
+                        <div class="vr mx-4"></div>
+                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
                             <a class="nav-link btn btn-ligth" aria-current="page" href="../start/">
                                 <i class="fas fa-chevron-left me-2"></i>
-                                Inicio
+                                <span class="space_name"></span>
                             </a>
-                        </li>
-                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
-                            <span id="organization_name" class="nav-link btn btn-ligth-static"></span>
-                        </li>
-                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
-                            <span id="space_name" class="nav-link btn btn-ligth-static"></span>
                         </li>
                     </ul>
                 </div>
@@ -92,8 +92,22 @@ class Headers
             </div>
         `);
     }
-    HeaderForm_()
+    HeaderForm_(target = "")
     {
+        let buttons = ``;
+
+        if(target == "columns" || target == "settings")
+        {
+            buttons = `
+                <li class="nav-item ms-md-2 mt-2 mt-md-0">
+                    <a class="nav-link btn btn-ligth go_form">
+                        <i class="fas fa-chevron-left me-2"></i>
+                        <span id="form_name"></span>
+                    </a>
+                </li>
+            `;
+        }
+
         $("#header_main").append
         (`
             <div class="container-fluid d-flex justify-content-between">
@@ -101,7 +115,6 @@ class Headers
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
-                    <strong class="container ml-2 d-none d-md-block">StructBX</strong>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
@@ -109,22 +122,18 @@ class Headers
                 <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item ms-md-2 mt-2 mt-md-0">
+                            <div class="d-flex align-items-center h-100">
+                                <h4 id="organization_name" class="m-0"></h4>
+                            </div>
+                        </li>
+                        <div class="vr mx-4"></div>
+                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
                             <a class="nav-link btn btn-ligth" aria-current="page" href="../start/">
                                 <i class="fas fa-chevron-left me-2"></i>
-                                Inicio
+                                <span class="space_name"></span>
                             </a>
                         </li>
-                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
-                            <span id="organization_name" class="nav-link btn btn-ligth-static"></span>
-                        </li>
-                        <li class="nav-item ms-md-2 mt-2 mt-md-0">
-                            <span id="space_name" class="nav-link btn btn-ligth-static"></span>
-                        </li>
-                        <li class="nav-item dropdown ms-md-2 mt-2 mt-md-0">
-                            <a id="form_name" class="nav-link dropdown-toggle btn btn-ligth" href="#">
-                                
-                            </a>
-                        </li>
+                        ` + buttons + `
                     </ul>
                 </div>
                 <div class="sidebar collapse navbar-collapse">
