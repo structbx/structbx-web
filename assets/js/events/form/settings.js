@@ -15,6 +15,29 @@ $(function()
     options_permissions.Build_('#component_settings_permissions_add select[name="delete"]');
     options_permissions.Build_('#component_settings_permissions_modify select[name="delete"]');
 
+    let options_permissions_users = new wtools.SelectOptions();
+    const options_permissions_users_init = (options, callback) => new wtools.Request(server_config.current.api + `/forms/permissions/users/out/read?form-identifier=${wtools.GetUrlSearchParam('identifier')}`).Exec_((response_data) =>
+    {
+        try
+        {
+            let tmp_options = [];
+            for(let row of response_data.body.data)
+                tmp_options.push(new wtools.OptionValue(row.id, row.username));
+
+            options.options = tmp_options;
+            options.Build_('#component_settings_permissions_add select[name="id_user"]');
+            options.Build_('#component_settings_permissions_modify select[name="id_user"]');
+            callback();
+        }
+        catch(error)
+        {
+            new wtools.Notification('WARNING').Show_('No se pudo acceder a los usuarios del espacio.');
+            new wtools.Notification('WARNING', 0, '#component_settings_permissions_add .notifications').Show_('No se pudo acceder a los usuarios del espacio.');
+            new wtools.Notification('WARNING', 0, '#component_settings_permissions_modify .notifications').Show_('No se pudo acceder a los usuarios del espacio.');
+        }
+    });
+    options_permissions_users_init(options_permissions_users, () => {})
+
     // Read
     const settings_read = () =>
     {
@@ -108,6 +131,68 @@ $(function()
         });
     };
     settings_read_permissions();
+    
+    // Click on Add Form permission Button
+    const permissions_settings_add_pre = () =>
+    {
+        const add = () =>
+        {
+            $('#component_settings_permissions_add .notifications').html('');
+            $('#component_settings_permissions_add form select[name="read"]').val("1");
+            $('#component_settings_permissions_add form select[name="add"]').val("1");
+            $('#component_settings_permissions_add form select[name="modify"]').val("1");
+            $('#component_settings_permissions_add form select[name="delete"]').val("1");
+            $('#component_settings_permissions_add').modal('show');
+        }
+        options_permissions_users_init(options_permissions_users, add);
+    }
+    $('#component_settings_permissions .add').click(() => permissions_settings_add_pre());
+
+    // Add Forms permissions
+    $('#component_settings_permissions_add form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_settings_permissions_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            $('#component_settings_permissions_add .notifications').html('');
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_settings_permissions_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Get Form identifier
+        if(wtools.GetUrlSearchParam('identifier') == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_settings_permissions_add form')[0]);
+        data.append('form-identifier', wtools.GetUrlSearchParam('identifier'));
+
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/permissions/add", "POST", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_settings_permissions_add .notifications', 'Permisos de formulario: A&ntilde;adir');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Permiso de formulario creado exitosamente.');
+            settings_read_permissions();
+            $('#component_settings_permissions_add').modal('hide');
+        });
+    });
     
     // Modify form
     $('#component_settings_general form').submit((e) =>

@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
-                                        <a class="btn btn-dark-shadow">
+                                        <a class="btn btn-dark-shadow add">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
@@ -129,7 +129,66 @@
                             </div>
                             <!-- /Contents -->
                         </article>
-                        <!-- /Settings: General -->
+                        <!-- /Settings: Permissions -->
+
+                        <!-- Settings: Permissions: Add -->
+                        <div id="component_settings_permissions_add" class="modal fade" tabindex="-1" aria-labelledby="component_settings_permissions_add_label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_settings_permissions_add_label">A&ntilde;adir permiso de formulario</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Usuario</th>
+                                                    <td>
+                                                        <select class="form-select" name="id_user">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Permiso de lectura</th>
+                                                    <td>
+                                                        <select class="form-select" name="read">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Permiso para crear entradas</th>
+                                                    <td>
+                                                        <select class="form-select" name="add">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Permiso para modificar entradas</th>
+                                                    <td>
+                                                        <select class="form-select" name="modify">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Permiso para borrar entradas</th>
+                                                    <td>
+                                                        <select class="form-select" name="delete">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">A&ntilde;adir permiso</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Settings: Permissions: Add -->
 
                         <!-- Settings: General: Delete -->
                         <article id="component_settings_general_delete" class="card p-4 bg-white mb-4">
