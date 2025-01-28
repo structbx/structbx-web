@@ -40,6 +40,8 @@ $(function()
     });
     options_permissions_users_init(options_permissions_users, () => {})
 
+    /* --- General settings --- */
+
     // Read
     const settings_read = () =>
     {
@@ -82,6 +84,95 @@ $(function()
         });
     };
     settings_read();
+
+    // Modify form
+    $('#component_settings_general form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_settings_general form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_settings_general .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_settings_general .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_settings_general form')[0]);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+            
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_settings_general .notifications', 'Formularios: Editar');
+            if(!result.Verify_())
+                return;
+
+            $('#component_settings_general .notifications').html('');
+            new wtools.Notification('SUCCESS', 5000, '#component_settings_general .notifications').Show_('Formulario actualizado correctamente.');
+
+            const identifier = data.get('identifier');
+            window.location.href = `/form?identifier=${identifier}#settings`
+        });
+    });
+
+    // Read form to Delete
+    $(document).on("click", '#component_settings_general_delete .delete', (e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Form data
+        const form_id = $('#component_settings_general input[name="id"]').val();
+        const form_name = $('#component_settings_general input[name="name"]').val();
+
+        // Setup form to delete
+        $('#component_settings_delete input[name=id]').val(form_id);
+        $('#component_settings_delete strong.header').html(form_name);
+        $('#component_settings_delete strong.name').html(form_name);
+        $('#component_settings_delete .notifications').html('');
+        $('#component_settings_delete').modal('show');
+        wait.Off_();
+    });
+
+    // Delete form
+    $('#component_settings_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_settings_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Data
+        const form_id = $('#component_settings_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage error
+            const result = new ResponseManager(response_data, '#component_settings_delete .notifications', 'Formularios: Eliminar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
+            window.location.href = `/start`
+        });
+    });
+
+
+    /* --- Permissions settings --- */
 
     // Read form permissions
     const settings_permissions_read = () =>
@@ -196,89 +287,113 @@ $(function()
         });
     });
     
-    // Modify form
-    $('#component_settings_general form').submit((e) =>
+});{
+    // Wait animation
+    let wait = new wtools.ElementState('#component_settings_permissions .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+    // Get Form identifier
+    const url_params = new URLSearchParams(window.location.search);
+    const form_identifier = url_params.get('identifier');
+    if(form_identifier == undefined)
     {
-        e.preventDefault();
+        wait.Off_();
+        new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+        return;
+    }
+    
+    // Request
+    new wtools.Request(server_config.current.api + `/forms/permissions/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+    {
+        // Clean
+        wait.Off_();
+        $('#component_settings_permissions .notifications').html('');
+        $('#component_settings_permissions table tbody').html('');
 
-        // Wait animation
-        let wait = new wtools.ElementState('#component_settings_general form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+        // Manage response
+        const result = new ResponseManager(response_data, '#component_settings_permissions .notifications', 'Configuraciones: Permisos');
+        if(!result.Verify_())
+            return;
 
-        // Form check
-        const check = new wtools.FormChecker(e.target).Check_();
-        if(!check)
+        if(response_data.body.data.length < 1)
         {
-            wait.Off_();
-            $('#component_settings_general .notifications').html('');
-            new wtools.Notification('WARNING', 5000, '#component_settings_general .notifications').Show_('Hay campos inv&aacute;lidos.');
+            new wtools.Notification('SUCCESS', 5000, '#component_settings_permissions .notifications').Show_('Sin resultados.');
             return;
         }
-
-        // Data collection
-        const data = new FormData($('#component_settings_general form')[0]);
-
-        // Request
-        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", data, false).Exec_((response_data) =>
+        
+        new wtools.UIElementsCreator('#component_settings_permissions table tbody', response_data.body.data).Build_((row) =>
         {
-            wait.Off_();
-            
-            // Manage error
-            const result = new ResponseManager(response_data, '#component_settings_general .notifications', 'Formularios: Editar');
-            if(!result.Verify_())
-                return;
+            let elements = [
+                `<th scope="row">${row.username}</th>`
+                ,`<td scope="row">${options_permissions.ValueToOption_(row.read)}</td>`
+                ,`<td scope="row">${options_permissions.ValueToOption_(row.add)}</td>`
+                ,`<td scope="row">${options_permissions.ValueToOption_(row.modify)}</td>`
+                ,`<td scope="row">${options_permissions.ValueToOption_(row.delete)}</td>`
+            ];
 
-            $('#component_settings_general .notifications').html('');
-            new wtools.Notification('SUCCESS', 5000, '#component_settings_general .notifications').Show_('Formulario actualizado correctamente.');
-
-            const identifier = data.get('identifier');
-            window.location.href = `/form?identifier=${identifier}#settings`
+            return new wtools.UIElementsPackage(`<tr permission-id="${row.id}"></tr>`, elements).Pack_();
         });
     });
+};
+settings_permissions_read();
 
-    // Read form to Delete
-    $(document).on("click", '#component_settings_general_delete .delete', (e) =>
+// Click on Add Form permission Button
+const permissions_settings_add_pre = () =>
+{
+    const add = () =>
     {
-        e.preventDefault();
+        $('#component_settings_permissions_add .notifications').html('');
+        $('#component_settings_permissions_add form select[name="read"]').val("1");
+        $('#component_settings_permissions_add form select[name="add"]').val("1");
+        $('#component_settings_permissions_add form select[name="modify"]').val("1");
+        $('#component_settings_permissions_add form select[name="delete"]').val("1");
+        $('#component_settings_permissions_add').modal('show');
+    }
+    options_permissions_users_init(options_permissions_users, add);
+}
+$('#component_settings_permissions .add').click(() => permissions_settings_add_pre());
 
-        // Wait animation
-        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+// Add Forms permissions
+$('#component_settings_permissions_add form').submit((e) =>
+{
+    e.preventDefault();
 
-        // Form data
-        const form_id = $('#component_settings_general input[name="id"]').val();
-        const form_name = $('#component_settings_general input[name="name"]').val();
+    // Wait animation
+    let wait = new wtools.ElementState('#component_settings_permissions_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
-        // Setup form to delete
-        $('#component_settings_delete input[name=id]').val(form_id);
-        $('#component_settings_delete strong.header').html(form_name);
-        $('#component_settings_delete strong.name').html(form_name);
-        $('#component_settings_delete .notifications').html('');
-        $('#component_settings_delete').modal('show');
+    // Form check
+    const check = new wtools.FormChecker(e.target).Check_();
+    if(!check)
+    {
+        $('#component_settings_permissions_add .notifications').html('');
         wait.Off_();
-    });
+        new wtools.Notification('WARNING', 5000, '#component_settings_permissions_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+        return;
+    }
 
-    // Delete form
-    $('#component_settings_delete form').submit((e) =>
+    // Get Form identifier
+    if(wtools.GetUrlSearchParam('identifier') == undefined)
     {
-        e.preventDefault();
+        wait.Off_();
+        new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+        return;
+    }
 
-        // Wait animation
-        let wait = new wtools.ElementState('#component_settings_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+    // Data collection
+    const data = new FormData($('#component_settings_permissions_add form')[0]);
+    data.append('form-identifier', wtools.GetUrlSearchParam('identifier'));
 
-        // Data
-        const form_id = $('#component_settings_delete input[name=id]').val();
+    // Request
+    new wtools.Request(server_config.current.api + "/forms/permissions/add", "POST", data, false).Exec_((response_data) =>
+    {
+        wait.Off_();
 
-        // Request
-        new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
-        {
-            wait.Off_();
+        // Manage response
+        const result = new ResponseManager(response_data, '#component_settings_permissions_add .notifications', 'Permisos de formulario: A&ntilde;adir');
+        if(!result.Verify_())
+            return;
 
-            // Manage error
-            const result = new ResponseManager(response_data, '#component_settings_delete .notifications', 'Formularios: Eliminar');
-            if(!result.Verify_())
-                return;
-
-            new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
-            window.location.href = `/start`
-        });
+        new wtools.Notification('SUCCESS').Show_('Permiso de formulario creado exitosamente.');
+        settings_permissions_read();
+        $('#component_settings_permissions_add').modal('hide');
     });
 });
