@@ -21,6 +21,8 @@ $(function()
         try
         {
             let tmp_options = [];
+            if(response_data.body.data.length < 1)
+                tmp_options.push(new wtools.OptionValue("", "No hay usuarios disponibles"));
             for(let row of response_data.body.data)
                 tmp_options.push(new wtools.OptionValue(row.id, row.username));
 
@@ -82,7 +84,7 @@ $(function()
     settings_read();
 
     // Read form permissions
-    const settings_read_permissions = () =>
+    const settings_permissions_read = () =>
     {
         // Wait animation
         let wait = new wtools.ElementState('#component_settings_permissions .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -103,7 +105,7 @@ $(function()
             // Clean
             wait.Off_();
             $('#component_settings_permissions .notifications').html('');
-            wtools.CleanForm($('#component_settings_permissions table tbody'));
+            $('#component_settings_permissions table tbody').html('');
 
             // Manage response
             const result = new ResponseManager(response_data, '#component_settings_permissions .notifications', 'Configuraciones: Permisos');
@@ -130,7 +132,7 @@ $(function()
             });
         });
     };
-    settings_read_permissions();
+    settings_permissions_read();
     
     // Click on Add Form permission Button
     const permissions_settings_add_pre = () =>
@@ -189,7 +191,7 @@ $(function()
                 return;
 
             new wtools.Notification('SUCCESS').Show_('Permiso de formulario creado exitosamente.');
-            settings_read_permissions();
+            settings_permissions_read();
             $('#component_settings_permissions_add').modal('hide');
         });
     });
