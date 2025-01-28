@@ -28,7 +28,6 @@ $(function()
 
             options.options = tmp_options;
             options.Build_('#component_settings_permissions_add select[name="id_user"]');
-            options.Build_('#component_settings_permissions_modify select[name="id_user"]');
             callback();
         }
         catch(error)
@@ -287,113 +286,108 @@ $(function()
         });
     });
     
-});{
-    // Wait animation
-    let wait = new wtools.ElementState('#component_settings_permissions .notifications', false, 'block', new wtools.WaitAnimation().for_block);
-
-    // Get Form identifier
-    const url_params = new URLSearchParams(window.location.search);
-    const form_identifier = url_params.get('identifier');
-    if(form_identifier == undefined)
+    // Read form permission to modify
+    $(document).on("click", '#component_settings_permissions table tbody tr', (e) =>
     {
-        wait.Off_();
-        new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
-        return;
-    }
-    
-    // Request
-    new wtools.Request(server_config.current.api + `/forms/permissions/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
-    {
-        // Clean
-        wait.Off_();
-        $('#component_settings_permissions .notifications').html('');
-        $('#component_settings_permissions table tbody').html('');
+        e.preventDefault();
 
-        // Manage response
-        const result = new ResponseManager(response_data, '#component_settings_permissions .notifications', 'Configuraciones: Permisos');
-        if(!result.Verify_())
-            return;
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
-        if(response_data.body.data.length < 1)
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
         {
-            new wtools.Notification('SUCCESS', 5000, '#component_settings_permissions .notifications').Show_('Sin resultados.');
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
             return;
         }
-        
-        new wtools.UIElementsCreator('#component_settings_permissions table tbody', response_data.body.data).Build_((row) =>
-        {
-            let elements = [
-                `<th scope="row">${row.username}</th>`
-                ,`<td scope="row">${options_permissions.ValueToOption_(row.read)}</td>`
-                ,`<td scope="row">${options_permissions.ValueToOption_(row.add)}</td>`
-                ,`<td scope="row">${options_permissions.ValueToOption_(row.modify)}</td>`
-                ,`<td scope="row">${options_permissions.ValueToOption_(row.delete)}</td>`
-            ];
 
-            return new wtools.UIElementsPackage(`<tr permission-id="${row.id}"></tr>`, elements).Pack_();
+        // Get ID
+        let id = $(e.currentTarget).attr('permission-id');
+        if(id == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de permiso de formulario.');
+            return;
+        }
+
+        // Read form permission to modify
+        new wtools.Request(server_config.current.api + `/forms/permissions/read/id?id=${id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+        {
+            // Manage response
+            const result = new ResponseManager(response_data, '', 'Permisos de formulario: Modificar');
+            if(!result.Verify_())
+                return;
+
+            // Handle no results or zero results
+            if(response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el permiso de formulario.');
+                return;
+            }
+
+            // Set data
+            $('#component_settings_permissions_modify input[name="id"]').val(response_data.body.data[0].id);
+            $('#component_settings_permissions_modify input[name="id_user"]').val(response_data.body.data[0].username);
+            $('#component_settings_permissions_modify select[name="read"]').val(response_data.body.data[0].read);
+            $('#component_settings_permissions_modify select[name="add"]').val(response_data.body.data[0].add);
+            $('#component_settings_permissions_modify select[name="modify"]').val(response_data.body.data[0].modify);
+            $('#component_settings_permissions_modify select[name="delete"]').val(response_data.body.data[0].delete);
+
+            wait.Off_();
+            $('#component_settings_permissions_modify form').removeClass('was-validated');
+            $('#component_settings_permissions_modify').modal('show');
         });
     });
-};
-settings_permissions_read();
 
-// Click on Add Form permission Button
-const permissions_settings_add_pre = () =>
-{
-    const add = () =>
+    // Modify form permission
+    $('#component_settings_permissions_modify form').submit((e) =>
     {
-        $('#component_settings_permissions_add .notifications').html('');
-        $('#component_settings_permissions_add form select[name="read"]').val("1");
-        $('#component_settings_permissions_add form select[name="add"]').val("1");
-        $('#component_settings_permissions_add form select[name="modify"]').val("1");
-        $('#component_settings_permissions_add form select[name="delete"]').val("1");
-        $('#component_settings_permissions_add').modal('show');
-    }
-    options_permissions_users_init(options_permissions_users, add);
-}
-$('#component_settings_permissions .add').click(() => permissions_settings_add_pre());
+        e.preventDefault();
 
-// Add Forms permissions
-$('#component_settings_permissions_add form').submit((e) =>
-{
-    e.preventDefault();
+        // Wait animation
+        let wait = new wtools.ElementState('#component_settings_permissions_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
-    // Wait animation
-    let wait = new wtools.ElementState('#component_settings_permissions_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
-
-    // Form check
-    const check = new wtools.FormChecker(e.target).Check_();
-    if(!check)
-    {
-        $('#component_settings_permissions_add .notifications').html('');
-        wait.Off_();
-        new wtools.Notification('WARNING', 5000, '#component_settings_permissions_add .notifications').Show_('Hay campos inv&aacute;lidos.');
-        return;
-    }
-
-    // Get Form identifier
-    if(wtools.GetUrlSearchParam('identifier') == undefined)
-    {
-        wait.Off_();
-        new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
-        return;
-    }
-
-    // Data collection
-    const data = new FormData($('#component_settings_permissions_add form')[0]);
-    data.append('form-identifier', wtools.GetUrlSearchParam('identifier'));
-
-    // Request
-    new wtools.Request(server_config.current.api + "/forms/permissions/add", "POST", data, false).Exec_((response_data) =>
-    {
-        wait.Off_();
-
-        // Manage response
-        const result = new ResponseManager(response_data, '#component_settings_permissions_add .notifications', 'Permisos de formulario: A&ntilde;adir');
-        if(!result.Verify_())
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_settings_permissions_modify .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_settings_permissions_modify .notifications').Show_('Hay campos inv&aacute;lidos.');
             return;
+        }
 
-        new wtools.Notification('SUCCESS').Show_('Permiso de formulario creado exitosamente.');
-        settings_permissions_read();
-        $('#component_settings_permissions_add').modal('hide');
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data collection
+        const new_data = new FormData($('#component_settings_permissions_modify form')[0]);
+        new_data.append('form-identifier', form_identifier);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/forms/permissions/modify", "PUT", new_data, false).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_settings_permissions_modify .notifications', 'Permiso de formulario: Modificar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Permiso de formulario modificado exitosamente.');
+            $('#component_settings_permissions_modify').modal('hide');
+            settings_permissions_read();
+        });
     });
+    
 });
