@@ -390,4 +390,61 @@ $(function()
         });
     });
     
+    // Read form permission to Delete
+    $('#component_settings_permissions_modify .delete').click((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+        // Data
+        let data = new FormData($('#component_settings_permissions_modify form')[0]);
+        const id = data.get('id');
+
+        // Setup form permission to delete
+        $('#component_settings_permissions_delete input[name=id]').val(id);
+        $('#component_settings_permissions_delete').modal('show');
+        wait.Off_();
+    });
+    
+    // Delete form permission
+    $('#component_settings_permissions_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_settings_permissions_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Get Form identifier
+        const url_params = new URLSearchParams(window.location.search);
+        const form_identifier = url_params.get('identifier');
+
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Data
+        const id = $('#component_settings_permissions_delete input[name=id]').val();
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/permissions/delete?id=${id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        {
+            wait.Off_();
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_settings_permissions_delete .notifications', 'Permiso de formulario: Eliminar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Permiso de formulario eliminado.');
+            $('#component_settings_permissions_delete').modal('hide');
+            $('#component_settings_permissions_modify').modal('hide');
+            settings_permissions_read();
+        });
+    });
+    
 });

@@ -241,7 +241,7 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Eliminar</button>
+                                        <button type="button" class="btn btn-danger me-auto delete">Eliminar</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Modificar permiso</button>
                                     </div>
@@ -250,6 +250,27 @@
                         </div>
                         <!-- /Settings: Permissions: Modify -->
 
+                        <!-- Settings: Permissions: Delete -->
+                        <div id="component_settings_permissions_delete" class="modal fade" tabindex="-1" aria-labelledby="component_settings_permissions_delete_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_settings_permissions_delete_label">Eliminar permiso de formulario</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <span>Seguro desea eliminar este permiso de formulario:</span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Settings: Permissions: Delete -->
 
                         <!-- Settings: General: Delete -->
                         <article id="component_settings_general_delete" class="card p-4 bg-white mb-4">
