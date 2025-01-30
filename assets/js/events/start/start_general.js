@@ -31,14 +31,14 @@ $(function ()
     const spaces_read = () =>
     {
         // Wait animation
-        let wait = new wtools.ElementState('#space_all_spaces', false, 'button', new wtools.WaitAnimation().for_button);
+        let wait = new wtools.ElementState('#component_sidebar_spaces .contents', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
         new wtools.Request(server_config.current.api + "/spaces/read").Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
-            $('#space_all_spaces').html('');
+            $('#component_sidebar_spaces .contents').html('');
 
             // Manage error
             const result = new ResponseManager(response_data, '');
@@ -46,40 +46,49 @@ $(function ()
                 return;
             
             // Results elements creator
-            new wtools.UIElementsCreator('#space_all_spaces', response_data.body.data).Build_((row) =>
+            new wtools.UIElementsCreator('#component_sidebar_spaces .contents', response_data.body.data).Build_((row) =>
             {
-                let elements = [
-                    `<a class="dropdown-item" href="#" space_id="${row.id}">${row.name}</a>`
-                ];
+                let element = '';
+                if($('.space_name').html() == row.name)
+                {
+                    element = `
+                        <div class="nav-item">
+                            <a class="nav-link mb-2 active" href="#" space_id="${row.id}">
+                                <i class="fas fa-building"></i>
+                                <span class="ms-2">${row.name}</span>
+                            </a>
+                        </div>
+                    `
+                }
+                else
+                {
+                    element = `
+                        <div class="nav-item">
+                            <a class="nav-link mb-2" href="#" space_id="${row.id}">
+                                <i class="fas fa-building"></i>
+                                <span class="ms-2">${row.name}</span>
+                            </a>
+                        </div>
+                    `
+                }
 
-                return new wtools.UIElementsPackage('<li></li>', elements).Pack_();
+                return new wtools.UIElementsPackage('<li></li>', [element]).Pack_();
             });
         });
     };
     spaces_read();
 
     // Change current space
-    $(document).on("click", '#space_all_spaces a', (e) =>
+    $(document).on("click", '#component_sidebar_spaces .contents a', (e) =>
     {
         e.preventDefault();
 
         // Wait animation
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
-        // Data
-        let current_space = $('.space_name').html();
-        let new_space = $(e.target).html();
-
-        if(current_space == new_space)
-        {
-            wait.Off_();
-            new wtools.Notification('WARNING').Show_('Elije un espacio diferente al actual.');
-            return;
-        }
-
         // Form data
         const new_data = new FormData();
-        new_data.append("id_space", $(e.target).attr('space_id'));
+        new_data.append("id_space", $(e.currentTarget).attr('space_id'));
 
         // Read dashboard to modify
         new wtools.Request(server_config.current.api + `/spaces/change`, "POST", new_data).Exec_((response_data) =>

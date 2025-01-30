@@ -76,10 +76,37 @@ $(function ()
             }
         });
     });
-        
-    const go_to_settings = () =>
+    
+    $(document).on('click', '.go-start-button', function()
     {
-        window.location.href = "/start#my_account";
-    }
-    $(document).on('click', '.go-settings-button', (e) => go_to_settings());
+        window.location.href = "/start/";
+    });
+    $(document).on('click', '.go-form-button', function()
+    {
+        window.location.href = `/form?identifier=${wtools.GetUrlSearchParam('identifier')}`;
+    });
+    $(document).on('click', '.go-spaces-button', function()
+    {
+        window.location.href = "/administration#spaces";
+    });
+    $(document).on('click', '.go-my-account-button', function()
+    {
+        window.location.href = "/administration#my_account";
+    });
+    $(document).on('click', '.go-instance-button', function()
+    {
+        window.location.href = "/administration#instance";
+    });
+    $(document).on('click', '.go-users-button', function()
+    {
+        window.location.href = "/administration#users";
+    });
+    $(document).on('click', '.go-groups-button', function()
+    {
+        window.location.href = "/administration#groups";
+    });
+    $(document).on('click', '.go-permissions-button', function()
+    {
+        window.location.href = "/administration#permissions";
+    });
 });

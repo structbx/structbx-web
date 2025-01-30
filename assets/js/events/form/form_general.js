@@ -22,7 +22,7 @@ $(function ()
     verify_session();
 
     // Elements
-        new Sidebars().SidebarMenuForm_();
+        new Headers().Header_();
         new Footers().Footer_();
     
     // Drag and drop Interface Design
