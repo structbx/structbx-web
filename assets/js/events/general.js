@@ -52,6 +52,31 @@ $(function ()
     };
     spaces_read_id();
     
+    // Read username logued
+    const username_logued_read = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('#instance_name', false, 'button', new wtools.WaitAnimation().for_button);
+
+        // Request
+        new wtools.Request(server_config.current.api + "/general/users/current/read").Exec_((response_data) =>
+        {
+            // Clean
+            wait.Off_();
+
+            // Manage error
+            if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al usuario logueado.');
+                return;
+            }
+            
+            // Setup username logued
+            $(".username_logued").html(response_data.body.data[0].username);
+        });
+    };
+    username_logued_read();
+        
     // Logout
     $(document).on('click', '#logout-button', (e) =>
     {

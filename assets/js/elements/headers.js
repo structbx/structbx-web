@@ -22,18 +22,25 @@ class Headers
                                 <h4 id="instance_name" class="m-0"></h4>
                             </div>
                         </li>
-                        <div class="vr mx-4 d-none d-md-inline-block"></div>
                     </ul>
                 </div>
                 <div class="sidebar d-md-flex collapse navbar-collapse text-center text-md-left">
                         <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
-                            <li class="nav-item">
+                            <li class="nav-item me-2">
                                 <div class="d-flex align-items-center h-100 text-center">
                                     <span class="me-1">Espacio:</span>
                                     <span class="space_name"></span>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <div class="vr mx-4 d-none d-md-inline-block"></div>
+                            <li class="nav-item me-2">
+                                <div class="d-flex align-items-center h-100 text-center">
+                                    <span class="me-1">Bienvenido:</span>
+                                    <span class="username_logued"></span>
+                                </div>
+                            </li>
+                            <div class="vr mx-4 d-none d-md-inline-block"></div>
+                            <li class="nav-item dropdown me-2">
                                 <a class="nav-link dropdown-toggle" id="dropdown_administration" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-tools fa-fw"></i>
                                 </a>
@@ -46,7 +53,7 @@ class Headers
                                     <li><a class="dropdown-item go-permissions-button" href="#">Permisos</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item me-2">
                                 <a class="nav-link" href="#" id="logout-button">
                                     <i class="fas fa-sign-out-alt"></i>
                                 </a>

@@ -22,7 +22,7 @@ $(function()
 
     // Elements]
     new Sidebars().SidebarMenuSpace_();
-    new Headers().HeaderSpace_();
+    new Headers().Header_();
     new Footers().Footer_();
     new wtools.MenuManager('#menu_main', true);
 
