@@ -6,7 +6,7 @@ class Headers
     {
         $("#header_main").append
         (`
-            <div class="container-fluid d-flex justify-content-between">
+            <div class="container-xxl d-flex justify-content-between">
                 <a class="navbar-brand d-flex align-items-center" href="../start/">
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
@@ -15,19 +15,18 @@ class Headers
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:#fff;"></i>
                 </button>
-                <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse">
+                <div class="sidebar d-md-flex justify-content-between collapse navbar-collapse text-center text-md-left">
                     <ul class="navbar-nav">
                         <li class="nav-item ms-md-2 mt-2 mt-md-0">
                             <div class="d-flex align-items-center h-100">
                                 <h4 id="instance_name" class="m-0"></h4>
                             </div>
                         </li>
-                        <div class="vr mx-4"></div>
+                        <div class="vr mx-4 d-none d-md-inline-block"></div>
                     </ul>
                 </div>
-                <div class="sidebar collapse navbar-collapse">
-                    <div class="d-flex flex-row-reverse ms-auto">
-                        <ul class="navbar-nav ms-md-0 me-3 me-lg-4">
+                <div class="sidebar d-md-flex collapse navbar-collapse text-center text-md-left overflow-scroll">
+                        <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
                             <li class="nav-item">
                                 <div class="d-flex align-items-center h-100 text-center">
                                     <span class="me-1">Espacio:</span>
@@ -53,7 +52,6 @@ class Headers
                                 </a>
                             </li>
                         </ul>
-                    </div>
                 </div>
             </div>
         `);    
