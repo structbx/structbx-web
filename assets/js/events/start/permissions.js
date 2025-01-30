@@ -109,7 +109,7 @@ $(function()
     // Change id group
     $('#component_permissions_read select[name=id_group]').change(() => permissions_read());
     
-    // Click on Add Group button
+    // Click on Add Permission button
     $('#component_permissions_read .add').click(() => 
     {
         options_endpoints_out_init(options_endpoints_out, function()
@@ -122,7 +122,7 @@ $(function()
         });
     });
 
-    // Add Group
+    // Add Permission
     $('#component_permissions_add form').submit((e) =>
     {
         e.preventDefault();
