@@ -20,6 +20,8 @@ $(function()
         try
         {
             let tmp_options = [];
+            if(response_data.body.data.length < 1)
+                tmp_options.push(new wtools.OptionValue("", "No hay usuarios disponibles"));
             for(let row of response_data.body.data)
                 tmp_options.push(new wtools.OptionValue(row.id, row.username));
 
