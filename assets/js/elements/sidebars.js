@@ -19,29 +19,34 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2" href="#my_account" menu="my_account">
-                    <i class="fas fa-cog"></i>
-                    <span class="ms-2">Administraci&oacute;n</span>
+                <a class="menu_my_account nav-link mb-2" href="#my_account" menu="my_account">
+                    <i class="fas fa-user"></i>
+                    <span class="ms-2">Mi cuenta</span>
                 </a>
             </div>
-            <div class="nav-item ps-4">
-                <div class="ps-2 mb-2"  style="border-left: 1px solid #DDD;">
-                    <a class="menu_my_account nav-link mb-2" href="#my_account" menu="my_account">
-                        <span>Mi cuenta</span>
-                    </a>
-                    <a class="menu_organization nav-link mb-2" href="#organization" menu="organization">
-                        <span>Organizaci&oacute;n</span>
-                    </a>
-                    <a class="menu_users nav-link mb-2" href="#users" menu="users">
-                        <span>Usuarios</span>
-                    </a>
-                    <a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
-                        <span>Grupos</span>
-                    </a>
-                    <a class="menu_permissions nav-link mb-2" href="#permissions" menu="permissions">
-                        <span>Permisos</span>
-                    </a>
-                </div>
+            <div class="nav-item">
+                <a class="menu_instance nav-link mb-2" href="#instance" menu="instance">
+                    <i class="fas fa-home"></i>
+                    <span class="ms-2">Instancia</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_users nav-link mb-2" href="#users" menu="users">
+                    <i class="fas fa-users"></i>
+                    <span class="ms-2">Usuarios</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_groups nav-link mb-2" href="#groups" menu="groups">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="ms-2">Grupos</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="menu_permissions nav-link mb-2" href="#permissions" menu="permissions">
+                    <i class="fas fa-user-lock"></i>
+                    <span class="ms-2">Permisos</span>
+                </a>
             </div>
         `));
 
