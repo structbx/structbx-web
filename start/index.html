@@ -642,34 +642,98 @@
                                     <div class="flex-grow-1 align-self-center">
                                         <span class="text-dark fw-bold">Permisos</span>
                                     </div>
+                                    <div class="p-2">
+                                        <select class="form-select" name="id_group" required></select>
+                                    </div>
+                                    <div class="p-2">
+                                        <button class="btn btn-dark-shadow add">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
                                 <div class="mb-2 mt-4">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Permiso en</th>
-                                                <th scope="col">Acci&oacute;n</th>
-                                                <th scope="col">Grupo</th>
-                                                <th scope="col">Creado</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td scope="row">Dashboards</td>
-                                                <td scope="row">Leer</td>
-                                                <td scope="row">Administrador</td>
-                                                <td scope="row">24/03/2024 12:23</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    
+                                    <div class="notifications"></div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-bordered">
+                                            <thead class="table-light text-center align-middle text-nowrap">
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Permiso</th>
+                                                    <th scope="col">Acci&oacute;n</th>
+                                                    <th scope="col">Creado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                                 <!-- /Contents -->
                                 
                             </article>
                         </section>
                         <!-- /Permissions: Read -->
+
+                        <!-- Permissions: Add -->
+                        <div id="component_permissions_add" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">A&ntilde;adir nuevo permiso</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id_group" required>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Endpoint</td>
+                                                    <td>
+                                                        <select class="form-select" name="endpoint" required></select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Acci&oacute;n</td>
+                                                    <td><select class="form-select" name="action" required></select></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Permissions: Add -->
+
+                        <!-- Permissions: Delete -->
+                        <div class="modal fade" id="component_permissions_delete" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Eliminar permiso</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>Seguro desea eliminar el permiso <strong class="value"></strong></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Permissions: Delete -->
 
                     </section>
                     <!-- /Permissions section -->
@@ -718,6 +782,7 @@
             <script src="../assets/js/events/start/forms.js"></script>
             <script src="../assets/js/events/start/users.js"></script>
             <script src="../assets/js/events/start/groups.js"></script>
+            <script src="../assets/js/events/start/permissions.js"></script>
 
         <!-- Javascript -->
     </body>
