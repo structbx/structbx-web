@@ -570,6 +570,37 @@
                         </div>
                         <!-- /Groups: Add -->
 
+                        <!-- Groups: Modify -->
+                        <div id="component_groups_modify" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Editar grupo</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td><input class="form-control" type="text" name="group" required maxlength="100"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="delete btn btn-danger me-auto">Eliminar usuario</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Modificar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Groups: Modify -->
+
                     </section>
                     <!-- /Groups section -->
 
