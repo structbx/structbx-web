@@ -25,7 +25,7 @@ class Headers
                         <div class="vr mx-4 d-none d-md-inline-block"></div>
                     </ul>
                 </div>
-                <div class="sidebar d-md-flex collapse navbar-collapse text-center text-md-left overflow-scroll">
+                <div class="sidebar d-md-flex collapse navbar-collapse text-center text-md-left">
                         <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
                             <li class="nav-item">
                                 <div class="d-flex align-items-center h-100 text-center">
