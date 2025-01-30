@@ -6,10 +6,23 @@ class Sidebars
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
+            <h5 class="small text-uppercase text-muted">ESPACIOS</h5>
+            <div id="component_sidebar_spaces">
+                <div class="notifications"></div>
+                <div class="contents"></div>
+            </div>
+        `));
+
+        $("#menu_main").append(sidebar_menu);
+    }
+    SidebarMenuAdministration_ ()
+    {
+        let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
+        sidebar_menu.append($(`
             <div class="nav-item">
-                <a class="menu_forms nav-link mb-2" href="#forms" menu="forms">
-                    <i class="fas fa-table"></i>
-                    <span class="ms-2">Formularios</span>
+                <a class="nav-link mb-2 go-start-button" href="#">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-2">Ir a inicio</span>
                 </a>
             </div>
             <div class="nav-item">
@@ -57,6 +70,12 @@ class Sidebars
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
             <div class="nav-item">
+                <a class="nav-link mb-2 go-start-button" href="#">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-2">Ir a inicio</span>
+                </a>
+            </div>
+            <div class="nav-item">
                 <a class="menu_space nav-link mb-2" href="#space" menu="space">
                     <i class="fas fa-building"></i>
                     <span class="ms-2">Espacio</span>
@@ -76,6 +95,37 @@ class Sidebars
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
+            <div class="nav-item">
+                <a class="nav-link mb-2 go-start-button" href="#">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-2">Ir a inicio</span>
+                </a>
+            </div>
+            <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
+            <div id="component_sidebar_forms">
+                <div class="notifications"></div>
+                <div class="contents"></div>
+            </div>
+        `));
+
+        $("#menu_main").append(sidebar_menu);
+    }
+    SidebarMenuFormSettings_()
+    {
+        let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
+        sidebar_menu.append($(`
+            <div class="nav-item">
+                <a class="nav-link mb-2 go-start-button" href="#">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-2">Ir a inicio</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link mb-2 go-form-button" href="#">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-2">Ir al formulario</span>
+                </a>
+            </div>
             <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
             <div id="component_sidebar_forms">
                 <div class="notifications"></div>
