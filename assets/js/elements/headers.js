@@ -44,13 +44,43 @@ class Headers
                                 <a class="nav-link dropdown-toggle" id="dropdown_administration" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-tools fa-fw"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown_administration">
-                                    <li><a class="dropdown-item go-spaces-button" href="#">Espacios</a></li>
-                                    <li><a class="dropdown-item go-my-account-button" href="#">Mi cuenta</a></li>
-                                    <li><a class="dropdown-item go-instance-button" href="#">Instancia</a></li>
-                                    <li><a class="dropdown-item go-users-button" href="#">Usuarios</a></li>
-                                    <li><a class="dropdown-item go-groups-button" href="#">Grupos</a></li>
-                                    <li><a class="dropdown-item go-permissions-button" href="#">Permisos</a></li>
+                                <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" aria-labelledby="dropdown_administration">
+                                    <li>
+                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-spaces-button" href="#">
+                                            <i class="fas fa-building"></i>
+                                            <span class="ms-2">Espacios</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-my-account-button" href="#">
+                                            <i class="fas fa-user"></i>
+                                            <span class="ms-2">Mi cuenta</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-instance-button" href="#">
+                                            <i class="fas fa-home"></i>
+                                            <span class="ms-2">Instancia</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-users-button" href="#">
+                                            <i class="fas fa-users"></i>
+                                            <span class="ms-2">Usuarios</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-groups-button" href="#">
+                                            <i class="fas fa-cog"></i>
+                                            <span class="ms-2">Grupos</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-permissions-button" href="#">
+                                            <i class="fas fa-user-lock"></i>
+                                            <span class="ms-2">Permisos</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item me-2">
