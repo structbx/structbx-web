@@ -592,7 +592,7 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="delete btn btn-danger me-auto">Eliminar usuario</button>
+                                        <button type="button" class="delete btn btn-danger me-auto">Eliminar grupo</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Modificar</button>
                                     </div>
@@ -600,6 +600,28 @@
                             </div>
                         </div>
                         <!-- /Groups: Modify -->
+
+                        <!-- Groups: Delete -->
+                        <div class="modal fade" id="component_groups_delete" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Eliminar grupo</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>Seguro desea eliminar el grupo <strong class="group"></strong></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Groups: Delete -->
 
                     </section>
                     <!-- /Groups section -->
