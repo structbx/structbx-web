@@ -92,17 +92,25 @@ $(function ()
 
             // Permissions error
             // Manage response
-            const result = new ResponseManager(response_data, '#component_data_add .notifications', 'Data: A&ntilde;adir');
+            const result = new ResponseManager(response_data, '#wait_animation_page', 'Data: A&ntilde;adir');
             if(!result.Verify_())
             {
-                window.location.href = "../start/#forms";
+                // Wait animation
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+        
+                window.location.href = "/start/#forms";
                 return;
             }
             
             // Setup form name
             const form = response_data.body.data[0].name;
             if(form == undefined)
-                window.location.href = "../start/#forms";
+            {
+                // Wait animation
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+        
+                window.location.href = "/start/#forms";
+            }
             else
             {
                 $('#form_name').html(form);

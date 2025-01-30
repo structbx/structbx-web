@@ -2,14 +2,14 @@
 $(function ()
 {
 
-    // Read organization
-    const organization_read = () =>
+    // Read instance name
+    const instance_name_read = () =>
     {
         // Wait animation
-        let wait = new wtools.ElementState('#organization_name', false, 'button', new wtools.WaitAnimation().for_button);
+        let wait = new wtools.ElementState('#instance_name', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Request
-        new wtools.Request(server_config.current.api + "/organizations/read").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/general/instanceName/read").Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -17,15 +17,15 @@ $(function ()
             // Manage error
             if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING').Show_('No se pudo acceder a la organizaci&oacute;n.');
+                new wtools.Notification('WARNING').Show_('No se pudo acceder al nombre de la instancia.');
                 return;
             }
             
             // Setup space name
-            $("#organization_name").html(response_data.body.data[0].name);
+            $("#instance_name").html(response_data.body.data[0].value);
         });
     };
-    organization_read();
+    instance_name_read();
         
     // Read current Space
     const spaces_read_id = () =>

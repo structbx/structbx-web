@@ -118,7 +118,6 @@
                     <section class="section_spaces d-none">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
-                                <li class="breadcrumb-item space_name"></li>
                                 <li class="breadcrumb-item active" aria-current="page">Espacios</li>
                             </ol>
                         </div>
@@ -209,8 +208,6 @@
                     <section class="section_my_account d-none">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
-                                <li class="breadcrumb-item space_name"></li>
-                                <li class="breadcrumb-item">Administraci&oacute;n</li>
                                 <li class="breadcrumb-item active" aria-current="page">Mi cuenta</li>
                             </ol>
                         </div>
@@ -292,23 +289,21 @@
                     </section>
                     <!-- /My Account section -->
 
-                    <!-- Organization section -->
-                    <section class="section_organization d-none">
+                    <!-- Instance section -->
+                    <section class="section_instance d-none">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
-                                <li class="breadcrumb-item space_name"></li>
-                                <li class="breadcrumb-item">Administraci&oacute;n</li>
-                                <li class="breadcrumb-item active" aria-current="page">Organizaci&oacute;n</li>
+                                <li class="breadcrumb-item active" aria-current="page">Instancia</li>
                             </ol>
                         </div>
 
-                        <!-- Organization: General -->
-                        <section  id="component_organization_read">
+                        <!-- Instancia: Name: Read -->
+                        <section  id="component_instance_name_read">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
                                     <div class="flex-grow-1 align-self-center">
-                                        <span class="text-dark fw-bold">Informaci&oacute;n general</span>
+                                        <span class="text-dark fw-bold">Nombre de instancia</span>
                                     </div>
                                 </header>
                                 <!-- /Card header -->
@@ -320,7 +315,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Nombre de la organizaci&oacute;n</th>
+                                                    <th scope="row">Nombre de la instancia</th>
                                                     <td scope="row"><input type="text" class="form-control" name="name"></td>
                                                 </tr>
                                             </tbody>
@@ -335,17 +330,15 @@
                                 
                             </article>
                         </section>
-                        <!-- /Organization: General -->
+                        <!-- /Instance: Name: Read -->
 
                     </section>
-                    <!-- /Organization section -->
+                    <!-- /Instance section -->
 
                     <!-- Users section -->
                     <section class="section_users d-none">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
-                                <li class="breadcrumb-item space_name"></li>
-                                <li class="breadcrumb-item">Administraci&oacute;n</li>
                                 <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
                             </ol>
                         </div>
@@ -505,8 +498,6 @@
                     <section class="section_groups d-none">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
-                                <li class="breadcrumb-item space_name"></li>
-                                <li class="breadcrumb-item">Administraci&oacute;n</li>
                                 <li class="breadcrumb-item active" aria-current="page">Grupos</li>
                             </ol>
                         </div>
@@ -549,8 +540,6 @@
                     <section class="section_permissions d-none">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
-                                <li class="breadcrumb-item space_name"></li>
-                                <li class="breadcrumb-item">Administraci&oacute;n</li>
                                 <li class="breadcrumb-item active" aria-current="page">Permisos</li>
                             </ol>
                         </div>
@@ -634,7 +623,7 @@
             <!-- Events -->
             <script src="../assets/js/events/general.js"></script>
             <script src="../assets/js/events/start/start_general.js"></script>
-            <script src="../assets/js/events/start/organizations.js"></script>
+            <script src="../assets/js/events/start/instance.js"></script>
             <script src="../assets/js/events/start/spaces.js"></script>
             <script src="../assets/js/events/start/forms.js"></script>
             <script src="../assets/js/events/start/users.js"></script>

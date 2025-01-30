@@ -10,7 +10,7 @@ $(function()
     options_status.Build_('#component_users_modify select[name="status"]');
 
     let options_id_group = new wtools.SelectOptions();
-    const options_id_group_init = (options, callback) => new wtools.Request(server_config.current.api + "/organizations/groups/read").Exec_((response_data) =>
+    const options_id_group_init = (options, callback) => new wtools.Request(server_config.current.api + "/general/groups/read").Exec_((response_data) =>
     {
         try
         {
@@ -39,7 +39,7 @@ $(function()
         let wait = new wtools.ElementState('#component_users_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
-        new wtools.Request(server_config.current.api + `/organizations/users/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/general/users/read`).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -80,7 +80,7 @@ $(function()
         let wait = new wtools.ElementState('#component_my_account_general .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
-        new wtools.Request(server_config.current.api + `/organizations/users/current/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/general/users/current/read`).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -124,7 +124,7 @@ $(function()
         const data = new FormData($('#component_my_account_general form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/organizations/users/current/username/modify", "PUT", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/general/users/current/username/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -160,7 +160,7 @@ $(function()
         const data = new FormData($('#component_my_account_change_password form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/organizations/users/current/password/modify", "PUT", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/general/users/current/password/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -204,7 +204,7 @@ $(function()
         const data = new FormData($('#component_users_add form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/organizations/users/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/general/users/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -240,7 +240,7 @@ $(function()
             }
 
             // Read user to modify
-            new wtools.Request(server_config.current.api + `/organizations/users/read/id?id=${id}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/general/users/read/id?id=${id}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Usuarios: Modificar');
@@ -291,7 +291,7 @@ $(function()
         const data = new FormData($('#component_users_modify form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/organizations/users/modify", "PUT", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/general/users/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -339,7 +339,7 @@ $(function()
         const id = $('#component_users_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/organizations/users/delete?id=${id}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/general/users/delete?id=${id}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
             
