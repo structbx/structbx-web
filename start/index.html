@@ -510,6 +510,11 @@
                                     <div class="flex-grow-1 align-self-center">
                                         <span class="text-dark fw-bold">Grupos</span>
                                     </div>
+                                    <div class="p-2">
+                                        <button class="btn btn-dark-shadow add">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </header>
                                 <!-- /Card header -->
                                 <!-- Contents -->
@@ -536,6 +541,34 @@
                             </article>
                         </section>
                         <!-- /Groups: Read -->
+
+                        <!-- Groups: Add -->
+                        <div id="component_groups_add" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">A&ntilde;adir nuevo grupo</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td><input class="form-control" type="text" name="group" required maxlength="100"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Groups: Add -->
 
                     </section>
                     <!-- /Groups section -->
