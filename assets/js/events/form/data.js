@@ -68,6 +68,7 @@ $(function()
             {
                 let keys = response_data.body.columns_meta.data;
                 data_read_columns = [];
+                let it = 0;
                 new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
                 {
                     let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
@@ -75,9 +76,16 @@ $(function()
 
                     // Add column to array
                     data_read_columns.push({id: row.id, name: row.name});
-    
+
+                    it++;
+                    
                     return [`<th scope="col">${form_icon}${row.name}</th>`];
                 });
+
+                if(it < 5)
+                {
+                    $('#component_data_read table thead tr').append($(`<td scope="col" style="width: 50%;background: #CCC;"></td>`));
+                }
             }
 
             // Handle zero results
@@ -114,10 +122,10 @@ $(function()
                                     for(let i = max; i > max - 10; i--)
                                         n = row[column][i] + n;
                                         
-                                    elements.push(`<td scope="row" max-width="100px">...${n}</td>`);
+                                    elements.push(`<td scope="row">...${n}</td>`);
                                 }
                                 else
-                                    elements.push(`<td scope="row" max-width="100px">${row[column]}</td>`);
+                                    elements.push(`<td scope="row">${row[column]}</td>`);
                             }
                             else
                                 basic_push(row, column);
@@ -130,7 +138,7 @@ $(function()
 
                     key++;
                 }
-
+                
                 return new wtools.UIElementsPackage(`<tr record-id="${row.ID}"></tr>`, elements).Pack_();
             });
         });
@@ -645,5 +653,5 @@ $(function()
             new wtools.Notification('WARNING').Show_(`Error al descargar el archivo: ${error}.`);
         });
     });
-        
+
 });
