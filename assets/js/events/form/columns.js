@@ -64,9 +64,7 @@ $(function()
         let wait = new wtools.ElementState('#component_columns_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
@@ -192,8 +190,7 @@ $(function()
         }
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
 
         if(form_identifier == undefined)
         {
@@ -218,7 +215,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Columna creada exitosamente.');
             $('#component_columns_add').modal('hide');
-            location.reload();
+            columns_read();
         });
     });
 
@@ -233,8 +230,7 @@ $(function()
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const url_params = new URLSearchParams(window.location.search);
-            const form_identifier = url_params.get('identifier');
+            const form_identifier = wtools.GetUrlSearchParam('identifier');
             if(form_identifier == undefined)
             {
                 wait.Off_();
@@ -316,8 +312,7 @@ $(function()
         }
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
             wait.Off_();
@@ -341,7 +336,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Columna modificada exitosamente.');
             $('#component_columns_modify').modal('hide');
-            location.reload();
+            columns_read();
         });
     });
     
@@ -374,8 +369,7 @@ $(function()
         let wait = new wtools.ElementState('#component_columns_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
 
         if(form_identifier == undefined)
         {
@@ -400,7 +394,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Columna eliminada.');
             $('#component_columns_delete').modal('hide');
             $('#component_columns_modify').modal('hide');
-            location.reload();
+            columns_read();
         });
     });
     

@@ -16,23 +16,20 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
-        // URL Params
-        const url_params = new URLSearchParams(window.location.search);
-
         // Get Form identifier
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
         // Get conditions
         let conditions = ""
-        if(url_params.get('conditions') != undefined)
-            conditions = `&conditions=${url_params.get('conditions')}`;
+        if(wtools.GetUrlSearchParam('conditions') != undefined)
+            conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
 
         // Get order
         let order = ""
-        if(url_params.get('conditions') != undefined)
-            order = `&order=${url_params.get('order')}`;
+        if(wtools.GetUrlSearchParam('conditions') != undefined)
+            order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
         // Path request
         let path = "";
@@ -160,9 +157,7 @@ $(function()
     const data_read_changeInt = () =>
     {
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
@@ -234,9 +229,7 @@ $(function()
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const url_params = new URLSearchParams(window.location.search);
-            const form_identifier = url_params.get('identifier');
-
+            const form_identifier = wtools.GetUrlSearchParam('identifier');
             if(form_identifier == undefined)
             {
                 new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
@@ -325,9 +318,7 @@ $(function()
         }
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
             wait.Off_();
@@ -367,8 +358,7 @@ $(function()
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const url_params = new URLSearchParams(window.location.search);
-            const form_identifier = url_params.get('identifier');
+            const form_identifier = wtools.GetUrlSearchParam('identifier');
             if(form_identifier == undefined)
             {
                 wait.Off_();
@@ -479,9 +469,7 @@ $(function()
         }
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
             wait.Off_();
@@ -537,8 +525,7 @@ $(function()
         let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
 
         if(form_identifier == undefined)
         {
@@ -582,23 +569,20 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
 
-        // URL Params
-        const url_params = new URLSearchParams(window.location.search);
-
         // Get Form identifier
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
         // Get conditions
         let conditions = ""
-        if(url_params.get('conditions') != undefined)
-            conditions = `&conditions=${url_params.get('conditions')}`;
+        if(wtools.GetUrlSearchParam('conditions') != undefined)
+            conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
 
         // Get order
         let order = ""
-        if(url_params.get('conditions') != undefined)
-            order = `&order=${url_params.get('order')}`;
+        if(wtools.GetUrlSearchParam('conditions') != undefined)
+            order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
         // Path request
         const limit = $('#component_data_read table tbody')[0].rows.length;

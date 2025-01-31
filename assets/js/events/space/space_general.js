@@ -33,8 +33,7 @@ $(function()
         let wait = new wtools.ElementState('#component_space_modify .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const space_identifier = url_params.get('identifier');
+        const space_identifier = wtools.GetUrlSearchParam('identifier');
         if(space_identifier == undefined)
         {
             new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');

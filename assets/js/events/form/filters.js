@@ -61,9 +61,8 @@ $(function()
             $('#component_data_filter_order tbody').html('');
 
             // Get Form identifier
-            const url_params = new URLSearchParams(window.location.search);
-            const conditions = url_params.get('conditions');
-            const order = url_params.get('order');
+            const conditions = wtools.GetUrlSearchParam('conditions');
+            const order = wtools.GetUrlSearchParam('order');
 
             if(conditions != undefined && conditions != "")
             {
@@ -244,9 +243,7 @@ $(function()
         const orders_query = orders.join(',');
         
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
             window.location.href = "/start";
@@ -282,9 +279,7 @@ $(function()
         e.preventDefault();
         
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
             window.location.href = "/start";
