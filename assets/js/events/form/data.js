@@ -143,9 +143,9 @@ $(function()
     data_read();
 
     // Data read Pagination
-    $(window).on("scroll", function()
+    $('#component_data_read .contents').on("scroll", function(e)
     {
-        if(window.innerHeight + window.scrollY >= document.body.offsetHeight)
+        if(e.currentTarget.scrollTop + e.currentTarget.clientHeight >= e.currentTarget.scrollHeight)
         {
             if($('#component_data_read table tbody').html() != "")
                 data_read();
