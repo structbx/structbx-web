@@ -9,3 +9,11 @@
 body{
     --bs-body-font-size: .8rem !important;
 }
+
+#header_main{
+    z-index: 1001;
+}
+
+#menu_main{
+    z-index: 1000;
+}
