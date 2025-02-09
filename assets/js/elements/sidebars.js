@@ -76,6 +76,12 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
+                <a class="nav-link mb-2 go-spaces-button" href="#">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-2">Ir a espacios</span>
+                </a>
+            </div>
+            <div class="nav-item">
                 <a class="menu_space nav-link mb-2" href="#space" menu="space">
                     <i class="fas fa-building"></i>
                     <span class="ms-2">Espacio</span>
