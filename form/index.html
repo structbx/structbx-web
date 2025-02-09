@@ -31,35 +31,37 @@
         <div class="container-xxl">
             <div class="row">
 
-                <!--- Sidebar menu --->
-                <aside id="menu_main" class="sticky-md-top h-100 sidebar col-md-3 col-lg-2 d-md-block bg-light collapse px-4" style="top:5rem">
-                </aside>
-                <!-- /Sidebar menu -->
-
                 <!-- Main content -->
-                <main id="contents_main" class="col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
+                <main id="contents_main" class="col-md-12 col-lg-12 ms-sm-auto px-md-4 pt-2 pb-5 bg-light">
 
                     <!-- Data section -->
                     <section class="section_data">
 
+                        <!-- All forms Nav -->
+                        <div id="component_sidebar_forms_tabs" class="mb-2">
+                            <div class="notifications"></div>
+                            <div class="contents" style="overflow:scroll;height:2.6rem;"></div>
+                        </div>
+                        <!-- /All forms Nav -->
+
                         <!-- Data Header -->
-                        <div class="pb-2 mb-3 border-bottom d-flex">
+                        <div class="border-bottom d-flex">
                             <!-- Breadcrumbs -->
-                            <ol class="breadcrumb h4 flex-grow-1 align-self-center">
-                                <li class="breadcrumb-item"><span class="space_name"></span></li>
-                                <li class="breadcrumb-item active"><span class="form_title"></span></li>
+                            <ol class="breadcrumb flex-grow-1 align-self-center mb-0">
+                                <li class="breadcrumb-item"><b class="space_name"></b></li>
+                                <li class="breadcrumb-item active"><b class="form_title"></b></li>
                             </ol>
                             <!-- /Breadcrumbs -->
                             <!-- Buttons -->
                             <section class="d-flex">
                                 <div class="p-2">
-                                    <button class="btn btn-dark-shadow data_add">
+                                    <button class="btn btn-sm btn-dark-shadow data_add">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
-                                        <a class="btn btn-dark-shadow data_filter">
+                                        <a class="btn btn-sm btn-dark-shadow data_filter">
                                             <i class="fas fa-filter"></i>
                                         </a>
                                     </div>
@@ -67,14 +69,14 @@
                                 <div class="p-2 bd-highlight">
                                     <div class="dropdown">
                                         <button
-                                            class="btn btn-dark-shadow dropdown-toggle"
+                                            class="btn btn-sm btn-dark-shadow dropdown-toggle"
                                             type="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
                                             <i class="fas fa-list"></i>
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" style="z-index:1200;">
                                             <li>
                                                 <a class="dropdown-item data_import">
                                                     Importar data
@@ -107,10 +109,10 @@
                         <article id="component_data_read" class="bg-white">
                             
                             <!-- Contents -->
-                            <div class="mb-4">
+                            <div class="container-xxl" style="position:absolute;overflow:scroll;height: calc(100vh - 12rem);background: #fff;width: calc(100% - 3rem);padding:0;">
 
                                 <table id="component_data_read_table" class="table table-hover table-bordered table_data">
-                                    <thead class="text-center align-middle text-nowrap" style="position:sticky;top:5rem;right:0;">
+                                    <thead class="text-center align-middle text-nowrap sticky-top">
                                         <tr></tr>
                                     </thead>
                                     <tbody>
@@ -344,11 +346,6 @@
                     </section>
                     <!-- /Data section -->
 
-                    <!-- Footer -->
-                    <footer class="main_footer container">
-                    </footer>
-                    <!-- /Footer -->
-                    
                 </main>
                 <!-- /Main content -->
 
@@ -385,13 +382,6 @@
             <script src="../assets/js/events/form/form_general.js"></script>
             <script src="../assets/js/events/form/data.js"></script>
             <script src="../assets/js/events/form/filters.js"></script>
-
-            <!-- Custom -->
-            <script>
-                $(function() {
-                    new Sidebars().SidebarMenuForm_();
-                });
-            </script>
 
         <!-- Javascript -->
     </body>
