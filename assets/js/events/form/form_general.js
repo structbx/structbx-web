@@ -23,7 +23,6 @@ $(function ()
 
     // Elements
         new Headers().Header_();
-        new Footers().Footer_();
     
     // Drag and drop Interface Design
     $("#component_interface_design_columns, #component_interface_design_layout").sortable({connectWith: ".connectedSortable"})
@@ -74,9 +73,7 @@ $(function ()
         let wait = new wtools.ElementState('#form_name', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
             window.location.href = "../start/#forms";
@@ -129,9 +126,7 @@ $(function ()
         let wait = new wtools.ElementState('#component_sidebar_forms .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const url_params = new URLSearchParams(window.location.search);
-        const form_identifier = url_params.get('identifier');
-
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         // Request
         new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
         {
@@ -139,6 +134,8 @@ $(function ()
             wait.Off_();
             $('#component_sidebar_forms .notifications').html('');
             $('#component_sidebar_forms .contents').html('');
+            $('#component_sidebar_forms_tabs .notifications').html('');
+            $('#component_sidebar_forms_tabs .contents').html('');
 
             // Manage response
             const result = new ResponseManager(response_data, '#component_sidebar_forms .notifications', '');
@@ -149,6 +146,7 @@ $(function ()
             if(response_data.body.data == undefined || response_data.body.data.length < 1)
             {
                 new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms_tabs .notifications').Show_('Sin resultados.');
                 return;
             }
 
@@ -178,6 +176,37 @@ $(function ()
             }
             let ui_element = new wtools.UIElementsPackage('<div class="nav-item"></div>', elements).Pack_();
             $('#component_sidebar_forms .contents').append(ui_element);
+
+            // Results elements creator (tabs)
+            $('#component_sidebar_forms_tabs .contents').html('');
+            elements = [];
+            for(let row of response_data.body.data)
+            {
+                if(row.identifier == form_identifier)
+                {
+                    elements.push(`
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/form?identifier=${row.identifier}">
+                                <i class="fas fa-database"></i>
+                                <span class="ms-2">${row.name}</span>
+                            </a>
+                        </li>
+                    `);
+                }
+                else
+                {
+                    elements.push(`
+                        <li class="nav-item">
+                            <a class="nav-link" href="/form?identifier=${row.identifier}">
+                                <i class="fas fa-database"></i>
+                                <span class="ms-2">${row.name}</span>
+                            </a>
+                        </li>
+                    `);
+                }
+            }
+            ui_element = new wtools.UIElementsPackage('<ul class="nav nav-tabs"></ul>', elements).Pack_();
+            $('#component_sidebar_forms_tabs .contents').append(ui_element);
         });
     };
     form_sidebar_read_all();
@@ -187,11 +216,8 @@ $(function ()
     {
         e.preventDefault();
 
-        // URL Params
-        const url_params = new URLSearchParams(window.location.search);
-
         // Get Form identifier
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
@@ -204,11 +230,8 @@ $(function ()
     {
         e.preventDefault();
 
-        // URL Params
-        const url_params = new URLSearchParams(window.location.search);
-
         // Get Form identifier
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
@@ -221,11 +244,8 @@ $(function ()
     {
         e.preventDefault();
 
-        // URL Params
-        const url_params = new URLSearchParams(window.location.search);
-
         // Get Form identifier
-        const form_identifier = url_params.get('identifier');
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
             return;
 
