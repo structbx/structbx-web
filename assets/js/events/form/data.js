@@ -97,7 +97,7 @@ $(function()
             new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
             {
                 let elements = [];
-                const basic_push = (row, column) => {elements.push(`<td scope="row">${row[column]}</td>`)};
+                const basic_push = (row, column) => {elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)};
                 let key = 0;
                 for(let column of response_data.body.columns)
                 {
@@ -109,7 +109,7 @@ $(function()
                         {
                             // Verify if the column is image or file
                             if(column_meta.column_type == "image")
-                                elements.push(`<td scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
+                                elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
                             else if(column_meta.column_type == "file")
                             {
                                 if(row[column].length > 10)
@@ -119,10 +119,10 @@ $(function()
                                     for(let i = max; i > max - 10; i--)
                                         n = row[column][i] + n;
                                         
-                                    elements.push(`<td scope="row">...${n}</td>`);
+                                    elements.push(`<td class="bg-white" scope="row">...${n}</td>`);
                                 }
                                 else
-                                    elements.push(`<td scope="row">${row[column]}</td>`);
+                                    elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`);
                             }
                             else
                                 basic_push(row, column);

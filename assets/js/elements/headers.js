@@ -44,7 +44,7 @@ class Headers
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                     <i class="fas fa-tools fa-fw"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1200;">
+                                <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1050;">
                                     <li>
                                         <a class="dropdown-item btn btn-ligth py-2 px-4 go-spaces-button" href="#">
                                             <i class="fas fa-building"></i>

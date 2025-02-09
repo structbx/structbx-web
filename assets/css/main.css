@@ -11,9 +11,9 @@ body{
 }
 
 #header_main{
-    z-index: 1300;
+    z-index: 1050;
 }
 
 #menu_main{
-    z-index: 1000;
+    z-index: 1050;
 }
