@@ -40,11 +40,11 @@ class Headers
                                 </div>
                             </li>
                             <div class="vr mx-4 d-none d-md-inline-block"></div>
-                            <li class="nav-item dropdown me-2">
-                                <a class="nav-link dropdown-toggle" id="dropdown_administration" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <li class="nav-item me-2">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                     <i class="fas fa-tools fa-fw"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" aria-labelledby="dropdown_administration">
+                                <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1200;">
                                     <li>
                                         <a class="dropdown-item btn btn-ligth py-2 px-4 go-spaces-button" href="#">
                                             <i class="fas fa-building"></i>
