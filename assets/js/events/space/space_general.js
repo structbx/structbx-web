@@ -11,6 +11,7 @@ $(function()
         {
             if(response_data.status != 200)
             {
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
                 window.location.href = "../login/";
                 return;
             }
@@ -98,7 +99,8 @@ $(function()
             
             const space_identifier = data.get('identifier');
             new wtools.Notification('SUCCESS').Show_('Espacio modificado exitosamente.');
-            window.location.href = `/space?identifier=${space_identifier}#space`;
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+            window.location.href = `/space?identifier=${space_identifier}`;
         });
     });
 
@@ -145,6 +147,7 @@ $(function()
                 return;
 
             new wtools.Notification('SUCCESS').Show_('Espacio eliminado exitosamente.');
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = `/start`
         });
     });

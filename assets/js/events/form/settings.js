@@ -118,6 +118,7 @@ $(function()
             new wtools.Notification('SUCCESS', 5000, '#component_settings_general .notifications').Show_('Formulario actualizado correctamente.');
 
             const identifier = data.get('identifier');
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = `/form?identifier=${identifier}#settings`
         });
     });

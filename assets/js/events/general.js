@@ -93,6 +93,7 @@ $(function ()
             // Notifications
             if(response_data.status == 200)
             {
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
                 window.location.href = "/login/";
             }
             else
@@ -102,36 +103,77 @@ $(function ()
         });
     });
     
-    $(document).on('click', '.go-start-button', function()
+    $(document).on('click', '.go-button', function(e)
     {
-        window.location.href = "/start/";
+        e.preventDefault();
+        let path = $(e.currentTarget).attr('go-path');
+        let hash = $(e.currentTarget).attr('go-hash');
+        if(window.location.pathname == path || window.location.pathname == path + "/")
+        {
+            location.hash = hash;
+            location.reload();
+        }
+        else
+        {
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+            window.location.href = path + hash;
+        }
     });
-    $(document).on('click', '.go-form-button', function()
+
+    $(document).on('click', '.go-form-button', function(e)
     {
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = `/form?identifier=${wtools.GetUrlSearchParam('identifier')}`;
     });
-    $(document).on('click', '.go-spaces-button', function()
+
+    /*$(document).on('click', '.go-start-button', function(e)
     {
-        window.location.href = "/administration#spaces";
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+        window.location.href = "/start/";
     });
-    $(document).on('click', '.go-my-account-button', function()
+    $(document).on('click', '.go-spaces-button', function(e)
     {
+        e.preventDefault();
+        if(window.location.pathname == "/administration" || window.location.pathname == "/administration/")
+        {
+            location.href = location.origin + "/administration#spaces";
+        }
+        else
+        {
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+            window.location.href = "/administration#spaces";
+        }
+    });
+    $(document).on('click', '.go-my-account-button', function(e)
+    {
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = "/administration#my_account";
     });
-    $(document).on('click', '.go-instance-button', function()
+    $(document).on('click', '.go-instance-button', function(e)
     {
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = "/administration#instance";
     });
-    $(document).on('click', '.go-users-button', function()
+    $(document).on('click', '.go-users-button', function(e)
     {
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = "/administration#users";
     });
-    $(document).on('click', '.go-groups-button', function()
+    $(document).on('click', '.go-groups-button', function(e)
     {
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = "/administration#groups";
     });
-    $(document).on('click', '.go-permissions-button', function()
+    $(document).on('click', '.go-permissions-button', function(e)
     {
+        e.preventDefault();
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = "/administration#permissions";
-    });
+    });*/
 });

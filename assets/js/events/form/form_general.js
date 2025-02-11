@@ -12,6 +12,7 @@ $(function ()
         {
             if(response_data.status != 200)
             {
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
                 window.location.href = "../login/";
                 return;
             }
@@ -76,7 +77,8 @@ $(function ()
         const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
-            window.location.href = "../start/#forms";
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+            window.location.href = "../start/";
             return;
         }
 
@@ -92,10 +94,8 @@ $(function ()
             const result = new ResponseManager(response_data, '#wait_animation_page', 'Data: A&ntilde;adir');
             if(!result.Verify_())
             {
-                // Wait animation
                 new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        
-                window.location.href = "/start/#forms";
+                window.location.href = "/start/";
                 return;
             }
             
@@ -103,10 +103,8 @@ $(function ()
             const form = response_data.body.data[0].name;
             if(form == undefined)
             {
-                // Wait animation
                 new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        
-                window.location.href = "/start/#forms";
+                window.location.href = "/start/";
             }
             else
             {
@@ -221,6 +219,7 @@ $(function ()
         if(form_identifier == undefined)
             return;
 
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         document.location.href = `/form?identifier=${form_identifier}`;
 
     });
@@ -235,6 +234,7 @@ $(function ()
         if(form_identifier == undefined)
             return;
 
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         document.location.href = `/form/columns?identifier=${form_identifier}`;
 
     });
@@ -249,6 +249,7 @@ $(function ()
         if(form_identifier == undefined)
             return;
 
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         document.location.href = `/form/settings?identifier=${form_identifier}`;
 
     });

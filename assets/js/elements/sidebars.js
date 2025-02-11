@@ -20,7 +20,7 @@ class Sidebars
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
             <div class="nav-item">
-                <a class="nav-link mb-2 go-start-button" href="#">
+                <a class="nav-link mb-2 go-button" go-path="/start" go-hash="" href="#">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ms-2">Ir a inicio</span>
                 </a>
@@ -70,13 +70,13 @@ class Sidebars
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
             <div class="nav-item">
-                <a class="nav-link mb-2 go-start-button" href="#">
+                <a class="nav-link mb-2 go-button" go-path="/start" go-hash="" href="#">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ms-2">Ir a inicio</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2 go-spaces-button" href="#">
+                <a class="nav-link mb-2 go-button" go-path="/administration" go-hash="#spaces" href="#">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ms-2">Ir a espacios</span>
                 </a>
@@ -102,7 +102,7 @@ class Sidebars
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
             <div class="nav-item">
-                <a class="nav-link mb-2 go-start-button" href="#">
+                <a class="nav-link mb-2 go-button" go-path="/start" go-hash="" href="#">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ms-2">Ir a inicio</span>
                 </a>
@@ -121,7 +121,7 @@ class Sidebars
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
             <div class="nav-item">
-                <a class="nav-link mb-2 go-start-button" href="#">
+                <a class="nav-link mb-2 go-button" go-path="/start" go-hash="" href="#">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ms-2">Ir a inicio</span>
                 </a>

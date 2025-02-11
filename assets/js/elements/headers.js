@@ -7,7 +7,7 @@ class Headers
         $("#header_main").append
         (`
             <div class="container-xxl d-flex justify-content-between">
-                <a class="navbar-brand d-flex align-items-center" href="../start/">
+                <a class="navbar-brand d-flex align-items-center m-0" href="../start/">
                     <div class="container">
                         <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
                     </div>
@@ -25,70 +25,70 @@ class Headers
                     </ul>
                 </div>
                 <div class="sidebar d-md-flex collapse navbar-collapse text-center text-md-left">
-                        <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
-                            <li class="nav-item me-2">
-                                <div class="d-flex align-items-center h-100 text-center">
-                                    <span class="me-1">Espacio:</span>
-                                    <span class="space_name"></span>
-                                </div>
-                            </li>
-                            <div class="vr mx-4 d-none d-md-inline-block"></div>
-                            <li class="nav-item me-2">
-                                <div class="d-flex align-items-center h-100 text-center">
-                                    <span class="me-1">Bienvenido:</span>
-                                    <span class="username_logued"></span>
-                                </div>
-                            </li>
-                            <div class="vr mx-4 d-none d-md-inline-block"></div>
-                            <li class="nav-item me-2">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                    <i class="fas fa-tools fa-fw"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1050;">
-                                    <li>
-                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-spaces-button" href="#">
-                                            <i class="fas fa-building"></i>
-                                            <span class="ms-2">Espacios</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-my-account-button" href="#">
-                                            <i class="fas fa-user"></i>
-                                            <span class="ms-2">Mi cuenta</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-instance-button" href="#">
-                                            <i class="fas fa-home"></i>
-                                            <span class="ms-2">Instancia</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-users-button" href="#">
-                                            <i class="fas fa-users"></i>
-                                            <span class="ms-2">Usuarios</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-groups-button" href="#">
-                                            <i class="fas fa-cog"></i>
-                                            <span class="ms-2">Grupos</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item btn btn-ligth py-2 px-4 go-permissions-button" href="#">
-                                            <i class="fas fa-user-lock"></i>
-                                            <span class="ms-2">Permisos</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item me-2">
-                                <a class="nav-link" href="#" id="logout-button">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                </a>
-                            </li>
-                        </ul>
+                    <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
+                        <li class="nav-item me-2">
+                            <div class="d-flex align-items-center h-100 text-center">
+                                <span class="me-1">Espacio:</span>
+                                <span class="space_name"></span>
+                            </div>
+                        </li>
+                        <div class="vr mx-4 d-none d-md-inline-block"></div>
+                        <li class="nav-item me-2">
+                            <div class="d-flex align-items-center h-100 text-center">
+                                <span class="me-1">Bienvenido:</span>
+                                <span class="username_logued"></span>
+                            </div>
+                        </li>
+                        <div class="vr mx-4 d-none d-md-inline-block"></div>
+                        <li class="nav-item me-2">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <i class="fas fa-tools fa-fw"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1050;">
+                                <li>
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#spaces" href="#">
+                                        <i class="fas fa-building"></i>
+                                        <span class="ms-2">Espacios</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#my_account"href="#">
+                                        <i class="fas fa-user"></i>
+                                        <span class="ms-2">Mi cuenta</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#instance" href="#">
+                                        <i class="fas fa-home"></i>
+                                        <span class="ms-2">Instancia</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#users" href="#">
+                                        <i class="fas fa-users"></i>
+                                        <span class="ms-2">Usuarios</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#groups" href="#">
+                                        <i class="fas fa-cog"></i>
+                                        <span class="ms-2">Grupos</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#permissions" href="#">
+                                        <i class="fas fa-user-lock"></i>
+                                        <span class="ms-2">Permisos</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link" href="#" id="logout-button">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         `);    

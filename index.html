@@ -5,10 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>StructBX</title>
         <link rel="icon" type="image/png" href="assets/images/logo-75x75.png">
+
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../assets/css/libraries/bootstrap-v5.1.1/bootstrap.min.css">
+        <!-- /CSS files -->
+
+        <!-- JS Libraries -->
+        <script src="../assets/js/libraries/jquery.min-v3.4.1.js"></script>
+        <script src="../assets/js/libraries/wtools/wtools.js"></script>
+        <!-- /JS Libraries -->
+        
     </head>
     <body id="structbx" class="position-relative">
-        <p>Redirigiendo</p>
+        <div id="wait_animation_page"></div>
         <script>
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "start/"
         </script>
     </body>

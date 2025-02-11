@@ -246,6 +246,7 @@ $(function()
         const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";
         }
 
@@ -253,6 +254,7 @@ $(function()
         const url = `/form?identifier=${form_identifier}&conditions=${btoa(conditions_query)}&order=${btoa(orders_query)}#data`;
         
         // Redirigir a la URL
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = url;
     }
 
@@ -282,9 +284,11 @@ $(function()
         const form_identifier = wtools.GetUrlSearchParam('identifier');
         if(form_identifier == undefined)
         {
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";
         }
 
-        window.location.href = `/form?identifier=${form_identifier}#data`;
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+        window.location.href = `/form?identifier=${form_identifier}`;
     });
 });

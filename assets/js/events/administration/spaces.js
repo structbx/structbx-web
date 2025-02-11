@@ -85,6 +85,7 @@ $(function()
                 return;
             
             new wtools.Notification('SUCCESS').Show_('Espacio creado exitosamente.');
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             location.reload();
         });
     });
