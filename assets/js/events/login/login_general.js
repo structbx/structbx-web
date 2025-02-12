@@ -35,20 +35,18 @@ $(function ()
 
                 // Logout
                 new wtools.Request(server_config.current.api + "/system/logout", "POST").Exec_((response_data) =>
+                {
+                    // Notifications
+                    if(response_data.status == 200)
                     {
-                        wait.Off_();
-            
-                        // Notifications
-                        if(response_data.status == 200)
-                        {
-                            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-                            window.location.href = "/login/";
-                        }
-                        else
-                        {
-                            new wtools.Notification('WARNING').Show_('No se pudo cerrar la sesi&oacute;n.');
-                        }
-                    });
+                        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+                        window.location.href = "/login/";
+                    }
+                    else
+                    {
+                        new wtools.Notification('WARNING').Show_('No se pudo cerrar la sesi&oacute;n.');
+                    }
+                });
                 return;
             }
 

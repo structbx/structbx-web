@@ -65,9 +65,9 @@ $(function ()
             wait.Off_();
 
             // Manage error
-            if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
+            if(response_data.status == 403 || response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING').Show_('No se pudo acceder al usuario logueado.');
+                logout();
                 return;
             }
             
@@ -78,10 +78,8 @@ $(function ()
     username_logued_read();
         
     // Logout
-    $(document).on('click', '#logout-button', (e) =>
+    const logout = () =>
     {
-        e.preventDefault();
-
         // Wait animation
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
@@ -101,6 +99,12 @@ $(function ()
                 new wtools.Notification('WARNING').Show_('No se pudo cerrar la sesi&oacute;n.');
             }
         });
+    }
+    $(document).on('click', '#logout-button', (e) =>
+    {
+        e.preventDefault();
+
+        logout();
     });
     
     $(document).on('click', '.go-button', function(e)
@@ -126,54 +130,4 @@ $(function ()
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = `/form?identifier=${wtools.GetUrlSearchParam('identifier')}`;
     });
-
-    /*$(document).on('click', '.go-start-button', function(e)
-    {
-        e.preventDefault();
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = "/start/";
-    });
-    $(document).on('click', '.go-spaces-button', function(e)
-    {
-        e.preventDefault();
-        if(window.location.pathname == "/administration" || window.location.pathname == "/administration/")
-        {
-            location.href = location.origin + "/administration#spaces";
-        }
-        else
-        {
-            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-            window.location.href = "/administration#spaces";
-        }
-    });
-    $(document).on('click', '.go-my-account-button', function(e)
-    {
-        e.preventDefault();
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = "/administration#my_account";
-    });
-    $(document).on('click', '.go-instance-button', function(e)
-    {
-        e.preventDefault();
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = "/administration#instance";
-    });
-    $(document).on('click', '.go-users-button', function(e)
-    {
-        e.preventDefault();
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = "/administration#users";
-    });
-    $(document).on('click', '.go-groups-button', function(e)
-    {
-        e.preventDefault();
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = "/administration#groups";
-    });
-    $(document).on('click', '.go-permissions-button', function(e)
-    {
-        e.preventDefault();
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = "/administration#permissions";
-    });*/
 });
