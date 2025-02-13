@@ -7,6 +7,11 @@ $(function()
     // Condition Element
     const ConditionElement = () =>
     {
+        let options = '';
+        for(let option of new FilterType().array)
+        {
+            options += `<option value="${option.value}">${option.title}</option>`;
+        }
         return $(`
             <tr class="ui-state-default">
                 <td><a class="btn"><i class="fas fa-sort"></i></a></td>
@@ -16,12 +21,7 @@ $(function()
                 </td>
                 <td>
                     <select class="form-select" name="condition" required>
-                        <option value="LIKE">Contiene</option>
-                        <option value="=">Igual</option>
-                        <option value=">">Mayor que</option>
-                        <option value="<">Menor que</option>
-                        <option value=">=">Mayor o igual que</option>
-                        <option value="<=">Menor o igual que</option>
+                        ${options}
                     </select>
                 </td>
                 <td><input type="text" class="form-control" name="value" required/></td>
@@ -213,17 +213,23 @@ $(function()
             const value = $(this).find('input[name="value"]').val();
         
             // Add parameter to the array
+            let filter_type = new FilterType();
             switch(condition)
             {
-                case 'LIKE':
+                case filter_type.like.value:
                     conditions.push(` _structbx_column_${column} ${condition} '%${value}%' `);
                     break;
-                case '=':
-                case '>':
-                case '<':
-                case '>=':
-                case '<=':
+                case filter_type.equal.value:
+                case filter_type.not_equal.value:
+                case filter_type.greater.value:
+                case filter_type.less.value:
+                case filter_type.greater_equal.value:
+                case filter_type.less_equal.value:
                     conditions.push(` _structbx_column_${column} ${condition} '${value}' `);
+                    break;
+                case filter_type.in_list.value:
+                case filter_type.not_in_list.value:
+                    conditions.push(` _structbx_column_${column} ${condition} (${value}) `);
                     break;
             }
         });
