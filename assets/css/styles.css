@@ -235,3 +235,7 @@ table.table_data td:first-child {
     background-color: #145da0 !important;
     color: #fff !important;
 }
+.modal-footer{
+    background-color: #ebebeb !important;
+    color: #fff !important;
+}
