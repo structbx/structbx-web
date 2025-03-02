@@ -8,7 +8,7 @@ $(function ()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Request
-        new wtools.Request(server_config.current.api + "/system/login", "POST").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/auth/login", "POST").Exec_((response_data) =>
         {
             if(response_data.status == 200)
             {
@@ -34,7 +34,7 @@ $(function ()
                 new wtools.Notification('WARNING').Show_('No se pudo acceder al espacio.');
 
                 // Logout
-                new wtools.Request(server_config.current.api + "/system/logout", "POST").Exec_((response_data) =>
+                new wtools.Request(server_config.current.api + "/auth/logout", "POST").Exec_((response_data) =>
                 {
                     // Notifications
                     if(response_data.status == 200)
@@ -76,7 +76,7 @@ $(function ()
         const data = new FormData($('#component_login form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/system/login", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/auth/login", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
             $('#component_login .notifications').html('');

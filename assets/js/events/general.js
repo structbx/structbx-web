@@ -84,7 +84,7 @@ $(function ()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Request
-        new wtools.Request(server_config.current.api + "/system/logout", "POST").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/auth/logout", "POST").Exec_((response_data) =>
         {
             wait.Off_();
 
