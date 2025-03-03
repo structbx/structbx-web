@@ -65,36 +65,41 @@ $(function()
         });
     });
 
-    // Read Instance logo
-    const instance_logo_read = () =>
+    // Modify instance logo
+    $('#component_instance_logo_read form').submit((e) =>
     {
+        e.preventDefault();
+
         // Wait animation
-        let wait = new wtools.ElementState('#component_instance_logo_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+        let wait = new wtools.ElementState('#component_instance_logo_read form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Form check
+        const check = new wtools.FormChecker(e.target).Check_();
+        if(!check)
+        {
+            wait.Off_();
+            $('#component_instance_logo_read .notifications').html('');
+            new wtools.Notification('WARNING', 5000, '#component_instance_logo_read .notifications').Show_('Hay campos inv&aacute;lidos.');
+            return;
+        }
+
+        // Data collection
+        const data = new FormData($('#component_instance_logo_read form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + `/general/instanceLogo/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/general/instanceLogo/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_instance_logo_read .notifications', 'Logo de instancia: Leer');
+            const result = new ResponseManager(response_data, '#component_instance_logo_read .notifications', 'Logo de instancia: Modificar');
             if(!result.Verify_())
                 return;
             
-            // Handle zero results
-            if(response_data.body.data.length < 1)
-            {
-                new wtools.Notification('WARNING', '#component_instance_logo_read .notifications').Show_('No se pudo acceder al logo de la instancia.');
-                return;
-            }
-
-            if(response_data.body.data[0].value == "")
-                $('#component_instance_logo_read img').attr('src', '/assets/images/logo-150x150.png');
-            else
-                $('#component_instance_logo_read img').attr('src', response_data.body.data[0].value);
+            new wtools.Notification('SUCCESS').Show_('Logo de instancia modificada exitosamente.');
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+            location.reload();
         });
-    };
-    instance_logo_read();
-    
+    });
     
 });
