@@ -28,7 +28,7 @@ $(function()
     };
     instance_name_read();
     
-    // Modify organization
+    // Modify instance name
     $('#component_instance_name_read form').submit((e) =>
     {
         e.preventDefault();
@@ -64,5 +64,37 @@ $(function()
             location.reload();
         });
     });
+
+    // Read Instance logo
+    const instance_logo_read = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('#component_instance_logo_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+        // Request
+        new wtools.Request(server_config.current.api + `/general/instanceLogo/read`).Exec_((response_data) =>
+        {
+            wait.Off_();
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_instance_logo_read .notifications', 'Logo de instancia: Leer');
+            if(!result.Verify_())
+                return;
+            
+            // Handle zero results
+            if(response_data.body.data.length < 1)
+            {
+                new wtools.Notification('WARNING', '#component_instance_logo_read .notifications').Show_('No se pudo acceder al logo de la instancia.');
+                return;
+            }
+
+            if(response_data.body.data[0].value == "")
+                $('#component_instance_logo_read img').attr('src', '/assets/images/logo-150x150.png');
+            else
+                $('#component_instance_logo_read img').attr('src', response_data.body.data[0].value);
+        });
+    };
+    instance_logo_read();
+    
     
 });
