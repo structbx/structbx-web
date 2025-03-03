@@ -9,7 +9,7 @@ class Headers
             <div class="container-xxl d-flex justify-content-between">
                 <a class="navbar-brand d-flex align-items-center m-0" href="../start/">
                     <div class="container">
-                        <img width="40px;" src="../assets/images/logo-150x150.png" alt="Logo">
+                        <img width="40px;" src="/api/general/instanceLogo/read" alt="Logo">
                     </div>
                 </a>
                 <button class="navbar-toggler d-md-none collapsed btn-ligth text-end" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
