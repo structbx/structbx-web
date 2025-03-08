@@ -255,7 +255,7 @@
 
                         <!-- Data: Import data -->
                         <div id="component_data_import" class="modal fade" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="component_data_import_label">Importar data</h5>
@@ -274,41 +274,25 @@
                                                     <th scope="row">Separador</th>
                                                     <td>
                                                         <select class="form-select" name="separator">
-                                                            <option value="1">TAB</option>
-                                                            <option value="2">,</option>
-                                                            <option value="3">Espacio</option>
-                                                            <option value="4">;</option>
+                                                            <option value="TAB">TAB</option>
+                                                            <option value=",">,</option>
+                                                            <option value=" ">Espacio</option>
+                                                            <option value=";">;</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <table class="table mt-4">
+                                        <table class="table mt-4 map">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="table mt-4 previsualization">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Columna de archivo</th>
-                                                    <th scope="col">Columna de formulario</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>name</td>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="1">Nombre</option>
-                                                            <option value="2">Edad</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>age</td>
-                                                    <td>
-                                                        <select class="form-select" name="">
-                                                            <option value="1">Nombre</option>
-                                                            <option value="2">Edad</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -372,6 +356,7 @@
             <script src="../assets/js/classes/form_elements.js"></script>
             <script src="../assets/js/classes/response_manager.js"></script>
             <script src="../assets/js/classes/filter_type.js"></script>
+            <script src="../assets/js/classes/csv_reader.js"></script>
 
             <!-- Elements -->
             <script src="../assets/js/elements/headers.js"></script>
