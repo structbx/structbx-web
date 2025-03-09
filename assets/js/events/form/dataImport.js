@@ -126,7 +126,7 @@ $(function()
             final_data.push(elements);
             cont++;
         }
-        console.log(final_data);
+        return final_data;
     }
 
     // Import Data
@@ -138,12 +138,43 @@ $(function()
     });
 
     // Input file change
-    $('#component_data_import form').submit((e) =>
-    {
-        e.preventDefault();
-        send_data()
-    });
     $('#component_data_import input[name=file]').change(() => read_file());
     $('#component_data_import select[name=separator]').change(() => read_file());
     $(document).on('change', '#component_data_import select.column', () => previsualize_data());
+
+    // Submit form
+    $('#component_data_import form').submit((e) =>
+    {
+        e.preventDefault();
+
+        // Wait animation
+        let wait = new wtools.ElementState('#component_data_import form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+        // Get Form identifier
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
+
+        if(form_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            return;
+        }
+
+        // Get Data
+        data = {"form-identifier": form_identifier, data: send_data()};
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/data/import`, "POST", data, true).Exec_((response_data) =>
+        {
+            wait.Off_();
+            
+            // Manage response
+            const result = new ResponseManager(response_data, '#component_data_import .notifications', 'Data: Importar');
+            if(!result.Verify_())
+                return;
+
+            new wtools.Notification('SUCCESS').Show_('Importaci&oacute;n exitosa.');
+            $('#component_data_import').modal('hide');
+        });
+    });
 });
