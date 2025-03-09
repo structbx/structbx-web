@@ -1,6 +1,7 @@
 $(function()
 {
     var file_data = [];
+    var map_columns = {sources: [], targets: []};
     
     const select_options = () =>
     {
@@ -65,19 +66,22 @@ $(function()
         $('#component_data_import table.previsualization tbody').html('');
 
         // Enable columns
-        let enabled_columns = [];
+        map_columns.sources = [];
+        map_columns.map = {}
         $("#component_data_import .map .column").each(function()
         {
-            if($(this).val() != '')
-                enabled_columns.push($(this).val());
+            if($(this).val() == '') return;
+
+            source = $(this).attr('name');
+            map_columns.sources.push(source);
+            map_columns.map[source] = $(this).val();
         });
 
         // Previsualize data
         let cont = 0;
         for(let row of file_data)
         {
-            if(cont > 5)
-                break;
+            if(cont > 5) break;
 
             // Setup Header
             if(cont == 0)
@@ -85,8 +89,8 @@ $(function()
                 let headers = "";
                 for(let header of Object.keys(row))
                 {
-                    if(enabled_columns.includes(header))
-                        headers += `<th>${header}</th>`;
+                    if(map_columns.sources.includes(header))
+                        headers += `<th>${header}/${map_columns.map[header]}</th>`;
                 }
                 $('#component_data_import table.previsualization thead tr').append(headers);
             }
@@ -95,12 +99,34 @@ $(function()
             let elements = "";
             for(let header of Object.keys(row))
             {
-                if(enabled_columns.includes(header))
+                if(map_columns.sources.includes(header))
                     elements += `<td>${row[header]}</td>`;
             }
             $('#component_data_import table.previsualization tbody').append(`<tr>${elements}</tr>`);
             cont++;
         }
+    }
+
+    const send_data = () =>
+    {
+        let cont = 0;
+        let final_data = [];
+        console.log(map_columns.map);
+        for(let row of file_data)
+        {
+            if(cont > 10) break;
+
+            // Setup Data
+            let elements = {};
+            for(let header of Object.keys(row))
+            {
+                if(map_columns.sources.includes(header))
+                    elements[map_columns.map[header]] = row[header];
+            }
+            final_data.push(elements);
+            cont++;
+        }
+        console.log(final_data);
     }
 
     // Import Data
@@ -112,6 +138,11 @@ $(function()
     });
 
     // Input file change
+    $('#component_data_import form').submit((e) =>
+    {
+        e.preventDefault();
+        send_data()
+    });
     $('#component_data_import input[name=file]').change(() => read_file());
     $('#component_data_import select[name=separator]').change(() => read_file());
     $(document).on('change', '#component_data_import select.column', () => previsualize_data());
