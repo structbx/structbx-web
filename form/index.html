@@ -255,46 +255,73 @@
 
                         <!-- Data: Import data -->
                         <div id="component_data_import" class="modal fade" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
+                            <div class="modal-dialog modal-fullscreen">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="component_data_import_label">Importar data</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Archivo fuente</th>
-                                                    <td>
-                                                        <input type="file" class="form-control" name="file">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Separador</th>
-                                                    <td>
-                                                        <select class="form-select" name="separator">
-                                                            <option value="TAB">TAB</option>
-                                                            <option value=",">,</option>
-                                                            <option value=" ">Espacio</option>
-                                                            <option value=";">;</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table mt-4 map">
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                        <table class="table mt-4 previsualization">
-                                            <thead>
-                                                <tr>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header">Fuente de datos</div>
+                                                    <div class="p-4">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Archivo fuente</th>
+                                                                    <td>
+                                                                        <input type="file" class="form-control" name="file">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Separador</th>
+                                                                    <td>
+                                                                        <select class="form-select" name="separator">
+                                                                            <option value="TAB">TAB</option>
+                                                                            <option value=",">,</option>
+                                                                            <option value=" ">Espacio</option>
+                                                                            <option value=";">;</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-header">Mapear columnas</div>
+                                                    <div class="p-4">
+                                                        <table class="table map table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Columna fuente</th>
+                                                                    <th>Columna objetivo</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-4">
+                                            <div class="card-header">Previsualizaci&oacute;n</div>
+                                            <div class="p-4">
+                                                <table class="table mt-4 previsualization">
+                                                    <thead>
+                                                        <tr>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -367,6 +394,7 @@
             <script src="../assets/js/events/general.js"></script>
             <script src="../assets/js/events/form/form_general.js"></script>
             <script src="../assets/js/events/form/data.js"></script>
+            <script src="../assets/js/events/form/dataImport.js"></script>
             <script src="../assets/js/events/form/filters.js"></script>
 
         <!-- Javascript -->

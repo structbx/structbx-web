@@ -637,49 +637,4 @@ $(function()
             new wtools.Notification('WARNING').Show_(`Error al descargar el archivo: ${error}.`);
         });
     });
-
-    // Import Data
-    $('.data_import').click((e) =>
-    {
-        e.preventDefault();
-
-        $('#component_data_import').modal('show');
-    });
-    $('#component_data_import input[name=file]').change((e) =>
-    {
-        const file = $('#component_data_import input[name=file]');
-        const separator = $('#component_data_import select[name=separator]').val();
-        new CSVReader(file, separator).Read((state, data) =>
-        {
-            $('#component_data_import table.previsualization thead tr').html('');
-            $('#component_data_import table.previsualization tbody').html('');
-
-            let cont = 0;
-            for(let row of data)
-            {
-                if(cont > 5)
-                    break;
-
-                // Header
-                if(cont == 0)
-                {
-                    let headers = "";
-                    for(let header of Object.keys(row))
-                    {
-                        headers += `<th>${header}</th>`;
-                    }
-                    $('#component_data_import table.previsualization thead tr').append(headers);    
-                }
-
-                // Data
-                let elements = "";
-                for(let header of Object.keys(row))
-                {
-                    elements += `<td>${row[header]}</td>`;
-                }
-                $('#component_data_import table.previsualization tbody').append(`<tr>${elements}</tr>`);
-                cont++;
-            }
-        });
-    });
 });
