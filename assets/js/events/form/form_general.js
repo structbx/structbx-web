@@ -134,6 +134,8 @@ $(function ()
             $('#component_sidebar_forms .contents').html('');
             $('#component_sidebar_forms_tabs .notifications').html('');
             $('#component_sidebar_forms_tabs .contents').html('');
+            $('#component_sidebar_forms_tabs_modal .notifications').html('');
+            $('#component_sidebar_forms_tabs_modal .contents').html('');
 
             // Manage response
             const result = new ResponseManager(response_data, '#component_sidebar_forms .notifications', '');
@@ -145,66 +147,56 @@ $(function ()
             {
                 new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms .notifications').Show_('Sin resultados.');
                 new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms_tabs .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms_tabs_modal .notifications').Show_('Sin resultados.');
                 return;
             }
 
-            // Results elements creator
+            // Results elements creator: Sidebar
             $('#component_sidebar_forms .contents').html('');
             let elements = [];
             for(let row of response_data.body.data)
             {
-                if(row.identifier == form_identifier)
-                {
-                    elements.push(`
-                        <a class="menu_data nav-link mb-2 active" href="/form?identifier=${row.identifier}">
-                            <i class="fas fa-database"></i>
-                            <span class="ms-2">${row.name}</span>
-                        </a>
-                    `);
-                }
-                else
-                {
-                    elements.push(`
-                        <a class="menu_data nav-link mb-2" href="/form?identifier=${row.identifier}">
-                            <i class="fas fa-database"></i>
-                            <span class="ms-2">${row.name}</span>
-                        </a>
-                    `);
-                }
+                elements.push(`
+                    <a class="menu_data nav-link mb-2 ${row.identifier == form_identifier ? "active" : ""}" href="/form?identifier=${row.identifier}">
+                        <i class="fas fa-database"></i>
+                        <span class="ms-2">${row.name}</span>
+                    </a>
+                `);
             }
             let ui_element = new wtools.UIElementsPackage('<div class="nav-item"></div>', elements).Pack_();
             $('#component_sidebar_forms .contents').append(ui_element);
 
-            // Results elements creator (tabs)
+            // Results elements creator: Tabs
             $('#component_sidebar_forms_tabs .contents').html('');
             elements = [];
             for(let row of response_data.body.data)
             {
-                if(row.identifier == form_identifier)
-                {
-                    elements.push(`
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/form?identifier=${row.identifier}">
-                                <i class="fas fa-database"></i>
-                                <span class="ms-2">${row.name}</span>
-                            </a>
-                        </li>
-                    `);
-                }
-                else
-                {
-                    elements.push(`
-                        <li class="nav-item">
-                            <a class="nav-link" href="/form?identifier=${row.identifier}">
-                                <i class="fas fa-database"></i>
-                                <span class="ms-2">${row.name}</span>
-                            </a>
-                        </li>
-                    `);
-                }
+                elements.push(`
+                    <li class="nav-item">
+                        <a class="nav-link ${row.identifier == form_identifier ? "active" : ""}" href="/form?identifier=${row.identifier}">
+                            <i class="fas fa-database"></i>
+                            <span class="ms-2">${row.name}</span>
+                        </a>
+                    </li>
+                `);
             }
             ui_element = new wtools.UIElementsPackage('<ul class="nav nav-tabs"></ul>', elements).Pack_();
             $('#component_sidebar_forms_tabs .contents').append(ui_element);
+
+            // Results elements creator: Modal
+            $('#component_sidebar_forms_tabs_modal .contents').html('');
+            elements = [];
+            for(let row of response_data.body.data)
+            {
+                elements.push(`
+                    <a class="btn ${row.identifier == form_identifier ? "btn-primary" : "btn-outline-secondary"} me-2 mb-2" href="/form?identifier=${row.identifier}">
+                        <i class="fas fa-database"></i>
+                        <span class="ms-2">${row.name}</span>
+                    </a>
+                `);
+            }
+            ui_element = new wtools.UIElementsPackage('<div class="text-center"></ul>', elements).Pack_();
+            $('#component_sidebar_forms_tabs_modal .contents').append(ui_element);
         });
     };
     form_sidebar_read_all();

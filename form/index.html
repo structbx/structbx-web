@@ -40,9 +40,31 @@
                         <!-- All forms Nav -->
                         <div id="component_sidebar_forms_tabs" class="mb-2">
                             <div class="notifications"></div>
-                            <div class="contents" style="overflow:scroll;height:2.6rem;"></div>
+                            <div class="d-flex">
+                                <div class="contents d-none d-md-block me-auto" style="overflow:hidden;height:2.2rem;"></div>
+                                <button class="btn btn-dark-shadow" data-bs-toggle="modal" data-bs-target="#component_sidebar_forms_tabs_modal">
+                                    <i class="fas fa-bars" style="color:#333;"></i>
+                                </button>
+                            </div>
                         </div>
                         <!-- /All forms Nav -->
+
+                        <!-- All Forms Nav: Modal -->
+                        <div class="modal fade" id="component_sidebar_forms_tabs_modal" tabindex="-1" aria-labelledby="component_sidebar_forms_tabs_modal_label" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_sidebar_forms_tabs_modal_label">Formularios</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <div class="contents"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- All Forms Nav: Modal -->
 
                         <!-- Data Header -->
                         <div class="border-bottom d-flex">
