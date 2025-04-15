@@ -257,7 +257,7 @@ $(function()
         }
 
         // Construir la URL completa
-        const url = `/form?identifier=${form_identifier}&conditions=${btoa(conditions_query)}&order=${btoa(orders_query)}#data`;
+        const url = `/form?identifier=${form_identifier}&conditions=${btoa(conditions_query)}&order=${btoa(orders_query)}`;
         
         // Redirigir a la URL
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
