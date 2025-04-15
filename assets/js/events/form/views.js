@@ -1,5 +1,22 @@
 $(function()
 {
+    // Out of the views
+    const out_view = () =>
+    {
+        // Get Form identifier
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        if(form_identifier == undefined)
+            return;
+
+        // Construir la URL completa
+        const url = `/form?identifier=${form_identifier}`;
+        
+        // Redirigir a la URL
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+        location.href = url;
+    };
+    $('#component_data_views .out-view').click(() => out_view());
+
     // Read current view
     const read_current_view = () =>
     {
@@ -50,8 +67,8 @@ $(function()
             new wtools.UIElementsCreator('#component_data_views .contents', response_data.body.data).Build_((row) =>
             {
                 return `
-                    <div class="py-2 px-4 dropdown-item" style="cursor:pointer;" view-id="${row.id}">
-                        <strong class="me-2">${row.name}</strong>
+                    <div class="py-2 px-4 dropdown-item" style="cursor:pointer;">
+                        <a view-id="${row.id} href="#"><strong class="me-2">${row.name}</strong></a>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-sm btn-secondary modify" view-id="${row.id}"><i class="fas fa-pen"></i></button>
                             <button type="button" class="btn btn-sm btn-secondary delete" view-id="${row.id}"><i class="fas fa-trash"></i></button>
@@ -63,7 +80,7 @@ $(function()
     };
     views_read();
     
-    $(document).on('click', '#component_data_views .dropdown-item', (e) =>
+    $(document).on('click', '#component_data_views .dropdown-item a', (e) =>
     {
         e.preventDefault();
         // Get view id
