@@ -111,11 +111,8 @@ $(function()
     {
         let cont = 0;
         let final_data = [];
-        console.log(map_columns.map);
         for(let row of file_data)
         {
-            if(cont > 10) break;
-
             // Setup Data
             let elements = {};
             for(let header of Object.keys(row))
@@ -161,7 +158,10 @@ $(function()
         }
 
         // Get Data
-        data = {"form-identifier": form_identifier, data: send_data()};
+        data = [
+            {name: "form-identifier", value: form_identifier}
+            ,{data: send_data()}
+        ];
 
         // Request
         new wtools.Request(server_config.current.api + `/forms/data/import`, "POST", data, true).Exec_((response_data) =>
@@ -175,6 +175,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Importaci&oacute;n exitosa.');
             $('#component_data_import').modal('hide');
+            location.reload();
         });
     });
 });
