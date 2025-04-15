@@ -23,7 +23,10 @@ $(function()
         // Get view name
         const view_name = wtools.GetUrlSearchParam('view');
         if(view_name == undefined)
+        {
+            $('#component_data_views .out-view').hide();
             return;
+        }
 
         $('.form_view').text(` (${view_name})`);
     };
@@ -67,9 +70,11 @@ $(function()
             new wtools.UIElementsCreator('#component_data_views .contents', response_data.body.data).Build_((row) =>
             {
                 return `
-                    <div class="py-2 px-4 dropdown-item" style="cursor:pointer;">
-                        <a view-id="${row.id} href="#"><strong class="me-2">${row.name}</strong></a>
-                        <div class="btn-group" role="group">
+                    <div class="p-0 dropdown-item d-flex align-items-center" style="cursor:pointer;">
+                        <a class="py-2 ps-4 text-dark text-decoration-none flex-fill me-2" view-id="${row.id}" href="#">
+                            ${row.name}
+                        </a>
+                        <div class="py-2 pe-4 btn-group" role="group">
                             <button type="button" class="btn btn-sm btn-secondary modify" view-id="${row.id}"><i class="fas fa-pen"></i></button>
                             <button type="button" class="btn btn-sm btn-secondary delete" view-id="${row.id}"><i class="fas fa-trash"></i></button>
                         </div>
