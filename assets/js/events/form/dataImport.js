@@ -109,7 +109,6 @@ $(function()
 
     const send_data = () =>
     {
-        let cont = 0;
         let final_data = [];
         for(let row of file_data)
         {
@@ -121,7 +120,6 @@ $(function()
                     elements[map_columns.map[header]] = row[header];
             }
             final_data.push(elements);
-            cont++;
         }
         return final_data;
     }
@@ -173,9 +171,11 @@ $(function()
             if(!result.Verify_())
                 return;
 
-            new wtools.Notification('SUCCESS').Show_('Importaci&oacute;n exitosa.');
-            $('#component_data_import').modal('hide');
-            location.reload();
+            $('#component_data_import_message').modal('show');
+            $('#component_data_import_message .contents').append($(`<p>Mensaje: ${response_data.body.message}</p>`));
+            $('#component_data_import_message .contents').append($(`<p>Total guardados: ${response_data.body.saved}</p>`));
+            $('#component_data_import_message .contents').append($(`<p>Total no guardados: ${response_data.body.errors}</p>`));
+            $('#component_data_import_message .contents').append($(`<p>Filas no guardadas: ${response_data.body.error_lines}</p>`));
         });
     });
 });
