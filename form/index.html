@@ -71,11 +71,34 @@
                             <!-- Breadcrumbs -->
                             <ol class="breadcrumb flex-grow-1 align-self-center mb-0">
                                 <li class="breadcrumb-item"><b class="space_name"></b></li>
-                                <li class="breadcrumb-item active"><b class="form_title"></b></li>
+                                <li class="breadcrumb-item active"><b class="form_title"></b><i class="form_view"></i></li>
                             </ol>
                             <!-- /Breadcrumbs -->
                             <!-- Buttons -->
                             <section class="d-flex">
+                                <div class="p-2 bd-highlight">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-dark-shadow dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <div class="dropdown-menu" style="z-index:1050;width:512px;">
+                                            <div id="component_data_views">
+                                                <div class="notifications"></div>
+                                                <div class="py-2 px-4 dropdown-item" style="cursor:pointer;">
+                                                    <i class="fas fa-plus me-2"></i>
+                                                    Crear nueva vista
+                                                </div>
+                                                <div class="py-2 px-4 dropdown-item" style="cursor:pointer;">
+                                                    <i class="fas fa-times me-2"></i>
+                                                    Salir de todas las vistas
+                                                </div>
+                                                <hr class="dropdown-divider">
+                                                <div class="contents p-2 text-end">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="p-2">
                                     <button class="btn btn-sm btn-dark-shadow data_add">
                                         <i class="fas fa-plus"></i>
@@ -437,6 +460,7 @@
             <script src="../assets/js/events/form/data.js"></script>
             <script src="../assets/js/events/form/dataImport.js"></script>
             <script src="../assets/js/events/form/filters.js"></script>
+            <script src="../assets/js/events/form/views.js"></script>
 
         <!-- Javascript -->
     </body>
