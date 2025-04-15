@@ -89,7 +89,6 @@ $(function()
             if(response_data.body.data.length < 1)
             {
                 data_read_page_end = true;
-                new wtools.Notification('SUCCESS', 5000, '#component_data_read .notifications').Show_('Sin m&aacute;s resultados.');
                 return;
             }
 
