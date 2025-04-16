@@ -256,12 +256,17 @@ $(function()
             window.location.href = "/start";
         }
 
-        // Construir la URL completa
-        const url = `/form?identifier=${form_identifier}&conditions=${btoa(conditions_query)}&order=${btoa(orders_query)}`;
-        
-        // Redirigir a la URL
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = url;
+        // Build URL params
+        const url = new URL(window.location.href);
+        url.searchParams.set('identifier', form_identifier);
+        url.searchParams.set('conditions', btoa(conditions_query));
+        url.searchParams.set('order', btoa(orders_query));
+        history.pushState({}, '', url.toString());
+
+        // Reload data
+        $('#component_data_reload').click();
+
+        $('#component_data_filter').modal('hide');
     }
 
     // Submit filters
@@ -293,8 +298,14 @@ $(function()
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";
         }
+        
+        // Build URL params
+        const url = new URL(window.location.href);
+        url.searchParams.delete('conditions');
+        url.searchParams.delete('order');
+        history.pushState({}, '', url.toString());
 
-        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = `/form?identifier=${form_identifier}`;
+        // Reload data
+        $('#component_data_reload').click();
     });
 });
