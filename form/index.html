@@ -50,7 +50,7 @@
                         <!-- /All forms Nav -->
 
                         <!-- All Forms Nav: Modal -->
-                        <div class="modal fade" id="component_sidebar_forms_tabs_modal" tabindex="-1" aria-labelledby="component_sidebar_forms_tabs_modal_label" aria-hidden="true">
+                        <div class="modal" id="component_sidebar_forms_tabs_modal" tabindex="-1" aria-labelledby="component_sidebar_forms_tabs_modal_label" aria-hidden="true">
                             <div class="modal-dialog modal-fullscreen">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
@@ -171,7 +171,7 @@
                         <!-- /Data: Read -->
 
                         <!-- Data: Add -->
-                        <div class="modal fade" id="component_data_add" tabindex="-1" aria-labelledby="component_data_add_label" aria-hidden="true">
+                        <div class="modal" id="component_data_add" tabindex="-1" aria-labelledby="component_data_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-fullscreen">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
@@ -197,7 +197,7 @@
                         <!-- /Data: Add -->
 
                         <!-- Data: Modify -->
-                        <div class="modal fade" id="component_data_modify" tabindex="-1" aria-labelledby="component_data_modify_label" aria-hidden="true">
+                        <div class="modal" id="component_data_modify" tabindex="-1" aria-labelledby="component_data_modify_label" aria-hidden="true">
                             <div class="modal-dialog modal-fullscreen">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
@@ -225,7 +225,7 @@
                         <!-- /Data: Modify -->
 
                         <!-- Data: Delete -->
-                        <div class="modal fade" id="component_data_delete" tabindex="-1" aria-labelledby="component_data_delete_label" aria-hidden="true">
+                        <div class="modal" id="component_data_delete" tabindex="-1" aria-labelledby="component_data_delete_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
@@ -247,7 +247,7 @@
                         <!-- /Data: Delete -->
 
                         <!-- Data: Filter -->
-                        <div id="component_data_filter" class="modal fade" tabindex="-1" aria-labelledby="component_data_filter_label" aria-hidden="true">
+                        <div id="component_data_filter" class="modal" tabindex="-1" aria-labelledby="component_data_filter_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
@@ -302,7 +302,7 @@
                         <!-- /Data: Filter -->
 
                         <!-- Data: Import data -->
-                        <div id="component_data_import" class="modal fade" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
+                        <div id="component_data_import" class="modal" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
                             <div class="modal-dialog modal-fullscreen">
                                 <form class="modal-content">
                                     <div class="modal-header">
@@ -382,7 +382,7 @@
                         <!-- /Data: Import data -->
 
                         <!-- Data: Import: Message -->
-                        <div id="component_data_import_message" class="modal fade" tabindex="-1" aria-labelledby="component_data_import_message_label" aria-hidden="true">
+                        <div id="component_data_import_message" class="modal" tabindex="-1" aria-labelledby="component_data_import_message_label" aria-hidden="true">
                             <div class="modal-dialog modal-fullscreen">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
@@ -400,7 +400,7 @@
                         <!-- /Data: Import: Message -->
 
                         <!-- Data: Export data -->
-                        <div id="component_data_export" class="modal fade" tabindex="-1" aria-labelledby="component_data_export_label" aria-hidden="true">
+                        <div id="component_data_export" class="modal" tabindex="-1" aria-labelledby="component_data_export_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -420,6 +420,74 @@
                             </div>
                         </div>
                         <!-- /Data: Export data -->
+
+                        <!-- Data: Views: Add -->
+                        <div class="modal" id="component_data_views_add" tabindex="-1" aria-labelledby="component_data_views_add_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_data_views_add_label">Nueva vista</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-xxl">
+                                            <div class="notifications"></div>
+                                            <p class="text-muted">La siguiente vista se guardar&aacute; con los filtros actuales</p>
+                                            <input type="text" name="name" class="form-control" placeholder="Nombre de la vista" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Agregar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Data: Views: Add -->
+
+                        <!-- Data: Views: Modify -->
+                        <div class="modal" id="component_data_views_modify" tabindex="-1" aria-labelledby="component_data_views_modify_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_data_views_modify_label">Modificar vista</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>Seguro desea actualizar la vista <strong class="view-name"></strong> con los filtros actuales</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Data: Views: Modify -->
+
+                        <!-- Data: Views: Delete -->
+                        <div class="modal" id="component_data_views_delete" tabindex="-1" aria-labelledby="component_data_views_delete_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="modal-content" novalidate>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="component_data_views_delete_label">Borrar vista</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="notifications"></div>
+                                        <input type="hidden" name="id" required>
+                                        <p>Seguro desea eliminar la vista <strong class="view-name"></strong></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Data: Views: Delete -->
 
                     </section>
                     <!-- /Data section -->

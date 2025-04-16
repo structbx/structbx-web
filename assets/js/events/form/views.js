@@ -58,10 +58,7 @@ $(function()
 
             // Handle zero results
             if(response_data.body.data.length < 1)
-            {
-                new wtools.Notification('SUCCESS', 0, '#component_data_views .notifications').Show_('Sin resultados.');
                 return;
-            }
 
             // Results elements creator
             wait.Off_();
@@ -128,4 +125,22 @@ $(function()
             window.location.href = url;
         });
     });
+
+    // Add a view
+    $('#component_data_views .add').click(() => 
+    {
+        $('#component_data_views_add').modal('show');
+    });
+
+    // Modify a view
+    $(document).on('click', '#component_data_views .contents .modify', () => 
+    {
+        $('#component_data_views_modify').modal('show');
+    });
+
+    // Delete a view
+    $(document).on('click', '#component_data_views .contents .delete', () => 
+    {
+        $('#component_data_views_delete').modal('show');
+    });    
 });
