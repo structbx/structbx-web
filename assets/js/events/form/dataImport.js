@@ -171,6 +171,7 @@ $(function()
             if(!result.Verify_())
                 return;
 
+            $('#component_data_reload').click();
             $('#component_data_import_message').modal('show');
             $('#component_data_import_message .contents').append($(`<p>Mensaje: ${response_data.body.message}</p>`));
             $('#component_data_import_message .contents').append($(`<p>Total guardados: ${response_data.body.saved}</p>`));
