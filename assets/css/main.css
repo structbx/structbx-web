@@ -17,3 +17,7 @@ body{
 #menu_main{
     z-index: 1049;
 }
+
+#notifications{
+    z-index: 1051;
+}
