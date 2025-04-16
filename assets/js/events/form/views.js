@@ -18,7 +18,7 @@ $(function()
         // Reload data
         $('#component_data_reload').click();
         $('.form_view').text('');
-        $('#component_data_views .out-view').hide();
+        $('#component_data_views .out-view').addClass('d-none');
     };
     $('#component_data_views .out-view').click(() => out_view());
 
