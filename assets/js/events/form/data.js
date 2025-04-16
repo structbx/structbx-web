@@ -3,10 +3,58 @@ var data_read_columns = [];
 
 $(function()
 {
-
-    // Read records
+    // Variables
+    var changeInt = 0;
+    var changeIntInit = false;
     var data_read_page = 0;
     var data_read_page_end = false;
+
+    // Create Rows
+    const createRows = (response_data, row) =>
+    {
+        let elements = [];
+        const basic_push = (row, column) => {elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)};
+        let key = 0;
+        for(let column of response_data.body.columns)
+        {
+            // Add row elements
+            let column_meta = response_data.body.columns_meta.data[key];
+            if(column_meta != undefined)
+            {
+                if(row[column] != "")
+                {
+                    // Verify if the column is image or file
+                    if(column_meta.column_type == "image")
+                        elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
+                    else if(column_meta.column_type == "file")
+                    {
+                        if(row[column].length > 10)
+                        {
+                            let n = "";
+                            let max = row[column].length - 1;
+                            for(let i = max; i > max - 10; i--)
+                                n = row[column][i] + n;
+                                
+                            elements.push(`<td class="bg-white" scope="row">...${n}</td>`);
+                        }
+                        else
+                            elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`);
+                    }
+                    else
+                        basic_push(row, column);
+                }
+                else
+                    basic_push(row, column);
+            }
+            else
+                basic_push(row, column);
+
+            key++;
+        }
+        return elements;
+    }
+
+    // Read records
     const data_read = (reload = false) =>
     {
         // Verify end of results
@@ -28,7 +76,7 @@ $(function()
 
         // Get order
         let order = ""
-        if(wtools.GetUrlSearchParam('conditions') != undefined)
+        if(wtools.GetUrlSearchParam('order') != undefined)
             order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
         // Path request
@@ -95,47 +143,8 @@ $(function()
             // Results elements creator (Rows)
             new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
             {
-                let elements = [];
-                const basic_push = (row, column) => {elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)};
-                let key = 0;
-                for(let column of response_data.body.columns)
-                {
-                    // Add row elements
-                    let column_meta = response_data.body.columns_meta.data[key];
-                    if(column_meta != undefined)
-                    {
-                        if(row[column] != "")
-                        {
-                            // Verify if the column is image or file
-                            if(column_meta.column_type == "image")
-                                elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
-                            else if(column_meta.column_type == "file")
-                            {
-                                if(row[column].length > 10)
-                                {
-                                    let n = "";
-                                    let max = row[column].length - 1;
-                                    for(let i = max; i > max - 10; i--)
-                                        n = row[column][i] + n;
-                                        
-                                    elements.push(`<td class="bg-white" scope="row">...${n}</td>`);
-                                }
-                                else
-                                    elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`);
-                            }
-                            else
-                                basic_push(row, column);
-                        }
-                        else
-                            basic_push(row, column);
-                    }
-                    else
-                        basic_push(row, column);
-
-                    key++;
-                }
-                
-                return new wtools.UIElementsPackage(`<tr record-id="${row.ID}"></tr>`, elements).Pack_();
+                const elements = createRows(response_data, row);
+                return new wtools.UIElementsPackage(`<tr id="row_${row.ID}" record-id="${row.ID}"></tr>`, elements).Pack_();
             });
         });
     };
@@ -154,8 +163,78 @@ $(function()
         }
     });
     
-    // Read last id
-    var changeInt = 0;
+    // Refresh row (changeInt)
+    const refresh_row = (row_id, insert = false) =>
+    {
+        try
+        {
+            // Get Form identifier
+            const form_identifier = wtools.GetUrlSearchParam('identifier');
+            if(form_identifier == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+                return;
+            }
+
+            // Get Data ID
+            if(row_id == undefined)
+            {
+                wait.Off_();
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del registro.');
+                return;
+            }
+
+            $('#component_data_modify .notifications').html('');
+            
+            // Get conditions
+            let conditions = ""
+            if(wtools.GetUrlSearchParam('conditions') != undefined)
+                conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
+
+            // Get order
+            let order = ""
+            if(wtools.GetUrlSearchParam('order') != undefined)
+                order = `&order=${wtools.GetUrlSearchParam('order')}`;
+
+            // Read row
+            new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${row_id}&form-identifier=${form_identifier}${conditions}${order}`).Exec_((response_data) =>
+            {
+                // Manage response
+                const result = new ResponseManager(response_data, '', 'Data: Leer (1)');
+                if(!result.Verify_())
+                    return;
+    
+                // Handle no results or zero results
+                if(response_data.body.data.length < 1)
+                    return;
+
+                // Results elements creator (Rows)
+                const elements = createRows(response_data, response_data.body.data[0]);
+                if(insert)
+                {
+                    const new_row = new wtools.UIElementsPackage(`<tr id="row_${response_data.body.data[0].ID}" record-id="${response_data.body.data[0].ID}"></tr>`, elements).Pack_();
+                    $('#component_data_read table tbody').append(new_row);
+                }
+                else
+                {
+                    $('#row_' + row_id).html('');
+                    for(let td of elements)
+                    {
+                        $('#row_' + row_id).append(td);
+                    }
+                }
+            });
+
+        }
+        catch(error)
+        {
+            new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error: ${error}.`);
+            return;
+        }
+    };
+    
+    // Read changeInt
     const data_read_changeInt = () =>
     {
         // Get Form identifier
@@ -164,23 +243,46 @@ $(function()
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?changeInt=${changeInt}&form-identifier=${form_identifier}`).Exec_((response_data) =>
         {
-            if(response_data.body.data != undefined && response_data.body.data.length > 0)
+            const data = response_data.body.data;
+            if(data != undefined && data.length > 0)
             {
-                const new_changeInt = response_data.body.data[0].change_int;
-                if(changeInt != new_changeInt)
+                if(!changeIntInit)
                 {
-                    if(changeInt != 0)
-                        data_read(true);
-
-                    changeInt = new_changeInt;
+                    // Firs init of changeInit (only update changeInt value to the last element id)
+                    changeInt = data[data.length - 1].id;
+                    changeIntInit = true;
+                }
+                else
+                {
+                    // If there is new changeInt, refresh rows
+                    for(let row of data)
+                    {
+                        changeInt = row.id;
+                        switch(row.operation)
+                        {
+                            case "insert":
+                                if(data_read_page_end)
+                                    refresh_row(row.row_id, true);
+                                break;
+                            case "update":
+                                refresh_row(row.row_id);
+                                break;
+                            case "delete":
+                                $(`#row_${row.row_id}`).remove();
+                                break;
+                            case "import":
+                                data_read(true);
+                                break;
+                        }
+                    }
                 }
             }
         });
     };
-    //data_read_changeInt();
-    //setInterval(data_read_changeInt, 5000);
+    data_read_changeInt();
+    setInterval(data_read_changeInt, 30000);
 
     // Function If column type is SELECTION
     const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
@@ -345,7 +447,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Registro guardado.');
             $('#component_data_add').modal('hide');
             data_read_page_end = false;
-            data_read(true);
+            data_read_changeInt();
         });
     });
     
@@ -495,7 +597,7 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Registro Actualizado.');
             $('#component_data_modify').modal('hide');
-            data_read(true);
+            data_read_changeInt();
         });
     });
 
@@ -552,7 +654,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Registro eliminado.');
             $('#component_data_delete').modal('hide');
             $('#component_data_modify').modal('hide');
-            data_read(true);
+            data_read_changeInt();
         });
     });
     
