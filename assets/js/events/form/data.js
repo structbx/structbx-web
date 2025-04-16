@@ -141,6 +141,9 @@ $(function()
     };
     data_read();
 
+    // Data reload button
+    $('#component_data_reload').click(() => data_read(true));
+
     // Data read Pagination
     $('#component_data_read .contents').on("scroll", function(e)
     {
