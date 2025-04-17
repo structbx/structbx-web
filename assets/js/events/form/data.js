@@ -1,26 +1,34 @@
 
-var data_read_columns = [];
-
-$(function()
+class Data
 {
-    // Variables
-    var changeInt = 0;
-    var changeIntInit = false;
-    var data_read_page = 0;
-    var data_read_page_end = false;
+    changeInt = 0;
+    changeIntInit = false;
+    data_read_page = 0;
+    data_read_page_end = false;
+    data_read_columns = [];
 
-    // Create Rows
-    const createRows = (response_data, row) =>
+    constructor()
+    {
+        this.Read_();
+    }
+
+    CreateRows_(response_data, row)
     {
         let elements = [];
+
+        // Basic <td> row
         const basic_push = (row, column) => {elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)};
+
+        // Loop in columns
         let key = 0;
         for(let column of response_data.body.columns)
         {
-            // Add row elements
+            // Setup columns meta
             let column_meta = response_data.body.columns_meta.data[key];
+
             if(column_meta != undefined)
             {
+                // Verify if the column is not ""
                 if(row[column] != "")
                 {
                     // Verify if the column is image or file
@@ -30,6 +38,7 @@ $(function()
                     {
                         if(row[column].length > 10)
                         {
+                            // Setup text less than 10 characters
                             let n = "";
                             let max = row[column].length - 1;
                             for(let i = max; i > max - 10; i--)
@@ -51,14 +60,15 @@ $(function()
 
             key++;
         }
+
+        // Return <td> rows in array
         return elements;
     }
 
-    // Read records
-    const data_read = (reload = false) =>
+    Read_ = (reload = false) =>
     {
-        // Verify end of results
-        if(data_read_page_end && reload == false)
+        // Exit if end of results and no reload
+        if(this.data_read_page_end && reload == false)
             return;
 
         // Wait animation
@@ -83,17 +93,22 @@ $(function()
         let path = "";
         if(reload)
         {
+            // Set current limit
             const limit = $('#component_data_read table tbody')[0].rows.length;
             $('#component_data_read table tbody').html('');
+
+            // Setup path
             if(limit < 20)
                 path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
             else
-            path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
+                path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
         }
         else
         {
-            data_read_page++;
-            path = `?form-identifier=${form_identifier}&page=${data_read_page}${conditions}${order}`;
+            // Next page
+            this.data_read_page++;
+            // Setup path
+            path = `?form-identifier=${form_identifier}&page=${this.data_read_page}${conditions}${order}`;
         }
 
         // Request
@@ -111,22 +126,27 @@ $(function()
             // Results elements creator (Columns)
             if($('#component_data_read table thead tr').html() == "")
             {
+                // Variables
                 let keys = response_data.body.columns_meta.data;
-                data_read_columns = [];
+                this.data_read_columns = [];
                 let it = 0;
+
+                // Setup columns meta
                 new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
                 {
+                    // Setup columns and icon
                     let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
                     let form_icon = form_element_object.GetIcon_(true);
 
                     // Add column to array
-                    data_read_columns.push({id: row.id, identifier: row.identifier, name: row.name});
+                    this.data_read_columns.push({id: row.id, identifier: row.identifier, name: row.name});
 
                     it++;
                     
                     return [`<th scope="col">${form_icon}${row.name}</th>`];
                 });
 
+                // If there is less than 5 columns, add empty column
                 if(it < 5)
                 {
                     $('#component_data_read table thead tr').append($(`<td scope="col" style="width: 50%;background: #CCC;"></td>`));
@@ -136,35 +156,22 @@ $(function()
             // Handle zero results
             if(response_data.body.data.length < 1)
             {
-                data_read_page_end = true;
+                // End of results reached
+                this.data_read_page_end = true;
                 return;
             }
 
             // Results elements creator (Rows)
             new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
             {
-                const elements = createRows(response_data, row);
+                // Create rows
+                const elements = this.CreateRows_(response_data, row);
                 return new wtools.UIElementsPackage(`<tr id="row_${row.ID}" record-id="${row.ID}"></tr>`, elements).Pack_();
             });
         });
     };
-    data_read();
 
-    // Data reload button
-    $('#component_data_reload').click(() => data_read(true));
-
-    // Data read Pagination
-    $('#component_data_read .contents').on("scroll", function(e)
-    {
-        if(e.currentTarget.scrollTop + e.currentTarget.clientHeight >= e.currentTarget.scrollHeight)
-        {
-            if($('#component_data_read table tbody').html() != "")
-                data_read();
-        }
-    });
-    
-    // Refresh row (changeInt)
-    const refresh_row = (row_id, insert = false) =>
+    RefreshRow_(row_id, insert = false)
     {
         try
         {
@@ -172,7 +179,6 @@ $(function()
             const form_identifier = wtools.GetUrlSearchParam('identifier');
             if(form_identifier == undefined)
             {
-                wait.Off_();
                 new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
                 return;
             }
@@ -180,7 +186,6 @@ $(function()
             // Get Data ID
             if(row_id == undefined)
             {
-                wait.Off_();
                 new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del registro.');
                 return;
             }
@@ -197,7 +202,7 @@ $(function()
             if(wtools.GetUrlSearchParam('order') != undefined)
                 order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
-            // Read row
+            // Request row
             new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${row_id}&form-identifier=${form_identifier}${conditions}${order}`).Exec_((response_data) =>
             {
                 // Manage response
@@ -210,14 +215,16 @@ $(function()
                     return;
 
                 // Results elements creator (Rows)
-                const elements = createRows(response_data, response_data.body.data[0]);
+                const elements = this.CreateRows_(response_data, response_data.body.data[0]);
                 if(insert)
                 {
+                    // Insert a new row
                     const new_row = new wtools.UIElementsPackage(`<tr id="row_${response_data.body.data[0].ID}" record-id="${response_data.body.data[0].ID}"></tr>`, elements).Pack_();
                     $('#component_data_read table tbody').append(new_row);
                 }
                 else
                 {
+                    // Update row
                     $('#row_' + row_id).html('');
                     for(let td of elements)
                     {
@@ -234,8 +241,7 @@ $(function()
         }
     };
     
-    // Read changeInt
-    const data_read_changeInt = () =>
+    ChangeIntVerification_()
     {
         // Get Form identifier
         const form_identifier = wtools.GetUrlSearchParam('identifier');
@@ -243,37 +249,37 @@ $(function()
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?changeInt=${changeInt}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?changeInt=${this.changeInt}&form-identifier=${form_identifier}`).Exec_((response_data) =>
         {
             const data = response_data.body.data;
             if(data != undefined && data.length > 0)
             {
-                if(!changeIntInit)
+                if(!this.changeIntInit)
                 {
                     // Firs init of changeInit (only update changeInt value to the last element id)
-                    changeInt = data[data.length - 1].id;
-                    changeIntInit = true;
+                    this.changeInt = data[data.length - 1].id;
+                    this.changeIntInit = true;
                 }
                 else
                 {
                     // If there is new changeInt, refresh rows
                     for(let row of data)
                     {
-                        changeInt = row.id;
+                        this.changeInt = row.id;
                         switch(row.operation)
                         {
                             case "insert":
-                                if(data_read_page_end)
-                                    refresh_row(row.row_id, true);
+                                if(this.data_read_page_end)
+                                    this.RefreshRow_(row.row_id, true);
                                 break;
                             case "update":
-                                refresh_row(row.row_id);
+                                this.RefreshRow_(row.row_id);
                                 break;
                             case "delete":
                                 $(`#row_${row.row_id}`).remove();
                                 break;
                             case "import":
-                                data_read(true);
+                                this.Read_(true);
                                 break;
                         }
                     }
@@ -281,11 +287,8 @@ $(function()
             }
         });
     };
-    data_read_changeInt();
-    setInterval(data_read_changeInt, 30000);
 
-    // Function If column type is SELECTION
-    const options_link_to_init = (element, link_to_form, column_name, target, selected = undefined) => 
+    OptionsLinkSelection_(element, link_to_form, column_name, target, selected = undefined)
     {
         let options = new wtools.SelectOptions();
 
@@ -294,11 +297,14 @@ $(function()
             try
             {
                 let tmp_options = [];
+
+                // Add empty <option>
                 if(selected == undefined)
                     tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
                 else
                     tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
 
+                // Add select or not selected <option>
                 for(let row of response_data.body.data)
                 {
                     const col1 = response_data.body.columns[0];
@@ -309,6 +315,7 @@ $(function()
                         tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
                 }
     
+                // Build <option>s
                 options.options = tmp_options;
                 let element_building = $(element).find('select');
                 options.Build_(element_building);
@@ -319,14 +326,11 @@ $(function()
             }
         });
     }
-    
-    // Read Form Columns to Add new record
-    const read_form_columns_add = (e) =>
+
+    ReadDataColumns_()
     {
         try
         {
-            e.preventDefault();
-
             $('#component_data_add .notifications').html('');
 
             // Wait animation
@@ -347,7 +351,7 @@ $(function()
             new wtools.Request(server_config.current.api + `/forms/columns/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
             {
                 // Manage response
-                const result = new ResponseManager(response_data, '', 'Data: Modificar');
+                const result = new ResponseManager(response_data, '', 'Data: Columnas: Leer');
                 if(!result.Verify_())
                     return;    
 
@@ -378,7 +382,7 @@ $(function()
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        options_link_to_init(form_element, row.link_to_form, row.name, '#component_data_add .notifications');
+                        this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_add .notifications');
 
                     // Final elements
                     let elements = [
@@ -401,13 +405,9 @@ $(function()
             return;
         }
     };
-    $('.data_add').click((e) => read_form_columns_add(e));
-    
-    // Add record
-    $('#component_data_add form').submit((e) =>
-    {
-        e.preventDefault();
 
+    Add_(e)
+    {
         // Wait animation
         let wait = new wtools.ElementState('#component_data_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -446,18 +446,15 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Registro guardado.');
             $('#component_data_add').modal('hide');
-            data_read_page_end = false;
-            data_read_changeInt();
+            this.data_read_page_end = false;
+            this.ChangeIntVerification_();
         });
-    });
-    
-    // Read columns and data to modify
-    $(document).on("click", '#component_data_read table tbody tr', (e) =>
+    }
+
+    ReadDataToModify_(e)
     {
         try
         {
-            e.preventDefault();
-
             // Wait animation
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
@@ -531,7 +528,7 @@ $(function()
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        options_link_to_init(form_element, row.link_to_form, row.name, '#component_data_modify .notifications', row.value);
+                        this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_modify .notifications', row.value);
 
                     let elements = [
                         `<th scope="row">${form_icon}${row.name}</th>`
@@ -552,13 +549,10 @@ $(function()
             new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error: ${error}.`);
             return;
         }
-    });
-    
-    // Modify record
-    $('#component_data_modify form').submit((e) =>
-    {
-        e.preventDefault();
+    }
 
+    Modify_(e)
+    {
         // Wait animation
         let wait = new wtools.ElementState('#component_data_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -597,15 +591,12 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Registro Actualizado.');
             $('#component_data_modify').modal('hide');
-            data_read_changeInt();
+            this.ChangeIntVerification_();
         });
-    });
+    }
 
-    // Read record to Delete
-    $('#component_data_modify .delete').click((e) =>
+    ReadDataToDelete_()
     {
-        e.preventDefault();
-
         // Wait animation
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
@@ -618,13 +609,10 @@ $(function()
         $('#component_data_delete strong.id').html(data_id);
         $('#component_data_delete').modal('show');
         wait.Off_();
-    });
-    
-    // Delete record
-    $('#component_data_delete form').submit((e) =>
-    {
-        e.preventDefault();
+    }
 
+    Delete_()
+    {
         // Wait animation
         let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -654,22 +642,12 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Registro eliminado.');
             $('#component_data_delete').modal('hide');
             $('#component_data_modify').modal('hide');
-            data_read_changeInt();
+            this.ChangeIntVerification_();
         });
-    });
-    
-    // Export Data
-    $('.data_export').click((e) =>
+    }
+
+    Export_()
     {
-        e.preventDefault();
-
-        $('#component_data_export').modal('show');
-    });
-
-    $('#component_data_export .export').click((e) =>
-    {
-        e.preventDefault();
-
         // Wait animation
         let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
 
@@ -740,5 +718,82 @@ $(function()
         .catch(error => {
             new wtools.Notification('WARNING').Show_(`Error al descargar el archivo: ${error}.`);
         });
+    }
+}
+
+$(function()
+{
+    let data = new Data();
+
+    // Pagination
+    $('#component_data_read .contents').on("scroll", function(e)
+    {
+        if(e.currentTarget.scrollTop + e.currentTarget.clientHeight >= e.currentTarget.scrollHeight)
+        {
+            if($('#component_data_read table tbody').html() != "")
+                data.Read_();
+        }
+    });
+    
+    // Watch changes
+    data.ChangeIntVerification_();
+    setInterval(data.ChangeIntVerification_, 30000);
+
+    // Data reload button
+    $('#component_data_reload').click(() => data.Read_(true));
+    
+    // Click on add data button
+    $('.data_add').click((e) => 
+    {
+        e.preventDefault();
+        data.ReadDataColumns_();
+    });
+    
+    // Add record
+    $('#component_data_add form').submit((e) =>
+    {
+        e.preventDefault();
+        data.Add_(e);
+    });
+    
+    // Read columns and data to modify
+    $(document).on("click", '#component_data_read table tbody tr', (e) =>
+    {
+        e.preventDefault();
+        data.ReadDataToModify_(e);
+    });
+    
+    // Modify record
+    $('#component_data_modify form').submit((e) =>
+    {
+        e.preventDefault();
+        data.Modify_(e);
+    });
+
+    // Read record to Delete
+    $('#component_data_modify .delete').click((e) =>
+    {
+        e.preventDefault();
+        data.ReadDataToDelete_(e);
+    });
+    
+    // Delete record
+    $('#component_data_delete form').submit((e) =>
+    {
+        e.preventDefault();
+        data.Delete_();
+    });
+    
+    // Export Data
+    $('.data_export').click((e) =>
+    {
+        e.preventDefault();
+        $('#component_data_export').modal('show');
+    });
+
+    $('#component_data_export .export').click((e) =>
+    {
+        e.preventDefault();
+        data.Export_();
     });
 });
