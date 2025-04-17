@@ -10,6 +10,7 @@ class Data
     constructor()
     {
         this.Read_();
+        setInterval(this.ChangeIntVerification_.bind(this), 5000);
     }
 
     CreateRows_(response_data, row)
@@ -175,6 +176,7 @@ class Data
     {
         try
         {
+            console.log('hola')
             // Get Form identifier
             const form_identifier = wtools.GetUrlSearchParam('identifier');
             if(form_identifier == undefined)
@@ -203,8 +205,10 @@ class Data
                 order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
             // Request row
+            console.log('hola1')
             new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${row_id}&form-identifier=${form_identifier}${conditions}${order}`).Exec_((response_data) =>
             {
+                console.log('hola2')
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Leer (1)');
                 if(!result.Verify_())
@@ -256,12 +260,14 @@ class Data
             {
                 if(!this.changeIntInit)
                 {
+                    console.log("First init of changeInt");
                     // Firs init of changeInit (only update changeInt value to the last element id)
                     this.changeInt = data[data.length - 1].id;
                     this.changeIntInit = true;
                 }
                 else
                 {
+                    console.log("changeInt");
                     // If there is new changeInt, refresh rows
                     for(let row of data)
                     {
@@ -269,13 +275,16 @@ class Data
                         switch(row.operation)
                         {
                             case "insert":
+                                console.log("insert");
                                 if(this.data_read_page_end)
                                     this.RefreshRow_(row.row_id, true);
                                 break;
                             case "update":
+                                console.log("update");
                                 this.RefreshRow_(row.row_id);
                                 break;
                             case "delete":
+                                console.log("delete");
                                 $(`#row_${row.row_id}`).remove();
                                 break;
                             case "import":
@@ -735,10 +744,6 @@ $(function()
         }
     });
     
-    // Watch changes
-    data.ChangeIntVerification_();
-    setInterval(data.ChangeIntVerification_, 30000);
-
     // Data reload button
     $('#component_data_reload').click(() => data.Read_(true));
     
