@@ -28,14 +28,14 @@ class Headers
                     <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
                         <li class="nav-item me-2">
                             <div class="d-flex align-items-center h-100 text-center">
-                                <span class="me-1">Espacio:</span>
+                                <span class="me-2"><i class="fas fa-building"></i></span>
                                 <span class="space_name"></span>
                             </div>
                         </li>
                         <div class="vr mx-4 d-none d-md-inline-block"></div>
                         <li class="nav-item me-2">
                             <div class="d-flex align-items-center h-100 text-center">
-                                <span class="me-1">Bienvenido:</span>
+                                <span class="me-2"><i class="fas fa-user"></i></span>
                                 <span class="username_logued"></span>
                             </div>
                         </li>
