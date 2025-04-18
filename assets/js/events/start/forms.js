@@ -51,25 +51,21 @@ $(function()
                 if(cont < 2)
                 {
                     elements.push(`
-                        <div class="col-12 col-sm-6 col-xxl-3 d-flex mb-4">
-							<div class="card flex-fill">
-								<div class="card-body py-4">
-									<div class="d-flex align-items-start">
-										<div class="flex-grow-1">
-											<h3 class="mb-2">
-                                                <a class="text-decoration-none text-dark" href="../form?identifier=${row.identifier}">
-                                                    ${row.name}
-                                                </a>
-                                            </h3>
-											<p class="mb-2 text-muted">Formulario</p>
-											<div class="mb-0">
-												<span class="badge bg-secondary me-2">${row.total} registros</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>    
+                        <div class="d-flex align-items-start btn btn-simple">
+                            <a href="/form?identifier=${row.identifier}" class="btn text-start mb-2 flex-grow-1">
+                                <span>${row.name}</span>
+                                <p class="text-muted">${row.description}</p>
+                                <div class="mt-2">
+                                    <span class="badge bg-secondary me-2"><i class="fas fa-key"></i> ${row.identifier}</span>
+                                    <span class="badge bg-secondary me-2"><i class="fas fa-pen"></i> ${row.total}</span>
+                                    <span class="badge bg-secondary me-2"><i class="fas fa-calendar"></i> ${row.created_at}</span>
+                                </div>
+                            </a>
+                            <div class="btn-group align-self-center" role="group">
+                                <a href="/form/columns?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-columns"></i></a>
+                                <a href="/form/settings?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-cog"></i></a>
+                            </div>
+                        </div>
                     `);
                 }
                 else
@@ -95,8 +91,7 @@ $(function()
         $('#component_forms_add .notifications').html('');
         $('#component_forms_add').modal('show');
     }
-    $('#component_forms_read .add').click(() => click_add_button());
-    $('a.form_add').click(() => click_add_button());
+    $('.form_add').click(() => click_add_button());
 
     // Add
     $('#component_forms_add form').submit((e) =>

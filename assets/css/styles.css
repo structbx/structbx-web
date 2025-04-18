@@ -29,8 +29,8 @@
     color:#333 !important;
 }
 .btn-primary{
-    background: #eee063;
-    border-color:#eee063;
+    background: #eee063 !important;
+    border-color:#eee063 !important;
     color:#333 !important;
 }
 .btn-secondary{
@@ -44,16 +44,16 @@
 }
 .btn-outline-primary{
     background: none;
-    border-color:#eee063;
+    border-color:#eee063 !important;
     color:#333 !important;
 }
 .btn-primary:hover{
     background: #cebf3e;
-    border-color:#eee063;
+    border-color:#eee063 !important;
 }
 .btn-primary:focus{
-    background: #eee063;
-    border-color:#eee063;
+    background: #eee063 !important;
+    border-color:#eee063 !important;
 }
 .btn-ligth{
     background: none;
@@ -66,7 +66,7 @@
     color:#fff !important;
 }
 .btn-ligth:hover{
-    background-color: #eee063;
+    background-color: #eee063 !important;
     color:#333 !important;
 }
 .btn-dark-shadow{
@@ -76,6 +76,14 @@
 }
 .btn-dark-shadow:hover{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.btn-simple{
+    background: none;
+    border-color:none;
+    color:#333 !important;
+}
+.btn-simple:hover{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 /* --- Tables --- */
 
@@ -206,7 +214,7 @@ table.table_data td:first-child {
     background-color: #d8d8d8;
 }
 #menu_main .nav-link.active {
-    background-color: #eee063;
+    background-color: #eee063 !important;
     color:#333;
     text-decoration: none;
 }

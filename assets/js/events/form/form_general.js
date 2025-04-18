@@ -25,48 +25,6 @@ $(function ()
     // Elements
         new Headers().Header_();
     
-    // Drag and drop Interface Design
-    $("#component_interface_design_columns, #component_interface_design_layout").sortable({connectWith: ".connectedSortable"})
-    .disableSelection();
-
-    // Click on Drag and drop item
-    $('.form-design-item').click((e) =>
-    {
-        const element = e.currentTarget.id;
-        $('#component_interface_design_item_design input[name="element"]').val(element);
-        $('#component_interface_design_item_design input[name="label"]').val(element);
-        $('#component_interface_design_item_design select[name="size"]').attr("disabled", false);
-        for(let html_class of $(`#${element}`)[0].classList)
-        {
-            if(html_class == "col-md-12") $('#component_interface_design_item_design select[name="size"]').val("12");
-            if(html_class == "col-md-11") $('#component_interface_design_item_design select[name="size"]').val("11");
-            if(html_class == "col-md-10") $('#component_interface_design_item_design select[name="size"]').val("10");
-            if(html_class == "col-md-9") $('#component_interface_design_item_design select[name="size"]').val("9");
-            if(html_class == "col-md-8") $('#component_interface_design_item_design select[name="size"]').val("8");
-            if(html_class == "col-md-7") $('#component_interface_design_item_design select[name="size"]').val("7");
-            if(html_class == "col-md-6") $('#component_interface_design_item_design select[name="size"]').val("6");
-            if(html_class == "col-md-5") $('#component_interface_design_item_design select[name="size"]').val("5");
-            if(html_class == "col-md-4") $('#component_interface_design_item_design select[name="size"]').val("4");
-            if(html_class == "col-md-3") $('#component_interface_design_item_design select[name="size"]').val("3");
-            if(html_class == "col-md-2") $('#component_interface_design_item_design select[name="size"]').val("2");
-            if(html_class == "col-md-1") $('#component_interface_design_item_design select[name="size"]').val("1");
-        }
-    });
-
-    // Change size of Drag and drop item
-    $('#component_interface_design_item_design select[name="size"]').change((e) =>
-    {
-        const element = $('#component_interface_design_item_design input[name="element"]').val();
-        const new_size = $(e.currentTarget).val();
-
-        // Remove classes
-        for(let i = 1; i < 13; i++)
-            $(`#${element}`).removeClass(`col-md-${i}`);
-
-        // Add class
-        $(`#${element}`).addClass(`col-md-${new_size}`);
-    });
-
     // Read Header Form
     const form_read = () =>
     {
@@ -189,10 +147,21 @@ $(function ()
             for(let row of response_data.body.data)
             {
                 elements.push(`
-                    <a class="btn ${row.identifier == form_identifier ? "btn-primary" : "btn-outline-secondary"} me-2 mb-2" href="/form?identifier=${row.identifier}">
-                        <i class="fas fa-database"></i>
-                        <span class="ms-2">${row.name}</span>
-                    </a>
+                    <div class="d-flex align-items-start btn ${row.identifier == form_identifier ? "btn-primary" : "btn-simple"}">
+                        <a href="/form?identifier=${row.identifier}" class="btn text-start mb-2 flex-grow-1">
+                            <span>${row.name}</span>
+                            <p class="text-muted">${row.description}</p>
+                            <div class="mt-2">
+                                <span class="badge bg-secondary me-2"><i class="fas fa-key"></i> ${row.identifier}</span>
+                                <span class="badge bg-secondary me-2"><i class="fas fa-pen"></i> ${row.total}</span>
+                                <span class="badge bg-secondary me-2"><i class="fas fa-calendar"></i> ${row.created_at}</span>
+                            </div>
+                        </a>
+                        <div class="btn-group align-self-center" role="group">
+                            <a href="/form/columns?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-columns"></i></a>
+                            <a href="/form/settings?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-cog"></i></a>
+                        </div>
+                    </div>
                 `);
             }
             ui_element = new wtools.UIElementsPackage('<div class="text-center"></ul>', elements).Pack_();
