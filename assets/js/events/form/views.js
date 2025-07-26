@@ -1,7 +1,7 @@
-$(function()
+class Views
 {
-    // Out of the views
-    const out_view = () =>
+    
+    GetOutOfView_()
     {
         // Get Form identifier
         const form_identifier = wtools.GetUrlSearchParam('identifier');
@@ -19,11 +19,9 @@ $(function()
         $('#component_data_reload').click();
         $('.form_view').text('');
         $('#component_data_views .out-view').addClass('d-none');
-    };
-    $('#component_data_views .out-view').click(() => out_view());
+    }
 
-    // Read current view
-    const read_current_view = () =>
+    ReadActiveView_()
     {
         // Get view id
         const view_id = wtools.GetUrlSearchParam('view');
@@ -63,10 +61,8 @@ $(function()
             $('#component_data_views .out-view').removeClass('d-none');
         });
     };
-    read_current_view();
 
-    // Read Views
-    const views_read = () =>
+    Read_()
     {
         // Wait animation
         let wait = new wtools.ElementState('#component_data_views .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -112,12 +108,10 @@ $(function()
                 `;
             });
         });
-    };
-    views_read();
+    }
     
-    $(document).on('click', '#component_data_views .dropdown-item a', (e) =>
+    SelectView_(e)
     {
-        e.preventDefault();
         // Get view id
         const view_id = $(e.currentTarget).attr('view-id');
         if(view_id == undefined)
@@ -160,20 +154,12 @@ $(function()
 
             // Reload data
             $('#component_data_reload').click();
-            read_current_view();
-        })
-    });
+            this.ReadActiveView_();
+        });
+    }
 
-    // Add a view
-    $('#component_data_views .add').click(() => 
+    Add_()
     {
-        $('#component_data_views_add').modal('show');
-    });
-    
-    $('#component_data_views_add form').submit((e) =>
-    {
-        e.preventDefault();
-
         // Wait animation
         let wait = new wtools.ElementState('#component_data_views_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -214,29 +200,12 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Vista creada exitosamente.');
             $('#component_data_views_add').modal('hide');
-            views_read();
+            this.Read_();
         });
-    });
+    }
 
-    // Modify a view
-    $(document).on('click', '#component_data_views .contents .modify', (e) => 
+    Modify_(e)
     {
-        const view_id = $(e.currentTarget).attr('view-id');
-        const view_name = $(e.currentTarget).attr('view-name');
-        if(view_id == undefined || view_name == undefined)
-        {
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; la vista.');
-            return;
-        }
-        $('#component_data_views_modify input[name="name"]').val(view_name);
-        $('#component_data_views_modify input[name="id"]').val(view_id);
-        $('#component_data_views_modify').modal('show');
-    });
-
-    $('#component_data_views_modify form').submit((e) =>
-    {
-        e.preventDefault();
-
         // Wait animation
         let wait = new wtools.ElementState('#component_data_views_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -277,29 +246,12 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Vista modificada exitosamente.');
             $('#component_data_views_modify').modal('hide');
-            views_read();
+            this.Read_();
         });
-    });
+    }
 
-    // Delete a view
-    $(document).on('click', '#component_data_views .contents .delete', (e) => 
+    Delete_(e)
     {
-        const view_id = $(e.currentTarget).attr('view-id');
-        const view_name = $(e.currentTarget).attr('view-name');
-        if(view_id == undefined || view_name == undefined)
-        {
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; la vista.');
-            return;
-        }
-        $('#component_data_views_delete .name').text(view_name);
-        $('#component_data_views_delete input[name="id"]').val(view_id);
-        $('#component_data_views_delete').modal('show');
-    });
-
-    $('#component_data_views_delete form').submit((e) =>
-    {
-        e.preventDefault();
-
         // Wait animation
         let wait = new wtools.ElementState('#component_data_views_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -336,9 +288,87 @@ $(function()
 
             new wtools.Notification('SUCCESS').Show_('Vista eliminada exitosamente.');
             $('#component_data_views_delete').modal('hide');
-            views_read();
+            this.Read_();
             if(current_view == view_id)
-                out_view();
+                this.GetOutOfView_();
         });
+    }
+}
+
+var viewsObject = new Views();
+
+$(function()
+{
+    // Out of the views
+    $('#component_data_views .out-view').click(() => viewsObject.GetOutOfView_());
+
+    // Read current view
+    viewsObject.ReadActiveView_();
+
+    // Read Views
+    viewsObject.Read_();
+    
+    // Select a view
+    $(document).on('click', '#component_data_views .dropdown-item a', (e) =>
+    {
+        e.preventDefault();
+        viewsObject.SelectView_(e);
+    });
+
+    // Add a view
+    $('#component_data_views .add').click(() => 
+    {
+        $('#component_data_views_add').modal('show');
+    });
+    
+    $('#component_data_views_add form').submit((e) =>
+    {
+        e.preventDefault();
+
+        viewsObject.Add_();
+    });
+
+    // Modify a view
+    $(document).on('click', '#component_data_views .contents .modify', (e) => 
+    {
+        const view_id = $(e.currentTarget).attr('view-id');
+        const view_name = $(e.currentTarget).attr('view-name');
+        if(view_id == undefined || view_name == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; la vista.');
+            return;
+        }
+        $('#component_data_views_modify input[name="name"]').val(view_name);
+        $('#component_data_views_modify input[name="id"]').val(view_id);
+        $('#component_data_views_modify').modal('show');
+    });
+
+    $('#component_data_views_modify form').submit((e) =>
+    {
+        e.preventDefault();
+
+        viewsObject.Modify_(e);
+    });
+
+    // Delete a view
+    $(document).on('click', '#component_data_views .contents .delete', (e) => 
+    {
+        const view_id = $(e.currentTarget).attr('view-id');
+        const view_name = $(e.currentTarget).attr('view-name');
+        if(view_id == undefined || view_name == undefined)
+        {
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; la vista.');
+            return;
+        }
+        $('#component_data_views_delete .name').text(view_name);
+        $('#component_data_views_delete input[name="id"]').val(view_id);
+        $('#component_data_views_delete').modal('show');
+    });
+
+    $('#component_data_views_delete form').submit((e) =>
+    {
+        e.preventDefault();
+
+        viewsObject.Delete_(e);
     });
 });
