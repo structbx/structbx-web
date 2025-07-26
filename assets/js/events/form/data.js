@@ -68,115 +68,123 @@ class Data
 
     Read_ = (reload = false) =>
     {
-        // Exit if end of results and no reload
-        if(this.data_read_page_end && reload == false)
-            return;
-
-        // Wait animation
-        let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
-
-        // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
-            return;
-
-        // Get conditions
-        let conditions = ""
-        if(wtools.GetUrlSearchParam('conditions') != undefined)
-            conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
-
-        // Get order
-        let order = ""
-        if(wtools.GetUrlSearchParam('order') != undefined)
-            order = `&order=${wtools.GetUrlSearchParam('order')}`;
-
-        // Path request
-        let path = "";
-        if(reload)
+        try
         {
-            // Set current limit
-            const limit = $('#component_data_read table tbody')[0].rows.length;
-            $('#component_data_read table tbody').html('');
+            // Exit if end of results and no reload
+            if(this.data_read_page_end && reload == false)
+                return;
 
-            // Setup path
-            if(limit < 20)
-                path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
+            // Wait animation
+            let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+
+            // Get Form identifier
+            const form_identifier = wtools.GetUrlSearchParam('identifier');
+            if(form_identifier == undefined)
+                return;
+
+            // Get conditions
+            let conditions = ""
+            if(wtools.GetUrlSearchParam('conditions') != undefined)
+                conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
+
+            // Get order
+            let order = ""
+            if(wtools.GetUrlSearchParam('order') != undefined)
+                order = `&order=${wtools.GetUrlSearchParam('order')}`;
+
+            // Path request
+            let path = "";
+            if(reload)
+            {
+                // Set current limit
+                const limit = $('#component_data_read table tbody')[0].rows.length;
+                $('#component_data_read table tbody').html('');
+
+                // Setup path
+                if(limit < 20)
+                    path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
+                else
+                    path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
+            }
             else
-                path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
-        }
-        else
-        {
-            // Next page
-            this.data_read_page++;
-            // Setup path
-            path = `?form-identifier=${form_identifier}&page=${this.data_read_page}${conditions}${order}`;
-        }
-
-        // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read${path}`).Exec_((response_data) =>
-        {
-            // Clean
-            wait.Off_();
-            $('#component_data_read .notifications').html('');
-
-            // Manage response
-            const result = new ResponseManager(response_data, '#component_data_read .notifications', 'Data: Leer');
-            if(!result.Verify_())
-                return;
-
-            // Results elements creator (Columns)
-            if($('#component_data_read table thead tr').html() == "")
             {
-                // Variables
-                let keys = response_data.body.columns_meta.data;
-                this.data_read_columns = [];
-                let it = 0;
+                // Next page
+                this.data_read_page++;
+                // Setup path
+                path = `?form-identifier=${form_identifier}&page=${this.data_read_page}${conditions}${order}`;
+            }
 
-                // Setup columns meta
-                new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
+            // Request
+            new wtools.Request(server_config.current.api + `/forms/data/read${path}`).Exec_((response_data) =>
+            {
+                // Clean
+                wait.Off_();
+                $('#component_data_read .notifications').html('');
+
+                // Manage response
+                const result = new ResponseManager(response_data, '#component_data_read .notifications', 'Data: Leer');
+                if(!result.Verify_())
+                    return;
+
+                // Results elements creator (Columns)
+                if($('#component_data_read table thead tr').html() == "")
                 {
-                    // Setup columns and icon
-                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
-                    let form_icon = form_element_object.GetIcon_(true);
+                    // Variables
+                    let keys = response_data.body.columns_meta.data;
+                    this.data_read_columns = [];
+                    let it = 0;
 
-                    // Add column to array
-                    this.data_read_columns.push({id: row.id, identifier: row.identifier, name: row.name});
+                    // Setup columns meta
+                    new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
+                    {
+                        // Setup columns and icon
+                        let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
+                        let form_icon = form_element_object.GetIcon_(true);
 
-                    it++;
-                    
-                    return [`<th scope="col">${form_icon}${row.name}</th>`];
-                });
+                        // Add column to array
+                        this.data_read_columns.push({id: row.id, identifier: row.identifier, name: row.name});
 
-                // If there is less than 5 columns, add empty column
-                if(it < 5)
-                {
-                    $('#component_data_read table thead tr').append($(`<td scope="col" style="width: 50%;background: #CCC;"></td>`));
+                        it++;
+                        
+                        return [`<th scope="col">${form_icon}${row.name}</th>`];
+                    });
+
+                    // If there is less than 5 columns, add empty column
+                    if(it < 5)
+                    {
+                        $('#component_data_read table thead tr').append($(`<td scope="col" style="width: 50%;background: #CCC;"></td>`));
+                    }
                 }
-            }
 
-            // Handle zero results
-            if(response_data.body.data.length < 1)
-            {
-                // End of results reached
-                this.data_read_page_end = true;
-                return;
-            }
+                // Handle zero results
+                if(response_data.body.data.length < 1)
+                {
+                    // End of results reached
+                    this.data_read_page_end = true;
+                    return;
+                }
 
-            // Results elements creator (Rows)
-            new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
-            {
-                // Create rows
-                const elements = this.CreateRows_(response_data, row);
-                return new wtools.UIElementsPackage(`<tr id="row_${row.ID}" record-id="${row.ID}"></tr>`, elements).Pack_();
-            });
-        });
+                // Results elements creator (Rows)
+                new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
+                {
+                    // Create rows
+                    const elements = this.CreateRows_(response_data, row);
+                    return new wtools.UIElementsPackage(`<tr id="row_${row.ID}" record-id="${row.ID}"></tr>`, elements).Pack_();
+                });
+            });   
+        }
+        catch(error)
+        {
+            new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error.`);
+            console.error(error);
+            return;
+        }
     };
 
     RefreshRow_(row_id, insert = false)
     {
         try
         {
-            console.log('hola')
             // Get Form identifier
             const form_identifier = wtools.GetUrlSearchParam('identifier');
             if(form_identifier == undefined)
@@ -752,6 +760,34 @@ $(function()
     {
         e.preventDefault();
         dataObject.ReadDataColumns_();
+    });
+
+    // Click on new tab
+    $(document).on('click', '#component_sidebar_forms_tabs .tab-scroller .tab', (e) =>
+    {
+        e.preventDefault();
+
+        // Get Form identifier
+        const form_identifier = $(e.currentTarget).data('tab-id');
+
+        // Reset URL parameters and set new form identifier
+        const url = new URL(window.location.href);
+        url.searchParams.delete('conditions');
+        url.searchParams.delete('order');
+        url.searchParams.delete('view');
+        url.searchParams.set('identifier', form_identifier);
+        history.pushState({}, '', url.toString());
+
+        // Clear previous data
+        $('#component_data_read table thead tr').html("");
+        $('#component_data_read table tbody').html("");
+
+        // New data object
+        dataObject = new Data();
+
+        // Set to active current tab
+        $('#component_sidebar_forms_tabs .tab').removeClass('active');
+        $(e.currentTarget).addClass('active');
     });
     
     // Add record
