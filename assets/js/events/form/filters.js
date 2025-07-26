@@ -1,11 +1,9 @@
-$(function()
-{
-    // Setup filters tables
-    $("#component_data_filter_conditions tbody").sortable();
-    $("#component_data_filter_order tbody").sortable();
 
-    // Condition Element
-    const ConditionElement = () =>
+class Filters
+{
+    data_read_columns = [];
+
+    ConditionElement_()
     {
         let options = '';
         for(let option of new FilterType().array)
@@ -30,8 +28,7 @@ $(function()
         `);
     }
 
-    // Order Element
-    const OrderElement = () =>
+    OrderElement_()
     {
         return $(`
             <tr class="ui-state-default">
@@ -50,9 +47,8 @@ $(function()
             </tr>
         `);
     }
-    
-    // Read filters from URL
-    const read_filters_from_path = () =>
+
+    ReadFromURL_()
     {
         try
         {
@@ -97,7 +93,7 @@ $(function()
                     value = value.replaceAll("'", "");
                     value = value.replaceAll("%", "");
                     value = value.slice(0, value.length - 1);
-                    add_element_condition(column, condition, value);
+                    this.AddElementCondition_(column, condition, value);
                 }
             }
             if(order != undefined && order != "")
@@ -108,7 +104,7 @@ $(function()
                     let it_split = it.split(' ');
                     const column = it_split[0].replace("_structbx_column_", "");
                     const order = it_split[1];
-                    add_element_order(column, order);
+                    this.AddElementOrder_(column, order);
                 }
             }
         }
@@ -118,31 +114,16 @@ $(function()
         }
     }
 
-    // Show filter modal
-    const show_filter_modal = (e) =>
+    AddElementCondition_(column = undefined, condition = undefined, value = undefined)
     {
-        e.preventDefault();
+        // Update data read columns
+        this.data_read_columns = dataObject.data_read_columns;
 
-        read_filters_from_path();
-        $('#component_data_filter').modal('show');
-    }
-    $('.data_filter').click(e => show_filter_modal(e));
-
-    // Remove elements
-    $(document).on('click', '#component_data_filter table .btn-close', e => 
-    {
-        e.preventDefault();
-        $(e.currentTarget).parent().parent().remove();
-    });
-
-    // Add elements conditions
-    const add_element_condition = (column = undefined, condition = undefined, value = undefined) =>
-    {
         // Create row filter
-        let row = ConditionElement()
+        let row = this.ConditionElement_()
 
         // Setup row 'columns'
-        for(let column of data_read_columns)
+        for(let column of this.data_read_columns)
         {
             $(row).find('select[name=column]').append($(`<option value="${column.id}">${column.name}</option>`))
         }
@@ -163,20 +144,16 @@ $(function()
         $('#component_data_filter_conditions tbody').append(row);
     }
 
-    $('#component_data_filter .add_condition').click(e => 
+    AddElementOrder_(column = undefined, order = undefined)
     {
-        e.preventDefault();
-        add_element_condition();
-    });
+        // Update data read columns
+        this.data_read_columns = dataObject.data_read_columns;
 
-    // Add elements order
-    const add_element_order = (column = undefined, order = undefined) =>
-    {
         // Create row filter
-        let row = OrderElement();
+        let row = this.OrderElement_();
 
         // Setup row 'columns'
-        for(let column of data_read_columns)
+        for(let column of this.data_read_columns)
         {
             $(row).find('select[name=column]').append($(`<option value="${column.id}">${column.name}</option>`))
         }
@@ -193,14 +170,7 @@ $(function()
         $('#component_data_filter_order tbody').append(row);
     }
 
-    $('#component_data_filter .add_order').click(e => 
-    {
-        e.preventDefault();
-        add_element_order();
-    });
-
-    // Apply filters to URL
-    const apply_filters = () =>
+    Apply_()
     {
         let conditions = [];
         let orders = [];
@@ -268,6 +238,45 @@ $(function()
 
         $('#component_data_filter').modal('hide');
     }
+    
+}
+
+var filtersObject = new Filters();
+
+$(function()
+{
+    // Setup filters tables
+    $("#component_data_filter_conditions tbody").sortable();
+    $("#component_data_filter_order tbody").sortable();
+
+    // Show filter modal
+    const show_filter_modal = (e) =>
+    {
+        e.preventDefault();
+
+        filtersObject.ReadFromURL_();
+        $('#component_data_filter').modal('show');
+    }
+    $('.data_filter').click(e => show_filter_modal(e));
+
+    // Remove elements
+    $(document).on('click', '#component_data_filter table .btn-close', e => 
+    {
+        e.preventDefault();
+        $(e.currentTarget).parent().parent().remove();
+    });
+
+    $('#component_data_filter .add_condition').click(e => 
+    {
+        e.preventDefault();
+        filtersObject.AddElementCondition_();
+    });
+
+    $('#component_data_filter .add_order').click(e => 
+    {
+        e.preventDefault();
+        filtersObject.AddElementOrder_();
+    });
 
     // Submit filters
     $('#component_data_filter form').submit(e => 
@@ -283,7 +292,7 @@ $(function()
             return;
         }
 
-        apply_filters();
+        filtersObject.Apply_();
     });
 
     // Reset filters
