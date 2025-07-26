@@ -13,6 +13,18 @@ class Data
         setInterval(this.ChangeIntVerification_.bind(this), 5000);
     }
 
+    GetFormIdentifier_()
+    {
+        // Get Form identifier
+        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        if(form_identifier == undefined)
+        {
+            new wtools.Notification('ERROR').Show_('No se encontr&oacute; el identificador del formulario.');
+            return undefined;
+        }
+        return form_identifier;
+    }
+
     CreateRows_(response_data, row)
     {
         let elements = [];
@@ -34,7 +46,7 @@ class Data
                 {
                     // Verify if the column is image or file
                     if(column_meta.column_type == "image")
-                        elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${form_identifier}" alt="${column}" width="100px"></td>`);
+                        elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${this.GetFormIdentifier_()}" alt="${column}" width="100px"></td>`);
                     else if(column_meta.column_type == "file")
                     {
                         if(row[column].length > 10)
@@ -78,7 +90,7 @@ class Data
             let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
             // Get Form identifier
-            const form_identifier = wtools.GetUrlSearchParam('identifier');
+            const form_identifier = this.GetFormIdentifier_();
             if(form_identifier == undefined)
                 return;
 
@@ -186,12 +198,9 @@ class Data
         try
         {
             // Get Form identifier
-            const form_identifier = wtools.GetUrlSearchParam('identifier');
+            const form_identifier = this.GetFormIdentifier_();
             if(form_identifier == undefined)
-            {
-                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
                 return;
-            }
 
             // Get Data ID
             if(row_id == undefined)
@@ -256,7 +265,7 @@ class Data
     ChangeIntVerification_()
     {
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const form_identifier = this.GetFormIdentifier_();
         if(form_identifier == undefined)
             return;
 
@@ -354,12 +363,9 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const form_identifier = wtools.GetUrlSearchParam('identifier');
+            const form_identifier = this.GetFormIdentifier_();
             if(form_identifier == undefined)
-            {
-                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
                 return;
-            }
 
             // Setup data columns
             $('#component_data_add table tbody').html('');
@@ -439,11 +445,10 @@ class Data
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const form_identifier = this.GetFormIdentifier_();
         if(form_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
             return;
         }
 
@@ -476,11 +481,10 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const form_identifier = wtools.GetUrlSearchParam('identifier');
+            const form_identifier = this.GetFormIdentifier_();
             if(form_identifier == undefined)
             {
                 wait.Off_();
-                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
                 return;
             }
 
@@ -584,11 +588,10 @@ class Data
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const form_identifier = this.GetFormIdentifier_();
         if(form_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
             return;
         }
 
@@ -634,12 +637,10 @@ class Data
         let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-
+        const form_identifier = this.GetFormIdentifier_();
         if(form_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
             return;
         }
 
@@ -669,7 +670,7 @@ class Data
         let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const form_identifier = this.GetFormIdentifier_();
         if(form_identifier == undefined)
             return;
 
@@ -768,14 +769,14 @@ $(function()
         e.preventDefault();
 
         // Get Form identifier
-        const form_identifier = $(e.currentTarget).data('tab-id');
+        const new_form_identifier = $(e.currentTarget).attr('form-identifier');
 
         // Reset URL parameters and set new form identifier
         const url = new URL(window.location.href);
         url.searchParams.delete('conditions');
         url.searchParams.delete('order');
         url.searchParams.delete('view');
-        url.searchParams.set('identifier', form_identifier);
+        url.searchParams.set('identifier', new_form_identifier);
         history.pushState({}, '', url.toString());
 
         // Clear previous data

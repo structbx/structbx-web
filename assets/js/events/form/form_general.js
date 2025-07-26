@@ -126,7 +126,7 @@ $(function ()
             for(let row of response_data.body.data)
             {
                 $('#component_sidebar_forms_tabs .tab-scroller').append(`
-                    <div class="tab ${row.identifier == form_identifier ? "active" : ""}" id="${row.identifier}" data-tab-id="${row.identifier}">
+                    <div class="tab ${row.identifier == form_identifier ? "active" : ""}" id="${row.identifier}" form-identifier="${row.identifier}">
                         <span class="tab-title">${row.name}</span>
                     </div>
                 `);
