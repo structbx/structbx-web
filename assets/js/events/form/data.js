@@ -786,6 +786,12 @@ $(function()
         // New data object
         dataObject = new Data();
 
+        // Reset views
+        viewsObject.Read_();
+
+        // Read Form
+        objectFormGeneral.Read_();
+
         // Set to active current tab
         $('#component_sidebar_forms_tabs .tab').removeClass('active');
         $(e.currentTarget).addClass('active');

@@ -1,8 +1,6 @@
-
-$(function ()
+class FormGeneral
 {
-    // Verify Session
-    let verify_session = () =>
+    VerifySession_()
     {
         // Wait animation
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
@@ -13,20 +11,15 @@ $(function ()
             if(response_data.status != 200)
             {
                 new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-                window.location.href = "../login/";
+                window.location.href = "/login/";
                 return;
             }
 
             wait.Off_();
         });
-    };
-    verify_session();
+    }
 
-    // Elements
-        new Headers().Header_();
-    
-    // Read Header Form
-    const form_read = () =>
+    Read_()
     {
         // Wait animation
         let wait = new wtools.ElementState('#form_name', false, 'button', new wtools.WaitAnimation().for_button);
@@ -71,7 +64,20 @@ $(function ()
             }
         });
     };
-    form_read();
+}
+
+var objectFormGeneral = new FormGeneral();
+
+$(function ()
+{
+    // Verify Session
+    objectFormGeneral.VerifySession_();
+
+    // Elements
+    new Headers().Header_();
+    
+    // Read Header Form
+    objectFormGeneral.Read_();
     
     // Read all Sidebar forms
     const form_sidebar_read_all = () =>
