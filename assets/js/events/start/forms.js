@@ -53,12 +53,14 @@ $(function()
                     elements.push(`
                         <div class="d-flex align-items-start btn btn-simple">
                             <a href="/form?identifier=${row.identifier}" class="btn text-start mb-2 flex-grow-1">
-                                <span>${row.name}</span>
-                                <p class="text-muted">${row.description}</p>
-                                <div class="mt-2">
-                                    <span class="badge bg-secondary me-2"><i class="fas fa-key"></i> ${row.identifier}</span>
-                                    <span class="badge bg-secondary me-2"><i class="fas fa-pen"></i> ${row.total}</span>
-                                    <span class="badge bg-secondary me-2"><i class="fas fa-calendar"></i> ${row.created_at}</span>
+                                <div class="border-left-secondary">
+                                    <span>${row.name}</span>
+                                    <p class="text-muted">${row.description}</p>
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary me-2"><i class="fas fa-key"></i> ${row.identifier}</span>
+                                        <span class="badge bg-secondary me-2"><i class="fas fa-pen"></i> ${row.total}</span>
+                                        <span class="badge bg-secondary me-2"><i class="fas fa-calendar"></i> ${row.created_at}</span>
+                                    </div>
                                 </div>
                             </a>
                             <div class="btn-group align-self-center" role="group">

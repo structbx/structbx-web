@@ -20,6 +20,10 @@
 .bg-light{
     background-color: #f3f3f3 !important;
 }
+.border-left-secondary{
+    border-left: 3px solid #b4b4b4 !important;
+    padding-left: 10px;
+}
 
 /* --- Buttons and forms --- */
 
