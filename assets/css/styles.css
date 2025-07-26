@@ -251,3 +251,42 @@ table.table_data td:first-child {
     background-color: #ebebeb !important;
     color: #fff !important;
 }
+
+/* Tabs */
+.tab-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    /*background-color: #f8f9fa;*/
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+}
+.tab-scroller {
+    display: inline-block;
+    min-width: 100%;
+}
+.tab {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-right: 0.25rem;
+    background-color: #f3f3f3;
+    border: 1px solid #dee2e6;
+    border-bottom: none;
+    border-radius: 0.25rem 0.25rem 0 0;
+    cursor: pointer;
+    position: relative;
+    max-width: 200px;
+    min-width: 120px;
+}
+.tab:hover {
+    background-color: #e1e9f7;
+}
+.tab.active {
+    background-color: #e1e9f7;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: -1px;
+    z-index: 1;
+    color: #2267d4;
+    font-weight: bold;
+}

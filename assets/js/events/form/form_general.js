@@ -120,6 +120,11 @@ $(function ()
                         <span class="ms-2">${row.name}</span>
                     </a>
                 `);
+                $('#tabScroller').append(`
+                    <div class="tab ${row.identifier == form_identifier ? "active" : ""}" id="${row.identifier}" data-tab-id="${row.identifier}">
+                        <span class="tab-title">${row.name}</span>
+                    </div>
+                `);
             }
             let ui_element = new wtools.UIElementsPackage('<div class="nav-item"></div>', elements).Pack_();
             $('#component_sidebar_forms .contents').append(ui_element);
