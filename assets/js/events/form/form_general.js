@@ -92,8 +92,6 @@ $(function ()
             $('#component_sidebar_forms .contents').html('');
             $('#component_sidebar_forms_tabs .notifications').html('');
             $('#component_sidebar_forms_tabs .contents').html('');
-            $('#component_sidebar_forms_tabs_modal .notifications').html('');
-            $('#component_sidebar_forms_tabs_modal .contents').html('');
 
             // Manage response
             const result = new ResponseManager(response_data, '#component_sidebar_forms .notifications', '');
@@ -105,7 +103,6 @@ $(function ()
             {
                 new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms .notifications').Show_('Sin resultados.');
                 new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms_tabs .notifications').Show_('Sin resultados.');
-                new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms_tabs_modal .notifications').Show_('Sin resultados.');
                 return;
             }
 
@@ -120,57 +117,20 @@ $(function ()
                         <span class="ms-2">${row.name}</span>
                     </a>
                 `);
-                $('#tabScroller').append(`
-                    <div class="tab ${row.identifier == form_identifier ? "active" : ""}" id="${row.identifier}" data-tab-id="${row.identifier}">
-                        <span class="tab-title">${row.name}</span>
-                    </div>
-                `);
             }
             let ui_element = new wtools.UIElementsPackage('<div class="nav-item"></div>', elements).Pack_();
             $('#component_sidebar_forms .contents').append(ui_element);
 
             // Results elements creator: Tabs
-            $('#component_sidebar_forms_tabs .contents').html('');
-            elements = [];
+            $('#component_sidebar_forms_tabs .tab-scroller').html('');
             for(let row of response_data.body.data)
             {
-                elements.push(`
-                    <li class="nav-item">
-                        <a class="nav-link ${row.identifier == form_identifier ? "active" : ""}" href="/form?identifier=${row.identifier}">
-                            <i class="fas fa-database"></i>
-                            <span class="ms-2">${row.name}</span>
-                        </a>
-                    </li>
-                `);
-            }
-            ui_element = new wtools.UIElementsPackage('<ul class="nav nav-tabs"></ul>', elements).Pack_();
-            $('#component_sidebar_forms_tabs .contents').append(ui_element);
-
-            // Results elements creator: Modal
-            $('#component_sidebar_forms_tabs_modal .contents').html('');
-            elements = [];
-            for(let row of response_data.body.data)
-            {
-                elements.push(`
-                    <div class="d-flex align-items-start btn ${row.identifier == form_identifier ? "btn-primary" : "btn-simple"}">
-                        <a href="/form?identifier=${row.identifier}" class="btn text-start mb-2 flex-grow-1">
-                            <span>${row.name}</span>
-                            <p class="text-muted">${row.description}</p>
-                            <div class="mt-2">
-                                <span class="badge bg-secondary me-2"><i class="fas fa-key"></i> ${row.identifier}</span>
-                                <span class="badge bg-secondary me-2"><i class="fas fa-pen"></i> ${row.total}</span>
-                                <span class="badge bg-secondary me-2"><i class="fas fa-calendar"></i> ${row.created_at}</span>
-                            </div>
-                        </a>
-                        <div class="btn-group align-self-center" role="group">
-                            <a href="/form/columns?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-columns"></i></a>
-                            <a href="/form/settings?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-cog"></i></a>
-                        </div>
+                $('#component_sidebar_forms_tabs .tab-scroller').append(`
+                    <div class="tab ${row.identifier == form_identifier ? "active" : ""}" id="${row.identifier}" data-tab-id="${row.identifier}">
+                        <span class="tab-title">${row.name}</span>
                     </div>
                 `);
             }
-            ui_element = new wtools.UIElementsPackage('<div class="text-center"></ul>', elements).Pack_();
-            $('#component_sidebar_forms_tabs_modal .contents').append(ui_element);
         });
     };
     form_sidebar_read_all();
