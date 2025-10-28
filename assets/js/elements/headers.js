@@ -28,7 +28,7 @@ class Headers
                     <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
                         <li class="nav-item me-2">
                             <div class="d-flex align-items-center h-100 text-center">
-                                <a class="btn btn-outline-secondary py-2 px-4 go-button" go-path="/administration" go-hash="#spaces" href="#">
+                                <a class="btn btn-outline-light py-2 px-4 go-button" go-path="/administration" go-hash="#spaces" href="#">
                                     <span class="me-2"><i class="fas fa-building"></i></span>
                                     <span class="space_name"></span>
                                 </a>
@@ -37,7 +37,7 @@ class Headers
                         <div class="vr mx-4 d-none d-md-inline-block"></div>
                         <li class="nav-item me-2">
                             <div class="d-flex align-items-center h-100 text-center">
-                                <a class="btn btn-outline-secondary py-2 px-4 go-button" go-path="/administration" go-hash="#my_account" href="#">
+                                <a class="btn btn-outline-light py-2 px-4 go-button" go-path="/administration" go-hash="#my_account" href="#">
                                     <span class="me-2"><i class="fas fa-user"></i></span>
                                     <span class="username_logued"></span>
                                 </a>

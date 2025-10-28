@@ -51,12 +51,12 @@
     border-color:#eee063 !important;
     color:#333 !important;
 }
-.btn-outline-secondary{
+.btn-outline-light{
     background: none;
     border:1px solid #ffffff00 !important;
     color:#fff !important;
 }
-.btn-outline-secondary:hover{
+.btn-outline-light:hover{
     background: none;
     border:1px solid #fff !important;
     color:#fff !important;
