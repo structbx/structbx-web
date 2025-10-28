@@ -51,28 +51,37 @@ $(function()
                 if(cont < 2)
                 {
                     elements.push(`
-                        <div class="d-flex align-items-start btn btn-simple">
-                            <a href="/form?identifier=${row.identifier}" class="btn text-start mb-2 flex-grow-1">
-                                <div class="border-left-secondary">
-                                    <span>${row.name}</span>
-                                    <p class="text-muted">${row.description}</p>
-                                    <div class="mt-2">
-                                        <span class="badge bg-secondary me-2"><i class="fas fa-key"></i> ${row.identifier}</span>
-                                        <span class="badge bg-secondary me-2"><i class="fas fa-pen"></i> ${row.total}</span>
-                                        <span class="badge bg-secondary me-2"><i class="fas fa-calendar"></i> ${row.created_at}</span>
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card card-table-item h-100 shadow-sm d-flex flex-column">
+                                
+                                <a href="/form?identifier=${row.identifier}" class="p-3 flex-grow-1 text-decoration-none text-dark">
+                                    <div class="border-start border-3 border-primary ps-2">
+                                        <h5 class="mb-1">${row.name}</h5>
+                                        <p class="text-muted small mb-3">${row.description}</p>
                                     </div>
+                                    
+                                    <div class="mt-2">
+                                        <span class="badge rounded-pill bg-dark me-2"><i class="fas fa-key fa-fw"></i> ${row.identifier}</span>
+                                        <span class="badge rounded-pill bg-dark me-2"><i class="fas fa-pen fa-fw"></i> ${row.total}</span>
+                                        <span class="badge rounded-pill bg-dark me-2"><i class="fas fa-calendar fa-fw"></i> ${row.created_at}</span>
+                                    </div>
+                                </a>
+                                
+                                <div class="card-footer d-flex justify-content-end bg-light border-0 pt-0">
+                                    <a href="/form/columns?identifier=${row.identifier}" class="btn btn-outline-secondary btn-sm me-2" title="Columnas">
+                                        <i class="fas fa-columns"></i>
+                                    </a>
+                                    <a href="/form/settings?identifier=${row.identifier}" class="btn btn-outline-secondary btn-sm" title="Ajustes">
+                                        <i class="fas fa-cog"></i>
+                                    </a>
                                 </div>
-                            </a>
-                            <div class="btn-group align-self-center" role="group">
-                                <a href="/form/columns?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-columns"></i></a>
-                                <a href="/form/settings?identifier=${row.identifier}" class="btn btn-dark-shadow"><i class="fas fa-cog"></i></a>
                             </div>
                         </div>
                     `);
                 }
                 else
                 {
-                    let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
+                    let ui_element = new wtools.UIElementsPackage('<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"></div>', elements).Pack_();
                     $('#component_forms_read .contents').append(ui_element);
                     cont = 0;
                     elements = [];
