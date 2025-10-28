@@ -135,8 +135,8 @@ table.table_data
 }
 table.table_data thead
 {
-    background-color: #145da0 !important;
-    color: #fff !important;
+    background-color: #ececec !important;
+    color: #444 !important;
 }
 table.table_data th {
     border-left: none !important;
