@@ -21,3 +21,7 @@ body{
 #notifications{
     z-index: 1051;
 }
+
+#component_data_read td{
+    cursor: pointer;
+}
