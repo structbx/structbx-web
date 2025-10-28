@@ -51,6 +51,16 @@
     border-color:#eee063 !important;
     color:#333 !important;
 }
+.btn-outline-secondary{
+    background: none;
+    border:1px solid #ffffff00 !important;
+    color:#fff !important;
+}
+.btn-outline-secondary:hover{
+    background: none;
+    border:1px solid #fff !important;
+    color:#fff !important;
+}
 .btn-primary:hover{
     background: #cebf3e;
     border-color:#eee063 !important;
