@@ -30,7 +30,39 @@ class Data
         let elements = [];
 
         // Basic <td> row
-        const basic_push = (row, column) => {elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)};
+        const basic_row = (row, column) =>
+        {
+            elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)
+        };
+        // User <td> row
+        const user_row = (row, column) =>
+        {
+            if(this.users_in_space[row[column]] != undefined)
+                elements.push(`<td class="bg-white" scope="row">${this.users_in_space[row[column]]}</td>`);
+            else
+                elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`);
+        };
+        // Image <td> row
+        const image_row = (row, column) =>
+        {
+            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${this.GetFormIdentifier_()}" alt="${column}" width="100px"></td>`);
+        };
+        // File <td> row
+        const file_row = (row, column) =>
+        {
+            if(row[column].length > 10)
+            {
+                // Setup text less than 10 characters
+                let new_content = "";
+                let max = row[column].length - 1;
+                for(let i = max; i > max - 10; i--)
+                    new_content = row[column][i] + new_content;
+                    
+                elements.push(`<td class="bg-white" scope="row">...${new_content}</td>`);
+            }
+            else
+                basic_row(row, column);
+        };
 
         // Loop in columns
         let key = 0;
@@ -39,37 +71,20 @@ class Data
             // Setup columns meta
             let column_meta = response_data.body.columns_meta.data[key];
 
-            if(column_meta != undefined)
+            if(column_meta != undefined && row[column] != "")
             {
-                // Verify if the column is not ""
-                if(row[column] != "")
-                {
-                    // Verify if the column is image or file
-                    if(column_meta.column_type == "image")
-                        elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${this.GetFormIdentifier_()}" alt="${column}" width="100px"></td>`);
-                    else if(column_meta.column_type == "file")
-                    {
-                        if(row[column].length > 10)
-                        {
-                            // Setup text less than 10 characters
-                            let n = "";
-                            let max = row[column].length - 1;
-                            for(let i = max; i > max - 10; i--)
-                                n = row[column][i] + n;
-                                
-                            elements.push(`<td class="bg-white" scope="row">...${n}</td>`);
-                        }
-                        else
-                            elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`);
-                    }
-                    else
-                        basic_push(row, column);
-                }
+                // Verify column typeoptions_column_type_initoptions_column_type_init
+                if(column_meta.column_type == "image")
+                    image_row(row, column);
+                else if(column_meta.column_type == "file")
+                    file_row(row, column);
+                else if(column_meta.column_type == "user" || column_meta.column_type == "current-user")
+                    user_row(row, column);
                 else
-                    basic_push(row, column);
+                    basic_row(row, column);
             }
             else
-                basic_push(row, column);
+                basic_row(row, column);
 
             key++;
         }
