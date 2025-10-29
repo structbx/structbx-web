@@ -104,6 +104,15 @@ class FormElements
                 );
                 break;
             }
+            case "user":
+            {
+                return_element = this.User_
+                (
+                    wtools.IFUndefined(this.data.identifier, "")
+                    ,wtools.IFUndefined(this.data.required, "")
+                );
+                break;
+            }
             default:
             {
                 return_element = this.Text_
@@ -167,6 +176,11 @@ class FormElements
             case "selection":
             {
                 return_element = '<i class="fas fa-hand-pointer';
+                break;
+            }
+            case "user":
+            {
+                return_element = '<i class="fas fa-users';
                 break;
             }
             default:
@@ -306,6 +320,15 @@ class FormElements
         return result;
     }
     Selection_(identifier, required)
+    {
+        return `
+            <td scope="row">
+                <select class="form-select" name="${identifier}" ${required == '1' ? 'required' : ''}>
+                </select>
+            </td>
+        `;
+    }
+    User_(identifier, required)
     {
         return `
             <td scope="row">
