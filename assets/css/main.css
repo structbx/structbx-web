@@ -1,5 +1,13 @@
 
-/* --- General --- */
+:root {
+    --primary: #eee063;
+    --primary-dark: #e3b502;
+    --dark: #212529;
+    --light: #f3f3f3;
+    --gradient: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%);
+    --text-color: #333333;
+    --border-color: #b4b4b4;
+}
 
 * {
     margin: none;
@@ -12,6 +20,7 @@ body{
 
 #header_main{
     z-index: 1050;
+    background: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
 }
 
 #menu_main{

@@ -1,27 +1,37 @@
 
+:root {
+    --primary: #eee063;
+    --primary-dark: #e3b502;
+    --dark: #212529;
+    --light: #f3f3f3;
+    --gradient: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%);
+    --text-color: #333333;
+    --border-color: #b4b4b4;
+}
+
 .primary-background
 {
-    background-color:#eee063 !important;
+    background-color:var(--primary) !important;
 }
 .primary-border
 {
-    border-color:#eee063 !important;
+    border-color:var(--primary) !important;
 }
 .primary-color
 {
-    color:#eee063 !important;
+    color:var(--primary) !important;
 }
 .bg-primary{
-    background: #eee063 !important;
+    background: var(--primary) !important;
 }
 .bg-dark{
-    background-color: #212529 !important;
+    background-color: var(--dark) !important;
 }
 .bg-light{
-    background-color: #f3f3f3 !important;
+    background-color: var(--light) !important;
 }
 .border-left-secondary{
-    border-left: 3px solid #b4b4b4 !important;
+    border-left: 3px solid var(--border-color) !important;
     padding-left: 10px;
 }
 
@@ -30,12 +40,12 @@
 .btn{
     background: none;
     border-color:none;
-    color:#333 !important;
+    color: var(--text-color) !important;
 }
 .btn-primary{
-    background: #eee063 !important;
-    border-color:#eee063 !important;
-    color:#333 !important;
+    background: var(--primary) !important;
+    border-color:var(--primary) !important;
+    color:var(--text-color) !important;
 }
 .btn-secondary{
     background: #b8b8b8;
@@ -48,7 +58,7 @@
 }
 .btn-outline-primary{
     background: none;
-    border-color:#eee063 !important;
+    border-color:var(--primary) !important;
     color:#333 !important;
 }
 .btn-outline-light{
@@ -62,12 +72,12 @@
     color:#fff !important;
 }
 .btn-primary:hover{
-    background: #cebf3e;
-    border-color:#eee063 !important;
+    background: var(--primary-dark) !important;
+    border-color:var(--primary-dark) !important;
 }
 .btn-primary:focus{
-    background: #eee063 !important;
-    border-color:#eee063 !important;
+    background: var(--primary) !important;
+    border-color:var(--primary) !important;
 }
 .btn-ligth{
     background: none;
@@ -80,7 +90,7 @@
     color:#fff !important;
 }
 .btn-ligth:hover{
-    background-color: #eee063 !important;
+    background-color: var(--primary) !important;
     color:#333 !important;
 }
 .btn-dark-shadow{
@@ -228,7 +238,7 @@ table.table_data td:first-child {
     background-color: #d8d8d8;
 }
 #menu_main .nav-link.active {
-    background-color: #eee063 !important;
+    background-color: var(--primary) !important;
     color:#333;
     text-decoration: none;
 }
@@ -254,7 +264,7 @@ table.table_data td:first-child {
 /* Modals elements */
 
 .modal-header{
-    background-color: #145da0 !important;
+    background: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
     color: #fff !important;
 }
 .modal-footer{
