@@ -6,10 +6,11 @@ class Data
     data_read_page = 0;
     data_read_page_end = false;
     data_read_columns = [];
+    users_in_space = {};
 
     constructor()
     {
-        this.Read_();
+        this.ReadUsersInSpace_(() => this.Read_());
         setInterval(this.ChangeIntVerification_.bind(this), 5000);
     }
 
@@ -166,20 +167,20 @@ class Data
                     {
                         // Setup columns and icon
                         let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
-                        let form_icon = form_element_object.GetIcon_(true);
+                        let form_icon = form_element_object.GetIcon_(false);
 
                         // Add column to array
                         this.data_read_columns.push({id: row.id, identifier: row.identifier, name: row.name});
 
                         it++;
                         
-                        return [`<th scope="col">${form_icon}${row.name}</th>`];
+                        return [`<th scope="col" class="user-select-none">${form_icon}${row.name}</th>`];
                     });
 
                     // If there is less than 5 columns, add empty column
                     if(it < 5)
                     {
-                        $('#component_data_read table thead tr').append($(`<td scope="col" style="width: 50%;background: #CCC;"></td>`));
+                        $('#component_data_read table thead tr').append($(`<th scope="col"  class="user-select-none" style="width: 50%;background: #f3f3f3;border-top:none !important;"></th>`));
                     }
                 }
 
@@ -203,7 +204,6 @@ class Data
         catch(error)
         {
             new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error.`);
-            console.error(error);
             return;
         }
     };
@@ -237,10 +237,8 @@ class Data
                 order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
             // Request row
-            console.log('hola1')
             new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${row_id}&form-identifier=${form_identifier}${conditions}${order}`).Exec_((response_data) =>
             {
-                console.log('hola2')
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Leer (1)');
                 if(!result.Verify_())
@@ -320,7 +318,7 @@ class Data
                                 $(`#row_${row.row_id}`).remove();
                                 break;
                             case "import":
-                                this.Read_(true);
+                                this.ReadUsersInSpace_(() => this.Read_(true));
                                 break;
                         }
                     }
@@ -477,6 +475,8 @@ class Data
                     // If column type is SELECTION
                     if(row.column_type == "selection")
                         this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_add .notifications');
+                    else if(row.column_type == "user")
+                        this.OptionsLinkUsersInSpace_(form_element, '#component_data_add .notifications');
 
                     // Final elements
                     let elements = [
@@ -621,6 +621,8 @@ class Data
                     // If column type is SELECTION
                     if(row.column_type == "selection")
                         this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_modify .notifications', row.value);
+                    else if(row.column_type == "user")
+                        this.OptionsLinkUsersInSpace_(form_element, '#component_data_add .notifications', row.value);
 
                     let elements = [
                         `<th scope="row">${form_icon}${row.name}</th>`
