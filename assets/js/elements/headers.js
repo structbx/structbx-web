@@ -44,9 +44,9 @@ class Headers
                             </div>
                         </li>
                         <div class="vr mx-4 d-none d-md-inline-block"></div>
-                        <li class="nav-item me-2">
+                        <li class="nav-item me-2 text-light">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-tools fa-fw"></i>
+                                <i class="fas fa-tools fa-fw text-light"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1050;">
                                 <li>
@@ -89,7 +89,7 @@ class Headers
                         </li>
                         <li class="nav-item me-2">
                             <a class="nav-link" href="#" id="logout-button">
-                                <i class="fas fa-sign-out-alt"></i>
+                                <i class="fas fa-sign-out-alt text-light"></i>
                             </a>
                         </li>
                     </ul>
