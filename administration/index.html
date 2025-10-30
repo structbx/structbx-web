@@ -13,6 +13,7 @@
 
         <link rel="stylesheet" href="../assets/css/main.css">
         <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/modal.css">
         <!-- /CSS files -->
         
         <!-- JS Libraries -->
@@ -93,12 +94,14 @@
                         <!-- /Spaces: Read -->
 
                         <!-- Spaces: Add -->
-                        <div class="modal" id="component_spaces_add" tabindex="-1" aria-labelledby="component_spaces_add_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_spaces_add" tabindex="-1" aria-labelledby="component_spaces_add_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Crear nuevo espacio</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-plus-circle me-2"></i>Crear nuevo espacio
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -120,8 +123,12 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Crear</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Crear
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -353,12 +360,14 @@
                         <!-- /Users: Read -->
 
                         <!-- Users: Add -->
-                        <div id="component_users_add" class="modal" tabindex="-1" aria-hidden="true">
+                        <div id="component_users_add" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">A&ntilde;adir nuevo usuario</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir nuevo usuario
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -382,8 +391,12 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>A&ntilde;adir
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -391,12 +404,14 @@
                         <!-- /Users: Add -->
 
                         <!-- Users: Modify -->
-                        <div id="component_users_modify" class="modal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_users_modify" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Editar usuario</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-pen me-2"></i>Editar usuario
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
 
@@ -428,9 +443,15 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="delete btn btn-danger me-auto">Eliminar usuario</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Modificar</button>
+                                        <button type="button" class="delete btn btn-danger me-auto">
+                                            <i class="fas fa-times me-2"></i>Eliminar usuario
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-pen me-2"></i>Modificar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -438,12 +459,14 @@
                         <!-- /Users: Modify -->
 
                         <!-- Users: Delete -->
-                        <div class="modal" id="component_users_delete" tabindex="-1" aria-labelledby="component_users_delete_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_users_delete" tabindex="-1" aria-labelledby="component_users_delete_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_users_delete_label">Eliminar usuario</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_users_delete_label">
+                                            <i class="fas fa-times me-2"></i>Eliminar usuario
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -451,8 +474,12 @@
                                         <p>Seguro desea eliminar el usuario <strong class="username"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -512,12 +539,14 @@
                         <!-- /Groups: Read -->
 
                         <!-- Groups: Add -->
-                        <div id="component_groups_add" class="modal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_groups_add" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">A&ntilde;adir nuevo grupo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir nuevo grupo
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -531,8 +560,12 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -540,12 +573,14 @@
                         <!-- /Groups: Add -->
 
                         <!-- Groups: Modify -->
-                        <div id="component_groups_modify" class="modal" tabindex="-1" aria-hidden="true">
+                        <div id="component_groups_modify" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Editar grupo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-pen me-2"></i>Editar grupo
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
 
@@ -561,9 +596,15 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="delete btn btn-danger me-auto">Eliminar grupo</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Modificar</button>
+                                        <button type="button" class="delete btn btn-danger me-auto">
+                                            <i class="fas fa-times me-2"></i>Eliminar grupo
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Modificar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -571,12 +612,14 @@
                         <!-- /Groups: Modify -->
 
                         <!-- Groups: Delete -->
-                        <div class="modal" id="component_groups_delete" tabindex="-1" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_groups_delete" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Eliminar grupo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-times me-2"></i>Eliminar grupo
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -584,8 +627,12 @@
                                         <p>Seguro desea eliminar el grupo <strong class="group"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -649,12 +696,14 @@
                         <!-- /Permissions: Read -->
 
                         <!-- Permissions: Add -->
-                        <div id="component_permissions_add" class="modal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_permissions_add" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">A&ntilde;adir nuevo permiso</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir nuevo permiso
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -671,8 +720,12 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>A&ntilde;adir
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -680,12 +733,14 @@
                         <!-- /Permissions: Add -->
 
                         <!-- Permissions: Delete -->
-                        <div class="modal" id="component_permissions_delete" tabindex="-1" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_permissions_delete" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Eliminar permiso</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-times me-2"></i>Eliminar permiso
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -693,8 +748,12 @@
                                         <p>Seguro desea eliminar el permiso <strong class="value"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>

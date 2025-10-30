@@ -13,6 +13,7 @@
 
         <link rel="stylesheet" href="../assets/css/main.css">
         <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/modal.css">
         <!-- /CSS files -->
 
         <!-- JS Libraries -->
@@ -121,12 +122,14 @@
                         <!-- /Space: Delete -->
 
                         <!-- Space: Delete: Final -->
-                        <div id="component_space_delete_final" class="modal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_space_delete_final" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Eliminar espacio <strong class="header"></strong></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-times me-2"></i>Eliminar espacio <strong class="header"></strong>
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -137,8 +140,12 @@
                                         </p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Eliminar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -197,12 +204,14 @@
                         <!-- /Users: Read -->
 
                         <!-- Users: Add -->
-                        <div id="component_users_add" class="modal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_users_add" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">A&ntilde;adir usuario al espacio</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir usuario al espacio
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -218,8 +227,12 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">A&ntilde;adir</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -227,12 +240,14 @@
                         <!-- /Users: Add -->
 
                         <!-- Users: Delete -->
-                        <div class="modal" id="component_users_delete" tabindex="-1" aria-labelledby="component_users_delete_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_users_delete" tabindex="-1" aria-labelledby="component_users_delete_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_users_delete_label">Eliminar usuario</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_users_delete_label">
+                                            <i class="fas fa-times me-2"></i>Eliminar usuario
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -240,8 +255,12 @@
                                         <p>Seguro desea eliminar el usuario <strong class="username"></strong> del espacio <strong class="space"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar del espacio</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar del espacio
+                                        </button>
                                     </div>
                                 </form>
                             </div>

@@ -13,6 +13,7 @@
 
         <link rel="stylesheet" href="../assets/css/main.css">
         <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/modal.css">
         <!-- /CSS files -->
         
         <!-- JS Libraries -->
@@ -70,12 +71,14 @@
                         <!-- /Forms: Read -->
 
                         <!-- Forms: Add -->
-                        <div id="component_forms_add" class="modal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_forms_add" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title">A&ntilde;adir nuevo formulario</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir nuevo formulario
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -97,8 +100,12 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Crear</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Crear
+                                        </button>
                                     </div>
                                 </form>
                             </div>

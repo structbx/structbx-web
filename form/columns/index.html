@@ -13,6 +13,7 @@
 
         <link rel="stylesheet" href="../assets/css/main.css">
         <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/modal.css">
         <!-- /CSS files -->
 
         <!-- JS Libraries -->
@@ -96,12 +97,14 @@
                         <!-- /Columns: Read -->
 
                         <!-- Columns: Add -->
-                        <div id="component_columns_add" class="modal" tabindex="-1" aria-labelledby="component_columns_add_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_columns_add" class="modal right-side-modal fade" tabindex="-1" aria-labelledby="component_columns_add_label" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_columns_add_label">A&ntilde;adir columna</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_columns_add_label">
+                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir columna
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -173,8 +176,12 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Crear columna</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-plus-circle me-2"></i>Crear columna
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -182,12 +189,14 @@
                         <!-- /Columns: Add -->
 
                         <!-- Columns: Modify -->
-                        <div id="component_columns_modify" class="modal" tabindex="-1" aria-labelledby="component_columns_modify_label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                        <div id="component_columns_modify" class="modal right-side-modal fade" tabindex="-1" aria-labelledby="component_columns_modify_label" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_columns_modify_label">Modificar columna</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_columns_modify_label">
+                                            <i class="fas fa-pen me-2"></i>Modificar columna
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
 
@@ -268,9 +277,15 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="delete btn btn-danger me-auto">Borrar columna</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Modificar</button>
+                                        <button type="button" class="delete btn btn-danger me-auto">
+                                            <i class="fas fa-times me-2"></i>Borrar columna
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-pen me-2"></i>Modificar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -278,12 +293,14 @@
                         <!-- /Columns: Modify -->
 
                         <!-- Columns: Delete -->
-                        <div class="modal" id="component_columns_delete" tabindex="-1" aria-labelledby="component_columns_delete_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_columns_delete" tabindex="-1" aria-labelledby="component_columns_delete_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_columns_delete_label">Borrar columna</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_columns_delete_label">
+                                            <i class="fas fa-times me-2"></i>Borrar columna
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -291,8 +308,11 @@
                                         <p>Seguro desea eliminar la columna ID <strong class="id"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
