@@ -218,17 +218,18 @@ table.table_data td:first-child {
 /* Nav link */
 
 .nav-link {
-    color:#333;
+    color:#333 !important;
 }
 .nav-link:hover {
-    color:#796e0c;
+    color:linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
 }
 .nav-link.active {
-    color:#796e0c;
+    color:#fff !important;
 }
 .nav-link.active:hover {
     text-decoration: underline;
-    color:#796e0c;
+    color: #fff !important;
+    border-color: var(--primary) !important;
 }
 #menu_main .nav-link {
     background: none;
@@ -238,11 +239,15 @@ table.table_data td:first-child {
     background-color: #d8d8d8;
 }
 #menu_main .nav-link.active {
-    background-color: var(--primary) !important;
-    color:#333;
+    background: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
+    color:#fff;
     text-decoration: none;
 }
-
+#menu_main .nav-link.active:hover{
+    text-decoration: none;
+    color: #fff !important;
+    border-color: var(--primary) !important;
+}
 
 /* Drag and Drop elements */
 

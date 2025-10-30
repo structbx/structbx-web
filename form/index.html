@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="../assets/css/main.css">
         <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/modal.css">
         <!-- /CSS files -->
 
         <!-- JS Libraries -->
@@ -155,25 +156,31 @@
                         <!-- /Data: Read -->
 
                         <!-- Data: Add -->
-                        <div class="modal" id="component_data_add" tabindex="-1" aria-labelledby="component_data_add_label" aria-hidden="true">
-                            <div class="modal-dialog modal-fullscreen">
+                        <div class="modal right-side-modal fade" id="component_data_add" tabindex="-1" aria-labelledby="component_data_add_label" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_add_label">Nuevo registro</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_add_label">
+                                            <i class="fas fa-plus-circle me-2"></i>Nuevo registro
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="container-xxl">
                                             <div class="notifications"></div>
-                                            <table class="table">
+                                            <table class="table table-form">
                                                 <tbody>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Agregar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Agregar registro
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -181,12 +188,14 @@
                         <!-- /Data: Add -->
 
                         <!-- Data: Modify -->
-                        <div class="modal" id="component_data_modify" tabindex="-1" aria-labelledby="component_data_modify_label" aria-hidden="true">
-                            <div class="modal-dialog modal-fullscreen">
+                        <div class="modal right-side-modal fade" id="component_data_modify" tabindex="-1" aria-labelledby="component_data_modify_label" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_modify_label">Modificar registro</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_modify_label">
+                                            <i class="fas fa-pen me-2"></i>Modificar registro
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="container-xxl">
@@ -199,9 +208,15 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="delete btn btn-danger me-auto">Borrar registro</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="button" class="delete btn btn-danger me-auto">
+                                            <i class="fas fa-times me-2"></i>Borrar registro
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Guardar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -209,12 +224,14 @@
                         <!-- /Data: Modify -->
 
                         <!-- Data: Delete -->
-                        <div class="modal" id="component_data_delete" tabindex="-1" aria-labelledby="component_data_delete_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_data_delete" tabindex="-1" aria-labelledby="component_data_delete_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_delete_label">Borrar registro</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_delete_label">
+                                            <i class="fas fa-times me-2"></i>Borrar registro
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -222,8 +239,12 @@
                                         <p>Seguro desea eliminar el registro ID #<strong class="id"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -231,12 +252,14 @@
                         <!-- /Data: Delete -->
 
                         <!-- Data: Filter -->
-                        <div id="component_data_filter" class="modal" tabindex="-1" aria-labelledby="component_data_filter_label" aria-hidden="true">
+                        <div id="component_data_filter" class="modal right-side-modal fade" tabindex="-1" aria-labelledby="component_data_filter_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_filter_label">Filtros</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_filter_label">
+                                            <i class="fas fa-filter"></i>Filtros
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
 
@@ -276,9 +299,15 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger me-auto reset_filters" data-bs-dismiss="modal">Resetear filtros</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                                        <button type="button" class="btn btn-danger me-auto reset_filters" data-bs-dismiss="modal">
+                                            <i class="fas fa-times me-2"></i>Resetear filtros
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cerrar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Aplicar filtros
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -286,12 +315,14 @@
                         <!-- /Data: Filter -->
 
                         <!-- Data: Import data -->
-                        <div id="component_data_import" class="modal" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
-                            <div class="modal-dialog modal-fullscreen">
+                        <div id="component_data_import" class="modal right-side-modal fade" tabindex="-1" aria-labelledby="component_data_import_label" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_import_label">Importar data</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_import_label">
+                                            <i class="fas fa-file-import me-2"></i>Importar data
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -357,8 +388,12 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Importar data</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Importar data
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -366,17 +401,21 @@
                         <!-- /Data: Import data -->
 
                         <!-- Data: Import: Message -->
-                        <div id="component_data_import_message" class="modal" tabindex="-1" aria-labelledby="component_data_import_message_label" aria-hidden="true">
-                            <div class="modal-dialog modal-fullscreen">
+                        <div id="component_data_import_message" class="modal right-side-modal fade" tabindex="-1" aria-labelledby="component_data_import_message_label" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_import_message_label">Mensaje de importaci&oacute;n</h5>
+                                        <h5 class="modal-title" id="component_data_import_message_label">
+                                            <i class="fas fa-file-import me-2"></i>Mensaje de importaci&oacute;n
+                                        </h5>
                                     </div>
                                     <div class="modal-body">
                                         <div class="contents"></div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cerrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -384,12 +423,14 @@
                         <!-- /Data: Import: Message -->
 
                         <!-- Data: Export data -->
-                        <div id="component_data_export" class="modal" tabindex="-1" aria-labelledby="component_data_export_label" aria-hidden="true">
+                        <div id="component_data_export" class="modal right-side-modal fade" tabindex="-1" aria-labelledby="component_data_export_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_export_label">Exportar data</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_export_label">
+                                            <i class="fas fa-download me-2"></i>Exportar data
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         
@@ -397,8 +438,12 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary export" data-bs-dismiss="modal">Exportar data</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="button" class="btn btn-primary export" data-bs-dismiss="modal">
+                                            <i class="fas fa-download me-2"></i>Exportar data
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -406,12 +451,14 @@
                         <!-- /Data: Export data -->
 
                         <!-- Data: Views: Add -->
-                        <div class="modal" id="component_data_views_add" tabindex="-1" aria-labelledby="component_data_views_add_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_data_views_add" tabindex="-1" aria-labelledby="component_data_views_add_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_views_add_label">Nueva vista</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_views_add_label">
+                                            <i class="fas fa-plus-circle me-2"></i>Nueva vista
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="container-xxl">
@@ -421,8 +468,12 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Agregar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cerrar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Agregar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -430,12 +481,14 @@
                         <!-- /Data: Views: Add -->
 
                         <!-- Data: Views: Modify -->
-                        <div class="modal" id="component_data_views_modify" tabindex="-1" aria-labelledby="component_data_views_modify_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_data_views_modify" tabindex="-1" aria-labelledby="component_data_views_modify_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_views_modify_label">Modificar vista</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_views_modify_label">
+                                            <i class="fas fa-pen me-2"></i>Modificar vista
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -444,8 +497,12 @@
                                         <input type="text" name="name" class="form-control" placeholder="Nombre de la vista" required>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Actualizar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -453,12 +510,14 @@
                         <!-- /Data: Views: Modify -->
 
                         <!-- Data: Views: Delete -->
-                        <div class="modal" id="component_data_views_delete" tabindex="-1" aria-labelledby="component_data_views_delete_label" aria-hidden="true">
+                        <div class="modal right-side-modal fade" id="component_data_views_delete" tabindex="-1" aria-labelledby="component_data_views_delete_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form class="modal-content" novalidate>
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="component_data_views_delete_label">Borrar vista</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="component_data_views_delete_label">
+                                            <i class="fas fa-times me-2"></i>Borrar vista
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
@@ -466,8 +525,12 @@
                                         <p>Seguro desea eliminar la vista <strong class="name"></strong></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times me-2"></i>Borrar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
