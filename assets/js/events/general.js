@@ -128,6 +128,6 @@ $(function ()
     {
         e.preventDefault();
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        window.location.href = `/form?identifier=${wtools.GetUrlSearchParam('identifier')}`;
+        window.location.href = `/table?identifier=${wtools.GetUrlSearchParam('identifier')}`;
     });
 });
