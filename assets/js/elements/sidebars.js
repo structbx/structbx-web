@@ -6,8 +6,8 @@ class Sidebars
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
-            <h5 class="small text-uppercase text-muted">ESPACIOS</h5>
-            <div id="component_sidebar_spaces">
+            <h5 class="small text-uppercase text-muted">BASES DE DATOS</h5>
+            <div id="component_sidebar_databases">
                 <div class="notifications"></div>
                 <div class="contents"></div>
             </div>
@@ -26,9 +26,9 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
-                <a class="menu_spaces nav-link mb-2" href="#spaces" menu="spaces">
+                <a class="menu_databases nav-link mb-2" href="#databases" menu="databases">
                     <i class="fas fa-building"></i>
-                    <span class="ms-2">Espacios</span>
+                    <span class="ms-2">Bases de datos</span>
                 </a>
             </div>
             <div class="nav-item">
@@ -65,7 +65,7 @@ class Sidebars
 
         $("#menu_main").append(sidebar_menu);
     }
-    SidebarMenuSpace_ ()
+    SidebarMenuDatabase_ ()
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
@@ -76,15 +76,15 @@ class Sidebars
                 </a>
             </div>
             <div class="nav-item">
-                <a class="nav-link mb-2 go-button" go-path="/administration" go-hash="#spaces" href="#">
+                <a class="nav-link mb-2 go-button" go-path="/administration" go-hash="#databases" href="#">
                     <i class="fas fa-arrow-left"></i>
-                    <span class="ms-2">Ir a espacios</span>
+                    <span class="ms-2">Ir a Bases de datos</span>
                 </a>
             </div>
             <div class="nav-item">
-                <a class="menu_space nav-link mb-2" href="#space" menu="space">
+                <a class="menu_database nav-link mb-2" href="#database" menu="database">
                     <i class="fas fa-building"></i>
-                    <span class="ms-2">Espacio</span>
+                    <span class="ms-2">Base de datos</span>
                 </a>
             </div>
             <div class="nav-item">

@@ -32,9 +32,9 @@ $(function()
         }
         catch(error)
         {
-            new wtools.Notification('WARNING').Show_('No se pudo acceder a los usuarios del espacio.');
-            new wtools.Notification('WARNING', 0, '#component_settings_permissions_add .notifications').Show_('No se pudo acceder a los usuarios del espacio.');
-            new wtools.Notification('WARNING', 0, '#component_settings_permissions_modify .notifications').Show_('No se pudo acceder a los usuarios del espacio.');
+            new wtools.Notification('WARNING').Show_('No se pudo acceder a los usuarios de la base de datos.');
+            new wtools.Notification('WARNING', 0, '#component_settings_permissions_add .notifications').Show_('No se pudo acceder a los usuarios de la base de datos.');
+            new wtools.Notification('WARNING', 0, '#component_settings_permissions_modify .notifications').Show_('No se pudo acceder a los usuarios de la base de datos.');
         }
     });
     options_permissions_users_init(options_permissions_users, () => {})

@@ -28,9 +28,9 @@ class Headers
                     <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
                         <li class="nav-item me-2">
                             <div class="d-flex align-items-center h-100 text-center">
-                                <a class="btn btn-sm btn-outline-light py-2 px-4 d-block d-md-inline-block w-100 mb-2 mb-md-0 go-button" go-path="/administration" go-hash="#spaces" href="#">
+                                <a class="btn btn-sm btn-outline-light py-2 px-4 d-block d-md-inline-block w-100 mb-2 mb-md-0 go-button" go-path="/administration" go-hash="#databases" href="#">
                                     <span class="me-2"><i class="fas fa-building"></i></span>
-                                    <span class="space_name"></span>
+                                    <span class="database_name"></span>
                                 </a>
                             </div>
                         </li>
@@ -50,9 +50,9 @@ class Headers
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1050;">
                                 <li>
-                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#spaces" href="#">
+                                    <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#databases" href="#">
                                         <i class="fas fa-building"></i>
-                                        <span class="ms-2">Espacios</span>
+                                        <span class="ms-2">Bases de datos</span>
                                     </a>
                                 </li>
                                 <li>

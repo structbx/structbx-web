@@ -6,11 +6,11 @@ class Data
     data_read_page = 0;
     data_read_page_end = false;
     data_read_columns = [];
-    users_in_space = {};
+    users_in_database = {};
 
     constructor()
     {
-        this.ReadUsersInSpace_(() => this.Read_());
+        this.ReadUsersInDatabase_(() => this.Read_());
         setInterval(this.ChangeIntVerification_.bind(this), 5000);
     }
 
@@ -38,8 +38,8 @@ class Data
         // User <td> row
         const user_row = (row, column) =>
         {
-            if(this.users_in_space[row[column]] != undefined)
-                elements.push(`<td class="bg-white" scope="row">${this.users_in_space[row[column]]}</td>`);
+            if(this.users_in_database[row[column]] != undefined)
+                elements.push(`<td class="bg-white" scope="row">${this.users_in_database[row[column]]}</td>`);
             else
                 elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`);
         };
@@ -318,7 +318,7 @@ class Data
                                 $(`#row_${row.row_id}`).remove();
                                 break;
                             case "import":
-                                this.ReadUsersInSpace_(() => this.Read_(true));
+                                this.ReadUsersInDatabase_(() => this.Read_(true));
                                 break;
                         }
                     }
@@ -366,30 +366,30 @@ class Data
         });
     }
 
-    ReadUsersInSpace_(callback)
+    ReadUsersInDatabase_(callback)
     {
-        new wtools.Request(server_config.current.api + `/spaces/users/current/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/databases/users/current/read`).Exec_((response_data) =>
         {
             try
             {
                 for(let row of response_data.body.data)
-                    this.users_in_space[row.id] = row.username;
+                    this.users_in_database[row.id] = row.username;
 
                 return callback();
             }
             catch(error)
             {
-                new wtools.Notification('WARNING').Show_(`No se pudo acceder a los usuarios del espacio.`);
+                new wtools.Notification('WARNING').Show_(`No se pudo acceder a los usuarios de la base de datos.`);
                 return;
             }
         });
     }
 
-    OptionsLinkUsersInSpace_(element, target, selected = undefined)
+    OptionsLinkUsersInDatabase_(element, target, selected = undefined)
     {
         let options = new wtools.SelectOptions();
 
-        new wtools.Request(server_config.current.api + `/spaces/users/current/read`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/databases/users/current/read`).Exec_((response_data) =>
         {
             try
             {
@@ -417,7 +417,7 @@ class Data
             }
             catch(error)
             {
-                new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a los usuarios del espacio.`);
+                new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a los usuarios de la base de datos.`);
             }
         });
     }
@@ -476,7 +476,7 @@ class Data
                     if(row.column_type == "selection")
                         this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_add .notifications');
                     else if(row.column_type == "user")
-                        this.OptionsLinkUsersInSpace_(form_element, '#component_data_add .notifications');
+                        this.OptionsLinkUsersInDatabase_(form_element, '#component_data_add .notifications');
 
                     // Final elements
                     let elements = [
@@ -622,7 +622,7 @@ class Data
                     if(row.column_type == "selection")
                         this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_modify .notifications', row.value);
                     else if(row.column_type == "user")
-                        this.OptionsLinkUsersInSpace_(form_element, '#component_data_add .notifications', row.value);
+                        this.OptionsLinkUsersInDatabase_(form_element, '#component_data_add .notifications', row.value);
 
                     let elements = [
                         `<th scope="row">${form_icon}${row.name}</th>`

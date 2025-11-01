@@ -21,20 +21,20 @@ $(function ()
                 return;
             }
             
-            // Setup space name
+            // Setup database name
             $("#instance_name").html(response_data.body.data[0].value);
         });
     };
     instance_name_read();
         
-    // Read current Space
-    const spaces_read_id = () =>
+    // Read current Database
+    const databases_read_id = () =>
     {
         // Wait animation
-        let wait = new wtools.ElementState('#space_name', false, 'button', new wtools.WaitAnimation().for_button);
+        let wait = new wtools.ElementState('#database_name', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Request
-        new wtools.Request(server_config.current.api + "/spaces/read/id").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/databases/read/id").Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -42,15 +42,15 @@ $(function ()
             // Manage error
             if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING').Show_('No se pudo acceder al espacio.');
+                new wtools.Notification('WARNING').Show_('No se pudo acceder a la base de datos.');
                 return;
             }
             
-            // Setup space name
-            $(".space_name").html(response_data.body.data[0].name);
+            // Setup database name
+            $(".database_name").html(response_data.body.data[0].name);
         });
     };
-    spaces_read_id();
+    databases_read_id();
     
     // Read username logued
     const username_logued_read = () =>

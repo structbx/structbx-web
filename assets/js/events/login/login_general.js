@@ -22,16 +22,16 @@ $(function ()
     };
     verify_session();
 
-    // Read and set current Space
-    const spaces_read_set_id = (callback) =>
+    // Read and set current Database
+    const databases_read_set_id = (callback) =>
     {
         // Request
-        new wtools.Request(server_config.current.api + "/spaces/read/id").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/databases/read/id").Exec_((response_data) =>
         {
             // Manage error
             if(response_data.status == 401 || response_data.status != 200 || response_data.body.data == undefined || response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING').Show_('No se pudo acceder al espacio.');
+                new wtools.Notification('WARNING').Show_('No se pudo acceder a la base de datos.');
 
                 // Logout
                 new wtools.Request(server_config.current.api + "/auth/logout", "POST").Exec_((response_data) =>
@@ -86,7 +86,7 @@ $(function ()
             {
                 new wtools.Notification('SUCCESS').Show_('Inicio de sesi&oacute;n exitoso. Espere...');
                 const callback = () => {window.location.href = "../start/"};
-                spaces_read_set_id(callback);
+                databases_read_set_id(callback);
                 return;
             }
             else if(response_data.status == 401)
