@@ -2,18 +2,18 @@ $(function()
 {
     // SELECT options
 
-    const get_space_identifier = () =>
+    const get_database_identifier = () =>
     {
-        const space_identifier = wtools.GetUrlSearchParam('identifier');
-        if(space_identifier == undefined)
+        const database_identifier = wtools.GetUrlSearchParam('identifier');
+        if(database_identifier == undefined)
         {
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la base de datos.');
             return;
         }
-        return space_identifier;
+        return database_identifier;
     }
     let options_users = new wtools.SelectOptions();
-    const options_users_init = (options, callback) => new wtools.Request(server_config.current.api + `/spaces/users/out/read?identifier_space=${get_space_identifier()}`).Exec_((response_data) =>
+    const options_users_init = (options, callback) => new wtools.Request(server_config.current.api + `/databases/users/out/read?identifier_database=${get_database_identifier()}`).Exec_((response_data) =>
     {
         try
         {
@@ -40,16 +40,16 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_users_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
-        // Get space identifier
-        const space_identifier = wtools.GetUrlSearchParam('identifier');
-        if(space_identifier == undefined)
+        // Get database identifier
+        const database_identifier = wtools.GetUrlSearchParam('identifier');
+        if(database_identifier == undefined)
         {
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la base de datos.');
             return;
         }
 
         // Request
-        new wtools.Request(server_config.current.api + `/spaces/users/read?identifier=${space_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/databases/users/read?identifier=${database_identifier}`).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -105,20 +105,20 @@ $(function()
             return;
         }
 
-        // Get space identifier
-        const space_identifier = wtools.GetUrlSearchParam('identifier');
-        if(space_identifier == undefined)
+        // Get database identifier
+        const database_identifier = wtools.GetUrlSearchParam('identifier');
+        if(database_identifier == undefined)
         {
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la base de datos.');
             return;
         }
         
         // Data collection
         const data = new FormData($('#component_users_add form')[0]);
-        data.append('identifier_space', space_identifier);
+        data.append('identifier_database', database_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/spaces/users/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/databases/users/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -168,11 +168,11 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_users_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
-        // Get space identifier
-        const space_identifier = wtools.GetUrlSearchParam('identifier');
-        if(space_identifier == undefined)
+        // Get database identifier
+        const database_identifier = wtools.GetUrlSearchParam('identifier');
+        if(database_identifier == undefined)
         {
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del espacio.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la base de datos.');
             return;
         }
         
@@ -180,7 +180,7 @@ $(function()
         const id = $('#component_users_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/spaces/users/delete?id=${id}&space_identifier=${space_identifier}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/databases/users/delete?id=${id}&database_identifier=${database_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
             
