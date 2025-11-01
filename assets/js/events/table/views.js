@@ -4,8 +4,8 @@ class Views
     GetOutOfView_()
     {
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
             return;
 
         // Build URL params
@@ -32,15 +32,15 @@ class Views
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";
         }
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/views/read/id?id=${view_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/views/read/id?id=${view_id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Manage response
             const result = new ResponseManager(response_data, '#component_data_views .notifications', 'Vistas: Leer');
@@ -68,12 +68,12 @@ class Views
         let wait = new wtools.ElementState('#component_data_views .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/views/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/views/read?table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -121,15 +121,15 @@ class Views
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";
         }
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/views/read/id?id=${view_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/views/read/id?id=${view_id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Manage response
             const result = new ResponseManager(response_data, '#component_data_views .notifications', 'Vistas: Leer');
@@ -146,7 +146,7 @@ class Views
 
             // Build URL params
             const url = new URL(window.location.href);
-            url.searchParams.set('identifier', form_identifier);
+            url.searchParams.set('identifier', table_identifier);
             url.searchParams.set('conditions', row.conditions);
             url.searchParams.set('order', row.order);
             url.searchParams.set('view', row.id);
@@ -174,11 +174,11 @@ class Views
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
@@ -186,10 +186,10 @@ class Views
         const data = new FormData($('#component_data_views_add form')[0]);
         data.append('conditions', wtools.GetUrlSearchParam('conditions'));
         data.append('order', wtools.GetUrlSearchParam('order'));
-        data.append('form-identifier', form_identifier);
+        data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/views/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/views/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -220,11 +220,11 @@ class Views
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
@@ -232,10 +232,10 @@ class Views
         const data = new FormData($('#component_data_views_modify form')[0]);
         data.append('conditions', wtools.GetUrlSearchParam('conditions'));
         data.append('order', wtools.GetUrlSearchParam('order'));
-        data.append('form-identifier', form_identifier);
+        data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/views/modify", "PUT", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/views/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -266,18 +266,18 @@ class Views
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
         // Request
         const current_view = wtools.GetUrlSearchParam('view');
         const view_id = $('#component_data_views_delete input[name="id"]').val();
-        new wtools.Request(server_config.current.api + `/forms/views/delete?id=${view_id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/views/delete?id=${view_id}&table-identifier=${table_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
 

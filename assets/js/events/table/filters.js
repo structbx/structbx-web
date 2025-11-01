@@ -219,8 +219,8 @@ class Filters
         const orders_query = orders.join(',');
         
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";
@@ -228,7 +228,7 @@ class Filters
 
         // Build URL params
         const url = new URL(window.location.href);
-        url.searchParams.set('identifier', form_identifier);
+        url.searchParams.set('identifier', table_identifier);
         url.searchParams.set('conditions', btoa(conditions_query));
         url.searchParams.set('order', btoa(orders_query));
         history.pushState({}, '', url.toString());
@@ -303,8 +303,8 @@ $(function()
         e.preventDefault();
         
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "/start";

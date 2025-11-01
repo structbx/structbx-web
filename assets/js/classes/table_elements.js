@@ -1,10 +1,10 @@
-class FormElements
+class TableElements
 {
-    constructor(element_type, data, form_identifier)
+    constructor(element_type, data, table_identifier)
     {
         this.element_type = element_type;
         this.data = data;
-        this.form_identifier = form_identifier;
+        this.table_identifier = table_identifier;
     }
     Get_()
     {
@@ -290,7 +290,7 @@ class FormElements
         if(value != undefined && value != '')
         {
             result += `
-                <a class="link mt-2" target="_blank" href="/api/forms/data/file/read?filepath=${value}&form-identifier=${this.form_identifier}">Ver</a>
+                <a class="link mt-2" target="_blank" href="/api/tables/data/file/read?filepath=${value}&table-identifier=${this.table_identifier}">Ver</a>
                 <td>
             `;
         }
@@ -309,8 +309,8 @@ class FormElements
         if(value != undefined && value != '')
         {
             result += `
-                    <a class="link mt-2" target="_blank" href="/api/forms/data/file/read?filepath=${value}&form-identifier=${this.form_identifier}">
-                        <img class="" src="/api/forms/data/file/read?filepath=${value}&form-identifier=${this.form_identifier}" alt="${value}" width="100px">
+                    <a class="link mt-2" target="_blank" href="/api/tables/data/file/read?filepath=${value}&table-identifier=${this.table_identifier}">
+                        <img class="" src="/api/tables/data/file/read?filepath=${value}&table-identifier=${this.table_identifier}" alt="${value}" width="100px">
                     </a>
                 </td>`;
         }

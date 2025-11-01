@@ -7,44 +7,44 @@ $(function()
         new wtools.OptionValue("activo", "Activo", true)
         ,new wtools.OptionValue("inactivo", "Inactivo")
     ]);
-    options_states.Build_('#component_forms_add select[name="state"]');
-    options_states.Build_('#component_forms_modify select[name="state"]');
+    options_states.Build_('#component_tables_add select[name="state"]');
+    options_states.Build_('#component_tables_modify select[name="state"]');
 
     const options_privacity = new wtools.SelectOptions
     ([
         new wtools.OptionValue("publico", "P&uacute;blico", true)
         ,new wtools.OptionValue("interno", "Interno")
     ]);
-    options_privacity.Build_('#component_forms_add select[name="privacity"]');
-    options_privacity.Build_('#component_forms_modify select[name="privacity"]');
+    options_privacity.Build_('#component_tables_add select[name="privacity"]');
+    options_privacity.Build_('#component_tables_modify select[name="privacity"]');
 
     // Read
     const form_read = () =>
     {
         // Wait animation
-        let wait = new wtools.ElementState('#component_forms_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+        let wait = new wtools.ElementState('#component_tables_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/read").Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
-            $('#component_forms_read .notifications').html('');
-            $('#component_forms_read .contents').html('');
+            $('#component_tables_read .notifications').html('');
+            $('#component_tables_read .contents').html('');
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_forms_read .notifications', 'Formularios: Leer');
+            const result = new ResponseManager(response_data, '#component_tables_read .notifications', 'Tablas: Leer');
             if(!result.Verify_())
                 return;
 
             if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('SUCCESS', 5000, '#component_forms_read .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 5000, '#component_tables_read .notifications').Show_('Sin resultados.');
                 return;
             }
             
             // Results elements creator
-            $('#component_forms_read .contents').html('');
+            $('#component_tables_read .contents').html('');
             let elements = []; let cont = 0;
             for(let row of response_data.body.data)
             {
@@ -54,7 +54,7 @@ $(function()
                         <div class="col-md-4 col-lg-3 mb-4">
                             <div class="card card-table-item h-100 shadow-sm d-flex flex-column">
                                 
-                                <a href="/form?identifier=${row.identifier}" class="p-3 flex-grow-1 text-decoration-none text-dark">
+                                <a href="/table?identifier=${row.identifier}" class="p-3 flex-grow-1 text-decoration-none text-dark">
                                     <div class="border-start border-3 border-primary ps-2">
                                         <h5 class="mb-1">${row.name}</h5>
                                         <p class="text-muted small mb-3">${row.description}</p>
@@ -68,10 +68,10 @@ $(function()
                                 </a>
                                 
                                 <div class="card-footer d-flex justify-content-end bg-light border-0 pt-0">
-                                    <a href="/form/columns?identifier=${row.identifier}" class="btn btn-outline-secondary btn-sm me-2" title="Columnas">
+                                    <a href="/table/columns?identifier=${row.identifier}" class="btn btn-outline-secondary btn-sm me-2" title="Columnas">
                                         <i class="fas fa-columns"></i>
                                     </a>
-                                    <a href="/form/settings?identifier=${row.identifier}" class="btn btn-outline-secondary btn-sm" title="Ajustes">
+                                    <a href="/table/settings?identifier=${row.identifier}" class="btn btn-outline-secondary btn-sm" title="Ajustes">
                                         <i class="fas fa-cog"></i>
                                     </a>
                                 </div>
@@ -82,7 +82,7 @@ $(function()
                 else
                 {
                     let ui_element = new wtools.UIElementsPackage('<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"></div>', elements).Pack_();
-                    $('#component_forms_read .contents').append(ui_element);
+                    $('#component_tables_read .contents').append(ui_element);
                     cont = 0;
                     elements = [];
                 }
@@ -90,7 +90,7 @@ $(function()
             if(elements.length > 0)
             {
                 let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
-                $('#component_forms_read .contents').append(ui_element);
+                $('#component_tables_read .contents').append(ui_element);
             }
         });
     };
@@ -99,46 +99,46 @@ $(function()
     // Click on Add Button
     const click_add_button = () =>
     {
-        $('#component_forms_add .notifications').html('');
-        $('#component_forms_add').modal('show');
+        $('#component_tables_add .notifications').html('');
+        $('#component_tables_add').modal('show');
     }
     $('.form_add').click(() => click_add_button());
 
     // Add
-    $('#component_forms_add form').submit((e) =>
+    $('#component_tables_add form').submit((e) =>
     {
         e.preventDefault();
 
         // Wait animation
-        let wait = new wtools.ElementState('#component_forms_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+        let wait = new wtools.ElementState('#component_tables_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Form check
         const check = new wtools.FormChecker(e.target).Check_();
         if(!check)
         {
-            $('#component_forms_add .notifications').html('');
+            $('#component_tables_add .notifications').html('');
             wait.Off_();
-            new wtools.Notification('WARNING', 5000, '#component_forms_add .notifications').Show_('Hay campos inv&aacute;lidos.');
+            new wtools.Notification('WARNING', 5000, '#component_tables_add .notifications').Show_('Hay campos inv&aacute;lidos.');
             return;
         }
 
         // Data collection
-        const data = new FormData($('#component_forms_add form')[0]);
+        const data = new FormData($('#component_tables_add form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
             // Manage error
-            const result = new ResponseManager(response_data, '#component_forms_add .notifications', 'Formularios: A&ntilde;adir');
+            const result = new ResponseManager(response_data, '#component_tables_add .notifications', 'Tablas: A&ntilde;adir');
             if(!result.Verify_())
                 return;
             
-            new wtools.Notification('SUCCESS').Show_('Formulario creado exitosamente.');
-            $('#component_forms_add').modal('hide');
-            wtools.CleanForm('#component_forms_add form');
-            $('#component_forms_add form').removeClass('was-validated');
+            new wtools.Notification('SUCCESS').Show_('Tabla creado exitosamente.');
+            $('#component_tables_add').modal('hide');
+            wtools.CleanForm('#component_tables_add form');
+            $('#component_tables_add form').removeClass('was-validated');
             form_read();
         });
     });

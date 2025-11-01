@@ -146,23 +146,23 @@ $(function()
         let wait = new wtools.ElementState('#component_data_import form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
 
-        if(form_identifier == undefined)
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
         // Get Data
         data = [
-            {name: "form-identifier", value: form_identifier}
+            {name: "table-identifier", value: table_identifier}
             ,{data: send_data()}
         ];
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/import`, "POST", data, true).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/data/import`, "POST", data, true).Exec_((response_data) =>
         {
             wait.Off_();
             

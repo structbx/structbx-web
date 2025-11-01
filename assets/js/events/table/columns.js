@@ -11,7 +11,7 @@ $(function()
     options_required.Build_('#component_columns_modify select[name="required"]');
 
     let options_column_type = new wtools.SelectOptions();
-    const options_column_type_init = (options, callback) => new wtools.Request(server_config.current.api + "/forms/columns/types/read").Exec_((response_data) =>
+    const options_column_type_init = (options, callback) => new wtools.Request(server_config.current.api + "/tables/columns/types/read").Exec_((response_data) =>
     {
         try
         {
@@ -34,7 +34,7 @@ $(function()
     options_column_type_init(options_column_type, () => {})
 
     let options_link_to = new wtools.SelectOptions();
-    const options_link_to_init = (options, callback) => new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
+    const options_link_to_init = (options, callback) => new wtools.Request(server_config.current.api + "/tables/read").Exec_((response_data) =>
     {
         try
         {
@@ -50,9 +50,9 @@ $(function()
         }
         catch(error)
         {
-            new wtools.Notification('WARNING').Show_('No se pudo acceder a los formulario a enlazar.');
-            new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_('No se pudo acceder a los formulario a enlazar.');
-            new wtools.Notification('WARNING', 0, '#component_columns_modify .notifications').Show_('No se pudo acceder a los formulario a enlazar.');
+            new wtools.Notification('WARNING').Show_('No se pudo acceder a los tabla a enlazar.');
+            new wtools.Notification('WARNING', 0, '#component_columns_add .notifications').Show_('No se pudo acceder a los tabla a enlazar.');
+            new wtools.Notification('WARNING', 0, '#component_columns_modify .notifications').Show_('No se pudo acceder a los tabla a enlazar.');
         }
     });
     options_link_to_init(options_link_to, () => {})
@@ -64,12 +64,12 @@ $(function()
         let wait = new wtools.ElementState('#component_columns_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/columns/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/columns/read?table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -190,21 +190,21 @@ $(function()
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
 
-        if(form_identifier == undefined)
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
         // Data collection
         const data = new FormData($('#component_columns_add form')[0]);
-        data.append('form-identifier', form_identifier);
+        data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/columns/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/columns/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -230,11 +230,11 @@ $(function()
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const form_identifier = wtools.GetUrlSearchParam('identifier');
-            if(form_identifier == undefined)
+            const table_identifier = wtools.GetUrlSearchParam('identifier');
+            if(table_identifier == undefined)
             {
                 wait.Off_();
-                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
                 return;
             }
 
@@ -251,7 +251,7 @@ $(function()
             $('#component_data_modify table tbody').html('');
             
             // Read form to modify
-            new wtools.Request(server_config.current.api + `/forms/columns/read/id?id=${id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/columns/read/id?id=${id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Columnas: Modificar');
@@ -312,20 +312,20 @@ $(function()
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
         // Data collection
         const new_data = new FormData($('#component_columns_modify form')[0]);
-        new_data.append('form-identifier', form_identifier);
+        new_data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/columns/modify", "PUT", new_data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/columns/modify", "PUT", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -369,12 +369,12 @@ $(function()
         let wait = new wtools.ElementState('#component_columns_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
 
-        if(form_identifier == undefined)
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
@@ -382,7 +382,7 @@ $(function()
         const id = $('#component_columns_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/columns/delete?id=${id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/columns/delete?id=${id}&table-identifier=${table_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
             

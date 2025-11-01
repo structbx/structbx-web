@@ -17,13 +17,13 @@ class Data
     GetFormIdentifier_()
     {
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
-            new wtools.Notification('ERROR').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('ERROR').Show_('No se encontr&oacute; el identificador de la tabla.');
             return undefined;
         }
-        return form_identifier;
+        return table_identifier;
     }
 
     CreateRows_(response_data, row)
@@ -46,7 +46,7 @@ class Data
         // Image <td> row
         const image_row = (row, column) =>
         {
-            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/forms/data/file/read?filepath=${row[column]}&form-identifier=${this.GetFormIdentifier_()}" alt="${column}" width="100px"></td>`);
+            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/tables/data/file/read?filepath=${row[column]}&table-identifier=${this.GetFormIdentifier_()}" alt="${column}" width="100px"></td>`);
         };
         // File <td> row
         const file_row = (row, column) =>
@@ -106,8 +106,8 @@ class Data
             let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
             // Get Form identifier
-            const form_identifier = this.GetFormIdentifier_();
-            if(form_identifier == undefined)
+            const table_identifier = this.GetFormIdentifier_();
+            if(table_identifier == undefined)
                 return;
 
             // Get conditions
@@ -130,20 +130,20 @@ class Data
 
                 // Setup path
                 if(limit < 20)
-                    path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
+                    path = `?table-identifier=${table_identifier}&limit=20${conditions}${order}`;
                 else
-                    path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
+                    path = `?table-identifier=${table_identifier}&limit=${limit}${conditions}${order}`;
             }
             else
             {
                 // Next page
                 this.data_read_page++;
                 // Setup path
-                path = `?form-identifier=${form_identifier}&page=${this.data_read_page}${conditions}${order}`;
+                path = `?table-identifier=${table_identifier}&page=${this.data_read_page}${conditions}${order}`;
             }
 
             // Request
-            new wtools.Request(server_config.current.api + `/forms/data/read${path}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/data/read${path}`).Exec_((response_data) =>
             {
                 // Clean
                 wait.Off_();
@@ -166,7 +166,7 @@ class Data
                     new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
                     {
                         // Setup columns and icon
-                        let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
+                        let form_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
                         let form_icon = form_element_object.GetIcon_(false);
 
                         // Add column to array
@@ -213,8 +213,8 @@ class Data
         try
         {
             // Get Form identifier
-            const form_identifier = this.GetFormIdentifier_();
-            if(form_identifier == undefined)
+            const table_identifier = this.GetFormIdentifier_();
+            if(table_identifier == undefined)
                 return;
 
             // Get Data ID
@@ -237,7 +237,7 @@ class Data
                 order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
             // Request row
-            new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${row_id}&form-identifier=${form_identifier}${conditions}${order}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/data/read/id?id=${row_id}&table-identifier=${table_identifier}${conditions}${order}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Leer (1)');
@@ -278,12 +278,12 @@ class Data
     ChangeIntVerification_()
     {
         // Get Form identifier
-        const form_identifier = this.GetFormIdentifier_();
-        if(form_identifier == undefined)
+        const table_identifier = this.GetFormIdentifier_();
+        if(table_identifier == undefined)
             return;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read/changeInt?changeInt=${this.changeInt}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/data/read/changeInt?changeInt=${this.changeInt}&table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             const data = response_data.body.data;
             if(data != undefined && data.length > 0)
@@ -331,7 +331,7 @@ class Data
     {
         let options = new wtools.SelectOptions();
 
-        new wtools.Request(server_config.current.api + `/forms/data/read?form-identifier=${link_to_form}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_form}`).Exec_((response_data) =>
         {
             try
             {
@@ -432,15 +432,15 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const form_identifier = this.GetFormIdentifier_();
-            if(form_identifier == undefined)
+            const table_identifier = this.GetFormIdentifier_();
+            if(table_identifier == undefined)
                 return;
 
             // Setup data columns
             $('#component_data_add table tbody').html('');
             
             // Read and setup columns
-            new wtools.Request(server_config.current.api + `/forms/columns/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/columns/read?table-identifier=${table_identifier}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Columnas: Leer');
@@ -462,13 +462,13 @@ class Data
                         return undefined;
 
                     // If column type is a NORMAL type
-                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
+                    let form_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
                     let form_element = $(form_element_object.Get_());
                     let form_icon = form_element_object.GetIcon_();
 
                     if(form_element == undefined)
                     {
-                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de formulario.');
+                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
                         return;
                     }
 
@@ -516,8 +516,8 @@ class Data
         }
 
         // Get Form identifier
-        const form_identifier = this.GetFormIdentifier_();
-        if(form_identifier == undefined)
+        const table_identifier = this.GetFormIdentifier_();
+        if(table_identifier == undefined)
         {
             wait.Off_();
             return;
@@ -525,10 +525,10 @@ class Data
 
         // Data collection
         let new_data = new FormData($('#component_data_add form')[0]);
-        new_data.append('form-identifier', form_identifier);
+        new_data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/data/add", "POST", new_data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/data/add", "POST", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
             
@@ -552,8 +552,8 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const form_identifier = this.GetFormIdentifier_();
-            if(form_identifier == undefined)
+            const table_identifier = this.GetFormIdentifier_();
+            if(table_identifier == undefined)
             {
                 wait.Off_();
                 return;
@@ -573,7 +573,7 @@ class Data
             $('#component_data_modify .notifications').html('');
             
             // Read form to modify
-            new wtools.Request(server_config.current.api + `/forms/data/read/id?id=${data_id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/data/read/id?id=${data_id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Modificar');
@@ -602,13 +602,13 @@ class Data
                 // Results elements creator
                 new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
                 {
-                    let form_element_object = new FormElements(wtools.IFUndefined(row.column_type, "text"), row, form_identifier);
+                    let form_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
                     let form_element = $(form_element_object.Get_());
                     let form_icon = form_element_object.GetIcon_();
 
                     if(form_element == undefined)
                     {
-                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de formulario.');
+                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
                         return;
                     }
 
@@ -661,8 +661,8 @@ class Data
         }
 
         // Get Form identifier
-        const form_identifier = this.GetFormIdentifier_();
-        if(form_identifier == undefined)
+        const table_identifier = this.GetFormIdentifier_();
+        if(table_identifier == undefined)
         {
             wait.Off_();
             return;
@@ -670,10 +670,10 @@ class Data
 
         // Data collection
         let new_data = new FormData($('#component_data_modify form')[0]);
-        new_data.append('form-identifier', form_identifier);
+        new_data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/data/modify", "PUT", new_data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/data/modify", "PUT", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
             
@@ -710,8 +710,8 @@ class Data
         let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = this.GetFormIdentifier_();
-        if(form_identifier == undefined)
+        const table_identifier = this.GetFormIdentifier_();
+        if(table_identifier == undefined)
         {
             wait.Off_();
             return;
@@ -721,7 +721,7 @@ class Data
         const data_id = $('#component_data_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/delete?id=${data_id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/data/delete?id=${data_id}&table-identifier=${table_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
             
@@ -743,8 +743,8 @@ class Data
         let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = this.GetFormIdentifier_();
-        if(form_identifier == undefined)
+        const table_identifier = this.GetFormIdentifier_();
+        if(table_identifier == undefined)
             return;
 
         // Get conditions
@@ -760,12 +760,12 @@ class Data
         // Path request
         const limit = $('#component_data_read table tbody')[0].rows.length;
         if(limit < 20)
-            path = `?form-identifier=${form_identifier}&limit=20${conditions}${order}`;
+            path = `?table-identifier=${table_identifier}&limit=20${conditions}${order}`;
         else
-        path = `?form-identifier=${form_identifier}&limit=${limit}${conditions}${order}`;
+        path = `?table-identifier=${table_identifier}&limit=${limit}${conditions}${order}`;
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/data/read${path}&export=true`, ).MakeHTTPRequest()
+        new wtools.Request(server_config.current.api + `/tables/data/read${path}&export=true`, ).MakeHTTPRequest()
         .then(response => response.body)
         .then(stream => 
         {
@@ -842,14 +842,14 @@ $(function()
         e.preventDefault();
 
         // Get Form identifier
-        const new_form_identifier = $(e.currentTarget).attr('form-identifier');
+        const new_table_identifier = $(e.currentTarget).attr('table-identifier');
 
         // Reset URL parameters and set new form identifier
         const url = new URL(window.location.href);
         url.searchParams.delete('conditions');
         url.searchParams.delete('order');
         url.searchParams.delete('view');
-        url.searchParams.set('identifier', new_form_identifier);
+        url.searchParams.set('identifier', new_table_identifier);
         history.pushState({}, '', url.toString());
 
         // Clear previous data

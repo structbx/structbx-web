@@ -25,8 +25,8 @@ class FormGeneral
         let wait = new wtools.ElementState('#form_name', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
             window.location.href = "../start/";
@@ -34,7 +34,7 @@ class FormGeneral
         }
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/read/identifier?identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/read/identifier?identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -88,9 +88,9 @@ $(function ()
         let wait = new wtools.ElementState('#component_sidebar_forms .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
         // Request
-        new wtools.Request(server_config.current.api + "/forms/read").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/read").Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -118,7 +118,7 @@ $(function ()
             for(let row of response_data.body.data)
             {
                 elements.push(`
-                    <a class="menu_data nav-link mb-2 ${row.identifier == form_identifier ? "active" : ""}" href="/form?identifier=${row.identifier}">
+                    <a class="menu_data nav-link mb-2 ${row.identifier == table_identifier ? "active" : ""}" href="/table?identifier=${row.identifier}">
                         <i class="fas fa-database"></i>
                         <span class="ms-2">${row.name}</span>
                     </a>
@@ -132,7 +132,7 @@ $(function ()
             for(let row of response_data.body.data)
             {
                 $('#component_sidebar_forms_tabs .tab-scroller').append(`
-                    <div class="tab ${row.identifier == form_identifier ? "active" : ""}" id="${row.identifier}" form-identifier="${row.identifier}">
+                    <div class="tab ${row.identifier == table_identifier ? "active" : ""}" id="${row.identifier}" table-identifier="${row.identifier}">
                         <span class="tab-title">${row.name}</span>
                     </div>
                 `);
@@ -147,12 +147,12 @@ $(function ()
         e.preventDefault();
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
             return;
 
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        document.location.href = `/form?identifier=${form_identifier}`;
+        document.location.href = `/table?identifier=${table_identifier}`;
 
     });
     
@@ -162,12 +162,12 @@ $(function ()
         e.preventDefault();
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
             return;
 
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        document.location.href = `/form/columns?identifier=${form_identifier}`;
+        document.location.href = `/table/columns?identifier=${table_identifier}`;
 
     });
 
@@ -177,12 +177,12 @@ $(function ()
         e.preventDefault();
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
             return;
 
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-        document.location.href = `/form/settings?identifier=${form_identifier}`;
+        document.location.href = `/table/settings?identifier=${table_identifier}`;
 
     });
     

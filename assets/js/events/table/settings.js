@@ -16,7 +16,7 @@ $(function()
     options_permissions.Build_('#component_settings_permissions_modify select[name="delete"]');
 
     let options_permissions_users = new wtools.SelectOptions();
-    const options_permissions_users_init = (options, callback) => new wtools.Request(server_config.current.api + `/forms/permissions/users/out/read?form-identifier=${wtools.GetUrlSearchParam('identifier')}`).Exec_((response_data) =>
+    const options_permissions_users_init = (options, callback) => new wtools.Request(server_config.current.api + `/tables/permissions/users/out/read?table-identifier=${wtools.GetUrlSearchParam('identifier')}`).Exec_((response_data) =>
     {
         try
         {
@@ -48,16 +48,16 @@ $(function()
         let wait = new wtools.ElementState('#component_settings_general .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
         
         // Request
-        new wtools.Request(server_config.current.api + `/forms/read/identifier?identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/read/identifier?identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -105,21 +105,21 @@ $(function()
         const data = new FormData($('#component_settings_general form')[0]);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/modify", "PUT", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/modify", "PUT", data, false).Exec_((response_data) =>
         {
             wait.Off_();
             
             // Manage error
-            const result = new ResponseManager(response_data, '#component_settings_general .notifications', 'Formularios: Editar');
+            const result = new ResponseManager(response_data, '#component_settings_general .notifications', 'Tablas: Editar');
             if(!result.Verify_())
                 return;
 
             $('#component_settings_general .notifications').html('');
-            new wtools.Notification('SUCCESS', 5000, '#component_settings_general .notifications').Show_('Formulario actualizado correctamente.');
+            new wtools.Notification('SUCCESS', 5000, '#component_settings_general .notifications').Show_('Tabla actualizado correctamente.');
 
             const identifier = data.get('identifier');
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-            window.location.href = `/form?identifier=${identifier}#settings`
+            window.location.href = `/table?identifier=${identifier}#settings`
         });
     });
 
@@ -156,16 +156,16 @@ $(function()
         const form_id = $('#component_settings_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
 
             // Manage error
-            const result = new ResponseManager(response_data, '#component_settings_delete .notifications', 'Formularios: Eliminar');
+            const result = new ResponseManager(response_data, '#component_settings_delete .notifications', 'Tablas: Eliminar');
             if(!result.Verify_())
                 return;
 
-            new wtools.Notification('SUCCESS').Show_('Formulario eliminado exitosamente.');
+            new wtools.Notification('SUCCESS').Show_('Tabla eliminado exitosamente.');
             window.location.href = `/start`
         });
     });
@@ -180,16 +180,16 @@ $(function()
         let wait = new wtools.ElementState('#component_settings_permissions .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
         
         // Request
-        new wtools.Request(server_config.current.api + `/forms/permissions/read?form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/permissions/read?table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Clean
             wait.Off_();
@@ -261,25 +261,25 @@ $(function()
         if(wtools.GetUrlSearchParam('identifier') == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
         // Data collection
         const data = new FormData($('#component_settings_permissions_add form')[0]);
-        data.append('form-identifier', wtools.GetUrlSearchParam('identifier'));
+        data.append('table-identifier', wtools.GetUrlSearchParam('identifier'));
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/permissions/add", "POST", data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/permissions/add", "POST", data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_settings_permissions_add .notifications', 'Permisos de formulario: A&ntilde;adir');
+            const result = new ResponseManager(response_data, '#component_settings_permissions_add .notifications', 'Permisos de tabla: A&ntilde;adir');
             if(!result.Verify_())
                 return;
 
-            new wtools.Notification('SUCCESS').Show_('Permiso de formulario creado exitosamente.');
+            new wtools.Notification('SUCCESS').Show_('Permiso de tabla creado exitosamente.');
             settings_permissions_read();
             $('#component_settings_permissions_add').modal('hide');
         });
@@ -294,11 +294,11 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
@@ -307,22 +307,22 @@ $(function()
         if(id == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de permiso de formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de permiso de tabla.');
             return;
         }
 
         // Read form permission to modify
-        new wtools.Request(server_config.current.api + `/forms/permissions/read/id?id=${id}&form-identifier=${form_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/permissions/read/id?id=${id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Manage response
-            const result = new ResponseManager(response_data, '', 'Permisos de formulario: Modificar');
+            const result = new ResponseManager(response_data, '', 'Permisos de tabla: Modificar');
             if(!result.Verify_())
                 return;
 
             // Handle no results or zero results
             if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el permiso de formulario.');
+                new wtools.Notification('WARNING').Show_('No se encontr&oacute; el permiso de tabla.');
                 return;
             }
 
@@ -359,29 +359,29 @@ $(function()
         }
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
         // Data collection
         const new_data = new FormData($('#component_settings_permissions_modify form')[0]);
-        new_data.append('form-identifier', form_identifier);
+        new_data.append('table-identifier', table_identifier);
 
         // Request
-        new wtools.Request(server_config.current.api + "/forms/permissions/modify", "PUT", new_data, false).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/permissions/modify", "PUT", new_data, false).Exec_((response_data) =>
         {
             wait.Off_();
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_settings_permissions_modify .notifications', 'Permiso de formulario: Modificar');
+            const result = new ResponseManager(response_data, '#component_settings_permissions_modify .notifications', 'Permiso de tabla: Modificar');
             if(!result.Verify_())
                 return;
 
-            new wtools.Notification('SUCCESS').Show_('Permiso de formulario modificado exitosamente.');
+            new wtools.Notification('SUCCESS').Show_('Permiso de tabla modificado exitosamente.');
             $('#component_settings_permissions_modify').modal('hide');
             settings_permissions_read();
         });
@@ -414,11 +414,11 @@ $(function()
         let wait = new wtools.ElementState('#component_settings_permissions_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const form_identifier = wtools.GetUrlSearchParam('identifier');
-        if(form_identifier == undefined)
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
         {
             wait.Off_();
-            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador del formulario.');
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
             return;
         }
 
@@ -426,16 +426,16 @@ $(function()
         const id = $('#component_settings_permissions_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/forms/permissions/delete?id=${id}&form-identifier=${form_identifier}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/permissions/delete?id=${id}&table-identifier=${table_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
             
             // Manage response
-            const result = new ResponseManager(response_data, '#component_settings_permissions_delete .notifications', 'Permiso de formulario: Eliminar');
+            const result = new ResponseManager(response_data, '#component_settings_permissions_delete .notifications', 'Permiso de tabla: Eliminar');
             if(!result.Verify_())
                 return;
 
-            new wtools.Notification('SUCCESS').Show_('Permiso de formulario eliminado.');
+            new wtools.Notification('SUCCESS').Show_('Permiso de tabla eliminado.');
             $('#component_settings_permissions_delete').modal('hide');
             $('#component_settings_permissions_modify').modal('hide');
             settings_permissions_read();
