@@ -17,7 +17,7 @@ class Views
 
         // Reload data
         $('#component_data_reload').click();
-        $('.form_view').text('');
+        $('.table_view').text('');
         $('#component_data_views .out-view').addClass('d-none');
     }
 
@@ -27,7 +27,7 @@ class Views
         const view_id = wtools.GetUrlSearchParam('view');
         if(view_id == undefined)
         {
-            $('.form_view').text('');
+            $('.table_view').text('');
             return;
         }
 
@@ -57,7 +57,7 @@ class Views
 
             // Set the current view
             const row = response_data.body.data[0];
-            $('.form_view').text(` (${row.name})`);
+            $('.table_view').text(` (${row.name})`);
             $('#component_data_views .out-view').removeClass('d-none');
         });
     };

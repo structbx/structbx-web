@@ -113,13 +113,13 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Form data
-        const form_id = $('#component_database_modify input[name="id"]').val();
-        const form_name = $('#component_database_modify input[name="name"]').val();
+        const table_id = $('#component_database_modify input[name="id"]').val();
+        const table_name = $('#component_database_modify input[name="name"]').val();
 
         // Setup form to delete
-        $('#component_database_delete_final input[name=id]').val(form_id);
-        $('#component_database_delete_final strong.header').html(form_name);
-        $('#component_database_delete_final strong.name').html(form_name);
+        $('#component_database_delete_final input[name=id]').val(table_id);
+        $('#component_database_delete_final strong.header').html(table_name);
+        $('#component_database_delete_final strong.name').html(table_name);
         $('#component_database_delete_final .notifications').html('');
         $('#component_database_delete_final').modal('show');
         wait.Off_();

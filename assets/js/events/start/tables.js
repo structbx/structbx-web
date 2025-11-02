@@ -19,7 +19,7 @@ $(function()
     options_privacity.Build_('#component_tables_modify select[name="privacity"]');
 
     // Read
-    const form_read = () =>
+    const table_read = () =>
     {
         // Wait animation
         let wait = new wtools.ElementState('#component_tables_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -94,7 +94,7 @@ $(function()
             }
         });
     };
-    form_read();
+    table_read();
     
     // Click on Add Button
     const click_add_button = () =>
@@ -102,7 +102,7 @@ $(function()
         $('#component_tables_add .notifications').html('');
         $('#component_tables_add').modal('show');
     }
-    $('.form_add').click(() => click_add_button());
+    $('.table_add').click(() => click_add_button());
 
     // Add
     $('#component_tables_add form').submit((e) =>
@@ -139,7 +139,7 @@ $(function()
             $('#component_tables_add').modal('hide');
             wtools.CleanForm('#component_tables_add form');
             $('#component_tables_add form').removeClass('was-validated');
-            form_read();
+            table_read();
         });
     });
 });

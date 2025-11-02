@@ -97,7 +97,7 @@ class Sidebars
 
         $("#menu_main").append(sidebar_menu);
     }
-    SidebarMenuForm_()
+    SidebarMenutable_()
     {
         let sidebar_menu = $('<nav class="nav nav-pills flex-column justify-contents-between pt-4"></nav>');
         sidebar_menu.append($(`
@@ -108,7 +108,7 @@ class Sidebars
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
-            <div id="component_sidebar_forms">
+            <div id="component_sidebar_tables">
                 <div class="notifications"></div>
                 <div class="contents"></div>
             </div>
@@ -133,7 +133,7 @@ class Sidebars
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
-            <div id="component_sidebar_forms">
+            <div id="component_sidebar_tables">
                 <div class="notifications"></div>
                 <div class="contents"></div>
             </div>

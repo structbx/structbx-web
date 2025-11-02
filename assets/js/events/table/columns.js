@@ -102,7 +102,7 @@ $(function()
                     ,`<td scope="row">${row.length}</td>`
                     ,`<td scope="row">${options_required.ValueToOption_(row.required)}</td>`
                     ,`<td scope="row">${row.default_value}</td>`
-                    ,`<td scope="row">${row.link_to_form_name}</td>`
+                    ,`<td scope="row">${row.link_to_table_name}</td>`
                     ,`<td scope="row">${row.description}</td>`
                     ,`<td scope="row">${row.created_at}</td>`
                 ];
@@ -153,7 +153,7 @@ $(function()
     });
 
     // Click on Add Button
-    const read_form_columns_add = () =>
+    const read_table_columns_add = () =>
     {
         const add = () =>
         {
@@ -168,8 +168,8 @@ $(function()
         options_column_type_init(options_column_type, add);
     }
 
-    $('#component_columns_read .add').click(() => read_form_columns_add());
-    $('a.column_add').click(() => read_form_columns_add());
+    $('#component_columns_read .add').click(() => read_table_columns_add());
+    $('a.column_add').click(() => read_table_columns_add());
 
     // Add Column
     $('#component_columns_add form').submit((e) =>

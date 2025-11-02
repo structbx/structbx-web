@@ -166,15 +166,15 @@ class Data
                     new wtools.UIElementsCreator('#component_data_read table thead tr', keys).Build_((row) =>
                     {
                         // Setup columns and icon
-                        let form_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
-                        let form_icon = form_element_object.GetIcon_(false);
+                        let table_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
+                        let table_icon = table_element_object.GetIcon_(false);
 
                         // Add column to array
                         this.data_read_columns.push({id: row.id, identifier: row.identifier, name: row.name});
 
                         it++;
                         
-                        return [`<th scope="col" class="user-select-none">${form_icon}${row.name}</th>`];
+                        return [`<th scope="col" class="user-select-none">${table_icon}${row.name}</th>`];
                     });
 
                     // If there is less than 5 columns, add empty column
@@ -327,11 +327,11 @@ class Data
         });
     };
 
-    OptionsLinkSelection_(element, link_to_form, column_name, target, selected = undefined)
+    OptionsLinkSelection_(element, link_to_table, column_name, target, selected = undefined)
     {
         let options = new wtools.SelectOptions();
 
-        new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_form}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_table}`).Exec_((response_data) =>
         {
             try
             {
@@ -462,11 +462,11 @@ class Data
                         return undefined;
 
                     // If column type is a NORMAL type
-                    let form_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
-                    let form_element = $(form_element_object.Get_());
-                    let form_icon = form_element_object.GetIcon_();
+                    let table_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
+                    let table_element = $(table_element_object.Get_());
+                    let table_icon = table_element_object.GetIcon_();
 
-                    if(form_element == undefined)
+                    if(table_element == undefined)
                     {
                         new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
                         return;
@@ -474,14 +474,14 @@ class Data
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_add .notifications');
+                        this.OptionsLinkSelection_(table_element, row.link_to_table, row.name, '#component_data_add .notifications');
                     else if(row.column_type == "user")
-                        this.OptionsLinkUsersInDatabase_(form_element, '#component_data_add .notifications');
+                        this.OptionsLinkUsersInDatabase_(table_element, '#component_data_add .notifications');
 
                     // Final elements
                     let elements = [
-                        `<th scope="row">${form_icon}${row.name}</th>`
-                        ,form_element
+                        `<th scope="row">${table_icon}${row.name}</th>`
+                        ,table_element
                     ];
 
                     return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
@@ -602,11 +602,11 @@ class Data
                 // Results elements creator
                 new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
                 {
-                    let form_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
-                    let form_element = $(form_element_object.Get_());
-                    let form_icon = form_element_object.GetIcon_();
+                    let table_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
+                    let table_element = $(table_element_object.Get_());
+                    let table_icon = table_element_object.GetIcon_();
 
-                    if(form_element == undefined)
+                    if(table_element == undefined)
                     {
                         new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
                         return;
@@ -620,13 +620,13 @@ class Data
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        this.OptionsLinkSelection_(form_element, row.link_to_form, row.name, '#component_data_modify .notifications', row.value);
+                        this.OptionsLinkSelection_(table_element, row.link_to_table, row.name, '#component_data_modify .notifications', row.value);
                     else if(row.column_type == "user")
-                        this.OptionsLinkUsersInDatabase_(form_element, '#component_data_add .notifications', row.value);
+                        this.OptionsLinkUsersInDatabase_(table_element, '#component_data_add .notifications', row.value);
 
                     let elements = [
-                        `<th scope="row">${form_icon}${row.name}</th>`
-                        ,form_element
+                        `<th scope="row">${table_icon}${row.name}</th>`
+                        ,table_element
                     ];
 
                     return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
@@ -837,7 +837,7 @@ $(function()
     });
 
     // Click on new tab
-    $(document).on('click', '#component_sidebar_forms_tabs .tab-scroller .tab', (e) =>
+    $(document).on('click', '#component_sidebar_tables_tabs .tab-scroller .tab', (e) =>
     {
         e.preventDefault();
 
@@ -866,7 +866,7 @@ $(function()
         objectFormGeneral.Read_();
 
         // Set to active current tab
-        $('#component_sidebar_forms_tabs .tab').removeClass('active');
+        $('#component_sidebar_tables_tabs .tab').removeClass('active');
         $(e.currentTarget).addClass('active');
     });
     

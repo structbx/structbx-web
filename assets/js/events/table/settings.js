@@ -132,13 +132,13 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Form data
-        const form_id = $('#component_settings_general input[name="id"]').val();
-        const form_name = $('#component_settings_general input[name="name"]').val();
+        const table_id = $('#component_settings_general input[name="id"]').val();
+        const table_name = $('#component_settings_general input[name="name"]').val();
 
         // Setup form to delete
-        $('#component_settings_delete input[name=id]').val(form_id);
-        $('#component_settings_delete strong.header').html(form_name);
-        $('#component_settings_delete strong.name').html(form_name);
+        $('#component_settings_delete input[name=id]').val(table_id);
+        $('#component_settings_delete strong.header').html(table_name);
+        $('#component_settings_delete strong.name').html(table_name);
         $('#component_settings_delete .notifications').html('');
         $('#component_settings_delete').modal('show');
         wait.Off_();
@@ -153,10 +153,10 @@ $(function()
         let wait = new wtools.ElementState('#component_settings_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Data
-        const form_id = $('#component_settings_delete input[name=id]').val();
+        const table_id = $('#component_settings_delete input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/tables/delete?id=${form_id}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/delete?id=${table_id}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
 

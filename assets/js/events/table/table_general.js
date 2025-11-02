@@ -22,7 +22,7 @@ class FormGeneral
     Read_()
     {
         // Wait animation
-        let wait = new wtools.ElementState('#form_name', false, 'button', new wtools.WaitAnimation().for_button);
+        let wait = new wtools.ElementState('#table_name', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
         const table_identifier = wtools.GetUrlSearchParam('identifier');
@@ -38,7 +38,7 @@ class FormGeneral
         {
             // Clean
             wait.Off_();
-            $('#form_name').html('');
+            $('#table_name').html('');
 
             // Permissions error
             // Manage response
@@ -59,8 +59,8 @@ class FormGeneral
             }
             else
             {
-                $('#form_name').html(form);
-                $('.form_title').html(form);
+                $('#table_name').html(form);
+                $('.table_title').html(form);
             }
         });
     };
@@ -80,12 +80,12 @@ $(function ()
     objectFormGeneral.Read_();
     
     // Read all Sidebar forms
-    const form_sidebar_read_all = () =>
+    const table_sidebar_read_all = () =>
     {
-        $('#component_sidebar_forms .contents').html('');
+        $('#component_sidebar_tables .contents').html('');
 
         // Wait animation
-        let wait = new wtools.ElementState('#component_sidebar_forms .notifications', false, 'block', new wtools.WaitAnimation().for_block);
+        let wait = new wtools.ElementState('#component_sidebar_tables .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Get Form identifier
         const table_identifier = wtools.GetUrlSearchParam('identifier');
@@ -94,26 +94,26 @@ $(function ()
         {
             // Clean
             wait.Off_();
-            $('#component_sidebar_forms .notifications').html('');
-            $('#component_sidebar_forms .contents').html('');
-            $('#component_sidebar_forms_tabs .notifications').html('');
-            $('#component_sidebar_forms_tabs .contents').html('');
+            $('#component_sidebar_tables .notifications').html('');
+            $('#component_sidebar_tables .contents').html('');
+            $('#component_sidebar_tables_tabs .notifications').html('');
+            $('#component_sidebar_tables_tabs .contents').html('');
 
             // Manage response
-            const result = new ResponseManager(response_data, '#component_sidebar_forms .notifications', '');
+            const result = new ResponseManager(response_data, '#component_sidebar_tables .notifications', '');
             if(!result.Verify_())
                 return;
 
             // Handle zero results
             if(response_data.body.data == undefined || response_data.body.data.length < 1)
             {
-                new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms .notifications').Show_('Sin resultados.');
-                new wtools.Notification('SUCCESS', 0, '#component_sidebar_forms_tabs .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 0, '#component_sidebar_tables .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 0, '#component_sidebar_tables_tabs .notifications').Show_('Sin resultados.');
                 return;
             }
 
             // Results elements creator: Sidebar
-            $('#component_sidebar_forms .contents').html('');
+            $('#component_sidebar_tables .contents').html('');
             let elements = [];
             for(let row of response_data.body.data)
             {
@@ -125,13 +125,13 @@ $(function ()
                 `);
             }
             let ui_element = new wtools.UIElementsPackage('<div class="nav-item"></div>', elements).Pack_();
-            $('#component_sidebar_forms .contents').append(ui_element);
+            $('#component_sidebar_tables .contents').append(ui_element);
 
             // Results elements creator: Tabs
-            $('#component_sidebar_forms_tabs .tab-scroller').html('');
+            $('#component_sidebar_tables_tabs .tab-scroller').html('');
             for(let row of response_data.body.data)
             {
-                $('#component_sidebar_forms_tabs .tab-scroller').append(`
+                $('#component_sidebar_tables_tabs .tab-scroller').append(`
                     <div class="tab ${row.identifier == table_identifier ? "active" : ""}" id="${row.identifier}" table-identifier="${row.identifier}">
                         <span class="tab-title">${row.name}</span>
                     </div>
@@ -139,10 +139,10 @@ $(function ()
             }
         });
     };
-    form_sidebar_read_all();
+    table_sidebar_read_all();
 
     // Go to Form data
-    $(document).on('click', '.go_form', (e) =>
+    $(document).on('click', '.go_table', (e) =>
     {
         e.preventDefault();
 
