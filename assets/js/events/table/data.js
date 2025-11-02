@@ -14,7 +14,7 @@ class Data
         setInterval(this.ChangeIntVerification_.bind(this), 5000);
     }
 
-    GetFormIdentifier_()
+    GetTableIdentifier_()
     {
         // Get Form identifier
         const table_identifier = wtools.GetUrlSearchParam('identifier');
@@ -46,7 +46,7 @@ class Data
         // Image <td> row
         const image_row = (row, column) =>
         {
-            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/tables/data/file/read?filepath=${row[column]}&table-identifier=${this.GetFormIdentifier_()}" alt="${column}" width="100px"></td>`);
+            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/tables/data/file/read?filepath=${row[column]}&table-identifier=${this.GetTableIdentifier_()}" alt="${column}" width="100px"></td>`);
         };
         // File <td> row
         const file_row = (row, column) =>
@@ -106,7 +106,7 @@ class Data
             let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
             // Get Form identifier
-            const table_identifier = this.GetFormIdentifier_();
+            const table_identifier = this.GetTableIdentifier_();
             if(table_identifier == undefined)
                 return;
 
@@ -213,7 +213,7 @@ class Data
         try
         {
             // Get Form identifier
-            const table_identifier = this.GetFormIdentifier_();
+            const table_identifier = this.GetTableIdentifier_();
             if(table_identifier == undefined)
                 return;
 
@@ -278,7 +278,7 @@ class Data
     ChangeIntVerification_()
     {
         // Get Form identifier
-        const table_identifier = this.GetFormIdentifier_();
+        const table_identifier = this.GetTableIdentifier_();
         if(table_identifier == undefined)
             return;
 
@@ -432,7 +432,7 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const table_identifier = this.GetFormIdentifier_();
+            const table_identifier = this.GetTableIdentifier_();
             if(table_identifier == undefined)
                 return;
 
@@ -516,7 +516,7 @@ class Data
         }
 
         // Get Form identifier
-        const table_identifier = this.GetFormIdentifier_();
+        const table_identifier = this.GetTableIdentifier_();
         if(table_identifier == undefined)
         {
             wait.Off_();
@@ -552,7 +552,7 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const table_identifier = this.GetFormIdentifier_();
+            const table_identifier = this.GetTableIdentifier_();
             if(table_identifier == undefined)
             {
                 wait.Off_();
@@ -661,7 +661,7 @@ class Data
         }
 
         // Get Form identifier
-        const table_identifier = this.GetFormIdentifier_();
+        const table_identifier = this.GetTableIdentifier_();
         if(table_identifier == undefined)
         {
             wait.Off_();
@@ -710,7 +710,7 @@ class Data
         let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const table_identifier = this.GetFormIdentifier_();
+        const table_identifier = this.GetTableIdentifier_();
         if(table_identifier == undefined)
         {
             wait.Off_();
@@ -743,7 +743,7 @@ class Data
         let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const table_identifier = this.GetFormIdentifier_();
+        const table_identifier = this.GetTableIdentifier_();
         if(table_identifier == undefined)
             return;
 

@@ -1,4 +1,4 @@
-class FormGeneral
+class TableGeneral
 {
     VerifySession_()
     {
@@ -66,18 +66,18 @@ class FormGeneral
     };
 }
 
-var objectFormGeneral = new FormGeneral();
+var objectTableGeneral = new TableGeneral();
 
 $(function ()
 {
     // Verify Session
-    objectFormGeneral.VerifySession_();
+    objectTableGeneral.VerifySession_();
 
     // Elements
     new Headers().Header_();
     
     // Read Header Form
-    objectFormGeneral.Read_();
+    objectTableGeneral.Read_();
     
     // Read all Sidebar forms
     const table_sidebar_read_all = () =>
