@@ -3,8 +3,8 @@ $(function()
     // SELECT options
     const options_status = new wtools.SelectOptions
     ([
-        new wtools.OptionValue("activo", "Activo", true)
-        ,new wtools.OptionValue("inactivo", "Inactivo")
+        new wtools.OptionValue("active", "Activo", true)
+        ,new wtools.OptionValue("inactive", "Inactivo")
     ]);
     options_status.Build_('#component_users_add select[name="status"]');
     options_status.Build_('#component_users_modify select[name="status"]');
