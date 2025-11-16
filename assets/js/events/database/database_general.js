@@ -56,7 +56,6 @@ $(function()
                 return;
             }
 
-            $('#component_database_modify input[name="id"]').val(response_data.body.data[0].id);
             $('#component_database_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
             $('#component_database_modify input[name="name"]').val(response_data.body.data[0].name);
             $('#component_database_modify textarea[name="description"]').val(response_data.body.data[0].description);
@@ -104,7 +103,7 @@ $(function()
         });
     });
 
-    // Read form to Delete
+    // Read database to Delete
     $(document).on("click", '#component_database_delete .delete', (e) =>
     {
         e.preventDefault();
@@ -113,19 +112,19 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Form data
-        const table_id = $('#component_database_modify input[name="id"]').val();
-        const table_name = $('#component_database_modify input[name="name"]').val();
+        const identifier = $('#component_database_modify input[name="identifier"]').val();
+        const name = $('#component_database_modify input[name="name"]').val();
 
         // Setup form to delete
-        $('#component_database_delete_final input[name=id]').val(table_id);
-        $('#component_database_delete_final strong.header').html(table_name);
-        $('#component_database_delete_final strong.name').html(table_name);
+        $('#component_database_delete_final input[name=identifier]').val(identifier);
+        $('#component_database_delete_final strong.header').html(name);
+        $('#component_database_delete_final strong.name').html(name);
         $('#component_database_delete_final .notifications').html('');
         $('#component_database_delete_final').modal('show');
         wait.Off_();
     });
 
-    // Delete form
+    // Delete database
     $('#component_database_delete_final form').submit((e) =>
     {
         e.preventDefault();
@@ -137,7 +136,7 @@ $(function()
         const database_id = $('#component_database_delete_final input[name=id]').val();
 
         // Request
-        new wtools.Request(server_config.current.api + `/databases/delete?id=${database_id}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/databases/delete?identifier=${database_id}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
 

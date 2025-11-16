@@ -54,7 +54,7 @@ $(function ()
                 {
                     element = `
                         <div class="nav-item">
-                            <a class="nav-link mb-2 active" href="#" database_id="${row.id}">
+                            <a class="nav-link mb-2 active" href="#" database_id="${row.identifier}">
                                 <i class="fas fa-building"></i>
                                 <span class="ms-2">${row.name}</span>
                             </a>
@@ -65,7 +65,7 @@ $(function ()
                 {
                     element = `
                         <div class="nav-item">
-                            <a class="nav-link mb-2" href="#" database_id="${row.id}">
+                            <a class="nav-link mb-2" href="#" database_id="${row.identifier}">
                                 <i class="fas fa-building"></i>
                                 <span class="ms-2">${row.name}</span>
                             </a>

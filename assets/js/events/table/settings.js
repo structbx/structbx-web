@@ -39,6 +39,13 @@ $(function()
     });
     options_permissions_users_init(options_permissions_users, () => {})
 
+    const options_public_form = new wtools.SelectOptions
+    ([
+        new wtools.OptionValue("0", "No", true)
+        ,new wtools.OptionValue("1", "S&iacute;")
+    ]);
+    options_public_form.Build_('#component_settings_general select[name="public_form"]');
+
     /* --- General settings --- */
 
     // Read
@@ -75,9 +82,9 @@ $(function()
                 return;
             }
             
-            $('#component_settings_general input[name="id"]').val(response_data.body.data[0].id);
             $('#component_settings_general input[name="identifier"]').val(response_data.body.data[0].identifier);
             $('#component_settings_general input[name="name"]').val(response_data.body.data[0].name);
+            $('#component_settings_general select[name="public_form"]').val(response_data.body.data[0].public_form);
             $('#component_settings_general textarea[name="description"]').val(response_data.body.data[0].description);
         });
     };
@@ -101,8 +108,18 @@ $(function()
             return;
         }
 
+        // Get Form identifier
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
+            return;
+        }
+
         // Data collection
         const data = new FormData($('#component_settings_general form')[0]);
+        data.append('identifier', table_identifier);
 
         // Request
         new wtools.Request(server_config.current.api + "/tables/modify", "PUT", data, false).Exec_((response_data) =>
@@ -119,11 +136,11 @@ $(function()
 
             const identifier = data.get('identifier');
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-            window.location.href = `/table?identifier=${identifier}#settings`
+            window.location.href = `/table/settings?identifier=${identifier}`
         });
     });
 
-    // Read form to Delete
+    // Read table to Delete
     $(document).on("click", '#component_settings_general_delete .delete', (e) =>
     {
         e.preventDefault();
@@ -132,11 +149,9 @@ $(function()
         let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
         // Form data
-        const table_id = $('#component_settings_general input[name="id"]').val();
         const table_name = $('#component_settings_general input[name="name"]').val();
 
-        // Setup form to delete
-        $('#component_settings_delete input[name=id]').val(table_id);
+        // Setup table to delete
         $('#component_settings_delete strong.header').html(table_name);
         $('#component_settings_delete strong.name').html(table_name);
         $('#component_settings_delete .notifications').html('');
@@ -144,7 +159,7 @@ $(function()
         wait.Off_();
     });
 
-    // Delete form
+    // Delete table
     $('#component_settings_delete form').submit((e) =>
     {
         e.preventDefault();
@@ -152,11 +167,16 @@ $(function()
         // Wait animation
         let wait = new wtools.ElementState('#component_settings_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
-        // Data
-        const table_id = $('#component_settings_delete input[name=id]').val();
-
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING').Show_('No se encontr&oacute; el identificador de la tabla.');
+            return;
+        }
+        
         // Request
-        new wtools.Request(server_config.current.api + `/tables/delete?id=${table_id}`, "DEL").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/tables/delete?identifier=${table_identifier}`, "DEL").Exec_((response_data) =>
         {
             wait.Off_();
 
@@ -165,7 +185,7 @@ $(function()
             if(!result.Verify_())
                 return;
 
-            new wtools.Notification('SUCCESS').Show_('Tabla eliminado exitosamente.');
+            new wtools.Notification('SUCCESS').Show_('Tabla eliminada exitosamente.');
             window.location.href = `/start`
         });
     });

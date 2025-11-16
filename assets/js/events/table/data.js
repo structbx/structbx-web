@@ -1,4 +1,92 @@
 
+function GetTableIdentifier()
+{
+    // Get Form identifier
+    const table_identifier = wtools.GetUrlSearchParam('identifier');
+    if(table_identifier == undefined)
+    {
+        new wtools.Notification('ERROR').Show_('No se encontr&oacute; el identificador de la tabla.');
+        return undefined;
+    }
+    return table_identifier;
+}
+
+function OptionsLinkSelection(element, link_to_table, column_name, target, selected = undefined, public_form = 0)
+{
+    let options = new wtools.SelectOptions();
+
+    new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_table}&public_form=${public_form}`).Exec_((response_data) =>
+    {
+        try
+        {
+            let tmp_options = [];
+
+            // Add empty <option>
+            if(selected == undefined)
+                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
+            else
+                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
+
+            // Add select or not selected <option>
+            for(let row of response_data.body.data)
+            {
+                const col1 = response_data.body.columns[0];
+                const col2 = response_data.body.columns[1];
+                if(selected == row[col1])
+                    tmp_options.push(new wtools.OptionValue(row[col1], row[col2], true));
+                else
+                    tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
+            }
+
+            // Build <option>s
+            options.options = tmp_options;
+            let element_building = $(element).find('select');
+            options.Build_(element_building);
+        }
+        catch(error)
+        {
+            new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a la columna enlazada (${column_name}).`);
+        }
+    });
+}
+
+function OptionsLinkUsersInDatabase(element, target, selected = undefined)
+{
+    let options = new wtools.SelectOptions();
+
+    new wtools.Request(server_config.current.api + `/databases/users/current/read`).Exec_((response_data) =>
+    {
+        try
+        {
+            let tmp_options = [];
+
+            // Add empty <option>
+            if(selected == undefined)
+                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
+            else
+                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
+
+            // Add select or not selected <option>
+            for(let row of response_data.body.data)
+            {
+                if(selected == row.id)
+                    tmp_options.push(new wtools.OptionValue(row.id, row.username, true));
+                else
+                    tmp_options.push(new wtools.OptionValue(row.id, row.username));
+            }
+
+            // Build <option>s
+            options.options = tmp_options;
+            let element_building = $(element).find('select');
+            options.Build_(element_building);
+        }
+        catch(error)
+        {
+            new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a los usuarios de la base de datos.`);
+        }
+    });
+}
+
 class Data
 {
     changeInt = 0;
@@ -12,18 +100,6 @@ class Data
     {
         this.ReadUsersInDatabase_(() => this.Read_());
         setInterval(this.ChangeIntVerification_.bind(this), 5000);
-    }
-
-    GetTableIdentifier_()
-    {
-        // Get Form identifier
-        const table_identifier = wtools.GetUrlSearchParam('identifier');
-        if(table_identifier == undefined)
-        {
-            new wtools.Notification('ERROR').Show_('No se encontr&oacute; el identificador de la tabla.');
-            return undefined;
-        }
-        return table_identifier;
     }
 
     CreateRows_(response_data, row)
@@ -46,7 +122,7 @@ class Data
         // Image <td> row
         const image_row = (row, column) =>
         {
-            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/tables/data/file/read?filepath=${row[column]}&table-identifier=${this.GetTableIdentifier_()}" alt="${column}" width="100px"></td>`);
+            elements.push(`<td class="bg-white" scope="row"><img class="" src="/api/tables/data/file/read?filepath=${row[column]}&table-identifier=${GetTableIdentifier()}" alt="${column}" width="100px"></td>`);
         };
         // File <td> row
         const file_row = (row, column) =>
@@ -106,7 +182,7 @@ class Data
             let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
             // Get Form identifier
-            const table_identifier = this.GetTableIdentifier_();
+            const table_identifier = GetTableIdentifier();
             if(table_identifier == undefined)
                 return;
 
@@ -213,7 +289,7 @@ class Data
         try
         {
             // Get Form identifier
-            const table_identifier = this.GetTableIdentifier_();
+            const table_identifier = GetTableIdentifier();
             if(table_identifier == undefined)
                 return;
 
@@ -278,7 +354,7 @@ class Data
     ChangeIntVerification_()
     {
         // Get Form identifier
-        const table_identifier = this.GetTableIdentifier_();
+        const table_identifier = GetTableIdentifier();
         if(table_identifier == undefined)
             return;
 
@@ -327,45 +403,6 @@ class Data
         });
     };
 
-    OptionsLinkSelection_(element, link_to_table, column_name, target, selected = undefined)
-    {
-        let options = new wtools.SelectOptions();
-
-        new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_table}`).Exec_((response_data) =>
-        {
-            try
-            {
-                let tmp_options = [];
-
-                // Add empty <option>
-                if(selected == undefined)
-                    tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
-                else
-                    tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
-
-                // Add select or not selected <option>
-                for(let row of response_data.body.data)
-                {
-                    const col1 = response_data.body.columns[0];
-                    const col2 = response_data.body.columns[1];
-                    if(selected == row[col1])
-                        tmp_options.push(new wtools.OptionValue(row[col1], row[col2], true));
-                    else
-                        tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
-                }
-    
-                // Build <option>s
-                options.options = tmp_options;
-                let element_building = $(element).find('select');
-                options.Build_(element_building);
-            }
-            catch(error)
-            {
-                new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a la columna enlazada (${column_name}).`);
-            }
-        });
-    }
-
     ReadUsersInDatabase_(callback)
     {
         new wtools.Request(server_config.current.api + `/databases/users/current/read`).Exec_((response_data) =>
@@ -385,43 +422,6 @@ class Data
         });
     }
 
-    OptionsLinkUsersInDatabase_(element, target, selected = undefined)
-    {
-        let options = new wtools.SelectOptions();
-
-        new wtools.Request(server_config.current.api + `/databases/users/current/read`).Exec_((response_data) =>
-        {
-            try
-            {
-                let tmp_options = [];
-
-                // Add empty <option>
-                if(selected == undefined)
-                    tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
-                else
-                    tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
-
-                // Add select or not selected <option>
-                for(let row of response_data.body.data)
-                {
-                    if(selected == row.id)
-                        tmp_options.push(new wtools.OptionValue(row.id, row.username, true));
-                    else
-                        tmp_options.push(new wtools.OptionValue(row.id, row.username));
-                }
-    
-                // Build <option>s
-                options.options = tmp_options;
-                let element_building = $(element).find('select');
-                options.Build_(element_building);
-            }
-            catch(error)
-            {
-                new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a los usuarios de la base de datos.`);
-            }
-        });
-    }
-
     ReadDataColumns_()
     {
         try
@@ -432,7 +432,7 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const table_identifier = this.GetTableIdentifier_();
+            const table_identifier = GetTableIdentifier();
             if(table_identifier == undefined)
                 return;
 
@@ -474,9 +474,9 @@ class Data
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        this.OptionsLinkSelection_(table_element, row.link_to_table, row.name, '#component_data_add .notifications');
+                        OptionsLinkSelection(table_element, row.link_to_table, row.name, '#component_data_add .notifications');
                     else if(row.column_type == "user")
-                        this.OptionsLinkUsersInDatabase_(table_element, '#component_data_add .notifications');
+                        OptionsLinkUsersInDatabase(table_element, '#component_data_add .notifications');
 
                     // Final elements
                     let elements = [
@@ -516,7 +516,7 @@ class Data
         }
 
         // Get Form identifier
-        const table_identifier = this.GetTableIdentifier_();
+        const table_identifier = GetTableIdentifier();
         if(table_identifier == undefined)
         {
             wait.Off_();
@@ -552,7 +552,7 @@ class Data
             let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
 
             // Get Form identifier
-            const table_identifier = this.GetTableIdentifier_();
+            const table_identifier = GetTableIdentifier();
             if(table_identifier == undefined)
             {
                 wait.Off_();
@@ -620,9 +620,9 @@ class Data
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        this.OptionsLinkSelection_(table_element, row.link_to_table, row.name, '#component_data_modify .notifications', row.value);
+                        OptionsLinkSelection(table_element, row.link_to_table, row.name, '#component_data_modify .notifications', row.value);
                     else if(row.column_type == "user")
-                        this.OptionsLinkUsersInDatabase_(table_element, '#component_data_add .notifications', row.value);
+                        OptionsLinkUsersInDatabase(table_element, '#component_data_add .notifications', row.value);
 
                     let elements = [
                         `<th scope="row">${table_icon}${row.name}</th>`
@@ -661,7 +661,7 @@ class Data
         }
 
         // Get Form identifier
-        const table_identifier = this.GetTableIdentifier_();
+        const table_identifier = GetTableIdentifier();
         if(table_identifier == undefined)
         {
             wait.Off_();
@@ -710,7 +710,7 @@ class Data
         let wait = new wtools.ElementState('#component_data_delete form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const table_identifier = this.GetTableIdentifier_();
+        const table_identifier = GetTableIdentifier();
         if(table_identifier == undefined)
         {
             wait.Off_();
@@ -743,7 +743,7 @@ class Data
         let wait = new wtools.ElementState('#component_data_export .export', false, 'button', new wtools.WaitAnimation().for_button);
 
         // Get Form identifier
-        const table_identifier = this.GetTableIdentifier_();
+        const table_identifier = GetTableIdentifier();
         if(table_identifier == undefined)
             return;
 
