@@ -107,7 +107,7 @@ class Sidebars
                     <span class="ms-2">Ir a inicio</span>
                 </a>
             </div>
-            <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
+            <h5 class="small text-uppercase text-muted">TABLAS</h5>
             <div id="component_sidebar_tables">
                 <div class="notifications"></div>
                 <div class="contents"></div>
@@ -132,7 +132,7 @@ class Sidebars
                     <span class="ms-2">Ir la tabla</span>
                 </a>
             </div>
-            <h5 class="small text-uppercase text-muted">FORMULARIOS</h5>
+            <h5 class="small text-uppercase text-muted">TABLAS</h5>
             <div id="component_sidebar_tables">
                 <div class="notifications"></div>
                 <div class="contents"></div>
