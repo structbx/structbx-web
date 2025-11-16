@@ -66,16 +66,17 @@
 
                                 <div class="notifications"></div>
                                 <form novalidate>
-                                    <input type="hidden" name="id"/>
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Identificador</th>
-                                                <td><input type="text" class="form-control" name="identifier"/></td>
-                                            </tr>
-                                            <tr>
                                                 <th scope="row">Nombre</th>
                                                 <td><input type="text" class="form-control" name="name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Formulario p&uacute;blico</th>
+                                                <td>
+                                                    <select class="form-select" name="public_form"></select>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Descripci&oacute;n</th>
@@ -328,7 +329,6 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="notifications"></div>
-                                        <input type="hidden" name="id" required>
                                         <p>
                                             Seguro desea eliminar la tabla <strong class="name"></strong>, esto eliminar&aacute; todos los registros
                                             en &eacute;l

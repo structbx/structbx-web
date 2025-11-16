@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="../assets/css/main.css">
         <link rel="stylesheet" href="../assets/css/styles.css">
-        <link rel="stylesheet" href="../assets/css/modal.css">
+        <link rel="stylesheet" href="../assets/css/form.css">
         <!-- /CSS files -->
         
         <!-- JS Libraries -->
@@ -30,82 +30,58 @@
             <div class="row">
 
                 <!-- Main content -->
-                <main id="contents_main" class="col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
+                <main id="contents_main" class="col-md-12 col-lg-12 ms-sm-auto px-md-4 py-5 bg-light">
 
-                    <!-- Forms section -->
-                    <section class="section_tables">
-                        <div class="pb-2 mb-3 border-bottom d-flex">
-                            <ol class="breadcrumb h4 me-auto flex-grow-1 align-self-center mb-0">
-                                <li class="breadcrumb-item database_name"></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tablas</li>
-                            </ol>
-                            <div class="p-2">
-                                <button class="btn btn-dark-shadow table_add">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <!-- Form section -->
+                    <section class="section_form">
 
-                        <!-- Forms: Read -->
-                        <article id="component_tables_read" class="card p-4 bg-white mb-4">
-                            <!-- Contents -->
-                            <div class="mb-2">
+                        <!-- Form: Add: Record -->
+                        <div id="component_form_addRecord" class="row justify-content-center">
+                            <div class="col-lg-8 col-xl-6">
 
-                                <div class="notifications"></div>
-                                <div class="contents mb-2 mt-2">
-
+                                <!-- Header -->
+                                <div class="form-header">
+                                    <div class="header-content">
+                                        <h1 class="form-title">Encuesta de Satisfacción</h1>
+                                        <p class="form-description">Comparte tu experiencia con nosotros para ayudarnos a mejorar nuestros servicios</p>
+                                        <div class="form-info">
+                                            <span class="required-indicator">*</span> Indica un campo requerido
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
-                            <!-- /Contents -->
-                            
-                        </article>
-                        <!-- /Forms: Read -->
-
-                        <!-- Forms: Add -->
-                        <div id="component_tables_add" class="modal right-side-modal fade" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <form class="modal-content" novalidate>
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">
-                                            <i class="fas fa-plus-circle me-2"></i>A&ntilde;adir nuevo tabla
-                                        </h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <!-- /Header -->
+                
+                                <div class="elegant-form">
+                                    <div class="notifications"></div>
+                                    <table class="table table-form">
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                
+                                <!-- Modal de Confirmación -->
+                                <div id="component_form_successModal" class="modal fade"  tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center p-5">
+                                                <div class="success-icon">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </div>
+                                                <h3 class="mt-4 mb-3">¡Encuesta enviada!</h3>
+                                                <p class="text-muted mb-4">Gracias por compartir tu feedback. Tu opinión es muy valiosa para nosotros.</p>
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                                    Continuar
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="notifications"></div>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Identificador</td>
-                                                    <td><input class="form-control" type="text" name="identifier" required></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Nombre</td>
-                                                    <td><input class="form-control" type="text" name="name" required></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Descripci&oacute;n</td>
-                                                    <td><textarea class="form-control" type="text" name="description"></textarea></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                            <i class="fas fa-arrow-left me-2"></i>Cancelar
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-plus-circle me-2"></i>Crear
-                                        </button>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                        <!-- /Forms: Add -->
+                        <!-- /Form: Add: Record -->
 
                     </section>
-                    <!-- /Forms section -->
+                    <!-- /Form section -->
 
                     <!-- Footer -->
                     <footer class="main_footer container">
@@ -145,8 +121,7 @@
 
             <!-- Events -->
             <script src="../assets/js/events/general.js"></script>
-            <script src="../assets/js/events/start/start_general.js"></script>
-            <script src="../assets/js/events/start/tables.js"></script>
+            <script src="../assets/js/events/form/form_general.js"></script>
 
         <!-- Javascript -->
     </body>
