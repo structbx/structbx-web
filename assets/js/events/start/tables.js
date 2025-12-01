@@ -61,9 +61,7 @@ $(function()
                                     </div>
                                     
                                     <div class="mt-2">
-                                        <span class="badge rounded-pill bg-dark me-2"><i class="fas fa-key fa-fw"></i> ${row.identifier}</span>
                                         <span class="badge rounded-pill bg-dark me-2"><i class="fas fa-pen fa-fw"></i> ${row.total}</span>
-                                        <span class="badge rounded-pill bg-dark me-2"><i class="fas fa-calendar fa-fw"></i> ${row.created_at}</span>
                                     </div>
                                 </a>
                                 
