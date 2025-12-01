@@ -321,3 +321,20 @@ table.table_data td:first-child {
     color: #2267d4;
     font-weight: bold;
 }
+
+.resize-handle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: col-resize;
+    transition: background 0.2s;
+}
+
+.resize-handle:hover,
+.resize-handle.resizing {
+    background: rgba(255, 255, 255, 0.8);
+    width: 8px;
+}
