@@ -19,7 +19,7 @@ class Headers
                     <ul class="navbar-nav">
                         <li class="nav-item ms-md-2 mt-2 mt-md-0">
                             <div class="d-flex align-items-center h-100">
-                                <h4 id="instance_name" class="m-0"></h4>
+                                <h5 id="instance_name" class="m-0 fw-bold"></h5>
                             </div>
                         </li>
                     </ul>
