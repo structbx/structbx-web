@@ -91,7 +91,8 @@ class Data
 {
     changeInt = 0;
     changeIntInit = false;
-    data_read_page = 0;
+    data_read_page = 1;
+    data_read_limit = 20;
     data_read_page_end = false;
     data_read_columns = [];
     users_in_database = {};
@@ -218,10 +219,33 @@ class Data
             return response_data.body.data;
     }
 
+    Read_ = (reload = false) =>
+    {
+        try
+        {
+            // Exit if end of results and no reload
+            /*if(this.data_read_page_end && reload == false)
+                return;*/
+
+            // Get Table identifier
+            const table_identifier = GetTableIdentifier();
+            if(table_identifier == undefined)
+                return "";
+
+            // Get path
+            const path = this.GetPath_(reload);
+            if(path == "")
+                return;
+
+            // Wait animation
+            let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
             // Request
             new wtools.Request(server_config.current.api + `/tables/data/read${path}`).Exec_((response_data) =>
             {
+                // Get data
+                let data = this.GetBodyData_(response_data);
+
                 // Clean
                 wait.Off_();
                 $('#component_data_read .notifications').html('');
@@ -232,7 +256,7 @@ class Data
                     return;
 
                 // Results elements creator (Columns)
-                if($('#component_data_read table thead tr').html() == "")
+                if($('#component_data_read table thead tr').html() == "" && response_data.body.columns_meta != undefined)
                 {
                     // Variables
                     let keys = response_data.body.columns_meta.data;
@@ -279,8 +303,13 @@ class Data
                     }*/
                 }
 
+                // Verify if results is lower than limit
+                console.log(data.length, this.data_read_limit);
+                if(data.length < this.data_read_limit)
+                    this.data_read_page_end = true;
+
                 // Handle zero results
-                if(response_data.body.data.length < 1)
+                if(data.length < 1)
                 {
                     // End of results reached
                     this.data_read_page_end = true;
@@ -288,12 +317,17 @@ class Data
                 }
 
                 // Results elements creator (Rows)
-                new wtools.UIElementsCreator('#component_data_read table tbody', response_data.body.data).Build_((row) =>
+                new wtools.UIElementsCreator('#component_data_read table tbody', data).Build_((row) =>
                 {
                     // Create rows
                     const elements = this.CreateRows_(response_data, row);
                     return new wtools.UIElementsPackage(`<tr id="row_${row.ID}" record-id="${row.ID}"></tr>`, elements).Pack_();
                 });
+
+                // Next page if not reload
+                if(!reload)
+                    this.data_read_page++;
+                console.log(`page: ${this.data_read_page}`);
             });   
         }
         catch(error)
@@ -303,7 +337,7 @@ class Data
         }
     };
 
-    RefreshRow_(row_id, insert = false)
+    RefreshRow_(row_id)
     {
         try
         {
@@ -345,20 +379,12 @@ class Data
 
                 // Results elements creator (Rows)
                 const elements = this.CreateRows_(response_data, response_data.body.data[0]);
-                if(insert)
+
+                // Update row
+                $('#row_' + row_id).html('');
+                for(let td of elements)
                 {
-                    // Insert a new row
-                    const new_row = new wtools.UIElementsPackage(`<tr id="row_${response_data.body.data[0].ID}" record-id="${response_data.body.data[0].ID}"></tr>`, elements).Pack_();
-                    $('#component_data_read table tbody').append(new_row);
-                }
-                else
-                {
-                    // Update row
-                    $('#row_' + row_id).html('');
-                    for(let td of elements)
-                    {
-                        $('#row_' + row_id).append(td);
-                    }
+                    $('#row_' + row_id).append(td);
                 }
             });
 
@@ -394,6 +420,7 @@ class Data
                 {
                     console.log("changeInt");
                     // If there is new changeInt, refresh rows
+                    let reload = false;
                     for(let row of data)
                     {
                         this.changeInt = row.id;
@@ -401,8 +428,7 @@ class Data
                         {
                             case "insert":
                                 console.log("insert");
-                                if(this.data_read_page_end)
-                                    this.RefreshRow_(row.row_id, true);
+                                reload = true;
                                 break;
                             case "update":
                                 console.log("update");
@@ -413,10 +439,13 @@ class Data
                                 $(`#row_${row.row_id}`).remove();
                                 break;
                             case "import":
-                                this.ReadUsersInDatabase_(() => this.Read_(true));
+                                console.log("import");
+                                reload = true;
                                 break;
                         }
                     }
+                    if(reload)
+                        this.ReadUsersInDatabase_(() => this.Read_(true));
                 }
             }
         });
@@ -534,7 +563,7 @@ class Data
             return;
         }
 
-        // Get Form identifier
+        // Get Table identifier
         const table_identifier = GetTableIdentifier();
         if(table_identifier == undefined)
         {
@@ -558,7 +587,6 @@ class Data
 
             new wtools.Notification('SUCCESS').Show_('Registro guardado.');
             $('#component_data_add').modal('hide');
-            this.data_read_page_end = false;
             this.ChangeIntVerification_();
         });
     }
@@ -766,22 +794,10 @@ class Data
         if(table_identifier == undefined)
             return;
 
-        // Get conditions
-        let conditions = ""
-        if(wtools.GetUrlSearchParam('conditions') != undefined)
-            conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
-
-        // Get order
-        let order = ""
-        if(wtools.GetUrlSearchParam('conditions') != undefined)
-            order = `&order=${wtools.GetUrlSearchParam('order')}`;
-
-        // Path request
-        const limit = $('#component_data_read table tbody')[0].rows.length;
-        if(limit < 20)
-            path = `?table-identifier=${table_identifier}&limit=20${conditions}${order}`;
-        else
-        path = `?table-identifier=${table_identifier}&limit=${limit}${conditions}${order}`;
+        // Get path
+        const path = this.GetPath_(true, false);
+        if(path == "")
+            return;
 
         // Request
         new wtools.Request(server_config.current.api + `/tables/data/read${path}&export=true`, ).MakeHTTPRequest()
@@ -882,7 +898,7 @@ $(function()
         viewsObject.Read_();
 
         // Read Form
-        objectFormGeneral.Read_();
+        objectTableGeneral.Read_();
 
         // Set to active current tab
         $('#component_sidebar_tables_tabs .tab').removeClass('active');
