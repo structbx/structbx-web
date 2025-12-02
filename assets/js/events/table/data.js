@@ -96,6 +96,7 @@ class Data
     data_read_page_end = false;
     data_read_columns = [];
     users_in_database = {};
+    read_mutex = false;
 
     constructor()
     {
@@ -151,7 +152,7 @@ class Data
 
             if(column_meta != undefined && row[column] != "")
             {
-                // Verify column typeoptions_column_type_initoptions_column_type_init
+                // Verify column type
                 if(column_meta.column_type == "image")
                     image_row(row, column);
                 else if(column_meta.column_type == "file")
@@ -193,7 +194,8 @@ class Data
         if(reload)
         {
             // Set current limit
-            this.data_read_limit = $('#component_data_read table tbody')[0].rows.length;
+            //this.data_read_limit = $('#component_data_read table tbody')[0].rows.length;
+            this.data_read_limit = 20 * this.data_read_page;
             if(clean)
                 $('#component_data_read table tbody').html('');
 
@@ -219,23 +221,44 @@ class Data
             return response_data.body.data;
     }
 
+    FreeMutex_()
+    {
+        this.read_mutex = false;
+    }
+
     Read_ = (reload = false) =>
     {
         try
         {
+            // Verify mutex
+            if(this.read_mutex)
+                return;
+
+            // Set mutex
+            this.read_mutex = true;
+
             // Exit if end of results and no reload
-            /*if(this.data_read_page_end && reload == false)
-                return;*/
+            if(this.data_read_page_end && reload == false)
+            {
+                this.FreeMutex_();
+                return;
+            }
 
             // Get Table identifier
             const table_identifier = GetTableIdentifier();
             if(table_identifier == undefined)
+            {
+                this.FreeMutex_();
                 return "";
+            }
 
             // Get path
             const path = this.GetPath_(reload);
             if(path == "")
+            {
+                this.FreeMutex_();
                 return;
+            }
 
             // Wait animation
             let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
@@ -253,7 +276,10 @@ class Data
                 // Manage response
                 const result = new ResponseManager(response_data, '#component_data_read .notifications', 'Data: Leer');
                 if(!result.Verify_())
+                {
+                    this.FreeMutex_();
                     return;
+                }
 
                 // Results elements creator (Columns)
                 if($('#component_data_read table thead tr').html() == "" && response_data.body.columns_meta != undefined)
@@ -313,8 +339,12 @@ class Data
                 {
                     // End of results reached
                     this.data_read_page_end = true;
+                    this.FreeMutex_();
                     return;
                 }
+
+                // No end of results
+                this.data_read_page_end = false;
 
                 // Results elements creator (Rows)
                 new wtools.UIElementsCreator('#component_data_read table tbody', data).Build_((row) =>
@@ -327,11 +357,17 @@ class Data
                 // Next page if not reload
                 if(!reload)
                     this.data_read_page++;
-                console.log(`page: ${this.data_read_page}`);
-            });   
+                console.log(`page: ${this.data_read_page}, limit: ${this.data_read_limit}, end: ${this.data_read_page_end}`);
+
+                // Free mutex
+                this.FreeMutex_();
+            });
         }
         catch(error)
         {
+            // Free mutex
+            this.FreeMutex_();
+
             new wtools.Notification('ERROR').Show_(`Ocurri&oacute; un error.`);
             return;
         }
