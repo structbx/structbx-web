@@ -170,53 +170,54 @@ class Data
         return elements;
     }
 
-    Read_ = (reload = false) =>
+    GetPath_ = (reload, clean = true) =>
     {
-        try
+        // Get Table identifier
+        const table_identifier = GetTableIdentifier();
+        if(table_identifier == undefined)
+            return "";
+
+        // Get conditions
+        let conditions = ""
+        if(wtools.GetUrlSearchParam('conditions') != undefined)
+            conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
+
+        // Get order
+        let order = ""
+        if(wtools.GetUrlSearchParam('order') != undefined)
+            order = `&order=${wtools.GetUrlSearchParam('order')}`;
+
+        // Path request
+        let path = "";
+        if(reload)
         {
-            // Exit if end of results and no reload
-            if(this.data_read_page_end && reload == false)
-                return;
-
-            // Wait animation
-            let wait = new wtools.ElementState('#component_data_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
-
-            // Get Form identifier
-            const table_identifier = GetTableIdentifier();
-            if(table_identifier == undefined)
-                return;
-
-            // Get conditions
-            let conditions = ""
-            if(wtools.GetUrlSearchParam('conditions') != undefined)
-                conditions = `&conditions=${wtools.GetUrlSearchParam('conditions')}`;
-
-            // Get order
-            let order = ""
-            if(wtools.GetUrlSearchParam('order') != undefined)
-                order = `&order=${wtools.GetUrlSearchParam('order')}`;
-
-            // Path request
-            let path = "";
-            if(reload)
-            {
-                // Set current limit
-                const limit = $('#component_data_read table tbody')[0].rows.length;
+            // Set current limit
+            this.data_read_limit = $('#component_data_read table tbody')[0].rows.length;
+            if(clean)
                 $('#component_data_read table tbody').html('');
 
-                // Setup path
-                if(limit < 20)
-                    path = `?table-identifier=${table_identifier}&limit=20${conditions}${order}`;
-                else
-                    path = `?table-identifier=${table_identifier}&limit=${limit}${conditions}${order}`;
-            }
+            // Setup path
+            if(this.data_read_limit < 20)
+                path = `?table-identifier=${table_identifier}&limit=20${conditions}${order}`;
             else
-            {
-                // Next page
-                this.data_read_page++;
-                // Setup path
-                path = `?table-identifier=${table_identifier}&page=${this.data_read_page}${conditions}${order}`;
-            }
+                path = `?table-identifier=${table_identifier}&limit=${this.data_read_limit}${conditions}${order}`;
+        }
+        else
+        {
+            // Setup path
+            path = `?table-identifier=${table_identifier}&page=${this.data_read_page}${conditions}${order}`;
+        }
+        return path;
+    }
+
+    GetBodyData_ = (response_data) =>
+    {
+        if (response_data.body == undefined || response_data.body.data == undefined)
+            return [];
+        else
+            return response_data.body.data;
+    }
+
 
             // Request
             new wtools.Request(server_config.current.api + `/tables/data/read${path}`).Exec_((response_data) =>
