@@ -251,14 +251,32 @@ class Data
 
                         it++;
                         
-                        return [`<th scope="col" class="user-select-none">${table_icon}${row.name}</th>`];
+                        return [`
+                            <th scope="col" class="user-select-none position-relative" data-col="${row.id}">
+                                <span>${table_icon}${row.name}</span>
+                                <div class="resize-handle"></div>
+                            </th>
+                        `];
+                    });
+
+                    // Setup table dimensions
+                    let tableD = new TableDimensions(table_identifier, '#component_data_read_table');
+                    tableD.Init_();
+                    // Prevenir selección de texto durante el redimensionamiento
+                    $(document).on('selectstart', function(e)
+                    {
+                        if (tableD.isResizing)
+                        {
+                            e.preventDefault();
+                            return false;
+                        }
                     });
 
                     // If there is less than 5 columns, add empty column
-                    if(it < 5)
+                    /*if(it < 5)
                     {
                         $('#component_data_read table thead tr').append($(`<th scope="col"  class="user-select-none" style="width: 50%;background: #f3f3f3;border-top:none !important;"></th>`));
-                    }
+                    }*/
                 }
 
                 // Handle zero results
