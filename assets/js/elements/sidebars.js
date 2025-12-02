@@ -129,7 +129,7 @@ class Sidebars
             <div class="nav-item">
                 <a class="nav-link mb-2 go-form-button" href="#">
                     <i class="fas fa-arrow-left"></i>
-                    <span class="ms-2">Ir la tabla</span>
+                    <span class="ms-2">Ir a la tabla</span>
                 </a>
             </div>
             <h5 class="small text-uppercase text-muted">TABLAS</h5>
