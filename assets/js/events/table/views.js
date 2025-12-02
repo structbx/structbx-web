@@ -3,7 +3,7 @@ class Views
     
     GetOutOfView_()
     {
-        // Get Form identifier
+        // Get table identifier
         const table_identifier = wtools.GetUrlSearchParam('identifier');
         if(table_identifier == undefined)
             return;
@@ -158,8 +158,11 @@ class Views
         });
     }
 
-    Add_()
+    Add_(e)
     {
+        // Clean notifications
+        $('#component_data_views_add .notifications').html('');
+
         // Wait animation
         let wait = new wtools.ElementState('#component_data_views_add form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -183,10 +186,26 @@ class Views
         }
 
         // Data collection
+        let conditions = wtools.GetUrlSearchParam('conditions');
+        let order = wtools.GetUrlSearchParam('order');
         const data = new FormData($('#component_data_views_add form')[0]);
-        data.append('conditions', wtools.GetUrlSearchParam('conditions'));
-        data.append('order', wtools.GetUrlSearchParam('order'));
+        data.append('conditions', conditions);
+        data.append('order', order);
         data.append('table-identifier', table_identifier);
+
+        // Verify that there is almost conditions or order
+        if(conditions == "" && order == "")
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_data_views_add .notifications').Show_('Debe establecer al menos condiciones u orden en los filtros.');
+            return;
+        }
+        if(conditions == undefined && order == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_data_views_add .notifications').Show_('Debe establecer al menos condiciones u orden en los filtros.');
+            return;
+        }
 
         // Request
         new wtools.Request(server_config.current.api + "/tables/views/add", "POST", data, false).Exec_((response_data) =>
@@ -206,6 +225,9 @@ class Views
 
     Modify_(e)
     {
+        // Clean notifications
+        $('#component_data_views_modify .notifications').html('');
+
         // Wait animation
         let wait = new wtools.ElementState('#component_data_views_modify form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
 
@@ -229,11 +251,27 @@ class Views
         }
 
         // Data collection
+        let conditions = wtools.GetUrlSearchParam('conditions');
+        let order = wtools.GetUrlSearchParam('order');
         const data = new FormData($('#component_data_views_modify form')[0]);
-        data.append('conditions', wtools.GetUrlSearchParam('conditions'));
-        data.append('order', wtools.GetUrlSearchParam('order'));
+        data.append('conditions', conditions);
+        data.append('order', order);
         data.append('table-identifier', table_identifier);
 
+        // Verify that there is almost conditions or order
+        if(conditions == "" && order == "")
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_data_views_modify .notifications').Show_('Debe establecer al menos condiciones u orden en los filtros.');
+            return;
+        }
+        if(conditions == undefined && order == undefined)
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_data_views_modify .notifications').Show_('Debe establecer al menos condiciones u orden en los filtros.');
+            return;
+        }
+    
         // Request
         new wtools.Request(server_config.current.api + "/tables/views/modify", "PUT", data, false).Exec_((response_data) =>
         {
@@ -325,7 +363,7 @@ $(function()
     {
         e.preventDefault();
 
-        viewsObject.Add_();
+        viewsObject.Add_(e);
     });
 
     // Modify a view
