@@ -330,7 +330,6 @@ class Data
                 }
 
                 // Verify if results is lower than limit
-                console.log(data.length, this.data_read_limit);
                 if(data.length < this.data_read_limit)
                     this.data_read_page_end = true;
 
@@ -357,7 +356,6 @@ class Data
                 // Next page if not reload
                 if(!reload)
                     this.data_read_page++;
-                console.log(`page: ${this.data_read_page}, limit: ${this.data_read_limit}, end: ${this.data_read_page_end}`);
 
                 // Free mutex
                 this.FreeMutex_();
@@ -447,14 +445,12 @@ class Data
             {
                 if(!this.changeIntInit)
                 {
-                    console.log("First init of changeInt");
                     // Firs init of changeInit (only update changeInt value to the last element id)
                     this.changeInt = data[data.length - 1].id;
                     this.changeIntInit = true;
                 }
                 else
                 {
-                    console.log("changeInt");
                     // If there is new changeInt, refresh rows
                     let reload = false;
                     for(let row of data)
@@ -463,19 +459,15 @@ class Data
                         switch(row.operation)
                         {
                             case "insert":
-                                console.log("insert");
                                 reload = true;
                                 break;
                             case "update":
-                                console.log("update");
                                 this.RefreshRow_(row.row_id);
                                 break;
                             case "delete":
-                                console.log("delete");
                                 $(`#row_${row.row_id}`).remove();
                                 break;
                             case "import":
-                                console.log("import");
                                 reload = true;
                                 break;
                         }
