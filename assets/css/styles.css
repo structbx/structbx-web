@@ -161,6 +161,10 @@ table.table_data th {
     border-right: 1px solid #dadada !important;
 }
 
+table.table_data th span {
+    cursor: pointer;
+}
+
 table.table_data td {
     border-left: none !important;
     border-top: none !important;

@@ -1,16 +1,4 @@
 
-function GetTableIdentifier()
-{
-    // Get Form identifier
-    const table_identifier = wtools.GetUrlSearchParam('identifier');
-    if(table_identifier == undefined)
-    {
-        new wtools.Notification('ERROR').Show_('No se encontr&oacute; el identificador de la tabla.');
-        return undefined;
-    }
-    return table_identifier;
-}
-
 function OptionsLinkSelection(element, link_to_table, column_name, target, selected = undefined, public_form = 0)
 {
     let options = new wtools.SelectOptions();
