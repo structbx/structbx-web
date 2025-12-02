@@ -6,7 +6,7 @@ $(function()
     const select_options = () =>
     {
         let options = "";
-        for(let column of data_read_columns)
+        for(let column of dataObject.data_read_columns)
         {
             options += `<option value="${column.identifier}">${column.name}</option>`;
         }
@@ -45,7 +45,18 @@ $(function()
         {
             // Setup column select
             let select = $(`<select class="form-select column" name="${header}">${select_options()}</select>`);
-            $(select).val(header);
+            // Select an option map
+            $(select).find('option').each(function()
+            {
+                console.log(header.toLowerCase(), this.text.toLowerCase());
+                if(header.toLowerCase() == this.text.toLowerCase())
+                {
+                    $(select).val(this.value);
+                    return false;
+                }
+            });
+
+            //$(select).val(header);
             if($(select).val() == undefined) $(select).val(''); // Fix for select
 
             // Add row to map table
@@ -90,7 +101,7 @@ $(function()
                 for(let header of Object.keys(row))
                 {
                     if(map_columns.sources.includes(header))
-                        headers += `<th>${header}/${map_columns.map[header]}</th>`;
+                        headers += `<th>${header}</th>`;
                 }
                 $('#component_data_import table.previsualization thead tr').append(headers);
             }
@@ -141,6 +152,9 @@ $(function()
     $('#component_data_import form').submit((e) =>
     {
         e.preventDefault();
+
+        // Clear notifications
+        $('#component_data_import_message .contents').html('');
 
         // Wait animation
         let wait = new wtools.ElementState('#component_data_import form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
