@@ -258,8 +258,7 @@ $(function()
         $('#component_data_filter').modal('show');
     }
     $('.data_filter').click(e => show_filter_modal(e));
-    $('#component_data_read_table thead').click(e => show_filter_modal(e));
-    
+    $(document).on('click', '#component_data_read_table thead span', e => show_filter_modal(e));
 
     // Remove elements
     $(document).on('click', '#component_data_filter table .btn-close', e => 
