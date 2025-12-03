@@ -1,6 +1,51 @@
 $(function()
 {
 
+    const ReadTableInfo = () =>
+    {
+        // Wait animation
+        let wait = new wtools.ElementState('.form-title', false, 'button', new wtools.WaitAnimation().for_button);
+
+        // Get Form identifier
+        const table_identifier = wtools.GetUrlSearchParam('identifier');
+        if(table_identifier == undefined)
+        {
+            new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+            window.location.href = "/start/";
+            return;
+        }
+
+        // Request
+        new wtools.Request(server_config.current.api + `/forms/tables/read/identifier?table-identifier=${table_identifier}`).Exec_((response_data) =>
+        {
+            // Clean
+            wait.Off_();
+            $('.form-title').html('');
+
+            // Manage response
+            const result = new ResponseManager(response_data, '#wait_animation_page', 'Data: A&ntilde;adir');
+            if(!result.Verify_())
+            {
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+                //window.location.href = "/start/";
+                return;
+            }
+            
+            // Setup form name
+            const form = response_data.body.data[0].name;
+            if(form == undefined)
+            {
+                new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+                //window.location.href = "/start/";
+            }
+            else
+            {
+                $('.form-title').html(form);
+            }
+        });
+    };
+    ReadTableInfo();
+
     const ReadDataColumns = function()
     {
         try
