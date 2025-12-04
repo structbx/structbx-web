@@ -40,7 +40,6 @@ class TableGeneral
             wait.Off_();
             $('#table_name').html('');
 
-            // Permissions error
             // Manage response
             const result = new ResponseManager(response_data, '#wait_animation_page', 'Data: A&ntilde;adir');
             if(!result.Verify_())
@@ -50,17 +49,17 @@ class TableGeneral
                 return;
             }
             
-            // Setup form name
-            const form = response_data.body.data[0].name;
-            if(form == undefined)
+            // Setup table name
+            const table_name = response_data.body.data[0].name;
+            if(table_name == undefined)
             {
                 new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
                 window.location.href = "/start/";
             }
             else
             {
-                $('#table_name').html(form);
-                $('.table_title').html(form);
+                $('#table_name').html(table_name);
+                $('.table_title').html(table_name);
             }
         });
     };
