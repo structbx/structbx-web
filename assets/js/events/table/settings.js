@@ -86,6 +86,11 @@ $(function()
             $('#component_settings_general input[name="name"]').val(response_data.body.data[0].name);
             $('#component_settings_general select[name="public_form"]').val(response_data.body.data[0].public_form);
             $('#component_settings_general textarea[name="description"]').val(response_data.body.data[0].description);
+            $('#component_settings_general span.link_form').html(`
+                <a href="/form?identifier=" target="_blank" class="mt-2 d-block form-link">
+                    Ir al formulario p&uacute;blico
+                </a>
+            `);
         });
     };
     settings_read();
