@@ -127,6 +127,50 @@ const ReadDataColumns = async () =>
     }
 }
 
+const AddData = async (e) =>
+{
+    e.preventDefault();
+
+    // Wait animation
+    let wait = new wtools.ElementState('#component_form_addData form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
+
+    // Form check
+    const check = new wtools.FormChecker(e.target).Check_();
+    if(!check)
+    {
+        wait.Off_();
+        $('#component_form_addData .notifications').html('');
+        new wtools.Notification('WARNING', 5000, '#component_form_addData .notifications').Show_('Hay campos inv&aacute;lidos.');
+        return;
+    }
+
+    // Get Table identifier
+    const table_identifier = GetTableIdentifier();
+    if(table_identifier == undefined)
+    {
+        wait.Off_();
+        return;
+    }
+
+    // Data collection
+    let new_data = new FormData($('#component_form_addData form')[0]);
+    new_data.append('table-identifier', table_identifier);
+
+    // Request
+    new wtools.Request(server_config.current.api + "/forms/tables/data/add", "POST", new_data, false).Exec_((response_data) =>
+    {
+        wait.Off_();
+        
+        // Manage response
+        const result = new ResponseManager(response_data, '#component_form_addData .notifications', 'Data: A&ntilde;adir');
+        if(!result.Verify_())
+            return;
+
+        $('#component_form_addData form').trigger('reset');
+        $('#component_form_successModal').modal('show');
+    });
+}
+
 // Stepper functions
 const functions = new wtools.StepperFunctions([ReadTableInfo, ReadDataColumns]);
 functions.Next_();
@@ -135,46 +179,7 @@ $(function()
 {
     $('#component_form_addData form').submit(function(e)
     {
-        e.preventDefault();
-
-        // Wait animation
-        let wait = new wtools.ElementState('#component_form_addData form button[type=submit]', true, 'button', new wtools.WaitAnimation().for_button);
-
-        // Form check
-        const check = new wtools.FormChecker(e.target).Check_();
-        if(!check)
-        {
-            wait.Off_();
-            $('#component_form_addData .notifications').html('');
-            new wtools.Notification('WARNING', 5000, '#component_form_addData .notifications').Show_('Hay campos inv&aacute;lidos.');
-            return;
-        }
-
-        // Get Table identifier
-        const table_identifier = GetTableIdentifier();
-        if(table_identifier == undefined)
-        {
-            wait.Off_();
-            return;
-        }
-
-        // Data collection
-        let new_data = new FormData($('#component_form_addData form')[0]);
-        new_data.append('table-identifier', table_identifier);
-
-        // Request
-        new wtools.Request(server_config.current.api + "/forms/tables/data/add", "POST", new_data, false).Exec_((response_data) =>
-        {
-            wait.Off_();
-            
-            // Manage response
-            const result = new ResponseManager(response_data, '#component_form_addData .notifications', 'Data: A&ntilde;adir');
-            if(!result.Verify_())
-                return;
-
-            $('#component_form_addData form').trigger('reset');
-            $('#component_form_successModal').modal('show');
-        });
+        AddData(e);
     });
 
 });
