@@ -42,7 +42,7 @@
                                 <!-- Header -->
                                 <div class="form-header">
                                     <div class="header-content">
-                                        <h1 class="form-title">Encuesta de Satisfacción</h1>
+                                        <h1 class="form-title"></h1>
                                         <p class="form-description">Agrega un nuevo registro enviando este formulario</p>
                                         <div class="form-info">
                                             <span class="required-indicator">*</span> Indica un campo requerido
@@ -51,7 +51,7 @@
                                 </div>
                                 <!-- /Header -->
                 
-                                <div class="elegant-form contents">
+                                <form class="elegant-form contents">
                                     <div class="notifications"></div>
                                     <table class="table table-form">
                                         <tbody>
@@ -62,19 +62,19 @@
                                             <i class="fas fa-plus-circle me-2"></i>Enviar formulario
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                 
                                 <!-- Modal de Confirmación -->
-                                <div id="component_form_successModal" class="modal fade"  tabindex="-1">
+                                <div id="component_form_successModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body text-center p-5">
                                                 <div class="success-icon">
                                                     <i class="fas fa-check-circle"></i>
                                                 </div>
-                                                <h3 class="mt-4 mb-3">¡Encuesta enviada!</h3>
-                                                <p class="text-muted mb-4">Gracias por compartir tu feedback. Tu opinión es muy valiosa para nosotros.</p>
-                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                                <h3 class="mt-4 mb-3">¡Formulario enviado!</h3>
+                                                <p class="text-muted mb-4">Su registro ha sido guardado en la correspondiente tabla.</p>
+                                                <button type="button" class="btn btn-primary" onclick="location.reload()">
                                                     Continuar
                                                 </button>
                                             </div>
