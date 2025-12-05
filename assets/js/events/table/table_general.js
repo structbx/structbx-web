@@ -29,7 +29,7 @@ class TableGeneral
         if(table_identifier == undefined)
         {
             new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-            window.location.href = "../start/";
+            window.location.href = "/start/";
             return;
         }
 

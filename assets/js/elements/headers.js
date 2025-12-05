@@ -7,7 +7,7 @@ class Headers
         $("#header_main").append
         (`
             <div class="container-xxl d-flex justify-content-between">
-                <a class="navbar-brand d-flex align-items-center m-0" href="../start/">
+                <a class="navbar-brand d-flex align-items-center m-0" href="/start/">
                     <div class="container">
                         <img width="40px;" src="/api/general/instanceLogo/read" alt="Logo">
                     </div>

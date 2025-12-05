@@ -13,7 +13,7 @@ $(function ()
             if(response_data.status == 200)
             {
                 new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
-                window.location.href = "../start/";
+                window.location.href = "/start/";
                 return;
             }
 
@@ -85,7 +85,7 @@ $(function ()
             if(response_data.status == 200)
             {
                 new wtools.Notification('SUCCESS').Show_('Inicio de sesi&oacute;n exitoso. Espere...');
-                const callback = () => {window.location.href = "../start/"};
+                const callback = () => {window.location.href = "/start/"};
                 databases_read_set_id(callback);
                 return;
             }
