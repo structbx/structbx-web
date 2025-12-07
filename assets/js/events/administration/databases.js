@@ -33,8 +33,7 @@ $(function()
             new wtools.UIElementsCreator('#component_databases_read table tbody', response_data.body.data).Build_((row) =>
             {
                 let elements = [
-                    `<th scope="row"><a href="/database?identifier=${row.identifier}">${row.identifier}</a></th>`
-                    ,`<th scope="row">${row.name}</th>`
+                    `<th scope="row"><a href="/database?identifier=${row.identifier}">${row.name}</a></th>`
                     ,`<td scope="row">${row.size} MB</td>`
                     ,`<td scope="row">${row.directory_size} MB</td>`
                     ,`<td scope="row">${row.description}</td>`
