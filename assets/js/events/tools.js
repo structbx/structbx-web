@@ -44,8 +44,102 @@ var databases_read_id = () =>
         
         // Setup database name
         $(".database_name").html(response_data.body.data[0].name);
+
+        databases_read();
     });
 };
+
+// Read databases
+var databases_read = () =>
+{
+    // Wait animation
+    let wait_sidebar = new wtools.ElementState('#component_sidebar_databases .contents', false, 'block', new wtools.WaitAnimation().for_block);
+    let wait_header = new wtools.ElementState('#component_databases_selector', false, 'block', new wtools.WaitAnimation().for_block);
+
+    // Request
+    new wtools.Request(server_config.current.api + "/databases/read").Exec_((response_data) =>
+    {
+        // Clean
+        wait_sidebar.Off_();
+        wait_header.Off_();
+        $('#component_sidebar_databases .contents').html('');
+        $('#component_databases_selector').html('');
+
+        // Manage error
+        const result = new ResponseManager(response_data, '');
+        if(!result.Verify_())
+            return;
+        
+        // Results elements creator (Sidebar)
+        new wtools.UIElementsCreator('#component_sidebar_databases .contents', response_data.body.data).Build_((row) =>
+        {
+            let element = '';
+            if($('.database_name').html() == row.name)
+            {
+                element = `
+                    <div class="nav-item">
+                        <a class="nav-link mb-2 active" href="#" database_id="${row.identifier}">
+                            <i class="fas fa-building"></i>
+                            <span class="ms-2">${row.name}</span>
+                        </a>
+                    </div>`
+            }
+            else
+            {
+                element = `
+                    <div class="nav-item">
+                        <a class="nav-link mb-2" href="#" database_id="${row.identifier}">
+                            <i class="fas fa-building"></i>
+                            <span class="ms-2">${row.name}</span>
+                        </a>
+                    </div>`
+            }
+
+            return new wtools.UIElementsPackage('<li></li>', [element]).Pack_();
+        });
+
+        // Results elements creator (Header)
+        new wtools.UIElementsCreator('#component_databases_selector', response_data.body.data).Build_((row) =>
+        {
+            let element = '';
+            if($('.database_name').html() != row.name)
+            {
+                element = `
+                    <li>
+                        <a class="dropdown-item btn btn-ligth" href="#" database_id="${row.identifier}">
+                            ${row.name}
+                        </a>
+                    </li>`
+            }
+
+            return new wtools.UIElementsPackage('<li></li>', [element]).Pack_();
+        });
+    });
+};
+
+var change_current_database = (database_id) =>
+{
+    // Wait animation
+    let wait = new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+
+    // Form data
+    const new_data = new FormData();
+    new_data.append("id_database", database_id);
+
+    // Read dashboard to modify
+    new wtools.Request(server_config.current.api + `/databases/change`, "POST", new_data).Exec_((response_data) =>
+    {
+        // Manage error
+        const result = new ResponseManager(response_data, '');
+        if(!result.Verify_())
+            return;
+        
+        new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
+        location.href = "/start/";
+
+        wait.Off_();
+    });
+}
 
 // Read username logued
 var username_logued_read = () =>
