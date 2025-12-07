@@ -1,3 +1,40 @@
+var user_permissions = [];
+
+var read_current_user_permissions = async (callback) =>
+{
+    // Request
+    await new wtools.Request(server_config.current.api + "/general/permissions/current/read").Exec_((response_data) =>
+    {
+        // Manage error
+        const result = new ResponseManager(response_data, '');
+        if(!result.Verify_())
+            return;
+        
+        for(let i = 0; i < response_data.body.data.length; i++)
+            user_permissions.push(response_data.body.data[i].endpoint);
+    });
+
+    callback();
+}
+
+var verify_if_user_has_permission = (permission_endpoint) =>
+{
+    return user_permissions.includes(permission_endpoint);
+}
+
+var hide_elements_without_permission = () =>
+{
+    read_current_user_permissions(() =>
+    {
+        $('[permission-endpoint]').each((index, element) =>
+        {
+            let endpoint = $(element).attr('permission-endpoint');
+            console.log(endpoint, verify_if_user_has_permission(endpoint));
+            if(!verify_if_user_has_permission(endpoint))
+                $(element).remove();
+        });
+    });
+}
 
 $(function ()
 {
@@ -37,4 +74,19 @@ $(function ()
         new wtools.ElementState('#wait_animation_page', true, 'block', new wtools.WaitAnimation().for_page);
         window.location.href = `/table?identifier=${wtools.GetUrlSearchParam('identifier')}`;
     });
+
+    // Change current database
+    $(document).on("click", '#component_sidebar_databases .contents a', (e) =>
+    {
+        e.preventDefault();
+
+        change_current_database($(e.currentTarget).attr('database_id'));
+    });
+    $(document).on("click", '#component_databases_selector li a', (e) =>
+    {
+        e.preventDefault();
+
+        change_current_database($(e.currentTarget).attr('database_id'));
+    });
+
 });
