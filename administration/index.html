@@ -42,7 +42,7 @@
                 <main id="contents_main" class="col-md-9 col-lg-10 ms-sm-auto px-md-4 py-5 bg-light">
 
                     <!-- Databases section -->
-                    <section class="section_databases d-none">
+                    <section class="section_databases d-none" permission-endpoint="/api/databases/read">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
                                 <li class="breadcrumb-item">Administraci&oacute;n</li>
@@ -73,7 +73,6 @@
                                         <table class="table table-hover table-bordered">
                                             <thead class="table-light text-center align-middle text-nowrap">
                                                 <tr>
-                                                    <th scope="col">ID</th>
                                                     <th scope="col">Base de datos</th>
                                                     <th scope="col">Almacenamiento en DB</th>
                                                     <th scope="col">Almacenamiento en Disco</th>
@@ -221,7 +220,7 @@
                     <!-- /My Account section -->
 
                     <!-- Instance section -->
-                    <section class="section_instance d-none">
+                    <section class="section_instance d-none" permission-endpoint="/api/general/instanceName/read">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
                                 <li class="breadcrumb-item">Administraci&oacute;n</li>
@@ -265,7 +264,7 @@
                         <!-- /Instance: Name: Read -->
 
                         <!-- Instancia: Logo: Read -->
-                        <section  id="component_instance_logo_read">
+                        <section  id="component_instance_logo_read" permission-endpoint="/api/general/instanceLogo/modify">
                             <article class="card p-4 bg-white mb-4">
                                 <!-- Card header -->
                                 <header class="mb-4 px-4 py-2 primary-background rounded d-flex">
@@ -306,7 +305,7 @@
                     <!-- /Instance section -->
 
                     <!-- Users section -->
-                    <section class="section_users d-none">
+                    <section class="section_users d-none" permission-endpoint="/api/general/users/read">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
                                 <li class="breadcrumb-item">Administraci&oacute;n</li>
@@ -486,7 +485,7 @@
                     <!-- /Users section -->
 
                     <!-- Groups section -->
-                    <section class="section_groups d-none">
+                    <section class="section_groups d-none" permission-endpoint="/api/general/groups/read">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
                                 <li class="breadcrumb-item">Administraci&oacute;n</li>
@@ -639,7 +638,7 @@
                     <!-- /Groups section -->
 
                     <!-- Permissions section -->
-                    <section class="section_permissions d-none">
+                    <section class="section_permissions d-none" permission-endpoint="/api/general/permissions/read">
                         <div class="pb-2 mb-3 border-bottom">
                             <ol class="breadcrumb h4">
                                 <li class="breadcrumb-item">Administraci&oacute;n</li>
