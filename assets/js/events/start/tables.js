@@ -39,7 +39,7 @@ $(function()
 
             if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('SUCCESS', 5000, '#component_tables_read .notifications').Show_('Sin resultados.');
+                new wtools.Notification('SUCCESS', 0, '#component_tables_read .notifications').ShowNoClose_('No hay tablas creadas.');
                 return;
             }
             
