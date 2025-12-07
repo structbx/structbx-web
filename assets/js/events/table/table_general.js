@@ -185,4 +185,5 @@ $(function ()
 
     });
     
+    hide_elements_without_permission();
 });

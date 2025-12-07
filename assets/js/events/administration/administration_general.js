@@ -28,4 +28,5 @@ $(function ()
     new Footers().Footer_();
     new wtools.MenuManager('#menu_main', true);
         
+    hide_elements_without_permission();
 });

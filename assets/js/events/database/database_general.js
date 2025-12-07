@@ -150,4 +150,6 @@ $(function()
             window.location.href = `/start`
         });
     });
+
+    hide_elements_without_permission();
 });
