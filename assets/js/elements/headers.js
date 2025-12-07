@@ -27,11 +27,13 @@ class Headers
                 <div class="sidebar d-md-flex collapse navbar-collapse text-center text-md-left">
                     <ul class="navbar-nav ms-md-auto me-3 me-lg-4">
                         <li class="nav-item me-2">
-                            <div class="d-flex align-items-center h-100 text-center">
-                                <a class="btn btn-sm btn-outline-light py-2 px-4 d-block d-md-inline-block w-100 mb-2 mb-md-0 go-button" go-path="/administration" go-hash="#databases" href="#">
-                                    <span class="me-2"><i class="fas fa-building"></i></span>
+                            <div class="dropdown">
+                                <a class="btn btn-ligth dropdown-toggle" type="button" id="component_databases_selector_btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-building me-2"></i>
                                     <span class="database_name"></span>
                                 </a>
+                                <ul id="component_databases_selector" class="dropdown-menu bg-dark" aria-labelledby="component_databases_selector_btn">
+                                </ul>
                             </div>
                         </li>
                         <div class="vr mx-4 d-none d-md-inline-block"></div>
@@ -49,7 +51,7 @@ class Headers
                                 <i class="fas fa-tools fa-fw text-light"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-2 bg-dark" style="z-index:1050;">
-                                <li>
+                                <li permission-endpoint="/api/databases/read">
                                     <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#databases" href="#">
                                         <i class="fas fa-building"></i>
                                         <span class="ms-2">Bases de datos</span>
@@ -61,25 +63,25 @@ class Headers
                                         <span class="ms-2">Mi cuenta</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li permission-endpoint="/api/general/instanceName/modify">
                                     <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#instance" href="#">
                                         <i class="fas fa-home"></i>
                                         <span class="ms-2">Instancia</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li permission-endpoint="/api/general/users/read">
                                     <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#users" href="#">
                                         <i class="fas fa-users"></i>
                                         <span class="ms-2">Usuarios</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li permission-endpoint="/api/general/groups/read">
                                     <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#groups" href="#">
                                         <i class="fas fa-cog"></i>
                                         <span class="ms-2">Grupos</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li permission-endpoint="/api/general/permissions/read">
                                     <a class="dropdown-item btn btn-ligth py-2 px-4 go-button" go-path="/administration" go-hash="#permissions" href="#">
                                         <i class="fas fa-user-lock"></i>
                                         <span class="ms-2">Permisos</span>
