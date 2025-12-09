@@ -95,8 +95,7 @@ $(function()
             new wtools.UIElementsCreator('#component_columns_read table tbody', response_data.body.data).Build_((row) =>
             {
                 let elements = [
-                    `<th scope="row">${row.identifier}</th>`
-                    ,`<td scope="row">${row.name}</td>`
+                    `<td scope="row">${row.name}</td>`
                     ,`<td scope="row">${row.column_type_name}</td>`
                     ,`<td scope="row">${row.position}</td>`
                     ,`<td scope="row">${row.length}</td>`
@@ -138,11 +137,13 @@ $(function()
         {
             $(target + ' form select[name="link_to"]').val("");
             $(target + ' form select[name="link_to"]').prop('disabled', false);
+            $(target + ' form .link_to_tr').removeClass('d-none');
         }
         else
         {
             $(target + ' form select[name="link_to"]').val("");
             $(target + ' form select[name="link_to"]').prop('disabled', true);
+            $(target + ' form .link_to_tr').addClass('d-none');
         }
     }
 
@@ -203,6 +204,14 @@ $(function()
         const data = new FormData($('#component_columns_add form')[0]);
         data.append('table-identifier', table_identifier);
 
+        // Verify if column type is selection then link_to is required
+        if(data.get('id_column_type') == "9" && (data.get('link_to') == null || data.get('link_to') == ""))
+        {
+            wait.Off_();
+            new wtools.Notification('WARNING', 5000, '#component_columns_add .notifications').Show_('Debe especificar la tabla a enlazar.');
+            return;
+        }
+
         // Request
         new wtools.Request(server_config.current.api + "/tables/columns/add", "POST", data, false).Exec_((response_data) =>
         {
@@ -216,6 +225,7 @@ $(function()
             new wtools.Notification('SUCCESS').Show_('Columna creada exitosamente.');
             $('#component_columns_add').modal('hide');
             columns_read();
+            $('#component_columns_add form input[name="name"]').val("Nueva columna");
         });
     });
 
@@ -267,7 +277,6 @@ $(function()
 
                 // Set data
                 $('#component_columns_modify input[name="id"]').val(response_data.body.data[0].id);
-                $('#component_columns_modify input[name="identifier"]').val(response_data.body.data[0].identifier);
                 $('#component_columns_modify input[name="name"]').val(response_data.body.data[0].name);
                 $('#component_columns_modify input[name="length"]').val(response_data.body.data[0].length);
                 $('#component_columns_modify select[name="required"]').val(response_data.body.data[0].required);
@@ -351,11 +360,11 @@ $(function()
         // Data
         let data = new FormData($('#component_columns_modify form')[0]);
         const id = data.get('id');
-        const identifier = data.get('identifier');
+        const name = data.get('name');
 
         // Setup data to delete
         $('#component_columns_delete input[name=id]').val(id);
-        $('#component_columns_delete strong.id').html(identifier);
+        $('#component_columns_delete strong.name').html(name);
         $('#component_columns_delete').modal('show');
         wait.Off_();
     });
