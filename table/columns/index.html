@@ -72,7 +72,6 @@
                                 <table class="table table-hover table-bordered">
                                     <thead class="table-light text-center align-middle text-nowrap">
                                         <tr>
-                                            <th scope="col">ID</th>
                                             <th scope="col">Columna</th>
                                             <th scope="col">Tipo</th>
                                             <th scope="col">Posici&oacute;n</th>
@@ -113,13 +112,13 @@
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
-                                                        <input type="text" class="form-control" name="name" value="Nueva columna">
+                                                        <input type="text" class="form-control" name="name" value="Nueva columna" required>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Tipo</th>
                                                     <td>
-                                                        <select class="form-select" name="id_column_type">
+                                                        <select class="form-select" name="id_column_type" required>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -127,6 +126,13 @@
                                                     <th scope="row">Descripcion</th>
                                                     <td>
                                                         <textarea class="form-control" name="description"></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="link_to_tr d-none">
+                                                    <th scope="row">Enlazar a</th>
+                                                    <td>
+                                                        <select class="form-select" name="link_to">
+                                                        </select>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -156,13 +162,6 @@
                                                         <th scope="row">Valor por defecto</th>
                                                         <td>
                                                             <input type="text" class="form-control" name="default_value">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Enlazar a</th>
-                                                        <td>
-                                                            <select class="form-select" name="link_to">
-                                                            </select>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -198,12 +197,6 @@
                                         <input type="hidden" name="id" required>
                                         <table class="table">
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">Identificador de columna</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="identifier" value="nueva_columna" required>
-                                                    </td>
-                                                </tr>
                                                 <tr>
                                                     <th scope="row">Nombre de columna</th>
                                                     <td>
@@ -299,7 +292,7 @@
                                     <div class="modal-body">
                                         <div class="notifications"></div>
                                         <input type="hidden" name="id" required>
-                                        <p>Seguro desea eliminar la columna ID <strong class="id"></strong></p>
+                                        <p>Seguro desea eliminar la columna ID <strong class="name"></strong></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
