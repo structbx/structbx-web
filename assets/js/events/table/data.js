@@ -345,6 +345,9 @@ class Data
                 if(!reload)
                     this.data_read_page++;
 
+                // Change int verification
+                this.ChangeIntVerification_();
+
                 // Free mutex
                 this.FreeMutex_();
             });
