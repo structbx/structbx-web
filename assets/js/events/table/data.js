@@ -1,35 +1,22 @@
 
 function OptionsLinkSelection(element, link_to_table, column_name, target, selected = undefined, public_form = 0)
 {
-    let options = new wtools.SelectOptions();
-
     new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_table}&public_form=${public_form}`).Exec_((response_data) =>
     {
         try
         {
-            let tmp_options = [];
-
             // Add empty <option>
-            if(selected == undefined)
-                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
-            else
-                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
+            element.AddOption_('', '-- Ninguno --');
 
             // Add select or not selected <option>
             for(let row of response_data.body.data)
             {
                 const col1 = response_data.body.columns[0];
                 const col2 = response_data.body.columns[1];
-                if(selected == row[col1])
-                    tmp_options.push(new wtools.OptionValue(row[col1], row[col2], true));
-                else
-                    tmp_options.push(new wtools.OptionValue(row[col1], row[col2]));
+                element.AddOption_(row[col1], row[col2]);
+                if(selected == row[col2])
+                    element.setValue(row[col1]);
             }
-
-            // Build <option>s
-            options.options = tmp_options;
-            let element_building = $(element).find('select');
-            options.Build_(element_building);
         }
         catch(error)
         {
@@ -89,7 +76,7 @@ class Data
     constructor()
     {
         this.ReadUsersInDatabase_(() => this.Read_());
-        setInterval(this.ChangeIntVerification_.bind(this), 5000);
+        //setInterval(this.ChangeIntVerification_.bind(this), 5000);
     }
 
     CreateRows_(response_data, row)
@@ -391,7 +378,7 @@ class Data
                 order = `&order=${wtools.GetUrlSearchParam('order')}`;
 
             // Request row
-            new wtools.Request(server_config.current.api + `/tables/data/read/id?id=${row_id}&table-identifier=${table_identifier}${conditions}${order}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/data/read?id=${row_id}&table-identifier=${table_identifier}${conditions}${order}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Leer (1)');
@@ -541,7 +528,12 @@ class Data
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        OptionsLinkSelection(table_element, row.link_to_table, row.name, '#component_data_add .notifications');
+                    {
+                        table_element = $('<td></td>');
+                        let customSelect = new CustomSelect(table_element);
+                        customSelect.hiddenInput.attr('name', row.identifier);
+                        OptionsLinkSelection(customSelect, row.link_to_table, row.name, '#component_data_add .notifications');
+                    }
                     else if(row.column_type == "user")
                         OptionsLinkUsersInDatabase(table_element, '#component_data_add .notifications');
 
@@ -639,7 +631,7 @@ class Data
             $('#component_data_modify .notifications').html('');
             
             // Read form to modify
-            new wtools.Request(server_config.current.api + `/tables/data/read/id?id=${data_id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
+            new wtools.Request(server_config.current.api + `/tables/data/read?id=${data_id}&table-identifier=${table_identifier}`).Exec_((response_data) =>
             {
                 // Manage response
                 const result = new ResponseManager(response_data, '', 'Data: Modificar');
@@ -686,7 +678,12 @@ class Data
 
                     // If column type is SELECTION
                     if(row.column_type == "selection")
-                        OptionsLinkSelection(table_element, row.link_to_table, row.name, '#component_data_modify .notifications', row.value);
+                    {
+                        table_element = $('<td></td>');
+                        let customSelect = new CustomSelect(table_element);
+                        customSelect.hiddenInput.attr('name', row.identifier);
+                        OptionsLinkSelection(customSelect, row.link_to_table, row.name, '#component_data_modify .notifications', row.value);
+                    }
                     else if(row.column_type == "user")
                         OptionsLinkUsersInDatabase(table_element, '#component_data_add .notifications', row.value);
 
