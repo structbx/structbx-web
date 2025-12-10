@@ -1,0 +1,64 @@
+/* Estilos del contenedor */
+.custom-select-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Estilo del display (el botón que se clickea) */
+.custom-select-display {
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 0.375rem 0.75rem;
+    transition: all 0.2s ease;
+}
+
+/* Estado activo/focus del display */
+.custom-select-display:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+}
+
+/* Estilo del dropdown (el menú desplegable) */
+.custom-select-dropdown {
+    position: absolute;
+    top: 100%; /* Justo debajo del display */
+    left: 0;
+    right: 0;
+    z-index: 1050; /* Por encima de otros elementos */
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-top: 2px;
+    max-height: 250px; /* Limita la altura */
+    overflow-y: auto; /* Scroll si hay muchas opciones */
+}
+
+/* Estilo de la lista de opciones */
+.custom-select-list {
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo de cada ítem en la lista */
+.custom-select-item {
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.1s;
+}
+
+/* Hover en las opciones */
+.custom-select-item:hover {
+    background-color: #f8f9fa; /* Fondo gris claro al pasar el mouse */
+}
+
+/* Ítem seleccionado */
+.custom-select-item.selected {
+    background-color: #e9ecef; /* Fondo ligeramente más oscuro para el seleccionado */
+    font-weight: bold;
+}
+
+/* Estilo para opciones ocultas por el buscador */
+.custom-select-item.hidden {
+    display: none !important;
+}
