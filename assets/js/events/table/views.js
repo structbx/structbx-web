@@ -50,7 +50,6 @@ class Views
             // Handle zero results
             if(response_data.body.data.length < 1)
             {
-                console.log('error')
                 new wtools.Notification('WARNING').Show_('Hubo un error al consultar la vista.');
                 return;
             }

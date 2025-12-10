@@ -48,7 +48,6 @@ $(function()
             // Select an option map
             $(select).find('option').each(function()
             {
-                console.log(header.toLowerCase(), this.text.toLowerCase());
                 if(header.toLowerCase() == this.text.toLowerCase())
                 {
                     $(select).val(this.value);

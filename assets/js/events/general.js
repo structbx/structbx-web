@@ -29,7 +29,6 @@ var hide_elements_without_permission = () =>
         $('[permission-endpoint]').each((index, element) =>
         {
             let endpoint = $(element).attr('permission-endpoint');
-            console.log(endpoint, verify_if_user_has_permission(endpoint));
             if(!verify_if_user_has_permission(endpoint))
                 $(element).remove();
         });

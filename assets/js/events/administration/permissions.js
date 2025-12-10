@@ -54,7 +54,6 @@ $(function()
         }
         catch(error)
         {
-            console.log(error)
             new wtools.Notification('WARNING').Show_('No se pudo acceder a grupos.');
             new wtools.Notification('WARNING', 0, '#component_permissions_add .notifications').Show_('No se pudo acceder a grupos.');
         }
