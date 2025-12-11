@@ -4,6 +4,7 @@ class CustomSelect
     {
         // 1. CORRECCIÓN: Usar variable local, no global
         const self = this;
+        this.open = false;
         
         // 2. Guardar el selector/elemento original
         this.originalElement = element;
@@ -45,12 +46,20 @@ class CustomSelect
         {
             e.stopPropagation(); // Prevenir que el clic se propague al document
             this.dropdown.toggleClass('d-none');
+            this.open = !this.dropdown.hasClass('d-none');
             
             // Poner foco en la caja de búsqueda cuando se abre
             if (!this.dropdown.hasClass('d-none'))
             {
                 setTimeout(() => this.searchBox.focus(), 50); // Pequeño delay para asegurar visibilidad
             }
+        });
+
+        // --- 2. Cerrar Dropdown al hacer clic fuera ---
+        $(document).on('click', function()
+        {
+            if(self.open)
+                self.CloseDropdown_();
         });
 
         // --- 3. Selección de Opciones y Actualización ---
