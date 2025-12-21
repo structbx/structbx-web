@@ -14,6 +14,8 @@ $(function()
     options_permissions.Build_('#component_settings_permissions_modify select[name="modify"]');
     options_permissions.Build_('#component_settings_permissions_add select[name="delete"]');
     options_permissions.Build_('#component_settings_permissions_modify select[name="delete"]');
+    options_permissions.Build_('#component_settings_permissions_add select[name="just_owner"]');
+    options_permissions.Build_('#component_settings_permissions_modify select[name="just_owner"]');
 
     let options_permissions_users = new wtools.SelectOptions();
     const options_permissions_users_init = (options, callback) => new wtools.Request(server_config.current.api + `/tables/permissions/users/out/read?table-identifier=${wtools.GetUrlSearchParam('identifier')}`).Exec_((response_data) =>
@@ -240,6 +242,7 @@ $(function()
                     ,`<td scope="row">${options_permissions.ValueToOption_(row.add)}</td>`
                     ,`<td scope="row">${options_permissions.ValueToOption_(row.modify)}</td>`
                     ,`<td scope="row">${options_permissions.ValueToOption_(row.delete)}</td>`
+                    ,`<td scope="row">${options_permissions.ValueToOption_(row.just_owner)}</td>`
                 ];
 
                 return new wtools.UIElementsPackage(`<tr permission-id="${row.id}"></tr>`, elements).Pack_();
@@ -258,6 +261,7 @@ $(function()
             $('#component_settings_permissions_add form select[name="add"]').val("1");
             $('#component_settings_permissions_add form select[name="modify"]').val("1");
             $('#component_settings_permissions_add form select[name="delete"]').val("1");
+            $('#component_settings_permissions_add form select[name="just_owner"]').val("0");
             $('#component_settings_permissions_add').modal('show');
         }
         options_permissions_users_init(options_permissions_users, add);
@@ -358,6 +362,7 @@ $(function()
             $('#component_settings_permissions_modify select[name="add"]').val(response_data.body.data[0].add);
             $('#component_settings_permissions_modify select[name="modify"]').val(response_data.body.data[0].modify);
             $('#component_settings_permissions_modify select[name="delete"]').val(response_data.body.data[0].delete);
+            $('#component_settings_permissions_modify select[name="just_owner"]').val(response_data.body.data[0].just_owner);
 
             wait.Off_();
             $('#component_settings_permissions_modify form').removeClass('was-validated');
