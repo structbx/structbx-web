@@ -1,17 +1,17 @@
 
 :root {
-    --primary: #eee063;
-    --primary-dark: #e3b502;
+    --primary: linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
+    --primary-dark: linear-gradient(135deg, #49475f 0%, #302f2e 100%) !important;
     --dark: #212529;
     --light: #f3f3f3;
-    --gradient: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%);
+    --gradient: linear-gradient(135deg, #302f2e 0%, #49475f 100%);
     --text-color: #333333;
     --border-color: #b4b4b4;
 }
 
 * {
-    margin: none;
-    padding: none;
+    margin: 0;
+    padding: 0;
 }
 
 body{
@@ -20,7 +20,7 @@ body{
 
 #header_main{
     z-index: 1050;
-    background: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
+    background: linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
 }
 
 #menu_main{

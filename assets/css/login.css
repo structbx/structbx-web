@@ -1,8 +1,9 @@
 
 :root {
-    --primary: #eee063;
-    --primary-dark: #e3b502;
-    --gradient: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%);
+    --primary: linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
+    --primary-dark: linear-gradient(135deg, #49475f 0%, #302f2e 100%) !important;
+    --gradient: linear-gradient(135deg, #302f2e 0%, #49475f 100%);
+    --gradient2: linear-gradient(135deg, #9b9896 0%, #989eb9 100%);
 }
 
 * {
@@ -39,7 +40,7 @@ body {
 }
 
 .login-right {
-    background: linear-gradient(var(--primary-dark), #764ba2);
+    background: var(--primary-dark);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,11 +1,13 @@
 
 :root {
-    --primary: #eee063;
-    --primary-dark: #e3b502;
+    --primary: linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
+    --primary-dark: linear-gradient(135deg, #49475f 0%, #302f2e 100%) !important;
+    --secondary: #3a3b50;
+    --secondary-hover: #4e4f64;
     --dark: #212529;
     --light: #f3f3f3;
     --light2:rgb(212, 212, 212);
-    --gradient: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%);
+    --gradient: linear-gradient(135deg, #302f2e 0%, #49475f 100%);
     --text-color: #333333;
     --border-color: #b4b4b4;
 }
@@ -47,21 +49,20 @@
 .btn-primary{
     background: var(--primary) !important;
     border-color:var(--primary) !important;
-    color:var(--text-color) !important;
+    color:var(--light) !important;
+    transition: all 0.5s ease-out !important;
 }
 .btn-primary:hover{
     background: var(--primary-dark) !important;
     border-color:var(--primary-dark) !important;
-    color:#fff !important;
 }
 .btn-secondary{
-    background: #b8b8b8;
-    border-color:#b8b8b8;
-    color:#333 !important;
+    background: var(--secondary) !important;
+    border-color:var(--secondary) !important;
+    color: var(--light) !important;
 }
 .btn-secondary:hover{
-    background: #9b9b9b;
-    color:#333 !important;
+    background: var(--secondary-hover) !important;
 }
 .btn-outline-primary{
     background: none;
@@ -96,8 +97,8 @@
     color:#fff !important;
 }
 .btn-ligth:hover{
-    background-color: var(--primary) !important;
-    color:#333 !important;
+    background: var(--primary) !important;
+    color:#fff !important;
 }
 .btn-dark-shadow{
     background: none;
@@ -231,7 +232,7 @@ table.table_data td:first-child {
     color:#333 !important;
 }
 .nav-link:hover {
-    color:linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
+    color:linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
 }
 .nav-link.active {
     color:#fff !important;
@@ -249,7 +250,7 @@ table.table_data td:first-child {
     background-color: #d8d8d8;
 }
 #menu_main .nav-link.active {
-    background: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
+    background: linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
     color:#fff;
     text-decoration: none;
 }
@@ -279,7 +280,7 @@ table.table_data td:first-child {
 /* Modals elements */
 
 .modal-header{
-    background: linear-gradient(135deg, #302f2e 0%, #5f5a47 100%) !important;
+    background: linear-gradient(135deg, #302f2e 0%, #49475f 100%) !important;
     color: #fff !important;
 }
 .modal-footer{
