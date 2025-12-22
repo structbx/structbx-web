@@ -89,7 +89,7 @@ $(function ()
         // Get Form identifier
         const table_identifier = wtools.GetUrlSearchParam('identifier');
         // Request
-        new wtools.Request(server_config.current.api + "/tables/read").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/read").Exec_(async (response_data) =>
         {
             // Clean
             wait.Off_();
@@ -113,11 +113,12 @@ $(function ()
 
             // Results elements creator: Sidebar
             $('#component_sidebar_tables .contents').html('');
+            $('#component_sidebar_tables .contents').hide();
             let elements = [];
             for(let row of response_data.body.data)
             {
                 elements.push(`
-                    <a class="menu_data nav-link mb-2 ${row.identifier == table_identifier ? "active" : ""}" href="/table?identifier=${row.identifier}">
+                    <a class="menu_data nav-link mb-2 ${row.identifier == table_identifier ? "active" : ""}" href="/table?identifier=${row.identifier}" table-identifier="${row.identifier}">
                         <i class="fas fa-database"></i>
                         <span class="ms-2">${row.name}</span>
                     </a>
@@ -128,6 +129,7 @@ $(function ()
 
             // Results elements creator: Tabs
             $('#component_sidebar_tables_tabs .tab-scroller').html('');
+            $('#component_sidebar_tables_tabs .tab-scroller').hide();
             for(let row of response_data.body.data)
             {
                 $('#component_sidebar_tables_tabs .tab-scroller').append(`
@@ -136,6 +138,10 @@ $(function ()
                     </div>
                 `);
             }
+
+            await hide_tables_without_permission();
+            $('#component_sidebar_tables .contents').show();
+            $('#component_sidebar_tables_tabs .tab-scroller').show();
         });
     };
     table_sidebar_read_all();

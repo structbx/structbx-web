@@ -1,4 +1,5 @@
 var user_permissions = [];
+var tables_permissions = [];
 
 var read_current_user_permissions = async (callback) =>
 {
@@ -35,9 +36,60 @@ var hide_elements_without_permission = () =>
     });
 }
 
+var read_current_user_tablePermissions = async (callback) =>
+{
+    // Request
+    await new wtools.Request(server_config.current.api + "/tables/permissions/tables/read").Exec_((response_data) =>
+    {
+        // Manage error
+        const result = new ResponseManager(response_data, '');
+        if(!result.Verify_())
+            return;
+        
+        for(let i = 0; i < response_data.body.data.length; i++)
+            tables_permissions.push(response_data.body.data[i].table_identifier);
+    });
+
+    callback();
+}
+
+var verify_if_user_has_tablePermission = (permission_endpoint) =>
+{
+    return tables_permissions.includes(permission_endpoint);
+}
+
+var hide_tables_without_permission = async () =>
+{
+    await read_current_user_tablePermissions(() =>
+    {
+        $('[table-identifier]').each((index, element) =>
+        {
+            let table_identifier = $(element).attr('table-identifier');
+            if(!verify_if_user_has_tablePermission(table_identifier))
+                $(element).remove();
+        });
+    });
+}
+
+var instance_logo_read = async () =>
+{
+    // Request
+    await new wtools.Request(server_config.current.api + "/general/instanceLogo/read").ExecPlain_((response_data) =>
+    {
+        // Manage error
+        const result = new ResponseManager(response_data, '');
+        if(!result.Verify_())
+            return;
+        
+        // The endpoint returns an image
+    });
+}
+
 $(function ()
 {
     instance_name_read();
+
+    instance_logo_read()
         
     databases_read_id();
     

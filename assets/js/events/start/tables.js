@@ -25,7 +25,7 @@ $(function()
         let wait = new wtools.ElementState('#component_tables_read .notifications', false, 'block', new wtools.WaitAnimation().for_block);
 
         // Request
-        new wtools.Request(server_config.current.api + "/tables/read").Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + "/tables/read").Exec_(async (response_data) =>
         {
             // Clean
             wait.Off_();
@@ -39,19 +39,27 @@ $(function()
 
             if(response_data.body.data.length < 1)
             {
-                new wtools.Notification('SUCCESS', 0, '#component_tables_read .notifications').ShowNoClose_('No hay tablas creadas.');
+                $('#component_tables_read .contents').html('');
+                $('#component_tables_read .contents').append(`
+                    <div class="p-2 text-center">
+                        <button class="btn btn-primary table_add">
+                            <i class="fas fa-plus"></i> Crear tabla
+                        </button>
+                    </div>
+                `)
                 return;
             }
             
             // Results elements creator
             $('#component_tables_read .contents').html('');
+            $('#component_tables_read .contents').hide();
             let elements = []; let cont = 0;
             for(let row of response_data.body.data)
             {
                 if(cont < 2)
                 {
                     elements.push(`
-                        <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="col-md-4 col-lg-3 mb-4" table-identifier="${row.identifier}">
                             <div class="card card-table-item h-100 shadow-sm d-flex flex-column">
                                 
                                 <a href="/table?identifier=${row.identifier}" class="p-3 flex-grow-1 text-decoration-none text-dark">
@@ -90,6 +98,8 @@ $(function()
                 let ui_element = new wtools.UIElementsPackage('<div class="row"></div>', elements).Pack_();
                 $('#component_tables_read .contents').append(ui_element);
             }
+            await hide_tables_without_permission();
+            $('#component_tables_read .contents').show();
         });
     };
     table_read();
@@ -100,7 +110,7 @@ $(function()
         $('#component_tables_add .notifications').html('');
         $('#component_tables_add').modal('show');
     }
-    $('.table_add').click(() => click_add_button());
+    $(document).on('click', '.table_add', () => click_add_button());
 
     // Add
     $('#component_tables_add form').submit((e) =>
