@@ -23,7 +23,7 @@ const ReadTableInfo = async () =>
                 throw new Error('No se pudo verificar la respuesta del servidor.');
             
             // Setup form name
-            if(response_data.body.data.length < 1)
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
                 throw new Error('No se encontr&oacute; el formulario solicitado.');
 
             const form = response_data.body.data[0].name;
@@ -41,7 +41,7 @@ const ReadTableInfo = async () =>
         wait.Off_();
         new wtools.ElementState('#wait_animation_page', true, 'block', 
             new wtools.FullScreenMessage(`
-                <img src="/assets/images/logo-150x150.png" alt="StructBX Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <img src="/assets/images/logo.png" alt="StructBX Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
                 No se puede acceder al formulario, ve a <a href="/">Inicio</a>
             `).message
         );
@@ -50,7 +50,7 @@ const ReadTableInfo = async () =>
     }
 };
 
-const ReadDataColumns = async () =>
+const ReadDataColumns = () =>
 {
     try
     {
@@ -68,7 +68,7 @@ const ReadDataColumns = async () =>
         $('#component_form_addData table tbody').html('');
         
         // Read and setup columns
-        await new wtools.Request(server_config.current.api + `/forms/columns/read?table-identifier=${table_identifier}`).Exec_((response_data) =>
+        new wtools.Request(server_config.current.api + `/forms/columns/read?table-identifier=${table_identifier}`).Exec_((response_data) =>
         {
             // Manage response
             const result = new ResponseManager(response_data, '', 'Formulario: Columnas: Leer');
@@ -76,7 +76,7 @@ const ReadDataColumns = async () =>
                 throw new Error('No se pudo verificar la respuesta del servidor.');
 
             // Handle zero results
-            if(response_data.body.data.length < 1)
+            if(response_data.body.data == undefined || response_data.body.data.length < 1)
                 throw new Error('El formulario no tiene columnas definidas.');
             
             // Results elements creator
@@ -95,7 +95,12 @@ const ReadDataColumns = async () =>
 
                 // If column type is SELECTION
                 if(row.column_type == "selection")
-                    OptionsLinkSelection(table_element, row.link_to_table, row.name, '#component_form_addData .notifications');
+                {
+                    table_element = $('<td></td>');
+                    let customSelect = new CustomSelect(table_element);
+                    customSelect.hiddenInput.attr('name', row.identifier);
+                    OptionsLinkSelection(customSelect, row.link_to_table, row.name, '#component_form_addData .notifications');
+                }
                 else if(row.column_type == "user")
                     OptionsLinkUsersInDatabase(table_element, '#component_form_addData .notifications');
 
@@ -115,10 +120,9 @@ const ReadDataColumns = async () =>
     }
     catch(error)
     {
-        wait.Off_();
         new wtools.ElementState('#wait_animation_page', true, 'block', 
             new wtools.FullScreenMessage(`
-                <img src="/assets/images/logo-150x150.png" alt="StructBX Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <img src="/assets/images/logo.png" alt="StructBX Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
                 No se puede acceder al formulario, ve a <a href="/">Inicio</a>
             `).message
         );
