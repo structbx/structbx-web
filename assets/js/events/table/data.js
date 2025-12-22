@@ -1,67 +1,4 @@
 
-function OptionsLinkSelection(element, link_to_table, column_name, target, selected = undefined, public_form = 0)
-{
-    new wtools.Request(server_config.current.api + `/tables/data/read?table-identifier=${link_to_table}&public_form=${public_form}`).Exec_((response_data) =>
-    {
-        try
-        {
-            // Add empty <option>
-            element.AddOption_('', '-- Ninguno --');
-
-            // Add select or not selected <option>
-            for(let row of response_data.body.data)
-            {
-                const col1 = response_data.body.columns[0];
-                const col2 = response_data.body.columns[1];
-                element.AddOption_(row[col1], row[col2]);
-                if(selected == row[col2])
-                    element.setValue(row[col1]);
-            }
-        }
-        catch(error)
-        {
-            new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a la columna enlazada (${column_name}).`);
-        }
-    });
-}
-
-function OptionsLinkUsersInDatabase(element, target, selected = undefined)
-{
-    let options = new wtools.SelectOptions();
-
-    new wtools.Request(server_config.current.api + `/databases/users/current/read`).Exec_((response_data) =>
-    {
-        try
-        {
-            let tmp_options = [];
-
-            // Add empty <option>
-            if(selected == undefined)
-                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', true));
-            else
-                tmp_options.push(new wtools.OptionValue('', '-- Ninguno --', false));
-
-            // Add select or not selected <option>
-            for(let row of response_data.body.data)
-            {
-                if(selected == row.id)
-                    tmp_options.push(new wtools.OptionValue(row.id, row.username, true));
-                else
-                    tmp_options.push(new wtools.OptionValue(row.id, row.username));
-            }
-
-            // Build <option>s
-            options.options = tmp_options;
-            let element_building = $(element).find('select');
-            options.Build_(element_building);
-        }
-        catch(error)
-        {
-            new wtools.Notification('WARNING', 0, target).Show_(`No se pudo acceder a los usuarios de la base de datos.`);
-        }
-    });
-}
-
 class Data
 {
     changeInt = 0;
@@ -510,6 +447,7 @@ class Data
                 }
                 
                 // Results elements creator
+                let cont = 1;
                 new wtools.UIElementsCreator('#component_data_add table tbody', response_data.body.data).Build_((row) =>
                 {
                     if(row.identifier == "id")
