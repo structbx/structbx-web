@@ -123,7 +123,6 @@ class CustomSelect
     CloseDropdown_()
     {
         this.dropdown.addClass('d-none');
-        this.display.focus();
         
         // Clear search when closing
         this.searchBox.val('');
