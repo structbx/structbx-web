@@ -25,6 +25,14 @@ class Data
         {
             elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)
         };
+        // header <td> row
+        const header_row = (row, column) =>
+        {
+            let header = row[column];
+            if(row["_structbx_column_colorHeader"] != undefined && row["_structbx_column_colorHeader"] != "")
+                header = `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>${row[column]}</span>`;
+            elements.push(`<td class="bg-white" scope="row">${header}</td>`)
+        };
         // User <td> row
         const user_row = (row, column) =>
         {
@@ -59,6 +67,9 @@ class Data
         let key = 0;
         for(let column of response_data.body.columns)
         {
+            if(column == "_structbx_column_colorHeader")
+                continue;
+
             // Setup columns meta
             let column_meta = response_data.body.columns_meta.data[key];
 
@@ -71,6 +82,8 @@ class Data
                     file_row(row, column);
                 else if(column_meta.column_type == "user" || column_meta.column_type == "current-user")
                     user_row(row, column);
+                else if(key == 1)
+                    header_row(row, column);
                 else
                     basic_row(row, column);
             }
@@ -413,6 +426,44 @@ class Data
         });
     }
 
+    SetupColumnRow_(row, table_identifier, elements, first, target, value = undefined)
+    {
+        // If column type is a NORMAL type
+        let table_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
+        let table_element = $(table_element_object.Get_());
+        let table_icon = table_element_object.GetIcon_();
+
+        if(table_element == undefined)
+        {
+            new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
+            return false;
+        }
+
+        // If column type is SELECTION
+        if(row.column_type == "selection")
+        {
+            table_element = $('<td></td>');
+            let customSelect = new CustomSelect(table_element);
+            customSelect.hiddenInput.attr('name', row.identifier);
+            OptionsLinkSelection(customSelect, row.link_to_table, row.name, `${target} .notifications`, value);
+        }
+        else if(row.column_type == "user")
+            OptionsLinkUsersInDatabase(table_element, `${target} .notifications`, value);
+
+        // Final elements
+        elements.push(`<th scope="row">${table_icon}${row.name}</th>`);
+        elements.push(table_element);
+
+        if(first)
+        {
+            $(`${target} .form_input_header`).append(`<h5 class="mb-2">${table_icon}${row.name}</h5>`);
+            $(`${target} .form_input_header`).append($(table_element).children().first());
+            return false;
+        }
+
+        return true;
+    }
+
     ReadDataColumns_()
     {
         try
@@ -428,6 +479,7 @@ class Data
                 return;
 
             // Setup data columns
+            $('#component_data_add .form_input_header').html('');
             $('#component_data_add table tbody').html('');
             
             // Read and setup columns
@@ -447,40 +499,19 @@ class Data
                 }
                 
                 // Results elements creator
-                let cont = 1;
+                let first = true;
                 new wtools.UIElementsCreator('#component_data_add table tbody', response_data.body.data).Build_((row) =>
                 {
                     if(row.identifier == "id")
                         return undefined;
 
-                    // If column type is a NORMAL type
-                    let table_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
-                    let table_element = $(table_element_object.Get_());
-                    let table_icon = table_element_object.GetIcon_();
-
-                    if(table_element == undefined)
+                    let elements = [];
+                    if(!this.SetupColumnRow_(row, table_identifier, elements, first, '#component_data_add'))
                     {
-                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
+                        first = false;
                         return;
                     }
-
-                    // If column type is SELECTION
-                    if(row.column_type == "selection")
-                    {
-                        table_element = $('<td></td>');
-                        let customSelect = new CustomSelect(table_element);
-                        customSelect.hiddenInput.attr('name', row.identifier);
-                        OptionsLinkSelection(customSelect, row.link_to_table, row.name, '#component_data_add .notifications');
-                    }
-                    else if(row.column_type == "user")
-                        OptionsLinkUsersInDatabase(table_element, '#component_data_add .notifications');
-
-                    // Final elements
-                    let elements = [
-                        `<th scope="row">${table_icon}${row.name}</th>`
-                        ,table_element
-                    ];
-
+                    
                     return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
                 });
 
@@ -565,6 +596,7 @@ class Data
             }
 
             // Setup form to modify
+            $('#component_data_modify .form_input_header').html('');
             $('#component_data_modify table tbody').html('');
             $('#component_data_modify .notifications').html('');
             
@@ -580,7 +612,6 @@ class Data
                 }
     
                 // Handle no results or zero results
-                // if(response_data.body.data.length < 1 || response_data.body.columns_meta != undefined)
                 if(response_data.body.data.length < 1)
                 {
                     wait.Off_();
@@ -596,40 +627,22 @@ class Data
                 }
 
                 // Results elements creator
+                let first = true;
                 new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
                 {
-                    let table_element_object = new TableElements(wtools.IFUndefined(row.column_type, "text"), row, table_identifier);
-                    let table_element = $(table_element_object.Get_());
-                    let table_icon = table_element_object.GetIcon_();
-
-                    if(table_element == undefined)
-                    {
-                        new wtools.Notification('ERROR').Show_('Error al crear un elemento de tabla.');
-                        return;
-                    }
-
                     if(row.identifier == "id")
                     {
                         $('#component_data_modify input[name="id"]').val(data_id);
                         return;
                     }
 
-                    // If column type is SELECTION
-                    if(row.column_type == "selection")
+                    let elements = [];
+                    if(!this.SetupColumnRow_(row, table_identifier, elements, first, '#component_data_modify', row.value))
                     {
-                        table_element = $('<td></td>');
-                        let customSelect = new CustomSelect(table_element);
-                        customSelect.hiddenInput.attr('name', row.identifier);
-                        OptionsLinkSelection(customSelect, row.link_to_table, row.name, '#component_data_modify .notifications', row.value);
+                        first = false;
+                        return;
                     }
-                    else if(row.column_type == "user")
-                        OptionsLinkUsersInDatabase(table_element, '#component_data_add .notifications', row.value);
-
-                    let elements = [
-                        `<th scope="row">${table_icon}${row.name}</th>`
-                        ,table_element
-                    ];
-
+                    
                     return new wtools.UIElementsPackage('<tr></tr>', elements).Pack_();
                 });
 
@@ -906,4 +919,75 @@ $(function()
         e.preventDefault();
         dataObject.Export_();
     });
+
+    // Color Header Selection
+    let colorsSelect = 
+    [
+        {color: '#4361ee', html: `<span class='small' style='background-color:#4361ee;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Principal</span>`},
+        {color: '#3a0ca3', html: `<span class='small' style='background-color:#3a0ca3;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Oscuro</span>`},
+        {color: '#4cc9f0', html: `<span class='small' style='background-color:#4cc9f0;color:#000;padding:2px 8px;border-radius:4px;'>Azul Claro</span>`},
+        {color: '#7209b7', html: `<span class='small' style='background-color:#7209b7;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura</span>`},
+        {color: '#f72585', html: `<span class='small' style='background-color:#f72585;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa</span>`},
+        {color: '#2ec4b6', html: `<span class='small' style='background-color:#2ec4b6;color:#fff;padding:2px 8px;border-radius:4px;'>Turquesa</span>`},
+        {color: '#e71d36', html: `<span class='small' style='background-color:#e71d36;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo</span>`},
+        {color: '#ff9f1c', html: `<span class='small' style='background-color:#ff9f1c;color:#000;padding:2px 8px;border-radius:4px;'>Naranja</span>`},
+        {color: '#ffd166', html: `<span class='small' style='background-color:#ffd166;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo</span>`},
+        {color: '#06d6a0', html: `<span class='small' style='background-color:#06d6a0;color:#000;padding:2px 8px;border-radius:4px;'>Verde</span>`},
+        {color: '#118ab2', html: `<span class='small' style='background-color:#118ab2;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Marino</span>`},
+        {color: '#073b4c', html: `<span class='small' style='background-color:#073b4c;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Noche</span>`},
+        {color: '#ef476f', html: `<span class='small' style='background-color:#ef476f;color:#fff;padding:2px 8px;border-radius:4px;'>Coral</span>`},
+        {color: '#9b5de5', html: `<span class='small' style='background-color:#9b5de5;color:#fff;padding:2px 8px;border-radius:4px;'>Lila</span>`},
+        {color: '#00bbf9', html: `<span class='small' style='background-color:#00bbf9;color:#fff;padding:2px 8px;border-radius:4px;'>Celeste</span>`},
+        {color: '#00f5d4', html: `<span class='small' style='background-color:#00f5d4;color:#000;padding:2px 8px;border-radius:4px;'>Cian</span>`},
+        {color: '#fee440', html: `<span class='small' style='background-color:#fee440;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Limón</span>`},
+        {color: '#f15bb5', html: `<span class='small' style='background-color:#f15bb5;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa Fuerte</span>`},
+        {color: '#9b2226', html: `<span class='small' style='background-color:#9b2226;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Vino</span>`},
+        {color: '#005f73', html: `<span class='small' style='background-color:#005f73;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Azulado</span>`},
+        {color: '#0a9396', html: `<span class='small' style='background-color:#0a9396;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Mar</span>`},
+        {color: '#94d2bd', html: `<span class='small' style='background-color:#94d2bd;color:#000;padding:2px 8px;border-radius:4px;'>Verde Pastel</span>`},
+        {color: '#e9d8a6', html: `<span class='small' style='background-color:#e9d8a6;color:#000;padding:2px 8px;border-radius:4px;'>Beige</span>`},
+        {color: '#ee9b00', html: `<span class='small' style='background-color:#ee9b00;color:#000;padding:2px 8px;border-radius:4px;'>Ocre</span>`},
+        {color: '#ca6702', html: `<span class='small' style='background-color:#ca6702;color:#fff;padding:2px 8px;border-radius:4px;'>Marrón</span>`},
+        {color: '#bb3e03', html: `<span class='small' style='background-color:#bb3e03;color:#fff;padding:2px 8px;border-radius:4px;'>Terracota</span>`},
+        {color: '#ae2012', html: `<span class='small' style='background-color:#ae2012;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Óxido</span>`},
+        {color: '#9b5de5', html: `<span class='small' style='background-color:#9b5de5;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura Vibrante</span>`},
+        {color: '#f3722c', html: `<span class='small' style='background-color:#f3722c;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Quemado</span>`},
+        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Gris Azulado</span>`},
+        {color: '#43aa8b', html: `<span class='small' style='background-color:#43aa8b;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Jade</span>`},
+        {color: '#90be6d', html: `<span class='small' style='background-color:#90be6d;color:#000;padding:2px 8px;border-radius:4px;'>Verde Lima</span>`},
+        {color: '#f9c74f', html: `<span class='small' style='background-color:#f9c74f;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Mostaza</span>`},
+        {color: '#f8961e', html: `<span class='small' style='background-color:#f8961e;color:#000;padding:2px 8px;border-radius:4px;'>Naranja Calabaza</span>`},
+        {color: '#f94144', html: `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Fuego</span>`},
+        {color: '#277da1', html: `<span class='small' style='background-color:#277da1;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Cobalto</span>`},
+        {color: '#8338ec', html: `<span class='small' style='background-color:#8338ec;color:#fff;padding:2px 8px;border-radius:4px;'>Violeta</span>`},
+        {color: '#3a86ff', html: `<span class='small' style='background-color:#3a86ff;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Brillante</span>`},
+        {color: '#fb5607', html: `<span class='small' style='background-color:#fb5607;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Neón</span>`},
+        {color: '#ff006e', html: `<span class='small' style='background-color:#ff006e;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa Neón</span>`},
+        {color: '#8338ec', html: `<span class='small' style='background-color:#8338ec;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura Eléctrico</span>`},
+        {color: '#3a86ff', html: `<span class='small' style='background-color:#3a86ff;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Eléctrico</span>`},
+        {color: '#ffbe0b', html: `<span class='small' style='background-color:#ffbe0b;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Eléctrico</span>`},
+        {color: '#fb5607', html: `<span class='small' style='background-color:#fb5607;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Eléctrico</span>`},
+        {color: '#ff006e', html: `<span class='small' style='background-color:#ff006e;color:#fff;padding:2px 8px;border-radius:4px;'>Magenta</span>`},
+        {color: '#4d908e', html: `<span class='small' style='background-color:#4d908e;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Grisáceo</span>`},
+        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Gris</span>`},
+        {color: '#f9844a', html: `<span class='small' style='background-color:#f9844a;color:#000;padding:2px 8px;border-radius:4px;'>Salmón</span>`},
+        {color: '#90be6d', html: `<span class='small' style='background-color:#90be6d;color:#000;padding:2px 8px;border-radius:4px;'>Verde Manzana</span>`},
+        {color: '#f9c74f', html: `<span class='small' style='background-color:#f9c74f;color:#000;padding:2px 8px;border-radius:4px;'>Oro</span>`},
+        {color: '#43aa8b', html: `<span class='small' style='background-color:#43aa8b;color:#fff;padding:2px 8px;border-radius:4px;'>Esmeralda</span>`},
+        {color: '#f3722c', html: `<span class='small' style='background-color:#f3722c;color:#fff;padding:2px 8px;border-radius:4px;'>Calabaza</span>`},
+        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Pizarra</span>`},
+        {color: '#277da1', html: `<span class='small' style='background-color:#277da1;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Acero</span>`},
+        {color: '#f94144', html: `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>Carmesí</span>`}
+    ];
+
+    let colorSelectAdd = new CustomSelect('#component_data_add_colorHeader');
+    let colorSelectModify = new CustomSelect('#component_data_modify_colorHeader');
+    colorSelectAdd.AddOption_('', '-- Ninguno --');
+    colorSelectModify.AddOption_('', '-- Ninguno --');
+    colorsSelect.forEach(colorOption => {
+        colorSelectAdd.AddOption_(colorOption.color, colorOption.html);
+        colorSelectModify.AddOption_(colorOption.color, colorOption.html);
+    });
+    colorSelectAdd.hiddenInput.attr('name', '_structbx_column_colorHeader');
+    colorSelectModify.hiddenInput.attr('name', '_structbx_column_colorHeader');
 });
