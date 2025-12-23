@@ -9,11 +9,80 @@ class Data
     data_read_columns = [];
     users_in_database = {};
     read_mutex = false;
+    colorsSelect = 
+    [
+        {color: '#4361ee', html: `<span class='small' style='background-color:#4361ee;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Principal</span>`},
+        {color: '#3a0ca3', html: `<span class='small' style='background-color:#3a0ca3;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Oscuro</span>`},
+        {color: '#4cc9f0', html: `<span class='small' style='background-color:#4cc9f0;color:#000;padding:2px 8px;border-radius:4px;'>Azul Claro</span>`},
+        {color: '#7209b7', html: `<span class='small' style='background-color:#7209b7;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura</span>`},
+        {color: '#f72585', html: `<span class='small' style='background-color:#f72585;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa</span>`},
+        {color: '#2ec4b6', html: `<span class='small' style='background-color:#2ec4b6;color:#fff;padding:2px 8px;border-radius:4px;'>Turquesa</span>`},
+        {color: '#e71d36', html: `<span class='small' style='background-color:#e71d36;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo</span>`},
+        {color: '#ff9f1c', html: `<span class='small' style='background-color:#ff9f1c;color:#000;padding:2px 8px;border-radius:4px;'>Naranja</span>`},
+        {color: '#ffd166', html: `<span class='small' style='background-color:#ffd166;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo</span>`},
+        {color: '#06d6a0', html: `<span class='small' style='background-color:#06d6a0;color:#000;padding:2px 8px;border-radius:4px;'>Verde</span>`},
+        {color: '#118ab2', html: `<span class='small' style='background-color:#118ab2;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Marino</span>`},
+        {color: '#073b4c', html: `<span class='small' style='background-color:#073b4c;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Noche</span>`},
+        {color: '#ef476f', html: `<span class='small' style='background-color:#ef476f;color:#fff;padding:2px 8px;border-radius:4px;'>Coral</span>`},
+        {color: '#9b5de5', html: `<span class='small' style='background-color:#9b5de5;color:#fff;padding:2px 8px;border-radius:4px;'>Lila</span>`},
+        {color: '#00bbf9', html: `<span class='small' style='background-color:#00bbf9;color:#fff;padding:2px 8px;border-radius:4px;'>Celeste</span>`},
+        {color: '#00f5d4', html: `<span class='small' style='background-color:#00f5d4;color:#000;padding:2px 8px;border-radius:4px;'>Cian</span>`},
+        {color: '#fee440', html: `<span class='small' style='background-color:#fee440;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Limón</span>`},
+        {color: '#f15bb5', html: `<span class='small' style='background-color:#f15bb5;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa Fuerte</span>`},
+        {color: '#9b2226', html: `<span class='small' style='background-color:#9b2226;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Vino</span>`},
+        {color: '#005f73', html: `<span class='small' style='background-color:#005f73;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Azulado</span>`},
+        {color: '#0a9396', html: `<span class='small' style='background-color:#0a9396;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Mar</span>`},
+        {color: '#94d2bd', html: `<span class='small' style='background-color:#94d2bd;color:#000;padding:2px 8px;border-radius:4px;'>Verde Pastel</span>`},
+        {color: '#e9d8a6', html: `<span class='small' style='background-color:#e9d8a6;color:#000;padding:2px 8px;border-radius:4px;'>Beige</span>`},
+        {color: '#ee9b00', html: `<span class='small' style='background-color:#ee9b00;color:#000;padding:2px 8px;border-radius:4px;'>Ocre</span>`},
+        {color: '#ca6702', html: `<span class='small' style='background-color:#ca6702;color:#fff;padding:2px 8px;border-radius:4px;'>Marrón</span>`},
+        {color: '#bb3e03', html: `<span class='small' style='background-color:#bb3e03;color:#fff;padding:2px 8px;border-radius:4px;'>Terracota</span>`},
+        {color: '#ae2012', html: `<span class='small' style='background-color:#ae2012;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Óxido</span>`},
+        {color: '#9b5de5', html: `<span class='small' style='background-color:#9b5de5;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura Vibrante</span>`},
+        {color: '#f3722c', html: `<span class='small' style='background-color:#f3722c;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Quemado</span>`},
+        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Gris Azulado</span>`},
+        {color: '#43aa8b', html: `<span class='small' style='background-color:#43aa8b;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Jade</span>`},
+        {color: '#90be6d', html: `<span class='small' style='background-color:#90be6d;color:#000;padding:2px 8px;border-radius:4px;'>Verde Lima</span>`},
+        {color: '#f9c74f', html: `<span class='small' style='background-color:#f9c74f;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Mostaza</span>`},
+        {color: '#f8961e', html: `<span class='small' style='background-color:#f8961e;color:#000;padding:2px 8px;border-radius:4px;'>Naranja Calabaza</span>`},
+        {color: '#f94144', html: `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Fuego</span>`},
+        {color: '#277da1', html: `<span class='small' style='background-color:#277da1;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Cobalto</span>`},
+        {color: '#8338ec', html: `<span class='small' style='background-color:#8338ec;color:#fff;padding:2px 8px;border-radius:4px;'>Violeta</span>`},
+        {color: '#3a86ff', html: `<span class='small' style='background-color:#3a86ff;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Brillante</span>`},
+        {color: '#fb5607', html: `<span class='small' style='background-color:#fb5607;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Neón</span>`},
+        {color: '#ff006e', html: `<span class='small' style='background-color:#ff006e;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa Neón</span>`},
+        {color: '#8338ec', html: `<span class='small' style='background-color:#8338ec;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura Eléctrico</span>`},
+        {color: '#3a86ff', html: `<span class='small' style='background-color:#3a86ff;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Eléctrico</span>`},
+        {color: '#ffbe0b', html: `<span class='small' style='background-color:#ffbe0b;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Eléctrico</span>`},
+        {color: '#fb5607', html: `<span class='small' style='background-color:#fb5607;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Eléctrico</span>`},
+        {color: '#ff006e', html: `<span class='small' style='background-color:#ff006e;color:#fff;padding:2px 8px;border-radius:4px;'>Magenta</span>`},
+        {color: '#4d908e', html: `<span class='small' style='background-color:#4d908e;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Grisáceo</span>`},
+        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Gris</span>`},
+        {color: '#f9844a', html: `<span class='small' style='background-color:#f9844a;color:#000;padding:2px 8px;border-radius:4px;'>Salmón</span>`},
+        {color: '#90be6d', html: `<span class='small' style='background-color:#90be6d;color:#000;padding:2px 8px;border-radius:4px;'>Verde Manzana</span>`},
+        {color: '#f9c74f', html: `<span class='small' style='background-color:#f9c74f;color:#000;padding:2px 8px;border-radius:4px;'>Oro</span>`},
+        {color: '#43aa8b', html: `<span class='small' style='background-color:#43aa8b;color:#fff;padding:2px 8px;border-radius:4px;'>Esmeralda</span>`},
+        {color: '#f3722c', html: `<span class='small' style='background-color:#f3722c;color:#fff;padding:2px 8px;border-radius:4px;'>Calabaza</span>`},
+        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Pizarra</span>`},
+        {color: '#277da1', html: `<span class='small' style='background-color:#277da1;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Acero</span>`},
+        {color: '#f94144', html: `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>Carmesí</span>`}
+    ];
+    colorSelectAdd = new CustomSelect('#component_data_add_colorHeader');
+    colorSelectModify = new CustomSelect('#component_data_modify_colorHeader');
 
     constructor()
     {
         this.ReadUsersInDatabase_(() => this.Read_());
         //setInterval(this.ChangeIntVerification_.bind(this), 5000);
+
+        this.colorSelectAdd.AddOption_('', '-- Ninguno --');
+        this.colorSelectModify.AddOption_('', '-- Ninguno --');
+        this.colorsSelect.forEach(colorOption => {
+            this.colorSelectAdd.AddOption_(colorOption.color, colorOption.html);
+            this.colorSelectModify.AddOption_(colorOption.color, colorOption.html);
+        });
+        this.colorSelectAdd.hiddenInput.attr('name', '_structbx_column_colorHeader');
+        this.colorSelectModify.hiddenInput.attr('name', '_structbx_column_colorHeader');
     }
 
     CreateRows_(response_data, row)
@@ -30,7 +99,13 @@ class Data
         {
             let header = row[column];
             if(row["_structbx_column_colorHeader"] != undefined && row["_structbx_column_colorHeader"] != "")
-                header = `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>${row[column]}</span>`;
+            {
+                header = `
+                    <span class='small' style='background-color:${row["_structbx_column_colorHeader"]};color:${getContrastColor(row["_structbx_column_colorHeader"])};padding:2px 8px;border-radius:4px;'>
+                        ${row[column]}
+                    </span>
+                `;
+            }
             elements.push(`<td class="bg-white" scope="row">${header}</td>`)
         };
         // User <td> row
@@ -626,6 +701,9 @@ class Data
                     it.value = response_data.body.data[0][it.name];
                 }
 
+                // Setup color header
+                this.colorSelectModify.setValue(response_data.body.data[0]._structbx_column_colorHeader);
+
                 // Results elements creator
                 let first = true;
                 new wtools.UIElementsCreator('#component_data_modify table tbody', data).Build_((row) =>
@@ -919,75 +997,4 @@ $(function()
         e.preventDefault();
         dataObject.Export_();
     });
-
-    // Color Header Selection
-    let colorsSelect = 
-    [
-        {color: '#4361ee', html: `<span class='small' style='background-color:#4361ee;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Principal</span>`},
-        {color: '#3a0ca3', html: `<span class='small' style='background-color:#3a0ca3;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Oscuro</span>`},
-        {color: '#4cc9f0', html: `<span class='small' style='background-color:#4cc9f0;color:#000;padding:2px 8px;border-radius:4px;'>Azul Claro</span>`},
-        {color: '#7209b7', html: `<span class='small' style='background-color:#7209b7;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura</span>`},
-        {color: '#f72585', html: `<span class='small' style='background-color:#f72585;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa</span>`},
-        {color: '#2ec4b6', html: `<span class='small' style='background-color:#2ec4b6;color:#fff;padding:2px 8px;border-radius:4px;'>Turquesa</span>`},
-        {color: '#e71d36', html: `<span class='small' style='background-color:#e71d36;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo</span>`},
-        {color: '#ff9f1c', html: `<span class='small' style='background-color:#ff9f1c;color:#000;padding:2px 8px;border-radius:4px;'>Naranja</span>`},
-        {color: '#ffd166', html: `<span class='small' style='background-color:#ffd166;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo</span>`},
-        {color: '#06d6a0', html: `<span class='small' style='background-color:#06d6a0;color:#000;padding:2px 8px;border-radius:4px;'>Verde</span>`},
-        {color: '#118ab2', html: `<span class='small' style='background-color:#118ab2;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Marino</span>`},
-        {color: '#073b4c', html: `<span class='small' style='background-color:#073b4c;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Noche</span>`},
-        {color: '#ef476f', html: `<span class='small' style='background-color:#ef476f;color:#fff;padding:2px 8px;border-radius:4px;'>Coral</span>`},
-        {color: '#9b5de5', html: `<span class='small' style='background-color:#9b5de5;color:#fff;padding:2px 8px;border-radius:4px;'>Lila</span>`},
-        {color: '#00bbf9', html: `<span class='small' style='background-color:#00bbf9;color:#fff;padding:2px 8px;border-radius:4px;'>Celeste</span>`},
-        {color: '#00f5d4', html: `<span class='small' style='background-color:#00f5d4;color:#000;padding:2px 8px;border-radius:4px;'>Cian</span>`},
-        {color: '#fee440', html: `<span class='small' style='background-color:#fee440;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Limón</span>`},
-        {color: '#f15bb5', html: `<span class='small' style='background-color:#f15bb5;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa Fuerte</span>`},
-        {color: '#9b2226', html: `<span class='small' style='background-color:#9b2226;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Vino</span>`},
-        {color: '#005f73', html: `<span class='small' style='background-color:#005f73;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Azulado</span>`},
-        {color: '#0a9396', html: `<span class='small' style='background-color:#0a9396;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Mar</span>`},
-        {color: '#94d2bd', html: `<span class='small' style='background-color:#94d2bd;color:#000;padding:2px 8px;border-radius:4px;'>Verde Pastel</span>`},
-        {color: '#e9d8a6', html: `<span class='small' style='background-color:#e9d8a6;color:#000;padding:2px 8px;border-radius:4px;'>Beige</span>`},
-        {color: '#ee9b00', html: `<span class='small' style='background-color:#ee9b00;color:#000;padding:2px 8px;border-radius:4px;'>Ocre</span>`},
-        {color: '#ca6702', html: `<span class='small' style='background-color:#ca6702;color:#fff;padding:2px 8px;border-radius:4px;'>Marrón</span>`},
-        {color: '#bb3e03', html: `<span class='small' style='background-color:#bb3e03;color:#fff;padding:2px 8px;border-radius:4px;'>Terracota</span>`},
-        {color: '#ae2012', html: `<span class='small' style='background-color:#ae2012;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Óxido</span>`},
-        {color: '#9b5de5', html: `<span class='small' style='background-color:#9b5de5;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura Vibrante</span>`},
-        {color: '#f3722c', html: `<span class='small' style='background-color:#f3722c;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Quemado</span>`},
-        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Gris Azulado</span>`},
-        {color: '#43aa8b', html: `<span class='small' style='background-color:#43aa8b;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Jade</span>`},
-        {color: '#90be6d', html: `<span class='small' style='background-color:#90be6d;color:#000;padding:2px 8px;border-radius:4px;'>Verde Lima</span>`},
-        {color: '#f9c74f', html: `<span class='small' style='background-color:#f9c74f;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Mostaza</span>`},
-        {color: '#f8961e', html: `<span class='small' style='background-color:#f8961e;color:#000;padding:2px 8px;border-radius:4px;'>Naranja Calabaza</span>`},
-        {color: '#f94144', html: `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>Rojo Fuego</span>`},
-        {color: '#277da1', html: `<span class='small' style='background-color:#277da1;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Cobalto</span>`},
-        {color: '#8338ec', html: `<span class='small' style='background-color:#8338ec;color:#fff;padding:2px 8px;border-radius:4px;'>Violeta</span>`},
-        {color: '#3a86ff', html: `<span class='small' style='background-color:#3a86ff;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Brillante</span>`},
-        {color: '#fb5607', html: `<span class='small' style='background-color:#fb5607;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Neón</span>`},
-        {color: '#ff006e', html: `<span class='small' style='background-color:#ff006e;color:#fff;padding:2px 8px;border-radius:4px;'>Rosa Neón</span>`},
-        {color: '#8338ec', html: `<span class='small' style='background-color:#8338ec;color:#fff;padding:2px 8px;border-radius:4px;'>Púrpura Eléctrico</span>`},
-        {color: '#3a86ff', html: `<span class='small' style='background-color:#3a86ff;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Eléctrico</span>`},
-        {color: '#ffbe0b', html: `<span class='small' style='background-color:#ffbe0b;color:#000;padding:2px 8px;border-radius:4px;'>Amarillo Eléctrico</span>`},
-        {color: '#fb5607', html: `<span class='small' style='background-color:#fb5607;color:#fff;padding:2px 8px;border-radius:4px;'>Naranja Eléctrico</span>`},
-        {color: '#ff006e', html: `<span class='small' style='background-color:#ff006e;color:#fff;padding:2px 8px;border-radius:4px;'>Magenta</span>`},
-        {color: '#4d908e', html: `<span class='small' style='background-color:#4d908e;color:#fff;padding:2px 8px;border-radius:4px;'>Verde Grisáceo</span>`},
-        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Gris</span>`},
-        {color: '#f9844a', html: `<span class='small' style='background-color:#f9844a;color:#000;padding:2px 8px;border-radius:4px;'>Salmón</span>`},
-        {color: '#90be6d', html: `<span class='small' style='background-color:#90be6d;color:#000;padding:2px 8px;border-radius:4px;'>Verde Manzana</span>`},
-        {color: '#f9c74f', html: `<span class='small' style='background-color:#f9c74f;color:#000;padding:2px 8px;border-radius:4px;'>Oro</span>`},
-        {color: '#43aa8b', html: `<span class='small' style='background-color:#43aa8b;color:#fff;padding:2px 8px;border-radius:4px;'>Esmeralda</span>`},
-        {color: '#f3722c', html: `<span class='small' style='background-color:#f3722c;color:#fff;padding:2px 8px;border-radius:4px;'>Calabaza</span>`},
-        {color: '#577590', html: `<span class='small' style='background-color:#577590;color:#fff;padding:2px 8px;border-radius:4px;'>Pizarra</span>`},
-        {color: '#277da1', html: `<span class='small' style='background-color:#277da1;color:#fff;padding:2px 8px;border-radius:4px;'>Azul Acero</span>`},
-        {color: '#f94144', html: `<span class='small' style='background-color:#f94144;color:#fff;padding:2px 8px;border-radius:4px;'>Carmesí</span>`}
-    ];
-
-    let colorSelectAdd = new CustomSelect('#component_data_add_colorHeader');
-    let colorSelectModify = new CustomSelect('#component_data_modify_colorHeader');
-    colorSelectAdd.AddOption_('', '-- Ninguno --');
-    colorSelectModify.AddOption_('', '-- Ninguno --');
-    colorsSelect.forEach(colorOption => {
-        colorSelectAdd.AddOption_(colorOption.color, colorOption.html);
-        colorSelectModify.AddOption_(colorOption.color, colorOption.html);
-    });
-    colorSelectAdd.hiddenInput.attr('name', '_structbx_column_colorHeader');
-    colorSelectModify.hiddenInput.attr('name', '_structbx_column_colorHeader');
 });

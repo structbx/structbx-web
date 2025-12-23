@@ -275,3 +275,18 @@ function GenerateRandomName(l)
     }
     return randomName;
 }
+
+function getContrastColor(hexColor)
+{
+    // Convertir hex a RGB
+    const r = parseInt(hexColor.substr(1, 2), 16);
+    const g = parseInt(hexColor.substr(3, 2), 16);
+    const b = parseInt(hexColor.substr(5, 2), 16);
+    
+    // Calcular luminancia (fórmula WCAG)
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    // Si el fondo es oscuro (luminancia < 0.5), usar texto blanco
+    // Si el fondo es claro (luminancia >= 0.5), usar texto negro
+    return luminance < 0.5 ? '#fff' : '#333';
+}
