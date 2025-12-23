@@ -264,3 +264,14 @@ function OptionsLinkUsersInDatabase(element, target, selected = undefined)
         }
     });
 }
+
+function GenerateRandomName(l)
+{
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomName = '';
+    for (let i = 0; i < l; i++) {
+        const randI = Math.floor(Math.random() * chars.length);
+        randomName += chars[randI];
+    }
+    return randomName;
+}
