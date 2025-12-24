@@ -90,9 +90,14 @@ class Data
         let elements = [];
 
         // Basic <td> row
-        const basic_row = (row, column) =>
+        const basic_row = (row, column, link_color = undefined) =>
         {
-            elements.push(`<td class="bg-white" scope="row">${row[column]}</td>`)
+            let header = row[column];
+            if(link_color != undefined && link_color != "")
+            {
+                header = getHeaderColor(link_color, row[column]);
+            }
+            elements.push(`<td class="bg-white" scope="row">${header}</td>`);
         };
         // header <td> row
         const header_row = (row, column) =>
@@ -100,11 +105,7 @@ class Data
             let header = row[column];
             if(row["_structbx_column_colorHeader"] != undefined && row["_structbx_column_colorHeader"] != "")
             {
-                header = `
-                    <span class='small' style='background-color:${row["_structbx_column_colorHeader"]};color:${getContrastColor(row["_structbx_column_colorHeader"])};padding:2px 8px;border-radius:4px;'>
-                        ${row[column]}
-                    </span>
-                `;
+                header = getHeaderColor(row["_structbx_column_colorHeader"], row[column]);
             }
             elements.push(`<td class="bg-white" scope="row">${header}</td>`)
         };
@@ -142,7 +143,7 @@ class Data
         let key = 0;
         for(let column of response_data.body.columns)
         {
-            if(column == "_structbx_column_colorHeader")
+            if(column.includes("_structbx_column"))
                 continue;
 
             // Setup columns meta
@@ -150,6 +151,8 @@ class Data
 
             if(column_meta != undefined && row[column] != "")
             {
+                let link_color = row[`_structbx_column_${column_meta.id}_colorHeader`];
+
                 // Verify column type
                 if(column_meta.column_type == "image")
                     image_row(row, column);
@@ -160,7 +163,7 @@ class Data
                 else if(key == 1)
                     header_row(row, column);
                 else
-                    basic_row(row, column);
+                    basic_row(row, column, link_color);
             }
             else
                 basic_row(row, column);

@@ -213,11 +213,16 @@ function OptionsLinkSelection(element, link_to_table, column_name, target, selec
             // Add select or not selected <option>
             for(let row of response_data.body.data)
             {
-                const col1 = response_data.body.columns[0];
-                const col2 = response_data.body.columns[1];
-                element.AddOption_(row[col1], row[col2]);
-                if(selected == row[col2])
-                    element.setValue(row[col1]);
+                const col_id = response_data.body.columns[0];
+                const col_name = response_data.body.columns[1];
+                
+                let final_value = row[col_name];
+                if(row._structbx_column_colorHeader != "")
+                    final_value = getHeaderColor(row._structbx_column_colorHeader, row[col_name]);
+
+                element.AddOption_(row[col_id], final_value);
+                if(selected == row[col_name])
+                    element.setValue(row[col_id]);
             }
         }
         catch(error)
@@ -289,4 +294,12 @@ function getContrastColor(hexColor)
     // Si el fondo es oscuro (luminancia < 0.5), usar texto blanco
     // Si el fondo es claro (luminancia >= 0.5), usar texto negro
     return luminance < 0.5 ? '#fff' : '#333';
+}
+function getHeaderColor(link_color, value)
+{
+    return  `
+        <span class='small' style='background-color:${link_color};color:${getContrastColor(link_color)};padding:2px 8px;border-radius:4px;'>
+            ${value}
+        </span>
+    `;
 }
